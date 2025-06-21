@@ -17,6 +17,7 @@ import { QueryViewer } from "@/components/query-viewer";
 import { Search } from "@/components/search";
 import { Header } from "@/components/header";
 
+
 export default function Page() {
   const [inputValue, setInputValue] = useState("");
   const [submitted, setSubmitted] = useState(false);
