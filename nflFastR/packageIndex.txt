@@ -1,0 +1,69 @@
+Package index
+Main Functions
+build_nflfastR_pbp()
+Build a Complete nflfastR Data Set
+update_db()
+Update or Create a nflfastR Play-by-Play Database
+Load Functions
+These functions access precomputed data using the nflreadr package. See https://nflreadr.nflverse.com for info and more data load functions.
+
+load_pbp()
+Load Play By Play
+load_player_stats()
+Load Player Level Weekly Stats
+Utility Functions
+save_raw_pbp()
+Download Raw PBP Data to Local Filesystem
+missing_raw_pbp()
+Compute Missing Raw PBP Data on Local Filesystem
+calculate_expected_points()
+Compute expected points
+calculate_series_conversion_rates()
+Compute Series Conversion Information from Play by Play
+calculate_stats()
+Calculate NFL Stats
+calculate_win_probability()
+Compute win probability
+report()
+Get a Situation Report on System, nflverse Package Versions and Dependencies
+Documentation
+nflfastR nflfastR-package
+nflfastR: Functions to Efficiently Access NFL Play by Play Data
+teams_colors_logos
+NFL Team names, colors and logo urls.
+field_descriptions
+nflfastR Field Descriptions
+stat_ids
+NFL Stat IDs and their Meanings
+nfl_stats_variables
+NFL Stats Variables
+Lower Level Functions
+These functions are wrapped in the above listed main functions and typically not used by the enduser.
+
+fast_scraper()
+Get NFL Play by Play Data
+add_qb_epa()
+Compute QB epa
+add_xpass()
+Add expected pass columns
+add_xyac()
+Add expected yards after completion (xyac) variables
+clean_pbp()
+Clean Play by Play Data
+decode_player_ids()
+Decode the player IDs in nflfastR play-by-play data
+Deprecated
+These functions are no longer recommended for use, see nflreadr for latest versions.
+
+fast_scraper_roster()
+Load Team Rosters for Multiple Seasons
+fast_scraper_schedules()
+Load NFL Season Schedules
+On this page
+Main Functions
+Load Functions
+Utility Functions
+Documentation
+Lower Level Functions
+Deprecated
+Developed by Sebastian Carl, Ben Baldwin.
