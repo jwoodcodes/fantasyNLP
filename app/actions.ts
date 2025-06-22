@@ -3,14 +3,14 @@
 import { Config, configSchema, explanationsSchema, Result } from "@/lib/types";
 import { openai } from "@ai-sdk/openai";
 import { mistral } from '@ai-sdk/mistral';
-// import { deepseek } from '@ai-sdk/deepseek';
+
 import { createOpenRouter } from '@openrouter/ai-sdk-provider'
 
 // import { sql } from "@vercel/postgres";
 import { PrismaClient } from "../app/generated/prisma";
 const prisma = new PrismaClient();
 import { generateObject } from "ai";
-import { z } from "zod";
+import { object, z } from "zod";
 
 const openrouter = createOpenRouter({
   // Optionally pass your OpenRouter API key here, or rely on env vars
@@ -21,10 +21,14 @@ export const generateQuery = async (input: string) => {
   "use server";
   try {
     const result = await generateObject({
-      // model: openai("gpt-4o"),
-      // model: mistral("mistral-large-latest"),
+      model: openai("gpt-4o"),
+      // model: openai("gpt-4.1-nano"),
       
-      model: openrouter("meta-llama/llama-3.3-8b-instruct:free"),
+      
+      
+      // model: openrouter("mistralai/mistral-small-3.1-24b-instruct:free"),
+      // model: openrouter("mistralai/mistral-small-3.2-24b-instruct:free"),
+    
       
       system: `You are a SQL (postgres) and data visualization expert. Your job is to help the user write a SQL query to retrieve the data they need. The table schema is as follows:
 
@@ -67,7 +71,11 @@ export const generateQuery = async (input: string) => {
 
     EVERY QUERY SHOULD RETURN QUANTITATIVE DATA THAT CAN BE PLOTTED ON A CHART! There should always be at least two columns. If the user asks for a single column, return the column and the count of the column. If the user asks for a rate, return the rate as a decimal. For example, 0.1 would be 10%.
 
-    convert the query to be a string that can be used in a SQL query. 
+    
+
+    
+    
+
    
     `,
       prompt: `Generate the query necessary to retrieve the data the user wants: ${input}`,
@@ -75,8 +83,15 @@ export const generateQuery = async (input: string) => {
         query: z.string(),
       }),
       
+      
     });
-    console.log('Model returned query:', result.object.query);
+    console.log('original query', result.object.query)
+    
+  
+    
+
+
+
     return result.object.query;
   } catch (e) {
     console.error(e);
@@ -124,8 +139,12 @@ export const explainQuery = async (input: string, sqlQuery: string) => {
   "use server";
   try {
     const result = await generateObject({
-      // model: openai("gpt-4o"),
-      model: openrouter("meta-llama/llama-3.3-8b-instruct:free"),
+      model: openai("gpt-4o"),
+      // model: openai("gpt-4.1-nano"),
+
+      // model: openrouter("mistralai/mistral-small-3.1-24b-instruct:free"),
+      // model: openrouter("mistralai/mistral-small-3.2-24b-instruct:free"),
+      
       
       schema: z.object({
         explanations: explanationsSchema,
@@ -170,8 +189,12 @@ export const generateChartConfig = async (
 
   try {
     const { object: config } = await generateObject({
-      // model: openai("gpt-4o"),
-      model: openrouter("meta-llama/llama-3.3-8b-instruct:free"),
+        model: openai("gpt-4o"),
+        // model: openai("gpt-4.1-nano"),
+      
+      // model: openrouter("mistralai/mistral-small-3.1-24b-instruct:free"),
+      // model: openrouter("mistralai/mistral-small-3.2-24b-instruct:free"),
+      // model: openrouter("mistralai/mistral-nemo:free"),
       
       system,
       prompt: `Given the following data from a SQL query result, generate the chart config that best visualises the data and answers the users query.
