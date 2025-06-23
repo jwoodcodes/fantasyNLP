@@ -21,13 +21,13 @@ export const generateQuery = async (input: string) => {
   "use server";
   try {
     const result = await generateObject({
-      model: openai("gpt-4o"),
+      // model: openai("gpt-4o"),
       // model: openai("gpt-4.1-nano"),
       
       
       
       // model: openrouter("mistralai/mistral-small-3.1-24b-instruct:free"),
-      // model: openrouter("mistralai/mistral-small-3.2-24b-instruct:free"),
+      model: openrouter("mistralai/mistral-small-3.2-24b-instruct:free"),
     
       
       system: `You are a SQL (postgres) and data visualization expert. Your job is to help the user write a SQL query to retrieve the data they need. The table schema is as follows:
@@ -139,11 +139,11 @@ export const explainQuery = async (input: string, sqlQuery: string) => {
   "use server";
   try {
     const result = await generateObject({
-      model: openai("gpt-4o"),
+      // model: openai("gpt-4o"),
       // model: openai("gpt-4.1-nano"),
 
       // model: openrouter("mistralai/mistral-small-3.1-24b-instruct:free"),
-      // model: openrouter("mistralai/mistral-small-3.2-24b-instruct:free"),
+      model: openrouter("mistralai/mistral-small-3.2-24b-instruct:free"),
       
       
       schema: z.object({
@@ -189,11 +189,11 @@ export const generateChartConfig = async (
 
   try {
     const { object: config } = await generateObject({
-        model: openai("gpt-4o"),
+        // model: openai("gpt-4o"),
         // model: openai("gpt-4.1-nano"),
       
       // model: openrouter("mistralai/mistral-small-3.1-24b-instruct:free"),
-      // model: openrouter("mistralai/mistral-small-3.2-24b-instruct:free"),
+      model: openrouter("mistralai/mistral-small-3.2-24b-instruct:free"),
       // model: openrouter("mistralai/mistral-nemo:free"),
       
       system,
