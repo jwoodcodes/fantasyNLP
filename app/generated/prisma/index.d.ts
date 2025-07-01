@@ -18,6 +18,16 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  * 
  */
 export type tradeAnalyzerData = $Result.DefaultSelection<Prisma.$tradeAnalyzerDataPayload>
+/**
+ * Model PlayerStat
+ * 
+ */
+export type PlayerStat = $Result.DefaultSelection<Prisma.$PlayerStatPayload>
+/**
+ * Model ReceivingStat
+ * 
+ */
+export type ReceivingStat = $Result.DefaultSelection<Prisma.$ReceivingStatPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -153,6 +163,26 @@ export class PrismaClient<
     * ```
     */
   get tradeAnalyzerData(): Prisma.tradeAnalyzerDataDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.playerStat`: Exposes CRUD operations for the **PlayerStat** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PlayerStats
+    * const playerStats = await prisma.playerStat.findMany()
+    * ```
+    */
+  get playerStat(): Prisma.PlayerStatDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.receivingStat`: Exposes CRUD operations for the **ReceivingStat** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ReceivingStats
+    * const receivingStats = await prisma.receivingStat.findMany()
+    * ```
+    */
+  get receivingStat(): Prisma.ReceivingStatDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -593,7 +623,9 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    tradeAnalyzerData: 'tradeAnalyzerData'
+    tradeAnalyzerData: 'tradeAnalyzerData',
+    PlayerStat: 'PlayerStat',
+    ReceivingStat: 'ReceivingStat'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -612,7 +644,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "tradeAnalyzerData"
+      modelProps: "tradeAnalyzerData" | "playerStat" | "receivingStat"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -687,6 +719,154 @@ export namespace Prisma {
           count: {
             args: Prisma.tradeAnalyzerDataCountArgs<ExtArgs>
             result: $Utils.Optional<TradeAnalyzerDataCountAggregateOutputType> | number
+          }
+        }
+      }
+      PlayerStat: {
+        payload: Prisma.$PlayerStatPayload<ExtArgs>
+        fields: Prisma.PlayerStatFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PlayerStatFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerStatPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PlayerStatFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerStatPayload>
+          }
+          findFirst: {
+            args: Prisma.PlayerStatFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerStatPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PlayerStatFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerStatPayload>
+          }
+          findMany: {
+            args: Prisma.PlayerStatFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerStatPayload>[]
+          }
+          create: {
+            args: Prisma.PlayerStatCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerStatPayload>
+          }
+          createMany: {
+            args: Prisma.PlayerStatCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PlayerStatCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerStatPayload>[]
+          }
+          delete: {
+            args: Prisma.PlayerStatDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerStatPayload>
+          }
+          update: {
+            args: Prisma.PlayerStatUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerStatPayload>
+          }
+          deleteMany: {
+            args: Prisma.PlayerStatDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PlayerStatUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PlayerStatUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerStatPayload>[]
+          }
+          upsert: {
+            args: Prisma.PlayerStatUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerStatPayload>
+          }
+          aggregate: {
+            args: Prisma.PlayerStatAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePlayerStat>
+          }
+          groupBy: {
+            args: Prisma.PlayerStatGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PlayerStatGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PlayerStatCountArgs<ExtArgs>
+            result: $Utils.Optional<PlayerStatCountAggregateOutputType> | number
+          }
+        }
+      }
+      ReceivingStat: {
+        payload: Prisma.$ReceivingStatPayload<ExtArgs>
+        fields: Prisma.ReceivingStatFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ReceivingStatFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReceivingStatPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ReceivingStatFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReceivingStatPayload>
+          }
+          findFirst: {
+            args: Prisma.ReceivingStatFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReceivingStatPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ReceivingStatFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReceivingStatPayload>
+          }
+          findMany: {
+            args: Prisma.ReceivingStatFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReceivingStatPayload>[]
+          }
+          create: {
+            args: Prisma.ReceivingStatCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReceivingStatPayload>
+          }
+          createMany: {
+            args: Prisma.ReceivingStatCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ReceivingStatCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReceivingStatPayload>[]
+          }
+          delete: {
+            args: Prisma.ReceivingStatDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReceivingStatPayload>
+          }
+          update: {
+            args: Prisma.ReceivingStatUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReceivingStatPayload>
+          }
+          deleteMany: {
+            args: Prisma.ReceivingStatDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ReceivingStatUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ReceivingStatUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReceivingStatPayload>[]
+          }
+          upsert: {
+            args: Prisma.ReceivingStatUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReceivingStatPayload>
+          }
+          aggregate: {
+            args: Prisma.ReceivingStatAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateReceivingStat>
+          }
+          groupBy: {
+            args: Prisma.ReceivingStatGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ReceivingStatGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ReceivingStatCountArgs<ExtArgs>
+            result: $Utils.Optional<ReceivingStatCountAggregateOutputType> | number
           }
         }
       }
@@ -775,6 +955,8 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     tradeAnalyzerData?: tradeAnalyzerDataOmit
+    playerStat?: PlayerStatOmit
+    receivingStat?: ReceivingStatOmit
   }
 
   /* Types for Logging */
@@ -2078,6 +2260,3566 @@ export namespace Prisma {
 
 
   /**
+   * Model PlayerStat
+   */
+
+  export type AggregatePlayerStat = {
+    _count: PlayerStatCountAggregateOutputType | null
+    _avg: PlayerStatAvgAggregateOutputType | null
+    _sum: PlayerStatSumAggregateOutputType | null
+    _min: PlayerStatMinAggregateOutputType | null
+    _max: PlayerStatMaxAggregateOutputType | null
+  }
+
+  export type PlayerStatAvgAggregateOutputType = {
+    season: number | null
+    week: number | null
+    completions: number | null
+    attempts: number | null
+    passingYards: number | null
+    passingTds: number | null
+    interceptions: number | null
+    sacks: number | null
+    sackYards: number | null
+    sackFumbles: number | null
+    sackFumblesLost: number | null
+    passingAirYards: number | null
+    passingYardsAfterCatch: number | null
+    passingFirstDowns: number | null
+    passingEpa: number | null
+    passing2ptConversions: number | null
+    pacr: number | null
+    dakota: number | null
+    carries: number | null
+    rushingYards: number | null
+    rushingTds: number | null
+    rushingFumbles: number | null
+    rushingFumblesLost: number | null
+    rushingFirstDowns: number | null
+    rushingEpa: number | null
+    rushing2ptConversions: number | null
+    receptions: number | null
+    targets: number | null
+    receivingYards: number | null
+    receivingTds: number | null
+    receivingFumbles: number | null
+    receivingFumblesLost: number | null
+    receivingAirYards: number | null
+    receivingYardsAfterCatch: number | null
+    receivingFirstDowns: number | null
+    receivingEpa: number | null
+    receiving2ptConversions: number | null
+    racr: number | null
+    targetShare: number | null
+    airYardsShare: number | null
+    wopr: number | null
+    specialTeamsTds: number | null
+    fantasyPoints: number | null
+    fantasyPointsPpr: number | null
+  }
+
+  export type PlayerStatSumAggregateOutputType = {
+    season: number | null
+    week: number | null
+    completions: number | null
+    attempts: number | null
+    passingYards: number | null
+    passingTds: number | null
+    interceptions: number | null
+    sacks: number | null
+    sackYards: number | null
+    sackFumbles: number | null
+    sackFumblesLost: number | null
+    passingAirYards: number | null
+    passingYardsAfterCatch: number | null
+    passingFirstDowns: number | null
+    passingEpa: number | null
+    passing2ptConversions: number | null
+    pacr: number | null
+    dakota: number | null
+    carries: number | null
+    rushingYards: number | null
+    rushingTds: number | null
+    rushingFumbles: number | null
+    rushingFumblesLost: number | null
+    rushingFirstDowns: number | null
+    rushingEpa: number | null
+    rushing2ptConversions: number | null
+    receptions: number | null
+    targets: number | null
+    receivingYards: number | null
+    receivingTds: number | null
+    receivingFumbles: number | null
+    receivingFumblesLost: number | null
+    receivingAirYards: number | null
+    receivingYardsAfterCatch: number | null
+    receivingFirstDowns: number | null
+    receivingEpa: number | null
+    receiving2ptConversions: number | null
+    racr: number | null
+    targetShare: number | null
+    airYardsShare: number | null
+    wopr: number | null
+    specialTeamsTds: number | null
+    fantasyPoints: number | null
+    fantasyPointsPpr: number | null
+  }
+
+  export type PlayerStatMinAggregateOutputType = {
+    id: string | null
+    playerId: string | null
+    playerName: string | null
+    playerDisplayName: string | null
+    position: string | null
+    positionGroup: string | null
+    headshotUrl: string | null
+    recentTeam: string | null
+    season: number | null
+    week: number | null
+    seasonType: string | null
+    opponentTeam: string | null
+    completions: number | null
+    attempts: number | null
+    passingYards: number | null
+    passingTds: number | null
+    interceptions: number | null
+    sacks: number | null
+    sackYards: number | null
+    sackFumbles: number | null
+    sackFumblesLost: number | null
+    passingAirYards: number | null
+    passingYardsAfterCatch: number | null
+    passingFirstDowns: number | null
+    passingEpa: number | null
+    passing2ptConversions: number | null
+    pacr: number | null
+    dakota: number | null
+    carries: number | null
+    rushingYards: number | null
+    rushingTds: number | null
+    rushingFumbles: number | null
+    rushingFumblesLost: number | null
+    rushingFirstDowns: number | null
+    rushingEpa: number | null
+    rushing2ptConversions: number | null
+    receptions: number | null
+    targets: number | null
+    receivingYards: number | null
+    receivingTds: number | null
+    receivingFumbles: number | null
+    receivingFumblesLost: number | null
+    receivingAirYards: number | null
+    receivingYardsAfterCatch: number | null
+    receivingFirstDowns: number | null
+    receivingEpa: number | null
+    receiving2ptConversions: number | null
+    racr: number | null
+    targetShare: number | null
+    airYardsShare: number | null
+    wopr: number | null
+    specialTeamsTds: number | null
+    fantasyPoints: number | null
+    fantasyPointsPpr: number | null
+  }
+
+  export type PlayerStatMaxAggregateOutputType = {
+    id: string | null
+    playerId: string | null
+    playerName: string | null
+    playerDisplayName: string | null
+    position: string | null
+    positionGroup: string | null
+    headshotUrl: string | null
+    recentTeam: string | null
+    season: number | null
+    week: number | null
+    seasonType: string | null
+    opponentTeam: string | null
+    completions: number | null
+    attempts: number | null
+    passingYards: number | null
+    passingTds: number | null
+    interceptions: number | null
+    sacks: number | null
+    sackYards: number | null
+    sackFumbles: number | null
+    sackFumblesLost: number | null
+    passingAirYards: number | null
+    passingYardsAfterCatch: number | null
+    passingFirstDowns: number | null
+    passingEpa: number | null
+    passing2ptConversions: number | null
+    pacr: number | null
+    dakota: number | null
+    carries: number | null
+    rushingYards: number | null
+    rushingTds: number | null
+    rushingFumbles: number | null
+    rushingFumblesLost: number | null
+    rushingFirstDowns: number | null
+    rushingEpa: number | null
+    rushing2ptConversions: number | null
+    receptions: number | null
+    targets: number | null
+    receivingYards: number | null
+    receivingTds: number | null
+    receivingFumbles: number | null
+    receivingFumblesLost: number | null
+    receivingAirYards: number | null
+    receivingYardsAfterCatch: number | null
+    receivingFirstDowns: number | null
+    receivingEpa: number | null
+    receiving2ptConversions: number | null
+    racr: number | null
+    targetShare: number | null
+    airYardsShare: number | null
+    wopr: number | null
+    specialTeamsTds: number | null
+    fantasyPoints: number | null
+    fantasyPointsPpr: number | null
+  }
+
+  export type PlayerStatCountAggregateOutputType = {
+    id: number
+    playerId: number
+    playerName: number
+    playerDisplayName: number
+    position: number
+    positionGroup: number
+    headshotUrl: number
+    recentTeam: number
+    season: number
+    week: number
+    seasonType: number
+    opponentTeam: number
+    completions: number
+    attempts: number
+    passingYards: number
+    passingTds: number
+    interceptions: number
+    sacks: number
+    sackYards: number
+    sackFumbles: number
+    sackFumblesLost: number
+    passingAirYards: number
+    passingYardsAfterCatch: number
+    passingFirstDowns: number
+    passingEpa: number
+    passing2ptConversions: number
+    pacr: number
+    dakota: number
+    carries: number
+    rushingYards: number
+    rushingTds: number
+    rushingFumbles: number
+    rushingFumblesLost: number
+    rushingFirstDowns: number
+    rushingEpa: number
+    rushing2ptConversions: number
+    receptions: number
+    targets: number
+    receivingYards: number
+    receivingTds: number
+    receivingFumbles: number
+    receivingFumblesLost: number
+    receivingAirYards: number
+    receivingYardsAfterCatch: number
+    receivingFirstDowns: number
+    receivingEpa: number
+    receiving2ptConversions: number
+    racr: number
+    targetShare: number
+    airYardsShare: number
+    wopr: number
+    specialTeamsTds: number
+    fantasyPoints: number
+    fantasyPointsPpr: number
+    _all: number
+  }
+
+
+  export type PlayerStatAvgAggregateInputType = {
+    season?: true
+    week?: true
+    completions?: true
+    attempts?: true
+    passingYards?: true
+    passingTds?: true
+    interceptions?: true
+    sacks?: true
+    sackYards?: true
+    sackFumbles?: true
+    sackFumblesLost?: true
+    passingAirYards?: true
+    passingYardsAfterCatch?: true
+    passingFirstDowns?: true
+    passingEpa?: true
+    passing2ptConversions?: true
+    pacr?: true
+    dakota?: true
+    carries?: true
+    rushingYards?: true
+    rushingTds?: true
+    rushingFumbles?: true
+    rushingFumblesLost?: true
+    rushingFirstDowns?: true
+    rushingEpa?: true
+    rushing2ptConversions?: true
+    receptions?: true
+    targets?: true
+    receivingYards?: true
+    receivingTds?: true
+    receivingFumbles?: true
+    receivingFumblesLost?: true
+    receivingAirYards?: true
+    receivingYardsAfterCatch?: true
+    receivingFirstDowns?: true
+    receivingEpa?: true
+    receiving2ptConversions?: true
+    racr?: true
+    targetShare?: true
+    airYardsShare?: true
+    wopr?: true
+    specialTeamsTds?: true
+    fantasyPoints?: true
+    fantasyPointsPpr?: true
+  }
+
+  export type PlayerStatSumAggregateInputType = {
+    season?: true
+    week?: true
+    completions?: true
+    attempts?: true
+    passingYards?: true
+    passingTds?: true
+    interceptions?: true
+    sacks?: true
+    sackYards?: true
+    sackFumbles?: true
+    sackFumblesLost?: true
+    passingAirYards?: true
+    passingYardsAfterCatch?: true
+    passingFirstDowns?: true
+    passingEpa?: true
+    passing2ptConversions?: true
+    pacr?: true
+    dakota?: true
+    carries?: true
+    rushingYards?: true
+    rushingTds?: true
+    rushingFumbles?: true
+    rushingFumblesLost?: true
+    rushingFirstDowns?: true
+    rushingEpa?: true
+    rushing2ptConversions?: true
+    receptions?: true
+    targets?: true
+    receivingYards?: true
+    receivingTds?: true
+    receivingFumbles?: true
+    receivingFumblesLost?: true
+    receivingAirYards?: true
+    receivingYardsAfterCatch?: true
+    receivingFirstDowns?: true
+    receivingEpa?: true
+    receiving2ptConversions?: true
+    racr?: true
+    targetShare?: true
+    airYardsShare?: true
+    wopr?: true
+    specialTeamsTds?: true
+    fantasyPoints?: true
+    fantasyPointsPpr?: true
+  }
+
+  export type PlayerStatMinAggregateInputType = {
+    id?: true
+    playerId?: true
+    playerName?: true
+    playerDisplayName?: true
+    position?: true
+    positionGroup?: true
+    headshotUrl?: true
+    recentTeam?: true
+    season?: true
+    week?: true
+    seasonType?: true
+    opponentTeam?: true
+    completions?: true
+    attempts?: true
+    passingYards?: true
+    passingTds?: true
+    interceptions?: true
+    sacks?: true
+    sackYards?: true
+    sackFumbles?: true
+    sackFumblesLost?: true
+    passingAirYards?: true
+    passingYardsAfterCatch?: true
+    passingFirstDowns?: true
+    passingEpa?: true
+    passing2ptConversions?: true
+    pacr?: true
+    dakota?: true
+    carries?: true
+    rushingYards?: true
+    rushingTds?: true
+    rushingFumbles?: true
+    rushingFumblesLost?: true
+    rushingFirstDowns?: true
+    rushingEpa?: true
+    rushing2ptConversions?: true
+    receptions?: true
+    targets?: true
+    receivingYards?: true
+    receivingTds?: true
+    receivingFumbles?: true
+    receivingFumblesLost?: true
+    receivingAirYards?: true
+    receivingYardsAfterCatch?: true
+    receivingFirstDowns?: true
+    receivingEpa?: true
+    receiving2ptConversions?: true
+    racr?: true
+    targetShare?: true
+    airYardsShare?: true
+    wopr?: true
+    specialTeamsTds?: true
+    fantasyPoints?: true
+    fantasyPointsPpr?: true
+  }
+
+  export type PlayerStatMaxAggregateInputType = {
+    id?: true
+    playerId?: true
+    playerName?: true
+    playerDisplayName?: true
+    position?: true
+    positionGroup?: true
+    headshotUrl?: true
+    recentTeam?: true
+    season?: true
+    week?: true
+    seasonType?: true
+    opponentTeam?: true
+    completions?: true
+    attempts?: true
+    passingYards?: true
+    passingTds?: true
+    interceptions?: true
+    sacks?: true
+    sackYards?: true
+    sackFumbles?: true
+    sackFumblesLost?: true
+    passingAirYards?: true
+    passingYardsAfterCatch?: true
+    passingFirstDowns?: true
+    passingEpa?: true
+    passing2ptConversions?: true
+    pacr?: true
+    dakota?: true
+    carries?: true
+    rushingYards?: true
+    rushingTds?: true
+    rushingFumbles?: true
+    rushingFumblesLost?: true
+    rushingFirstDowns?: true
+    rushingEpa?: true
+    rushing2ptConversions?: true
+    receptions?: true
+    targets?: true
+    receivingYards?: true
+    receivingTds?: true
+    receivingFumbles?: true
+    receivingFumblesLost?: true
+    receivingAirYards?: true
+    receivingYardsAfterCatch?: true
+    receivingFirstDowns?: true
+    receivingEpa?: true
+    receiving2ptConversions?: true
+    racr?: true
+    targetShare?: true
+    airYardsShare?: true
+    wopr?: true
+    specialTeamsTds?: true
+    fantasyPoints?: true
+    fantasyPointsPpr?: true
+  }
+
+  export type PlayerStatCountAggregateInputType = {
+    id?: true
+    playerId?: true
+    playerName?: true
+    playerDisplayName?: true
+    position?: true
+    positionGroup?: true
+    headshotUrl?: true
+    recentTeam?: true
+    season?: true
+    week?: true
+    seasonType?: true
+    opponentTeam?: true
+    completions?: true
+    attempts?: true
+    passingYards?: true
+    passingTds?: true
+    interceptions?: true
+    sacks?: true
+    sackYards?: true
+    sackFumbles?: true
+    sackFumblesLost?: true
+    passingAirYards?: true
+    passingYardsAfterCatch?: true
+    passingFirstDowns?: true
+    passingEpa?: true
+    passing2ptConversions?: true
+    pacr?: true
+    dakota?: true
+    carries?: true
+    rushingYards?: true
+    rushingTds?: true
+    rushingFumbles?: true
+    rushingFumblesLost?: true
+    rushingFirstDowns?: true
+    rushingEpa?: true
+    rushing2ptConversions?: true
+    receptions?: true
+    targets?: true
+    receivingYards?: true
+    receivingTds?: true
+    receivingFumbles?: true
+    receivingFumblesLost?: true
+    receivingAirYards?: true
+    receivingYardsAfterCatch?: true
+    receivingFirstDowns?: true
+    receivingEpa?: true
+    receiving2ptConversions?: true
+    racr?: true
+    targetShare?: true
+    airYardsShare?: true
+    wopr?: true
+    specialTeamsTds?: true
+    fantasyPoints?: true
+    fantasyPointsPpr?: true
+    _all?: true
+  }
+
+  export type PlayerStatAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PlayerStat to aggregate.
+     */
+    where?: PlayerStatWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PlayerStats to fetch.
+     */
+    orderBy?: PlayerStatOrderByWithRelationInput | PlayerStatOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PlayerStatWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PlayerStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PlayerStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PlayerStats
+    **/
+    _count?: true | PlayerStatCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PlayerStatAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PlayerStatSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PlayerStatMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PlayerStatMaxAggregateInputType
+  }
+
+  export type GetPlayerStatAggregateType<T extends PlayerStatAggregateArgs> = {
+        [P in keyof T & keyof AggregatePlayerStat]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePlayerStat[P]>
+      : GetScalarType<T[P], AggregatePlayerStat[P]>
+  }
+
+
+
+
+  export type PlayerStatGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PlayerStatWhereInput
+    orderBy?: PlayerStatOrderByWithAggregationInput | PlayerStatOrderByWithAggregationInput[]
+    by: PlayerStatScalarFieldEnum[] | PlayerStatScalarFieldEnum
+    having?: PlayerStatScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PlayerStatCountAggregateInputType | true
+    _avg?: PlayerStatAvgAggregateInputType
+    _sum?: PlayerStatSumAggregateInputType
+    _min?: PlayerStatMinAggregateInputType
+    _max?: PlayerStatMaxAggregateInputType
+  }
+
+  export type PlayerStatGroupByOutputType = {
+    id: string
+    playerId: string | null
+    playerName: string | null
+    playerDisplayName: string | null
+    position: string | null
+    positionGroup: string | null
+    headshotUrl: string | null
+    recentTeam: string | null
+    season: number | null
+    week: number | null
+    seasonType: string | null
+    opponentTeam: string | null
+    completions: number | null
+    attempts: number | null
+    passingYards: number | null
+    passingTds: number | null
+    interceptions: number | null
+    sacks: number | null
+    sackYards: number | null
+    sackFumbles: number | null
+    sackFumblesLost: number | null
+    passingAirYards: number | null
+    passingYardsAfterCatch: number | null
+    passingFirstDowns: number | null
+    passingEpa: number | null
+    passing2ptConversions: number | null
+    pacr: number | null
+    dakota: number | null
+    carries: number | null
+    rushingYards: number | null
+    rushingTds: number | null
+    rushingFumbles: number | null
+    rushingFumblesLost: number | null
+    rushingFirstDowns: number | null
+    rushingEpa: number | null
+    rushing2ptConversions: number | null
+    receptions: number | null
+    targets: number | null
+    receivingYards: number | null
+    receivingTds: number | null
+    receivingFumbles: number | null
+    receivingFumblesLost: number | null
+    receivingAirYards: number | null
+    receivingYardsAfterCatch: number | null
+    receivingFirstDowns: number | null
+    receivingEpa: number | null
+    receiving2ptConversions: number | null
+    racr: number | null
+    targetShare: number | null
+    airYardsShare: number | null
+    wopr: number | null
+    specialTeamsTds: number | null
+    fantasyPoints: number | null
+    fantasyPointsPpr: number | null
+    _count: PlayerStatCountAggregateOutputType | null
+    _avg: PlayerStatAvgAggregateOutputType | null
+    _sum: PlayerStatSumAggregateOutputType | null
+    _min: PlayerStatMinAggregateOutputType | null
+    _max: PlayerStatMaxAggregateOutputType | null
+  }
+
+  type GetPlayerStatGroupByPayload<T extends PlayerStatGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PlayerStatGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PlayerStatGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PlayerStatGroupByOutputType[P]>
+            : GetScalarType<T[P], PlayerStatGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PlayerStatSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    playerId?: boolean
+    playerName?: boolean
+    playerDisplayName?: boolean
+    position?: boolean
+    positionGroup?: boolean
+    headshotUrl?: boolean
+    recentTeam?: boolean
+    season?: boolean
+    week?: boolean
+    seasonType?: boolean
+    opponentTeam?: boolean
+    completions?: boolean
+    attempts?: boolean
+    passingYards?: boolean
+    passingTds?: boolean
+    interceptions?: boolean
+    sacks?: boolean
+    sackYards?: boolean
+    sackFumbles?: boolean
+    sackFumblesLost?: boolean
+    passingAirYards?: boolean
+    passingYardsAfterCatch?: boolean
+    passingFirstDowns?: boolean
+    passingEpa?: boolean
+    passing2ptConversions?: boolean
+    pacr?: boolean
+    dakota?: boolean
+    carries?: boolean
+    rushingYards?: boolean
+    rushingTds?: boolean
+    rushingFumbles?: boolean
+    rushingFumblesLost?: boolean
+    rushingFirstDowns?: boolean
+    rushingEpa?: boolean
+    rushing2ptConversions?: boolean
+    receptions?: boolean
+    targets?: boolean
+    receivingYards?: boolean
+    receivingTds?: boolean
+    receivingFumbles?: boolean
+    receivingFumblesLost?: boolean
+    receivingAirYards?: boolean
+    receivingYardsAfterCatch?: boolean
+    receivingFirstDowns?: boolean
+    receivingEpa?: boolean
+    receiving2ptConversions?: boolean
+    racr?: boolean
+    targetShare?: boolean
+    airYardsShare?: boolean
+    wopr?: boolean
+    specialTeamsTds?: boolean
+    fantasyPoints?: boolean
+    fantasyPointsPpr?: boolean
+  }, ExtArgs["result"]["playerStat"]>
+
+  export type PlayerStatSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    playerId?: boolean
+    playerName?: boolean
+    playerDisplayName?: boolean
+    position?: boolean
+    positionGroup?: boolean
+    headshotUrl?: boolean
+    recentTeam?: boolean
+    season?: boolean
+    week?: boolean
+    seasonType?: boolean
+    opponentTeam?: boolean
+    completions?: boolean
+    attempts?: boolean
+    passingYards?: boolean
+    passingTds?: boolean
+    interceptions?: boolean
+    sacks?: boolean
+    sackYards?: boolean
+    sackFumbles?: boolean
+    sackFumblesLost?: boolean
+    passingAirYards?: boolean
+    passingYardsAfterCatch?: boolean
+    passingFirstDowns?: boolean
+    passingEpa?: boolean
+    passing2ptConversions?: boolean
+    pacr?: boolean
+    dakota?: boolean
+    carries?: boolean
+    rushingYards?: boolean
+    rushingTds?: boolean
+    rushingFumbles?: boolean
+    rushingFumblesLost?: boolean
+    rushingFirstDowns?: boolean
+    rushingEpa?: boolean
+    rushing2ptConversions?: boolean
+    receptions?: boolean
+    targets?: boolean
+    receivingYards?: boolean
+    receivingTds?: boolean
+    receivingFumbles?: boolean
+    receivingFumblesLost?: boolean
+    receivingAirYards?: boolean
+    receivingYardsAfterCatch?: boolean
+    receivingFirstDowns?: boolean
+    receivingEpa?: boolean
+    receiving2ptConversions?: boolean
+    racr?: boolean
+    targetShare?: boolean
+    airYardsShare?: boolean
+    wopr?: boolean
+    specialTeamsTds?: boolean
+    fantasyPoints?: boolean
+    fantasyPointsPpr?: boolean
+  }, ExtArgs["result"]["playerStat"]>
+
+  export type PlayerStatSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    playerId?: boolean
+    playerName?: boolean
+    playerDisplayName?: boolean
+    position?: boolean
+    positionGroup?: boolean
+    headshotUrl?: boolean
+    recentTeam?: boolean
+    season?: boolean
+    week?: boolean
+    seasonType?: boolean
+    opponentTeam?: boolean
+    completions?: boolean
+    attempts?: boolean
+    passingYards?: boolean
+    passingTds?: boolean
+    interceptions?: boolean
+    sacks?: boolean
+    sackYards?: boolean
+    sackFumbles?: boolean
+    sackFumblesLost?: boolean
+    passingAirYards?: boolean
+    passingYardsAfterCatch?: boolean
+    passingFirstDowns?: boolean
+    passingEpa?: boolean
+    passing2ptConversions?: boolean
+    pacr?: boolean
+    dakota?: boolean
+    carries?: boolean
+    rushingYards?: boolean
+    rushingTds?: boolean
+    rushingFumbles?: boolean
+    rushingFumblesLost?: boolean
+    rushingFirstDowns?: boolean
+    rushingEpa?: boolean
+    rushing2ptConversions?: boolean
+    receptions?: boolean
+    targets?: boolean
+    receivingYards?: boolean
+    receivingTds?: boolean
+    receivingFumbles?: boolean
+    receivingFumblesLost?: boolean
+    receivingAirYards?: boolean
+    receivingYardsAfterCatch?: boolean
+    receivingFirstDowns?: boolean
+    receivingEpa?: boolean
+    receiving2ptConversions?: boolean
+    racr?: boolean
+    targetShare?: boolean
+    airYardsShare?: boolean
+    wopr?: boolean
+    specialTeamsTds?: boolean
+    fantasyPoints?: boolean
+    fantasyPointsPpr?: boolean
+  }, ExtArgs["result"]["playerStat"]>
+
+  export type PlayerStatSelectScalar = {
+    id?: boolean
+    playerId?: boolean
+    playerName?: boolean
+    playerDisplayName?: boolean
+    position?: boolean
+    positionGroup?: boolean
+    headshotUrl?: boolean
+    recentTeam?: boolean
+    season?: boolean
+    week?: boolean
+    seasonType?: boolean
+    opponentTeam?: boolean
+    completions?: boolean
+    attempts?: boolean
+    passingYards?: boolean
+    passingTds?: boolean
+    interceptions?: boolean
+    sacks?: boolean
+    sackYards?: boolean
+    sackFumbles?: boolean
+    sackFumblesLost?: boolean
+    passingAirYards?: boolean
+    passingYardsAfterCatch?: boolean
+    passingFirstDowns?: boolean
+    passingEpa?: boolean
+    passing2ptConversions?: boolean
+    pacr?: boolean
+    dakota?: boolean
+    carries?: boolean
+    rushingYards?: boolean
+    rushingTds?: boolean
+    rushingFumbles?: boolean
+    rushingFumblesLost?: boolean
+    rushingFirstDowns?: boolean
+    rushingEpa?: boolean
+    rushing2ptConversions?: boolean
+    receptions?: boolean
+    targets?: boolean
+    receivingYards?: boolean
+    receivingTds?: boolean
+    receivingFumbles?: boolean
+    receivingFumblesLost?: boolean
+    receivingAirYards?: boolean
+    receivingYardsAfterCatch?: boolean
+    receivingFirstDowns?: boolean
+    receivingEpa?: boolean
+    receiving2ptConversions?: boolean
+    racr?: boolean
+    targetShare?: boolean
+    airYardsShare?: boolean
+    wopr?: boolean
+    specialTeamsTds?: boolean
+    fantasyPoints?: boolean
+    fantasyPointsPpr?: boolean
+  }
+
+  export type PlayerStatOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "playerId" | "playerName" | "playerDisplayName" | "position" | "positionGroup" | "headshotUrl" | "recentTeam" | "season" | "week" | "seasonType" | "opponentTeam" | "completions" | "attempts" | "passingYards" | "passingTds" | "interceptions" | "sacks" | "sackYards" | "sackFumbles" | "sackFumblesLost" | "passingAirYards" | "passingYardsAfterCatch" | "passingFirstDowns" | "passingEpa" | "passing2ptConversions" | "pacr" | "dakota" | "carries" | "rushingYards" | "rushingTds" | "rushingFumbles" | "rushingFumblesLost" | "rushingFirstDowns" | "rushingEpa" | "rushing2ptConversions" | "receptions" | "targets" | "receivingYards" | "receivingTds" | "receivingFumbles" | "receivingFumblesLost" | "receivingAirYards" | "receivingYardsAfterCatch" | "receivingFirstDowns" | "receivingEpa" | "receiving2ptConversions" | "racr" | "targetShare" | "airYardsShare" | "wopr" | "specialTeamsTds" | "fantasyPoints" | "fantasyPointsPpr", ExtArgs["result"]["playerStat"]>
+
+  export type $PlayerStatPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PlayerStat"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      playerId: string | null
+      playerName: string | null
+      playerDisplayName: string | null
+      position: string | null
+      positionGroup: string | null
+      headshotUrl: string | null
+      recentTeam: string | null
+      season: number | null
+      week: number | null
+      seasonType: string | null
+      opponentTeam: string | null
+      completions: number | null
+      attempts: number | null
+      passingYards: number | null
+      passingTds: number | null
+      interceptions: number | null
+      sacks: number | null
+      sackYards: number | null
+      sackFumbles: number | null
+      sackFumblesLost: number | null
+      passingAirYards: number | null
+      passingYardsAfterCatch: number | null
+      passingFirstDowns: number | null
+      passingEpa: number | null
+      passing2ptConversions: number | null
+      pacr: number | null
+      dakota: number | null
+      carries: number | null
+      rushingYards: number | null
+      rushingTds: number | null
+      rushingFumbles: number | null
+      rushingFumblesLost: number | null
+      rushingFirstDowns: number | null
+      rushingEpa: number | null
+      rushing2ptConversions: number | null
+      receptions: number | null
+      targets: number | null
+      receivingYards: number | null
+      receivingTds: number | null
+      receivingFumbles: number | null
+      receivingFumblesLost: number | null
+      receivingAirYards: number | null
+      receivingYardsAfterCatch: number | null
+      receivingFirstDowns: number | null
+      receivingEpa: number | null
+      receiving2ptConversions: number | null
+      racr: number | null
+      targetShare: number | null
+      airYardsShare: number | null
+      wopr: number | null
+      specialTeamsTds: number | null
+      fantasyPoints: number | null
+      fantasyPointsPpr: number | null
+    }, ExtArgs["result"]["playerStat"]>
+    composites: {}
+  }
+
+  type PlayerStatGetPayload<S extends boolean | null | undefined | PlayerStatDefaultArgs> = $Result.GetResult<Prisma.$PlayerStatPayload, S>
+
+  type PlayerStatCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PlayerStatFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PlayerStatCountAggregateInputType | true
+    }
+
+  export interface PlayerStatDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PlayerStat'], meta: { name: 'PlayerStat' } }
+    /**
+     * Find zero or one PlayerStat that matches the filter.
+     * @param {PlayerStatFindUniqueArgs} args - Arguments to find a PlayerStat
+     * @example
+     * // Get one PlayerStat
+     * const playerStat = await prisma.playerStat.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PlayerStatFindUniqueArgs>(args: SelectSubset<T, PlayerStatFindUniqueArgs<ExtArgs>>): Prisma__PlayerStatClient<$Result.GetResult<Prisma.$PlayerStatPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PlayerStat that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PlayerStatFindUniqueOrThrowArgs} args - Arguments to find a PlayerStat
+     * @example
+     * // Get one PlayerStat
+     * const playerStat = await prisma.playerStat.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PlayerStatFindUniqueOrThrowArgs>(args: SelectSubset<T, PlayerStatFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PlayerStatClient<$Result.GetResult<Prisma.$PlayerStatPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PlayerStat that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerStatFindFirstArgs} args - Arguments to find a PlayerStat
+     * @example
+     * // Get one PlayerStat
+     * const playerStat = await prisma.playerStat.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PlayerStatFindFirstArgs>(args?: SelectSubset<T, PlayerStatFindFirstArgs<ExtArgs>>): Prisma__PlayerStatClient<$Result.GetResult<Prisma.$PlayerStatPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PlayerStat that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerStatFindFirstOrThrowArgs} args - Arguments to find a PlayerStat
+     * @example
+     * // Get one PlayerStat
+     * const playerStat = await prisma.playerStat.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PlayerStatFindFirstOrThrowArgs>(args?: SelectSubset<T, PlayerStatFindFirstOrThrowArgs<ExtArgs>>): Prisma__PlayerStatClient<$Result.GetResult<Prisma.$PlayerStatPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PlayerStats that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerStatFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PlayerStats
+     * const playerStats = await prisma.playerStat.findMany()
+     * 
+     * // Get first 10 PlayerStats
+     * const playerStats = await prisma.playerStat.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const playerStatWithIdOnly = await prisma.playerStat.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PlayerStatFindManyArgs>(args?: SelectSubset<T, PlayerStatFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerStatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PlayerStat.
+     * @param {PlayerStatCreateArgs} args - Arguments to create a PlayerStat.
+     * @example
+     * // Create one PlayerStat
+     * const PlayerStat = await prisma.playerStat.create({
+     *   data: {
+     *     // ... data to create a PlayerStat
+     *   }
+     * })
+     * 
+     */
+    create<T extends PlayerStatCreateArgs>(args: SelectSubset<T, PlayerStatCreateArgs<ExtArgs>>): Prisma__PlayerStatClient<$Result.GetResult<Prisma.$PlayerStatPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PlayerStats.
+     * @param {PlayerStatCreateManyArgs} args - Arguments to create many PlayerStats.
+     * @example
+     * // Create many PlayerStats
+     * const playerStat = await prisma.playerStat.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PlayerStatCreateManyArgs>(args?: SelectSubset<T, PlayerStatCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PlayerStats and returns the data saved in the database.
+     * @param {PlayerStatCreateManyAndReturnArgs} args - Arguments to create many PlayerStats.
+     * @example
+     * // Create many PlayerStats
+     * const playerStat = await prisma.playerStat.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PlayerStats and only return the `id`
+     * const playerStatWithIdOnly = await prisma.playerStat.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PlayerStatCreateManyAndReturnArgs>(args?: SelectSubset<T, PlayerStatCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerStatPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PlayerStat.
+     * @param {PlayerStatDeleteArgs} args - Arguments to delete one PlayerStat.
+     * @example
+     * // Delete one PlayerStat
+     * const PlayerStat = await prisma.playerStat.delete({
+     *   where: {
+     *     // ... filter to delete one PlayerStat
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PlayerStatDeleteArgs>(args: SelectSubset<T, PlayerStatDeleteArgs<ExtArgs>>): Prisma__PlayerStatClient<$Result.GetResult<Prisma.$PlayerStatPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PlayerStat.
+     * @param {PlayerStatUpdateArgs} args - Arguments to update one PlayerStat.
+     * @example
+     * // Update one PlayerStat
+     * const playerStat = await prisma.playerStat.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PlayerStatUpdateArgs>(args: SelectSubset<T, PlayerStatUpdateArgs<ExtArgs>>): Prisma__PlayerStatClient<$Result.GetResult<Prisma.$PlayerStatPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PlayerStats.
+     * @param {PlayerStatDeleteManyArgs} args - Arguments to filter PlayerStats to delete.
+     * @example
+     * // Delete a few PlayerStats
+     * const { count } = await prisma.playerStat.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PlayerStatDeleteManyArgs>(args?: SelectSubset<T, PlayerStatDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PlayerStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerStatUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PlayerStats
+     * const playerStat = await prisma.playerStat.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PlayerStatUpdateManyArgs>(args: SelectSubset<T, PlayerStatUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PlayerStats and returns the data updated in the database.
+     * @param {PlayerStatUpdateManyAndReturnArgs} args - Arguments to update many PlayerStats.
+     * @example
+     * // Update many PlayerStats
+     * const playerStat = await prisma.playerStat.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PlayerStats and only return the `id`
+     * const playerStatWithIdOnly = await prisma.playerStat.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PlayerStatUpdateManyAndReturnArgs>(args: SelectSubset<T, PlayerStatUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerStatPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PlayerStat.
+     * @param {PlayerStatUpsertArgs} args - Arguments to update or create a PlayerStat.
+     * @example
+     * // Update or create a PlayerStat
+     * const playerStat = await prisma.playerStat.upsert({
+     *   create: {
+     *     // ... data to create a PlayerStat
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PlayerStat we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PlayerStatUpsertArgs>(args: SelectSubset<T, PlayerStatUpsertArgs<ExtArgs>>): Prisma__PlayerStatClient<$Result.GetResult<Prisma.$PlayerStatPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PlayerStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerStatCountArgs} args - Arguments to filter PlayerStats to count.
+     * @example
+     * // Count the number of PlayerStats
+     * const count = await prisma.playerStat.count({
+     *   where: {
+     *     // ... the filter for the PlayerStats we want to count
+     *   }
+     * })
+    **/
+    count<T extends PlayerStatCountArgs>(
+      args?: Subset<T, PlayerStatCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PlayerStatCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PlayerStat.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerStatAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PlayerStatAggregateArgs>(args: Subset<T, PlayerStatAggregateArgs>): Prisma.PrismaPromise<GetPlayerStatAggregateType<T>>
+
+    /**
+     * Group by PlayerStat.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerStatGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PlayerStatGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PlayerStatGroupByArgs['orderBy'] }
+        : { orderBy?: PlayerStatGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PlayerStatGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPlayerStatGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PlayerStat model
+   */
+  readonly fields: PlayerStatFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PlayerStat.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PlayerStatClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PlayerStat model
+   */
+  interface PlayerStatFieldRefs {
+    readonly id: FieldRef<"PlayerStat", 'String'>
+    readonly playerId: FieldRef<"PlayerStat", 'String'>
+    readonly playerName: FieldRef<"PlayerStat", 'String'>
+    readonly playerDisplayName: FieldRef<"PlayerStat", 'String'>
+    readonly position: FieldRef<"PlayerStat", 'String'>
+    readonly positionGroup: FieldRef<"PlayerStat", 'String'>
+    readonly headshotUrl: FieldRef<"PlayerStat", 'String'>
+    readonly recentTeam: FieldRef<"PlayerStat", 'String'>
+    readonly season: FieldRef<"PlayerStat", 'Int'>
+    readonly week: FieldRef<"PlayerStat", 'Int'>
+    readonly seasonType: FieldRef<"PlayerStat", 'String'>
+    readonly opponentTeam: FieldRef<"PlayerStat", 'String'>
+    readonly completions: FieldRef<"PlayerStat", 'Int'>
+    readonly attempts: FieldRef<"PlayerStat", 'Int'>
+    readonly passingYards: FieldRef<"PlayerStat", 'Float'>
+    readonly passingTds: FieldRef<"PlayerStat", 'Int'>
+    readonly interceptions: FieldRef<"PlayerStat", 'Int'>
+    readonly sacks: FieldRef<"PlayerStat", 'Int'>
+    readonly sackYards: FieldRef<"PlayerStat", 'Float'>
+    readonly sackFumbles: FieldRef<"PlayerStat", 'Int'>
+    readonly sackFumblesLost: FieldRef<"PlayerStat", 'Int'>
+    readonly passingAirYards: FieldRef<"PlayerStat", 'Float'>
+    readonly passingYardsAfterCatch: FieldRef<"PlayerStat", 'Float'>
+    readonly passingFirstDowns: FieldRef<"PlayerStat", 'Int'>
+    readonly passingEpa: FieldRef<"PlayerStat", 'Float'>
+    readonly passing2ptConversions: FieldRef<"PlayerStat", 'Int'>
+    readonly pacr: FieldRef<"PlayerStat", 'Float'>
+    readonly dakota: FieldRef<"PlayerStat", 'Float'>
+    readonly carries: FieldRef<"PlayerStat", 'Int'>
+    readonly rushingYards: FieldRef<"PlayerStat", 'Float'>
+    readonly rushingTds: FieldRef<"PlayerStat", 'Int'>
+    readonly rushingFumbles: FieldRef<"PlayerStat", 'Int'>
+    readonly rushingFumblesLost: FieldRef<"PlayerStat", 'Int'>
+    readonly rushingFirstDowns: FieldRef<"PlayerStat", 'Int'>
+    readonly rushingEpa: FieldRef<"PlayerStat", 'Float'>
+    readonly rushing2ptConversions: FieldRef<"PlayerStat", 'Int'>
+    readonly receptions: FieldRef<"PlayerStat", 'Int'>
+    readonly targets: FieldRef<"PlayerStat", 'Int'>
+    readonly receivingYards: FieldRef<"PlayerStat", 'Float'>
+    readonly receivingTds: FieldRef<"PlayerStat", 'Int'>
+    readonly receivingFumbles: FieldRef<"PlayerStat", 'Int'>
+    readonly receivingFumblesLost: FieldRef<"PlayerStat", 'Int'>
+    readonly receivingAirYards: FieldRef<"PlayerStat", 'Float'>
+    readonly receivingYardsAfterCatch: FieldRef<"PlayerStat", 'Float'>
+    readonly receivingFirstDowns: FieldRef<"PlayerStat", 'Int'>
+    readonly receivingEpa: FieldRef<"PlayerStat", 'Float'>
+    readonly receiving2ptConversions: FieldRef<"PlayerStat", 'Int'>
+    readonly racr: FieldRef<"PlayerStat", 'Float'>
+    readonly targetShare: FieldRef<"PlayerStat", 'Float'>
+    readonly airYardsShare: FieldRef<"PlayerStat", 'Float'>
+    readonly wopr: FieldRef<"PlayerStat", 'Float'>
+    readonly specialTeamsTds: FieldRef<"PlayerStat", 'Int'>
+    readonly fantasyPoints: FieldRef<"PlayerStat", 'Float'>
+    readonly fantasyPointsPpr: FieldRef<"PlayerStat", 'Float'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PlayerStat findUnique
+   */
+  export type PlayerStatFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerStat
+     */
+    select?: PlayerStatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerStat
+     */
+    omit?: PlayerStatOmit<ExtArgs> | null
+    /**
+     * Filter, which PlayerStat to fetch.
+     */
+    where: PlayerStatWhereUniqueInput
+  }
+
+  /**
+   * PlayerStat findUniqueOrThrow
+   */
+  export type PlayerStatFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerStat
+     */
+    select?: PlayerStatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerStat
+     */
+    omit?: PlayerStatOmit<ExtArgs> | null
+    /**
+     * Filter, which PlayerStat to fetch.
+     */
+    where: PlayerStatWhereUniqueInput
+  }
+
+  /**
+   * PlayerStat findFirst
+   */
+  export type PlayerStatFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerStat
+     */
+    select?: PlayerStatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerStat
+     */
+    omit?: PlayerStatOmit<ExtArgs> | null
+    /**
+     * Filter, which PlayerStat to fetch.
+     */
+    where?: PlayerStatWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PlayerStats to fetch.
+     */
+    orderBy?: PlayerStatOrderByWithRelationInput | PlayerStatOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PlayerStats.
+     */
+    cursor?: PlayerStatWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PlayerStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PlayerStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PlayerStats.
+     */
+    distinct?: PlayerStatScalarFieldEnum | PlayerStatScalarFieldEnum[]
+  }
+
+  /**
+   * PlayerStat findFirstOrThrow
+   */
+  export type PlayerStatFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerStat
+     */
+    select?: PlayerStatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerStat
+     */
+    omit?: PlayerStatOmit<ExtArgs> | null
+    /**
+     * Filter, which PlayerStat to fetch.
+     */
+    where?: PlayerStatWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PlayerStats to fetch.
+     */
+    orderBy?: PlayerStatOrderByWithRelationInput | PlayerStatOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PlayerStats.
+     */
+    cursor?: PlayerStatWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PlayerStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PlayerStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PlayerStats.
+     */
+    distinct?: PlayerStatScalarFieldEnum | PlayerStatScalarFieldEnum[]
+  }
+
+  /**
+   * PlayerStat findMany
+   */
+  export type PlayerStatFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerStat
+     */
+    select?: PlayerStatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerStat
+     */
+    omit?: PlayerStatOmit<ExtArgs> | null
+    /**
+     * Filter, which PlayerStats to fetch.
+     */
+    where?: PlayerStatWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PlayerStats to fetch.
+     */
+    orderBy?: PlayerStatOrderByWithRelationInput | PlayerStatOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PlayerStats.
+     */
+    cursor?: PlayerStatWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PlayerStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PlayerStats.
+     */
+    skip?: number
+    distinct?: PlayerStatScalarFieldEnum | PlayerStatScalarFieldEnum[]
+  }
+
+  /**
+   * PlayerStat create
+   */
+  export type PlayerStatCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerStat
+     */
+    select?: PlayerStatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerStat
+     */
+    omit?: PlayerStatOmit<ExtArgs> | null
+    /**
+     * The data needed to create a PlayerStat.
+     */
+    data?: XOR<PlayerStatCreateInput, PlayerStatUncheckedCreateInput>
+  }
+
+  /**
+   * PlayerStat createMany
+   */
+  export type PlayerStatCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PlayerStats.
+     */
+    data: PlayerStatCreateManyInput | PlayerStatCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PlayerStat createManyAndReturn
+   */
+  export type PlayerStatCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerStat
+     */
+    select?: PlayerStatSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerStat
+     */
+    omit?: PlayerStatOmit<ExtArgs> | null
+    /**
+     * The data used to create many PlayerStats.
+     */
+    data: PlayerStatCreateManyInput | PlayerStatCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PlayerStat update
+   */
+  export type PlayerStatUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerStat
+     */
+    select?: PlayerStatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerStat
+     */
+    omit?: PlayerStatOmit<ExtArgs> | null
+    /**
+     * The data needed to update a PlayerStat.
+     */
+    data: XOR<PlayerStatUpdateInput, PlayerStatUncheckedUpdateInput>
+    /**
+     * Choose, which PlayerStat to update.
+     */
+    where: PlayerStatWhereUniqueInput
+  }
+
+  /**
+   * PlayerStat updateMany
+   */
+  export type PlayerStatUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PlayerStats.
+     */
+    data: XOR<PlayerStatUpdateManyMutationInput, PlayerStatUncheckedUpdateManyInput>
+    /**
+     * Filter which PlayerStats to update
+     */
+    where?: PlayerStatWhereInput
+    /**
+     * Limit how many PlayerStats to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PlayerStat updateManyAndReturn
+   */
+  export type PlayerStatUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerStat
+     */
+    select?: PlayerStatSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerStat
+     */
+    omit?: PlayerStatOmit<ExtArgs> | null
+    /**
+     * The data used to update PlayerStats.
+     */
+    data: XOR<PlayerStatUpdateManyMutationInput, PlayerStatUncheckedUpdateManyInput>
+    /**
+     * Filter which PlayerStats to update
+     */
+    where?: PlayerStatWhereInput
+    /**
+     * Limit how many PlayerStats to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PlayerStat upsert
+   */
+  export type PlayerStatUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerStat
+     */
+    select?: PlayerStatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerStat
+     */
+    omit?: PlayerStatOmit<ExtArgs> | null
+    /**
+     * The filter to search for the PlayerStat to update in case it exists.
+     */
+    where: PlayerStatWhereUniqueInput
+    /**
+     * In case the PlayerStat found by the `where` argument doesn't exist, create a new PlayerStat with this data.
+     */
+    create: XOR<PlayerStatCreateInput, PlayerStatUncheckedCreateInput>
+    /**
+     * In case the PlayerStat was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PlayerStatUpdateInput, PlayerStatUncheckedUpdateInput>
+  }
+
+  /**
+   * PlayerStat delete
+   */
+  export type PlayerStatDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerStat
+     */
+    select?: PlayerStatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerStat
+     */
+    omit?: PlayerStatOmit<ExtArgs> | null
+    /**
+     * Filter which PlayerStat to delete.
+     */
+    where: PlayerStatWhereUniqueInput
+  }
+
+  /**
+   * PlayerStat deleteMany
+   */
+  export type PlayerStatDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PlayerStats to delete
+     */
+    where?: PlayerStatWhereInput
+    /**
+     * Limit how many PlayerStats to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PlayerStat without action
+   */
+  export type PlayerStatDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerStat
+     */
+    select?: PlayerStatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerStat
+     */
+    omit?: PlayerStatOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ReceivingStat
+   */
+
+  export type AggregateReceivingStat = {
+    _count: ReceivingStatCountAggregateOutputType | null
+    _avg: ReceivingStatAvgAggregateOutputType | null
+    _sum: ReceivingStatSumAggregateOutputType | null
+    _min: ReceivingStatMinAggregateOutputType | null
+    _max: ReceivingStatMaxAggregateOutputType | null
+  }
+
+  export type ReceivingStatAvgAggregateOutputType = {
+    playerGameCount: number | null
+    avgDepthOfTarget: number | null
+    avoidedTackles: number | null
+    caughtPercent: number | null
+    contestedCatchRate: number | null
+    contestedReceptions: number | null
+    contestedTargets: number | null
+    declinedPenalties: number | null
+    dropRate: number | null
+    drops: number | null
+    firstDowns: number | null
+    franchiseId: number | null
+    fumbles: number | null
+    gradesHandsDrop: number | null
+    gradesHandsFumble: number | null
+    gradesOffense: number | null
+    gradesPassBlock: number | null
+    gradesPassRoute: number | null
+    inlineRate: number | null
+    inlineSnaps: number | null
+    interceptions: number | null
+    longest: number | null
+    passBlockRate: number | null
+    passBlocks: number | null
+    passPlays: number | null
+    penalties: number | null
+    receptions: number | null
+    routeRate: number | null
+    routes: number | null
+    slotRate: number | null
+    slotSnaps: number | null
+    targetedQbRating: number | null
+    targets: number | null
+    touchdowns: number | null
+    wideRate: number | null
+    wideSnaps: number | null
+    yards: number | null
+    yardsAfterCatch: number | null
+    yardsAfterCatchPerReception: number | null
+    yardsPerReception: number | null
+    yprr: number | null
+  }
+
+  export type ReceivingStatSumAggregateOutputType = {
+    playerGameCount: number | null
+    avgDepthOfTarget: number | null
+    avoidedTackles: number | null
+    caughtPercent: number | null
+    contestedCatchRate: number | null
+    contestedReceptions: number | null
+    contestedTargets: number | null
+    declinedPenalties: number | null
+    dropRate: number | null
+    drops: number | null
+    firstDowns: number | null
+    franchiseId: number | null
+    fumbles: number | null
+    gradesHandsDrop: number | null
+    gradesHandsFumble: number | null
+    gradesOffense: number | null
+    gradesPassBlock: number | null
+    gradesPassRoute: number | null
+    inlineRate: number | null
+    inlineSnaps: number | null
+    interceptions: number | null
+    longest: number | null
+    passBlockRate: number | null
+    passBlocks: number | null
+    passPlays: number | null
+    penalties: number | null
+    receptions: number | null
+    routeRate: number | null
+    routes: number | null
+    slotRate: number | null
+    slotSnaps: number | null
+    targetedQbRating: number | null
+    targets: number | null
+    touchdowns: number | null
+    wideRate: number | null
+    wideSnaps: number | null
+    yards: number | null
+    yardsAfterCatch: number | null
+    yardsAfterCatchPerReception: number | null
+    yardsPerReception: number | null
+    yprr: number | null
+  }
+
+  export type ReceivingStatMinAggregateOutputType = {
+    id: string | null
+    player: string | null
+    playerId: string | null
+    position: string | null
+    teamName: string | null
+    playerGameCount: number | null
+    avgDepthOfTarget: number | null
+    avoidedTackles: number | null
+    caughtPercent: number | null
+    contestedCatchRate: number | null
+    contestedReceptions: number | null
+    contestedTargets: number | null
+    declinedPenalties: number | null
+    dropRate: number | null
+    drops: number | null
+    firstDowns: number | null
+    franchiseId: number | null
+    fumbles: number | null
+    gradesHandsDrop: number | null
+    gradesHandsFumble: number | null
+    gradesOffense: number | null
+    gradesPassBlock: number | null
+    gradesPassRoute: number | null
+    inlineRate: number | null
+    inlineSnaps: number | null
+    interceptions: number | null
+    longest: number | null
+    passBlockRate: number | null
+    passBlocks: number | null
+    passPlays: number | null
+    penalties: number | null
+    receptions: number | null
+    routeRate: number | null
+    routes: number | null
+    slotRate: number | null
+    slotSnaps: number | null
+    targetedQbRating: number | null
+    targets: number | null
+    touchdowns: number | null
+    wideRate: number | null
+    wideSnaps: number | null
+    yards: number | null
+    yardsAfterCatch: number | null
+    yardsAfterCatchPerReception: number | null
+    yardsPerReception: number | null
+    yprr: number | null
+  }
+
+  export type ReceivingStatMaxAggregateOutputType = {
+    id: string | null
+    player: string | null
+    playerId: string | null
+    position: string | null
+    teamName: string | null
+    playerGameCount: number | null
+    avgDepthOfTarget: number | null
+    avoidedTackles: number | null
+    caughtPercent: number | null
+    contestedCatchRate: number | null
+    contestedReceptions: number | null
+    contestedTargets: number | null
+    declinedPenalties: number | null
+    dropRate: number | null
+    drops: number | null
+    firstDowns: number | null
+    franchiseId: number | null
+    fumbles: number | null
+    gradesHandsDrop: number | null
+    gradesHandsFumble: number | null
+    gradesOffense: number | null
+    gradesPassBlock: number | null
+    gradesPassRoute: number | null
+    inlineRate: number | null
+    inlineSnaps: number | null
+    interceptions: number | null
+    longest: number | null
+    passBlockRate: number | null
+    passBlocks: number | null
+    passPlays: number | null
+    penalties: number | null
+    receptions: number | null
+    routeRate: number | null
+    routes: number | null
+    slotRate: number | null
+    slotSnaps: number | null
+    targetedQbRating: number | null
+    targets: number | null
+    touchdowns: number | null
+    wideRate: number | null
+    wideSnaps: number | null
+    yards: number | null
+    yardsAfterCatch: number | null
+    yardsAfterCatchPerReception: number | null
+    yardsPerReception: number | null
+    yprr: number | null
+  }
+
+  export type ReceivingStatCountAggregateOutputType = {
+    id: number
+    player: number
+    playerId: number
+    position: number
+    teamName: number
+    playerGameCount: number
+    avgDepthOfTarget: number
+    avoidedTackles: number
+    caughtPercent: number
+    contestedCatchRate: number
+    contestedReceptions: number
+    contestedTargets: number
+    declinedPenalties: number
+    dropRate: number
+    drops: number
+    firstDowns: number
+    franchiseId: number
+    fumbles: number
+    gradesHandsDrop: number
+    gradesHandsFumble: number
+    gradesOffense: number
+    gradesPassBlock: number
+    gradesPassRoute: number
+    inlineRate: number
+    inlineSnaps: number
+    interceptions: number
+    longest: number
+    passBlockRate: number
+    passBlocks: number
+    passPlays: number
+    penalties: number
+    receptions: number
+    routeRate: number
+    routes: number
+    slotRate: number
+    slotSnaps: number
+    targetedQbRating: number
+    targets: number
+    touchdowns: number
+    wideRate: number
+    wideSnaps: number
+    yards: number
+    yardsAfterCatch: number
+    yardsAfterCatchPerReception: number
+    yardsPerReception: number
+    yprr: number
+    _all: number
+  }
+
+
+  export type ReceivingStatAvgAggregateInputType = {
+    playerGameCount?: true
+    avgDepthOfTarget?: true
+    avoidedTackles?: true
+    caughtPercent?: true
+    contestedCatchRate?: true
+    contestedReceptions?: true
+    contestedTargets?: true
+    declinedPenalties?: true
+    dropRate?: true
+    drops?: true
+    firstDowns?: true
+    franchiseId?: true
+    fumbles?: true
+    gradesHandsDrop?: true
+    gradesHandsFumble?: true
+    gradesOffense?: true
+    gradesPassBlock?: true
+    gradesPassRoute?: true
+    inlineRate?: true
+    inlineSnaps?: true
+    interceptions?: true
+    longest?: true
+    passBlockRate?: true
+    passBlocks?: true
+    passPlays?: true
+    penalties?: true
+    receptions?: true
+    routeRate?: true
+    routes?: true
+    slotRate?: true
+    slotSnaps?: true
+    targetedQbRating?: true
+    targets?: true
+    touchdowns?: true
+    wideRate?: true
+    wideSnaps?: true
+    yards?: true
+    yardsAfterCatch?: true
+    yardsAfterCatchPerReception?: true
+    yardsPerReception?: true
+    yprr?: true
+  }
+
+  export type ReceivingStatSumAggregateInputType = {
+    playerGameCount?: true
+    avgDepthOfTarget?: true
+    avoidedTackles?: true
+    caughtPercent?: true
+    contestedCatchRate?: true
+    contestedReceptions?: true
+    contestedTargets?: true
+    declinedPenalties?: true
+    dropRate?: true
+    drops?: true
+    firstDowns?: true
+    franchiseId?: true
+    fumbles?: true
+    gradesHandsDrop?: true
+    gradesHandsFumble?: true
+    gradesOffense?: true
+    gradesPassBlock?: true
+    gradesPassRoute?: true
+    inlineRate?: true
+    inlineSnaps?: true
+    interceptions?: true
+    longest?: true
+    passBlockRate?: true
+    passBlocks?: true
+    passPlays?: true
+    penalties?: true
+    receptions?: true
+    routeRate?: true
+    routes?: true
+    slotRate?: true
+    slotSnaps?: true
+    targetedQbRating?: true
+    targets?: true
+    touchdowns?: true
+    wideRate?: true
+    wideSnaps?: true
+    yards?: true
+    yardsAfterCatch?: true
+    yardsAfterCatchPerReception?: true
+    yardsPerReception?: true
+    yprr?: true
+  }
+
+  export type ReceivingStatMinAggregateInputType = {
+    id?: true
+    player?: true
+    playerId?: true
+    position?: true
+    teamName?: true
+    playerGameCount?: true
+    avgDepthOfTarget?: true
+    avoidedTackles?: true
+    caughtPercent?: true
+    contestedCatchRate?: true
+    contestedReceptions?: true
+    contestedTargets?: true
+    declinedPenalties?: true
+    dropRate?: true
+    drops?: true
+    firstDowns?: true
+    franchiseId?: true
+    fumbles?: true
+    gradesHandsDrop?: true
+    gradesHandsFumble?: true
+    gradesOffense?: true
+    gradesPassBlock?: true
+    gradesPassRoute?: true
+    inlineRate?: true
+    inlineSnaps?: true
+    interceptions?: true
+    longest?: true
+    passBlockRate?: true
+    passBlocks?: true
+    passPlays?: true
+    penalties?: true
+    receptions?: true
+    routeRate?: true
+    routes?: true
+    slotRate?: true
+    slotSnaps?: true
+    targetedQbRating?: true
+    targets?: true
+    touchdowns?: true
+    wideRate?: true
+    wideSnaps?: true
+    yards?: true
+    yardsAfterCatch?: true
+    yardsAfterCatchPerReception?: true
+    yardsPerReception?: true
+    yprr?: true
+  }
+
+  export type ReceivingStatMaxAggregateInputType = {
+    id?: true
+    player?: true
+    playerId?: true
+    position?: true
+    teamName?: true
+    playerGameCount?: true
+    avgDepthOfTarget?: true
+    avoidedTackles?: true
+    caughtPercent?: true
+    contestedCatchRate?: true
+    contestedReceptions?: true
+    contestedTargets?: true
+    declinedPenalties?: true
+    dropRate?: true
+    drops?: true
+    firstDowns?: true
+    franchiseId?: true
+    fumbles?: true
+    gradesHandsDrop?: true
+    gradesHandsFumble?: true
+    gradesOffense?: true
+    gradesPassBlock?: true
+    gradesPassRoute?: true
+    inlineRate?: true
+    inlineSnaps?: true
+    interceptions?: true
+    longest?: true
+    passBlockRate?: true
+    passBlocks?: true
+    passPlays?: true
+    penalties?: true
+    receptions?: true
+    routeRate?: true
+    routes?: true
+    slotRate?: true
+    slotSnaps?: true
+    targetedQbRating?: true
+    targets?: true
+    touchdowns?: true
+    wideRate?: true
+    wideSnaps?: true
+    yards?: true
+    yardsAfterCatch?: true
+    yardsAfterCatchPerReception?: true
+    yardsPerReception?: true
+    yprr?: true
+  }
+
+  export type ReceivingStatCountAggregateInputType = {
+    id?: true
+    player?: true
+    playerId?: true
+    position?: true
+    teamName?: true
+    playerGameCount?: true
+    avgDepthOfTarget?: true
+    avoidedTackles?: true
+    caughtPercent?: true
+    contestedCatchRate?: true
+    contestedReceptions?: true
+    contestedTargets?: true
+    declinedPenalties?: true
+    dropRate?: true
+    drops?: true
+    firstDowns?: true
+    franchiseId?: true
+    fumbles?: true
+    gradesHandsDrop?: true
+    gradesHandsFumble?: true
+    gradesOffense?: true
+    gradesPassBlock?: true
+    gradesPassRoute?: true
+    inlineRate?: true
+    inlineSnaps?: true
+    interceptions?: true
+    longest?: true
+    passBlockRate?: true
+    passBlocks?: true
+    passPlays?: true
+    penalties?: true
+    receptions?: true
+    routeRate?: true
+    routes?: true
+    slotRate?: true
+    slotSnaps?: true
+    targetedQbRating?: true
+    targets?: true
+    touchdowns?: true
+    wideRate?: true
+    wideSnaps?: true
+    yards?: true
+    yardsAfterCatch?: true
+    yardsAfterCatchPerReception?: true
+    yardsPerReception?: true
+    yprr?: true
+    _all?: true
+  }
+
+  export type ReceivingStatAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ReceivingStat to aggregate.
+     */
+    where?: ReceivingStatWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReceivingStats to fetch.
+     */
+    orderBy?: ReceivingStatOrderByWithRelationInput | ReceivingStatOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ReceivingStatWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReceivingStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReceivingStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ReceivingStats
+    **/
+    _count?: true | ReceivingStatCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ReceivingStatAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ReceivingStatSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ReceivingStatMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ReceivingStatMaxAggregateInputType
+  }
+
+  export type GetReceivingStatAggregateType<T extends ReceivingStatAggregateArgs> = {
+        [P in keyof T & keyof AggregateReceivingStat]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateReceivingStat[P]>
+      : GetScalarType<T[P], AggregateReceivingStat[P]>
+  }
+
+
+
+
+  export type ReceivingStatGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReceivingStatWhereInput
+    orderBy?: ReceivingStatOrderByWithAggregationInput | ReceivingStatOrderByWithAggregationInput[]
+    by: ReceivingStatScalarFieldEnum[] | ReceivingStatScalarFieldEnum
+    having?: ReceivingStatScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ReceivingStatCountAggregateInputType | true
+    _avg?: ReceivingStatAvgAggregateInputType
+    _sum?: ReceivingStatSumAggregateInputType
+    _min?: ReceivingStatMinAggregateInputType
+    _max?: ReceivingStatMaxAggregateInputType
+  }
+
+  export type ReceivingStatGroupByOutputType = {
+    id: string
+    player: string | null
+    playerId: string | null
+    position: string | null
+    teamName: string | null
+    playerGameCount: number | null
+    avgDepthOfTarget: number | null
+    avoidedTackles: number | null
+    caughtPercent: number | null
+    contestedCatchRate: number | null
+    contestedReceptions: number | null
+    contestedTargets: number | null
+    declinedPenalties: number | null
+    dropRate: number | null
+    drops: number | null
+    firstDowns: number | null
+    franchiseId: number | null
+    fumbles: number | null
+    gradesHandsDrop: number | null
+    gradesHandsFumble: number | null
+    gradesOffense: number | null
+    gradesPassBlock: number | null
+    gradesPassRoute: number | null
+    inlineRate: number | null
+    inlineSnaps: number | null
+    interceptions: number | null
+    longest: number | null
+    passBlockRate: number | null
+    passBlocks: number | null
+    passPlays: number | null
+    penalties: number | null
+    receptions: number | null
+    routeRate: number | null
+    routes: number | null
+    slotRate: number | null
+    slotSnaps: number | null
+    targetedQbRating: number | null
+    targets: number | null
+    touchdowns: number | null
+    wideRate: number | null
+    wideSnaps: number | null
+    yards: number | null
+    yardsAfterCatch: number | null
+    yardsAfterCatchPerReception: number | null
+    yardsPerReception: number | null
+    yprr: number | null
+    _count: ReceivingStatCountAggregateOutputType | null
+    _avg: ReceivingStatAvgAggregateOutputType | null
+    _sum: ReceivingStatSumAggregateOutputType | null
+    _min: ReceivingStatMinAggregateOutputType | null
+    _max: ReceivingStatMaxAggregateOutputType | null
+  }
+
+  type GetReceivingStatGroupByPayload<T extends ReceivingStatGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ReceivingStatGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ReceivingStatGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ReceivingStatGroupByOutputType[P]>
+            : GetScalarType<T[P], ReceivingStatGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ReceivingStatSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    player?: boolean
+    playerId?: boolean
+    position?: boolean
+    teamName?: boolean
+    playerGameCount?: boolean
+    avgDepthOfTarget?: boolean
+    avoidedTackles?: boolean
+    caughtPercent?: boolean
+    contestedCatchRate?: boolean
+    contestedReceptions?: boolean
+    contestedTargets?: boolean
+    declinedPenalties?: boolean
+    dropRate?: boolean
+    drops?: boolean
+    firstDowns?: boolean
+    franchiseId?: boolean
+    fumbles?: boolean
+    gradesHandsDrop?: boolean
+    gradesHandsFumble?: boolean
+    gradesOffense?: boolean
+    gradesPassBlock?: boolean
+    gradesPassRoute?: boolean
+    inlineRate?: boolean
+    inlineSnaps?: boolean
+    interceptions?: boolean
+    longest?: boolean
+    passBlockRate?: boolean
+    passBlocks?: boolean
+    passPlays?: boolean
+    penalties?: boolean
+    receptions?: boolean
+    routeRate?: boolean
+    routes?: boolean
+    slotRate?: boolean
+    slotSnaps?: boolean
+    targetedQbRating?: boolean
+    targets?: boolean
+    touchdowns?: boolean
+    wideRate?: boolean
+    wideSnaps?: boolean
+    yards?: boolean
+    yardsAfterCatch?: boolean
+    yardsAfterCatchPerReception?: boolean
+    yardsPerReception?: boolean
+    yprr?: boolean
+  }, ExtArgs["result"]["receivingStat"]>
+
+  export type ReceivingStatSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    player?: boolean
+    playerId?: boolean
+    position?: boolean
+    teamName?: boolean
+    playerGameCount?: boolean
+    avgDepthOfTarget?: boolean
+    avoidedTackles?: boolean
+    caughtPercent?: boolean
+    contestedCatchRate?: boolean
+    contestedReceptions?: boolean
+    contestedTargets?: boolean
+    declinedPenalties?: boolean
+    dropRate?: boolean
+    drops?: boolean
+    firstDowns?: boolean
+    franchiseId?: boolean
+    fumbles?: boolean
+    gradesHandsDrop?: boolean
+    gradesHandsFumble?: boolean
+    gradesOffense?: boolean
+    gradesPassBlock?: boolean
+    gradesPassRoute?: boolean
+    inlineRate?: boolean
+    inlineSnaps?: boolean
+    interceptions?: boolean
+    longest?: boolean
+    passBlockRate?: boolean
+    passBlocks?: boolean
+    passPlays?: boolean
+    penalties?: boolean
+    receptions?: boolean
+    routeRate?: boolean
+    routes?: boolean
+    slotRate?: boolean
+    slotSnaps?: boolean
+    targetedQbRating?: boolean
+    targets?: boolean
+    touchdowns?: boolean
+    wideRate?: boolean
+    wideSnaps?: boolean
+    yards?: boolean
+    yardsAfterCatch?: boolean
+    yardsAfterCatchPerReception?: boolean
+    yardsPerReception?: boolean
+    yprr?: boolean
+  }, ExtArgs["result"]["receivingStat"]>
+
+  export type ReceivingStatSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    player?: boolean
+    playerId?: boolean
+    position?: boolean
+    teamName?: boolean
+    playerGameCount?: boolean
+    avgDepthOfTarget?: boolean
+    avoidedTackles?: boolean
+    caughtPercent?: boolean
+    contestedCatchRate?: boolean
+    contestedReceptions?: boolean
+    contestedTargets?: boolean
+    declinedPenalties?: boolean
+    dropRate?: boolean
+    drops?: boolean
+    firstDowns?: boolean
+    franchiseId?: boolean
+    fumbles?: boolean
+    gradesHandsDrop?: boolean
+    gradesHandsFumble?: boolean
+    gradesOffense?: boolean
+    gradesPassBlock?: boolean
+    gradesPassRoute?: boolean
+    inlineRate?: boolean
+    inlineSnaps?: boolean
+    interceptions?: boolean
+    longest?: boolean
+    passBlockRate?: boolean
+    passBlocks?: boolean
+    passPlays?: boolean
+    penalties?: boolean
+    receptions?: boolean
+    routeRate?: boolean
+    routes?: boolean
+    slotRate?: boolean
+    slotSnaps?: boolean
+    targetedQbRating?: boolean
+    targets?: boolean
+    touchdowns?: boolean
+    wideRate?: boolean
+    wideSnaps?: boolean
+    yards?: boolean
+    yardsAfterCatch?: boolean
+    yardsAfterCatchPerReception?: boolean
+    yardsPerReception?: boolean
+    yprr?: boolean
+  }, ExtArgs["result"]["receivingStat"]>
+
+  export type ReceivingStatSelectScalar = {
+    id?: boolean
+    player?: boolean
+    playerId?: boolean
+    position?: boolean
+    teamName?: boolean
+    playerGameCount?: boolean
+    avgDepthOfTarget?: boolean
+    avoidedTackles?: boolean
+    caughtPercent?: boolean
+    contestedCatchRate?: boolean
+    contestedReceptions?: boolean
+    contestedTargets?: boolean
+    declinedPenalties?: boolean
+    dropRate?: boolean
+    drops?: boolean
+    firstDowns?: boolean
+    franchiseId?: boolean
+    fumbles?: boolean
+    gradesHandsDrop?: boolean
+    gradesHandsFumble?: boolean
+    gradesOffense?: boolean
+    gradesPassBlock?: boolean
+    gradesPassRoute?: boolean
+    inlineRate?: boolean
+    inlineSnaps?: boolean
+    interceptions?: boolean
+    longest?: boolean
+    passBlockRate?: boolean
+    passBlocks?: boolean
+    passPlays?: boolean
+    penalties?: boolean
+    receptions?: boolean
+    routeRate?: boolean
+    routes?: boolean
+    slotRate?: boolean
+    slotSnaps?: boolean
+    targetedQbRating?: boolean
+    targets?: boolean
+    touchdowns?: boolean
+    wideRate?: boolean
+    wideSnaps?: boolean
+    yards?: boolean
+    yardsAfterCatch?: boolean
+    yardsAfterCatchPerReception?: boolean
+    yardsPerReception?: boolean
+    yprr?: boolean
+  }
+
+  export type ReceivingStatOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "player" | "playerId" | "position" | "teamName" | "playerGameCount" | "avgDepthOfTarget" | "avoidedTackles" | "caughtPercent" | "contestedCatchRate" | "contestedReceptions" | "contestedTargets" | "declinedPenalties" | "dropRate" | "drops" | "firstDowns" | "franchiseId" | "fumbles" | "gradesHandsDrop" | "gradesHandsFumble" | "gradesOffense" | "gradesPassBlock" | "gradesPassRoute" | "inlineRate" | "inlineSnaps" | "interceptions" | "longest" | "passBlockRate" | "passBlocks" | "passPlays" | "penalties" | "receptions" | "routeRate" | "routes" | "slotRate" | "slotSnaps" | "targetedQbRating" | "targets" | "touchdowns" | "wideRate" | "wideSnaps" | "yards" | "yardsAfterCatch" | "yardsAfterCatchPerReception" | "yardsPerReception" | "yprr", ExtArgs["result"]["receivingStat"]>
+
+  export type $ReceivingStatPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ReceivingStat"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      player: string | null
+      playerId: string | null
+      position: string | null
+      teamName: string | null
+      playerGameCount: number | null
+      avgDepthOfTarget: number | null
+      avoidedTackles: number | null
+      caughtPercent: number | null
+      contestedCatchRate: number | null
+      contestedReceptions: number | null
+      contestedTargets: number | null
+      declinedPenalties: number | null
+      dropRate: number | null
+      drops: number | null
+      firstDowns: number | null
+      franchiseId: number | null
+      fumbles: number | null
+      gradesHandsDrop: number | null
+      gradesHandsFumble: number | null
+      gradesOffense: number | null
+      gradesPassBlock: number | null
+      gradesPassRoute: number | null
+      inlineRate: number | null
+      inlineSnaps: number | null
+      interceptions: number | null
+      longest: number | null
+      passBlockRate: number | null
+      passBlocks: number | null
+      passPlays: number | null
+      penalties: number | null
+      receptions: number | null
+      routeRate: number | null
+      routes: number | null
+      slotRate: number | null
+      slotSnaps: number | null
+      targetedQbRating: number | null
+      targets: number | null
+      touchdowns: number | null
+      wideRate: number | null
+      wideSnaps: number | null
+      yards: number | null
+      yardsAfterCatch: number | null
+      yardsAfterCatchPerReception: number | null
+      yardsPerReception: number | null
+      yprr: number | null
+    }, ExtArgs["result"]["receivingStat"]>
+    composites: {}
+  }
+
+  type ReceivingStatGetPayload<S extends boolean | null | undefined | ReceivingStatDefaultArgs> = $Result.GetResult<Prisma.$ReceivingStatPayload, S>
+
+  type ReceivingStatCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ReceivingStatFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ReceivingStatCountAggregateInputType | true
+    }
+
+  export interface ReceivingStatDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ReceivingStat'], meta: { name: 'ReceivingStat' } }
+    /**
+     * Find zero or one ReceivingStat that matches the filter.
+     * @param {ReceivingStatFindUniqueArgs} args - Arguments to find a ReceivingStat
+     * @example
+     * // Get one ReceivingStat
+     * const receivingStat = await prisma.receivingStat.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ReceivingStatFindUniqueArgs>(args: SelectSubset<T, ReceivingStatFindUniqueArgs<ExtArgs>>): Prisma__ReceivingStatClient<$Result.GetResult<Prisma.$ReceivingStatPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ReceivingStat that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ReceivingStatFindUniqueOrThrowArgs} args - Arguments to find a ReceivingStat
+     * @example
+     * // Get one ReceivingStat
+     * const receivingStat = await prisma.receivingStat.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ReceivingStatFindUniqueOrThrowArgs>(args: SelectSubset<T, ReceivingStatFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ReceivingStatClient<$Result.GetResult<Prisma.$ReceivingStatPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ReceivingStat that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReceivingStatFindFirstArgs} args - Arguments to find a ReceivingStat
+     * @example
+     * // Get one ReceivingStat
+     * const receivingStat = await prisma.receivingStat.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ReceivingStatFindFirstArgs>(args?: SelectSubset<T, ReceivingStatFindFirstArgs<ExtArgs>>): Prisma__ReceivingStatClient<$Result.GetResult<Prisma.$ReceivingStatPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ReceivingStat that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReceivingStatFindFirstOrThrowArgs} args - Arguments to find a ReceivingStat
+     * @example
+     * // Get one ReceivingStat
+     * const receivingStat = await prisma.receivingStat.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ReceivingStatFindFirstOrThrowArgs>(args?: SelectSubset<T, ReceivingStatFindFirstOrThrowArgs<ExtArgs>>): Prisma__ReceivingStatClient<$Result.GetResult<Prisma.$ReceivingStatPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ReceivingStats that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReceivingStatFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ReceivingStats
+     * const receivingStats = await prisma.receivingStat.findMany()
+     * 
+     * // Get first 10 ReceivingStats
+     * const receivingStats = await prisma.receivingStat.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const receivingStatWithIdOnly = await prisma.receivingStat.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ReceivingStatFindManyArgs>(args?: SelectSubset<T, ReceivingStatFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReceivingStatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ReceivingStat.
+     * @param {ReceivingStatCreateArgs} args - Arguments to create a ReceivingStat.
+     * @example
+     * // Create one ReceivingStat
+     * const ReceivingStat = await prisma.receivingStat.create({
+     *   data: {
+     *     // ... data to create a ReceivingStat
+     *   }
+     * })
+     * 
+     */
+    create<T extends ReceivingStatCreateArgs>(args: SelectSubset<T, ReceivingStatCreateArgs<ExtArgs>>): Prisma__ReceivingStatClient<$Result.GetResult<Prisma.$ReceivingStatPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ReceivingStats.
+     * @param {ReceivingStatCreateManyArgs} args - Arguments to create many ReceivingStats.
+     * @example
+     * // Create many ReceivingStats
+     * const receivingStat = await prisma.receivingStat.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ReceivingStatCreateManyArgs>(args?: SelectSubset<T, ReceivingStatCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ReceivingStats and returns the data saved in the database.
+     * @param {ReceivingStatCreateManyAndReturnArgs} args - Arguments to create many ReceivingStats.
+     * @example
+     * // Create many ReceivingStats
+     * const receivingStat = await prisma.receivingStat.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ReceivingStats and only return the `id`
+     * const receivingStatWithIdOnly = await prisma.receivingStat.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ReceivingStatCreateManyAndReturnArgs>(args?: SelectSubset<T, ReceivingStatCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReceivingStatPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ReceivingStat.
+     * @param {ReceivingStatDeleteArgs} args - Arguments to delete one ReceivingStat.
+     * @example
+     * // Delete one ReceivingStat
+     * const ReceivingStat = await prisma.receivingStat.delete({
+     *   where: {
+     *     // ... filter to delete one ReceivingStat
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ReceivingStatDeleteArgs>(args: SelectSubset<T, ReceivingStatDeleteArgs<ExtArgs>>): Prisma__ReceivingStatClient<$Result.GetResult<Prisma.$ReceivingStatPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ReceivingStat.
+     * @param {ReceivingStatUpdateArgs} args - Arguments to update one ReceivingStat.
+     * @example
+     * // Update one ReceivingStat
+     * const receivingStat = await prisma.receivingStat.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ReceivingStatUpdateArgs>(args: SelectSubset<T, ReceivingStatUpdateArgs<ExtArgs>>): Prisma__ReceivingStatClient<$Result.GetResult<Prisma.$ReceivingStatPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ReceivingStats.
+     * @param {ReceivingStatDeleteManyArgs} args - Arguments to filter ReceivingStats to delete.
+     * @example
+     * // Delete a few ReceivingStats
+     * const { count } = await prisma.receivingStat.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ReceivingStatDeleteManyArgs>(args?: SelectSubset<T, ReceivingStatDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ReceivingStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReceivingStatUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ReceivingStats
+     * const receivingStat = await prisma.receivingStat.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ReceivingStatUpdateManyArgs>(args: SelectSubset<T, ReceivingStatUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ReceivingStats and returns the data updated in the database.
+     * @param {ReceivingStatUpdateManyAndReturnArgs} args - Arguments to update many ReceivingStats.
+     * @example
+     * // Update many ReceivingStats
+     * const receivingStat = await prisma.receivingStat.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ReceivingStats and only return the `id`
+     * const receivingStatWithIdOnly = await prisma.receivingStat.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ReceivingStatUpdateManyAndReturnArgs>(args: SelectSubset<T, ReceivingStatUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReceivingStatPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ReceivingStat.
+     * @param {ReceivingStatUpsertArgs} args - Arguments to update or create a ReceivingStat.
+     * @example
+     * // Update or create a ReceivingStat
+     * const receivingStat = await prisma.receivingStat.upsert({
+     *   create: {
+     *     // ... data to create a ReceivingStat
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ReceivingStat we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ReceivingStatUpsertArgs>(args: SelectSubset<T, ReceivingStatUpsertArgs<ExtArgs>>): Prisma__ReceivingStatClient<$Result.GetResult<Prisma.$ReceivingStatPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ReceivingStats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReceivingStatCountArgs} args - Arguments to filter ReceivingStats to count.
+     * @example
+     * // Count the number of ReceivingStats
+     * const count = await prisma.receivingStat.count({
+     *   where: {
+     *     // ... the filter for the ReceivingStats we want to count
+     *   }
+     * })
+    **/
+    count<T extends ReceivingStatCountArgs>(
+      args?: Subset<T, ReceivingStatCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ReceivingStatCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ReceivingStat.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReceivingStatAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ReceivingStatAggregateArgs>(args: Subset<T, ReceivingStatAggregateArgs>): Prisma.PrismaPromise<GetReceivingStatAggregateType<T>>
+
+    /**
+     * Group by ReceivingStat.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReceivingStatGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ReceivingStatGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ReceivingStatGroupByArgs['orderBy'] }
+        : { orderBy?: ReceivingStatGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ReceivingStatGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetReceivingStatGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ReceivingStat model
+   */
+  readonly fields: ReceivingStatFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ReceivingStat.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ReceivingStatClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ReceivingStat model
+   */
+  interface ReceivingStatFieldRefs {
+    readonly id: FieldRef<"ReceivingStat", 'String'>
+    readonly player: FieldRef<"ReceivingStat", 'String'>
+    readonly playerId: FieldRef<"ReceivingStat", 'String'>
+    readonly position: FieldRef<"ReceivingStat", 'String'>
+    readonly teamName: FieldRef<"ReceivingStat", 'String'>
+    readonly playerGameCount: FieldRef<"ReceivingStat", 'Int'>
+    readonly avgDepthOfTarget: FieldRef<"ReceivingStat", 'Float'>
+    readonly avoidedTackles: FieldRef<"ReceivingStat", 'Int'>
+    readonly caughtPercent: FieldRef<"ReceivingStat", 'Float'>
+    readonly contestedCatchRate: FieldRef<"ReceivingStat", 'Float'>
+    readonly contestedReceptions: FieldRef<"ReceivingStat", 'Int'>
+    readonly contestedTargets: FieldRef<"ReceivingStat", 'Int'>
+    readonly declinedPenalties: FieldRef<"ReceivingStat", 'Int'>
+    readonly dropRate: FieldRef<"ReceivingStat", 'Float'>
+    readonly drops: FieldRef<"ReceivingStat", 'Int'>
+    readonly firstDowns: FieldRef<"ReceivingStat", 'Int'>
+    readonly franchiseId: FieldRef<"ReceivingStat", 'Int'>
+    readonly fumbles: FieldRef<"ReceivingStat", 'Int'>
+    readonly gradesHandsDrop: FieldRef<"ReceivingStat", 'Float'>
+    readonly gradesHandsFumble: FieldRef<"ReceivingStat", 'Float'>
+    readonly gradesOffense: FieldRef<"ReceivingStat", 'Float'>
+    readonly gradesPassBlock: FieldRef<"ReceivingStat", 'Float'>
+    readonly gradesPassRoute: FieldRef<"ReceivingStat", 'Float'>
+    readonly inlineRate: FieldRef<"ReceivingStat", 'Float'>
+    readonly inlineSnaps: FieldRef<"ReceivingStat", 'Int'>
+    readonly interceptions: FieldRef<"ReceivingStat", 'Int'>
+    readonly longest: FieldRef<"ReceivingStat", 'Int'>
+    readonly passBlockRate: FieldRef<"ReceivingStat", 'Float'>
+    readonly passBlocks: FieldRef<"ReceivingStat", 'Int'>
+    readonly passPlays: FieldRef<"ReceivingStat", 'Int'>
+    readonly penalties: FieldRef<"ReceivingStat", 'Int'>
+    readonly receptions: FieldRef<"ReceivingStat", 'Int'>
+    readonly routeRate: FieldRef<"ReceivingStat", 'Float'>
+    readonly routes: FieldRef<"ReceivingStat", 'Int'>
+    readonly slotRate: FieldRef<"ReceivingStat", 'Float'>
+    readonly slotSnaps: FieldRef<"ReceivingStat", 'Int'>
+    readonly targetedQbRating: FieldRef<"ReceivingStat", 'Float'>
+    readonly targets: FieldRef<"ReceivingStat", 'Int'>
+    readonly touchdowns: FieldRef<"ReceivingStat", 'Int'>
+    readonly wideRate: FieldRef<"ReceivingStat", 'Float'>
+    readonly wideSnaps: FieldRef<"ReceivingStat", 'Int'>
+    readonly yards: FieldRef<"ReceivingStat", 'Int'>
+    readonly yardsAfterCatch: FieldRef<"ReceivingStat", 'Int'>
+    readonly yardsAfterCatchPerReception: FieldRef<"ReceivingStat", 'Float'>
+    readonly yardsPerReception: FieldRef<"ReceivingStat", 'Float'>
+    readonly yprr: FieldRef<"ReceivingStat", 'Float'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ReceivingStat findUnique
+   */
+  export type ReceivingStatFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReceivingStat
+     */
+    select?: ReceivingStatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReceivingStat
+     */
+    omit?: ReceivingStatOmit<ExtArgs> | null
+    /**
+     * Filter, which ReceivingStat to fetch.
+     */
+    where: ReceivingStatWhereUniqueInput
+  }
+
+  /**
+   * ReceivingStat findUniqueOrThrow
+   */
+  export type ReceivingStatFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReceivingStat
+     */
+    select?: ReceivingStatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReceivingStat
+     */
+    omit?: ReceivingStatOmit<ExtArgs> | null
+    /**
+     * Filter, which ReceivingStat to fetch.
+     */
+    where: ReceivingStatWhereUniqueInput
+  }
+
+  /**
+   * ReceivingStat findFirst
+   */
+  export type ReceivingStatFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReceivingStat
+     */
+    select?: ReceivingStatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReceivingStat
+     */
+    omit?: ReceivingStatOmit<ExtArgs> | null
+    /**
+     * Filter, which ReceivingStat to fetch.
+     */
+    where?: ReceivingStatWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReceivingStats to fetch.
+     */
+    orderBy?: ReceivingStatOrderByWithRelationInput | ReceivingStatOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ReceivingStats.
+     */
+    cursor?: ReceivingStatWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReceivingStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReceivingStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ReceivingStats.
+     */
+    distinct?: ReceivingStatScalarFieldEnum | ReceivingStatScalarFieldEnum[]
+  }
+
+  /**
+   * ReceivingStat findFirstOrThrow
+   */
+  export type ReceivingStatFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReceivingStat
+     */
+    select?: ReceivingStatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReceivingStat
+     */
+    omit?: ReceivingStatOmit<ExtArgs> | null
+    /**
+     * Filter, which ReceivingStat to fetch.
+     */
+    where?: ReceivingStatWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReceivingStats to fetch.
+     */
+    orderBy?: ReceivingStatOrderByWithRelationInput | ReceivingStatOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ReceivingStats.
+     */
+    cursor?: ReceivingStatWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReceivingStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReceivingStats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ReceivingStats.
+     */
+    distinct?: ReceivingStatScalarFieldEnum | ReceivingStatScalarFieldEnum[]
+  }
+
+  /**
+   * ReceivingStat findMany
+   */
+  export type ReceivingStatFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReceivingStat
+     */
+    select?: ReceivingStatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReceivingStat
+     */
+    omit?: ReceivingStatOmit<ExtArgs> | null
+    /**
+     * Filter, which ReceivingStats to fetch.
+     */
+    where?: ReceivingStatWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ReceivingStats to fetch.
+     */
+    orderBy?: ReceivingStatOrderByWithRelationInput | ReceivingStatOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ReceivingStats.
+     */
+    cursor?: ReceivingStatWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ReceivingStats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ReceivingStats.
+     */
+    skip?: number
+    distinct?: ReceivingStatScalarFieldEnum | ReceivingStatScalarFieldEnum[]
+  }
+
+  /**
+   * ReceivingStat create
+   */
+  export type ReceivingStatCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReceivingStat
+     */
+    select?: ReceivingStatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReceivingStat
+     */
+    omit?: ReceivingStatOmit<ExtArgs> | null
+    /**
+     * The data needed to create a ReceivingStat.
+     */
+    data?: XOR<ReceivingStatCreateInput, ReceivingStatUncheckedCreateInput>
+  }
+
+  /**
+   * ReceivingStat createMany
+   */
+  export type ReceivingStatCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ReceivingStats.
+     */
+    data: ReceivingStatCreateManyInput | ReceivingStatCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ReceivingStat createManyAndReturn
+   */
+  export type ReceivingStatCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReceivingStat
+     */
+    select?: ReceivingStatSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReceivingStat
+     */
+    omit?: ReceivingStatOmit<ExtArgs> | null
+    /**
+     * The data used to create many ReceivingStats.
+     */
+    data: ReceivingStatCreateManyInput | ReceivingStatCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ReceivingStat update
+   */
+  export type ReceivingStatUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReceivingStat
+     */
+    select?: ReceivingStatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReceivingStat
+     */
+    omit?: ReceivingStatOmit<ExtArgs> | null
+    /**
+     * The data needed to update a ReceivingStat.
+     */
+    data: XOR<ReceivingStatUpdateInput, ReceivingStatUncheckedUpdateInput>
+    /**
+     * Choose, which ReceivingStat to update.
+     */
+    where: ReceivingStatWhereUniqueInput
+  }
+
+  /**
+   * ReceivingStat updateMany
+   */
+  export type ReceivingStatUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ReceivingStats.
+     */
+    data: XOR<ReceivingStatUpdateManyMutationInput, ReceivingStatUncheckedUpdateManyInput>
+    /**
+     * Filter which ReceivingStats to update
+     */
+    where?: ReceivingStatWhereInput
+    /**
+     * Limit how many ReceivingStats to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ReceivingStat updateManyAndReturn
+   */
+  export type ReceivingStatUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReceivingStat
+     */
+    select?: ReceivingStatSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReceivingStat
+     */
+    omit?: ReceivingStatOmit<ExtArgs> | null
+    /**
+     * The data used to update ReceivingStats.
+     */
+    data: XOR<ReceivingStatUpdateManyMutationInput, ReceivingStatUncheckedUpdateManyInput>
+    /**
+     * Filter which ReceivingStats to update
+     */
+    where?: ReceivingStatWhereInput
+    /**
+     * Limit how many ReceivingStats to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ReceivingStat upsert
+   */
+  export type ReceivingStatUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReceivingStat
+     */
+    select?: ReceivingStatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReceivingStat
+     */
+    omit?: ReceivingStatOmit<ExtArgs> | null
+    /**
+     * The filter to search for the ReceivingStat to update in case it exists.
+     */
+    where: ReceivingStatWhereUniqueInput
+    /**
+     * In case the ReceivingStat found by the `where` argument doesn't exist, create a new ReceivingStat with this data.
+     */
+    create: XOR<ReceivingStatCreateInput, ReceivingStatUncheckedCreateInput>
+    /**
+     * In case the ReceivingStat was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ReceivingStatUpdateInput, ReceivingStatUncheckedUpdateInput>
+  }
+
+  /**
+   * ReceivingStat delete
+   */
+  export type ReceivingStatDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReceivingStat
+     */
+    select?: ReceivingStatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReceivingStat
+     */
+    omit?: ReceivingStatOmit<ExtArgs> | null
+    /**
+     * Filter which ReceivingStat to delete.
+     */
+    where: ReceivingStatWhereUniqueInput
+  }
+
+  /**
+   * ReceivingStat deleteMany
+   */
+  export type ReceivingStatDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ReceivingStats to delete
+     */
+    where?: ReceivingStatWhereInput
+    /**
+     * Limit how many ReceivingStats to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ReceivingStat without action
+   */
+  export type ReceivingStatDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ReceivingStat
+     */
+    select?: ReceivingStatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ReceivingStat
+     */
+    omit?: ReceivingStatOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -2111,6 +5853,118 @@ export namespace Prisma {
   };
 
   export type TradeAnalyzerDataScalarFieldEnum = (typeof TradeAnalyzerDataScalarFieldEnum)[keyof typeof TradeAnalyzerDataScalarFieldEnum]
+
+
+  export const PlayerStatScalarFieldEnum: {
+    id: 'id',
+    playerId: 'playerId',
+    playerName: 'playerName',
+    playerDisplayName: 'playerDisplayName',
+    position: 'position',
+    positionGroup: 'positionGroup',
+    headshotUrl: 'headshotUrl',
+    recentTeam: 'recentTeam',
+    season: 'season',
+    week: 'week',
+    seasonType: 'seasonType',
+    opponentTeam: 'opponentTeam',
+    completions: 'completions',
+    attempts: 'attempts',
+    passingYards: 'passingYards',
+    passingTds: 'passingTds',
+    interceptions: 'interceptions',
+    sacks: 'sacks',
+    sackYards: 'sackYards',
+    sackFumbles: 'sackFumbles',
+    sackFumblesLost: 'sackFumblesLost',
+    passingAirYards: 'passingAirYards',
+    passingYardsAfterCatch: 'passingYardsAfterCatch',
+    passingFirstDowns: 'passingFirstDowns',
+    passingEpa: 'passingEpa',
+    passing2ptConversions: 'passing2ptConversions',
+    pacr: 'pacr',
+    dakota: 'dakota',
+    carries: 'carries',
+    rushingYards: 'rushingYards',
+    rushingTds: 'rushingTds',
+    rushingFumbles: 'rushingFumbles',
+    rushingFumblesLost: 'rushingFumblesLost',
+    rushingFirstDowns: 'rushingFirstDowns',
+    rushingEpa: 'rushingEpa',
+    rushing2ptConversions: 'rushing2ptConversions',
+    receptions: 'receptions',
+    targets: 'targets',
+    receivingYards: 'receivingYards',
+    receivingTds: 'receivingTds',
+    receivingFumbles: 'receivingFumbles',
+    receivingFumblesLost: 'receivingFumblesLost',
+    receivingAirYards: 'receivingAirYards',
+    receivingYardsAfterCatch: 'receivingYardsAfterCatch',
+    receivingFirstDowns: 'receivingFirstDowns',
+    receivingEpa: 'receivingEpa',
+    receiving2ptConversions: 'receiving2ptConversions',
+    racr: 'racr',
+    targetShare: 'targetShare',
+    airYardsShare: 'airYardsShare',
+    wopr: 'wopr',
+    specialTeamsTds: 'specialTeamsTds',
+    fantasyPoints: 'fantasyPoints',
+    fantasyPointsPpr: 'fantasyPointsPpr'
+  };
+
+  export type PlayerStatScalarFieldEnum = (typeof PlayerStatScalarFieldEnum)[keyof typeof PlayerStatScalarFieldEnum]
+
+
+  export const ReceivingStatScalarFieldEnum: {
+    id: 'id',
+    player: 'player',
+    playerId: 'playerId',
+    position: 'position',
+    teamName: 'teamName',
+    playerGameCount: 'playerGameCount',
+    avgDepthOfTarget: 'avgDepthOfTarget',
+    avoidedTackles: 'avoidedTackles',
+    caughtPercent: 'caughtPercent',
+    contestedCatchRate: 'contestedCatchRate',
+    contestedReceptions: 'contestedReceptions',
+    contestedTargets: 'contestedTargets',
+    declinedPenalties: 'declinedPenalties',
+    dropRate: 'dropRate',
+    drops: 'drops',
+    firstDowns: 'firstDowns',
+    franchiseId: 'franchiseId',
+    fumbles: 'fumbles',
+    gradesHandsDrop: 'gradesHandsDrop',
+    gradesHandsFumble: 'gradesHandsFumble',
+    gradesOffense: 'gradesOffense',
+    gradesPassBlock: 'gradesPassBlock',
+    gradesPassRoute: 'gradesPassRoute',
+    inlineRate: 'inlineRate',
+    inlineSnaps: 'inlineSnaps',
+    interceptions: 'interceptions',
+    longest: 'longest',
+    passBlockRate: 'passBlockRate',
+    passBlocks: 'passBlocks',
+    passPlays: 'passPlays',
+    penalties: 'penalties',
+    receptions: 'receptions',
+    routeRate: 'routeRate',
+    routes: 'routes',
+    slotRate: 'slotRate',
+    slotSnaps: 'slotSnaps',
+    targetedQbRating: 'targetedQbRating',
+    targets: 'targets',
+    touchdowns: 'touchdowns',
+    wideRate: 'wideRate',
+    wideSnaps: 'wideSnaps',
+    yards: 'yards',
+    yardsAfterCatch: 'yardsAfterCatch',
+    yardsAfterCatchPerReception: 'yardsAfterCatchPerReception',
+    yardsPerReception: 'yardsPerReception',
+    yprr: 'yprr'
+  };
+
+  export type ReceivingStatScalarFieldEnum = (typeof ReceivingStatScalarFieldEnum)[keyof typeof ReceivingStatScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -2327,6 +6181,564 @@ export namespace Prisma {
     consensusValue?: FloatNullableWithAggregatesFilter<"tradeAnalyzerData"> | number | null
   }
 
+  export type PlayerStatWhereInput = {
+    AND?: PlayerStatWhereInput | PlayerStatWhereInput[]
+    OR?: PlayerStatWhereInput[]
+    NOT?: PlayerStatWhereInput | PlayerStatWhereInput[]
+    id?: StringFilter<"PlayerStat"> | string
+    playerId?: StringNullableFilter<"PlayerStat"> | string | null
+    playerName?: StringNullableFilter<"PlayerStat"> | string | null
+    playerDisplayName?: StringNullableFilter<"PlayerStat"> | string | null
+    position?: StringNullableFilter<"PlayerStat"> | string | null
+    positionGroup?: StringNullableFilter<"PlayerStat"> | string | null
+    headshotUrl?: StringNullableFilter<"PlayerStat"> | string | null
+    recentTeam?: StringNullableFilter<"PlayerStat"> | string | null
+    season?: IntNullableFilter<"PlayerStat"> | number | null
+    week?: IntNullableFilter<"PlayerStat"> | number | null
+    seasonType?: StringNullableFilter<"PlayerStat"> | string | null
+    opponentTeam?: StringNullableFilter<"PlayerStat"> | string | null
+    completions?: IntNullableFilter<"PlayerStat"> | number | null
+    attempts?: IntNullableFilter<"PlayerStat"> | number | null
+    passingYards?: FloatNullableFilter<"PlayerStat"> | number | null
+    passingTds?: IntNullableFilter<"PlayerStat"> | number | null
+    interceptions?: IntNullableFilter<"PlayerStat"> | number | null
+    sacks?: IntNullableFilter<"PlayerStat"> | number | null
+    sackYards?: FloatNullableFilter<"PlayerStat"> | number | null
+    sackFumbles?: IntNullableFilter<"PlayerStat"> | number | null
+    sackFumblesLost?: IntNullableFilter<"PlayerStat"> | number | null
+    passingAirYards?: FloatNullableFilter<"PlayerStat"> | number | null
+    passingYardsAfterCatch?: FloatNullableFilter<"PlayerStat"> | number | null
+    passingFirstDowns?: IntNullableFilter<"PlayerStat"> | number | null
+    passingEpa?: FloatNullableFilter<"PlayerStat"> | number | null
+    passing2ptConversions?: IntNullableFilter<"PlayerStat"> | number | null
+    pacr?: FloatNullableFilter<"PlayerStat"> | number | null
+    dakota?: FloatNullableFilter<"PlayerStat"> | number | null
+    carries?: IntNullableFilter<"PlayerStat"> | number | null
+    rushingYards?: FloatNullableFilter<"PlayerStat"> | number | null
+    rushingTds?: IntNullableFilter<"PlayerStat"> | number | null
+    rushingFumbles?: IntNullableFilter<"PlayerStat"> | number | null
+    rushingFumblesLost?: IntNullableFilter<"PlayerStat"> | number | null
+    rushingFirstDowns?: IntNullableFilter<"PlayerStat"> | number | null
+    rushingEpa?: FloatNullableFilter<"PlayerStat"> | number | null
+    rushing2ptConversions?: IntNullableFilter<"PlayerStat"> | number | null
+    receptions?: IntNullableFilter<"PlayerStat"> | number | null
+    targets?: IntNullableFilter<"PlayerStat"> | number | null
+    receivingYards?: FloatNullableFilter<"PlayerStat"> | number | null
+    receivingTds?: IntNullableFilter<"PlayerStat"> | number | null
+    receivingFumbles?: IntNullableFilter<"PlayerStat"> | number | null
+    receivingFumblesLost?: IntNullableFilter<"PlayerStat"> | number | null
+    receivingAirYards?: FloatNullableFilter<"PlayerStat"> | number | null
+    receivingYardsAfterCatch?: FloatNullableFilter<"PlayerStat"> | number | null
+    receivingFirstDowns?: IntNullableFilter<"PlayerStat"> | number | null
+    receivingEpa?: FloatNullableFilter<"PlayerStat"> | number | null
+    receiving2ptConversions?: IntNullableFilter<"PlayerStat"> | number | null
+    racr?: FloatNullableFilter<"PlayerStat"> | number | null
+    targetShare?: FloatNullableFilter<"PlayerStat"> | number | null
+    airYardsShare?: FloatNullableFilter<"PlayerStat"> | number | null
+    wopr?: FloatNullableFilter<"PlayerStat"> | number | null
+    specialTeamsTds?: IntNullableFilter<"PlayerStat"> | number | null
+    fantasyPoints?: FloatNullableFilter<"PlayerStat"> | number | null
+    fantasyPointsPpr?: FloatNullableFilter<"PlayerStat"> | number | null
+  }
+
+  export type PlayerStatOrderByWithRelationInput = {
+    id?: SortOrder
+    playerId?: SortOrderInput | SortOrder
+    playerName?: SortOrderInput | SortOrder
+    playerDisplayName?: SortOrderInput | SortOrder
+    position?: SortOrderInput | SortOrder
+    positionGroup?: SortOrderInput | SortOrder
+    headshotUrl?: SortOrderInput | SortOrder
+    recentTeam?: SortOrderInput | SortOrder
+    season?: SortOrderInput | SortOrder
+    week?: SortOrderInput | SortOrder
+    seasonType?: SortOrderInput | SortOrder
+    opponentTeam?: SortOrderInput | SortOrder
+    completions?: SortOrderInput | SortOrder
+    attempts?: SortOrderInput | SortOrder
+    passingYards?: SortOrderInput | SortOrder
+    passingTds?: SortOrderInput | SortOrder
+    interceptions?: SortOrderInput | SortOrder
+    sacks?: SortOrderInput | SortOrder
+    sackYards?: SortOrderInput | SortOrder
+    sackFumbles?: SortOrderInput | SortOrder
+    sackFumblesLost?: SortOrderInput | SortOrder
+    passingAirYards?: SortOrderInput | SortOrder
+    passingYardsAfterCatch?: SortOrderInput | SortOrder
+    passingFirstDowns?: SortOrderInput | SortOrder
+    passingEpa?: SortOrderInput | SortOrder
+    passing2ptConversions?: SortOrderInput | SortOrder
+    pacr?: SortOrderInput | SortOrder
+    dakota?: SortOrderInput | SortOrder
+    carries?: SortOrderInput | SortOrder
+    rushingYards?: SortOrderInput | SortOrder
+    rushingTds?: SortOrderInput | SortOrder
+    rushingFumbles?: SortOrderInput | SortOrder
+    rushingFumblesLost?: SortOrderInput | SortOrder
+    rushingFirstDowns?: SortOrderInput | SortOrder
+    rushingEpa?: SortOrderInput | SortOrder
+    rushing2ptConversions?: SortOrderInput | SortOrder
+    receptions?: SortOrderInput | SortOrder
+    targets?: SortOrderInput | SortOrder
+    receivingYards?: SortOrderInput | SortOrder
+    receivingTds?: SortOrderInput | SortOrder
+    receivingFumbles?: SortOrderInput | SortOrder
+    receivingFumblesLost?: SortOrderInput | SortOrder
+    receivingAirYards?: SortOrderInput | SortOrder
+    receivingYardsAfterCatch?: SortOrderInput | SortOrder
+    receivingFirstDowns?: SortOrderInput | SortOrder
+    receivingEpa?: SortOrderInput | SortOrder
+    receiving2ptConversions?: SortOrderInput | SortOrder
+    racr?: SortOrderInput | SortOrder
+    targetShare?: SortOrderInput | SortOrder
+    airYardsShare?: SortOrderInput | SortOrder
+    wopr?: SortOrderInput | SortOrder
+    specialTeamsTds?: SortOrderInput | SortOrder
+    fantasyPoints?: SortOrderInput | SortOrder
+    fantasyPointsPpr?: SortOrderInput | SortOrder
+  }
+
+  export type PlayerStatWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PlayerStatWhereInput | PlayerStatWhereInput[]
+    OR?: PlayerStatWhereInput[]
+    NOT?: PlayerStatWhereInput | PlayerStatWhereInput[]
+    playerId?: StringNullableFilter<"PlayerStat"> | string | null
+    playerName?: StringNullableFilter<"PlayerStat"> | string | null
+    playerDisplayName?: StringNullableFilter<"PlayerStat"> | string | null
+    position?: StringNullableFilter<"PlayerStat"> | string | null
+    positionGroup?: StringNullableFilter<"PlayerStat"> | string | null
+    headshotUrl?: StringNullableFilter<"PlayerStat"> | string | null
+    recentTeam?: StringNullableFilter<"PlayerStat"> | string | null
+    season?: IntNullableFilter<"PlayerStat"> | number | null
+    week?: IntNullableFilter<"PlayerStat"> | number | null
+    seasonType?: StringNullableFilter<"PlayerStat"> | string | null
+    opponentTeam?: StringNullableFilter<"PlayerStat"> | string | null
+    completions?: IntNullableFilter<"PlayerStat"> | number | null
+    attempts?: IntNullableFilter<"PlayerStat"> | number | null
+    passingYards?: FloatNullableFilter<"PlayerStat"> | number | null
+    passingTds?: IntNullableFilter<"PlayerStat"> | number | null
+    interceptions?: IntNullableFilter<"PlayerStat"> | number | null
+    sacks?: IntNullableFilter<"PlayerStat"> | number | null
+    sackYards?: FloatNullableFilter<"PlayerStat"> | number | null
+    sackFumbles?: IntNullableFilter<"PlayerStat"> | number | null
+    sackFumblesLost?: IntNullableFilter<"PlayerStat"> | number | null
+    passingAirYards?: FloatNullableFilter<"PlayerStat"> | number | null
+    passingYardsAfterCatch?: FloatNullableFilter<"PlayerStat"> | number | null
+    passingFirstDowns?: IntNullableFilter<"PlayerStat"> | number | null
+    passingEpa?: FloatNullableFilter<"PlayerStat"> | number | null
+    passing2ptConversions?: IntNullableFilter<"PlayerStat"> | number | null
+    pacr?: FloatNullableFilter<"PlayerStat"> | number | null
+    dakota?: FloatNullableFilter<"PlayerStat"> | number | null
+    carries?: IntNullableFilter<"PlayerStat"> | number | null
+    rushingYards?: FloatNullableFilter<"PlayerStat"> | number | null
+    rushingTds?: IntNullableFilter<"PlayerStat"> | number | null
+    rushingFumbles?: IntNullableFilter<"PlayerStat"> | number | null
+    rushingFumblesLost?: IntNullableFilter<"PlayerStat"> | number | null
+    rushingFirstDowns?: IntNullableFilter<"PlayerStat"> | number | null
+    rushingEpa?: FloatNullableFilter<"PlayerStat"> | number | null
+    rushing2ptConversions?: IntNullableFilter<"PlayerStat"> | number | null
+    receptions?: IntNullableFilter<"PlayerStat"> | number | null
+    targets?: IntNullableFilter<"PlayerStat"> | number | null
+    receivingYards?: FloatNullableFilter<"PlayerStat"> | number | null
+    receivingTds?: IntNullableFilter<"PlayerStat"> | number | null
+    receivingFumbles?: IntNullableFilter<"PlayerStat"> | number | null
+    receivingFumblesLost?: IntNullableFilter<"PlayerStat"> | number | null
+    receivingAirYards?: FloatNullableFilter<"PlayerStat"> | number | null
+    receivingYardsAfterCatch?: FloatNullableFilter<"PlayerStat"> | number | null
+    receivingFirstDowns?: IntNullableFilter<"PlayerStat"> | number | null
+    receivingEpa?: FloatNullableFilter<"PlayerStat"> | number | null
+    receiving2ptConversions?: IntNullableFilter<"PlayerStat"> | number | null
+    racr?: FloatNullableFilter<"PlayerStat"> | number | null
+    targetShare?: FloatNullableFilter<"PlayerStat"> | number | null
+    airYardsShare?: FloatNullableFilter<"PlayerStat"> | number | null
+    wopr?: FloatNullableFilter<"PlayerStat"> | number | null
+    specialTeamsTds?: IntNullableFilter<"PlayerStat"> | number | null
+    fantasyPoints?: FloatNullableFilter<"PlayerStat"> | number | null
+    fantasyPointsPpr?: FloatNullableFilter<"PlayerStat"> | number | null
+  }, "id">
+
+  export type PlayerStatOrderByWithAggregationInput = {
+    id?: SortOrder
+    playerId?: SortOrderInput | SortOrder
+    playerName?: SortOrderInput | SortOrder
+    playerDisplayName?: SortOrderInput | SortOrder
+    position?: SortOrderInput | SortOrder
+    positionGroup?: SortOrderInput | SortOrder
+    headshotUrl?: SortOrderInput | SortOrder
+    recentTeam?: SortOrderInput | SortOrder
+    season?: SortOrderInput | SortOrder
+    week?: SortOrderInput | SortOrder
+    seasonType?: SortOrderInput | SortOrder
+    opponentTeam?: SortOrderInput | SortOrder
+    completions?: SortOrderInput | SortOrder
+    attempts?: SortOrderInput | SortOrder
+    passingYards?: SortOrderInput | SortOrder
+    passingTds?: SortOrderInput | SortOrder
+    interceptions?: SortOrderInput | SortOrder
+    sacks?: SortOrderInput | SortOrder
+    sackYards?: SortOrderInput | SortOrder
+    sackFumbles?: SortOrderInput | SortOrder
+    sackFumblesLost?: SortOrderInput | SortOrder
+    passingAirYards?: SortOrderInput | SortOrder
+    passingYardsAfterCatch?: SortOrderInput | SortOrder
+    passingFirstDowns?: SortOrderInput | SortOrder
+    passingEpa?: SortOrderInput | SortOrder
+    passing2ptConversions?: SortOrderInput | SortOrder
+    pacr?: SortOrderInput | SortOrder
+    dakota?: SortOrderInput | SortOrder
+    carries?: SortOrderInput | SortOrder
+    rushingYards?: SortOrderInput | SortOrder
+    rushingTds?: SortOrderInput | SortOrder
+    rushingFumbles?: SortOrderInput | SortOrder
+    rushingFumblesLost?: SortOrderInput | SortOrder
+    rushingFirstDowns?: SortOrderInput | SortOrder
+    rushingEpa?: SortOrderInput | SortOrder
+    rushing2ptConversions?: SortOrderInput | SortOrder
+    receptions?: SortOrderInput | SortOrder
+    targets?: SortOrderInput | SortOrder
+    receivingYards?: SortOrderInput | SortOrder
+    receivingTds?: SortOrderInput | SortOrder
+    receivingFumbles?: SortOrderInput | SortOrder
+    receivingFumblesLost?: SortOrderInput | SortOrder
+    receivingAirYards?: SortOrderInput | SortOrder
+    receivingYardsAfterCatch?: SortOrderInput | SortOrder
+    receivingFirstDowns?: SortOrderInput | SortOrder
+    receivingEpa?: SortOrderInput | SortOrder
+    receiving2ptConversions?: SortOrderInput | SortOrder
+    racr?: SortOrderInput | SortOrder
+    targetShare?: SortOrderInput | SortOrder
+    airYardsShare?: SortOrderInput | SortOrder
+    wopr?: SortOrderInput | SortOrder
+    specialTeamsTds?: SortOrderInput | SortOrder
+    fantasyPoints?: SortOrderInput | SortOrder
+    fantasyPointsPpr?: SortOrderInput | SortOrder
+    _count?: PlayerStatCountOrderByAggregateInput
+    _avg?: PlayerStatAvgOrderByAggregateInput
+    _max?: PlayerStatMaxOrderByAggregateInput
+    _min?: PlayerStatMinOrderByAggregateInput
+    _sum?: PlayerStatSumOrderByAggregateInput
+  }
+
+  export type PlayerStatScalarWhereWithAggregatesInput = {
+    AND?: PlayerStatScalarWhereWithAggregatesInput | PlayerStatScalarWhereWithAggregatesInput[]
+    OR?: PlayerStatScalarWhereWithAggregatesInput[]
+    NOT?: PlayerStatScalarWhereWithAggregatesInput | PlayerStatScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PlayerStat"> | string
+    playerId?: StringNullableWithAggregatesFilter<"PlayerStat"> | string | null
+    playerName?: StringNullableWithAggregatesFilter<"PlayerStat"> | string | null
+    playerDisplayName?: StringNullableWithAggregatesFilter<"PlayerStat"> | string | null
+    position?: StringNullableWithAggregatesFilter<"PlayerStat"> | string | null
+    positionGroup?: StringNullableWithAggregatesFilter<"PlayerStat"> | string | null
+    headshotUrl?: StringNullableWithAggregatesFilter<"PlayerStat"> | string | null
+    recentTeam?: StringNullableWithAggregatesFilter<"PlayerStat"> | string | null
+    season?: IntNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    week?: IntNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    seasonType?: StringNullableWithAggregatesFilter<"PlayerStat"> | string | null
+    opponentTeam?: StringNullableWithAggregatesFilter<"PlayerStat"> | string | null
+    completions?: IntNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    attempts?: IntNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    passingYards?: FloatNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    passingTds?: IntNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    interceptions?: IntNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    sacks?: IntNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    sackYards?: FloatNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    sackFumbles?: IntNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    sackFumblesLost?: IntNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    passingAirYards?: FloatNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    passingYardsAfterCatch?: FloatNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    passingFirstDowns?: IntNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    passingEpa?: FloatNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    passing2ptConversions?: IntNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    pacr?: FloatNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    dakota?: FloatNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    carries?: IntNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    rushingYards?: FloatNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    rushingTds?: IntNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    rushingFumbles?: IntNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    rushingFumblesLost?: IntNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    rushingFirstDowns?: IntNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    rushingEpa?: FloatNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    rushing2ptConversions?: IntNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    receptions?: IntNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    targets?: IntNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    receivingYards?: FloatNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    receivingTds?: IntNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    receivingFumbles?: IntNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    receivingFumblesLost?: IntNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    receivingAirYards?: FloatNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    receivingYardsAfterCatch?: FloatNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    receivingFirstDowns?: IntNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    receivingEpa?: FloatNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    receiving2ptConversions?: IntNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    racr?: FloatNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    targetShare?: FloatNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    airYardsShare?: FloatNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    wopr?: FloatNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    specialTeamsTds?: IntNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    fantasyPoints?: FloatNullableWithAggregatesFilter<"PlayerStat"> | number | null
+    fantasyPointsPpr?: FloatNullableWithAggregatesFilter<"PlayerStat"> | number | null
+  }
+
+  export type ReceivingStatWhereInput = {
+    AND?: ReceivingStatWhereInput | ReceivingStatWhereInput[]
+    OR?: ReceivingStatWhereInput[]
+    NOT?: ReceivingStatWhereInput | ReceivingStatWhereInput[]
+    id?: StringFilter<"ReceivingStat"> | string
+    player?: StringNullableFilter<"ReceivingStat"> | string | null
+    playerId?: StringNullableFilter<"ReceivingStat"> | string | null
+    position?: StringNullableFilter<"ReceivingStat"> | string | null
+    teamName?: StringNullableFilter<"ReceivingStat"> | string | null
+    playerGameCount?: IntNullableFilter<"ReceivingStat"> | number | null
+    avgDepthOfTarget?: FloatNullableFilter<"ReceivingStat"> | number | null
+    avoidedTackles?: IntNullableFilter<"ReceivingStat"> | number | null
+    caughtPercent?: FloatNullableFilter<"ReceivingStat"> | number | null
+    contestedCatchRate?: FloatNullableFilter<"ReceivingStat"> | number | null
+    contestedReceptions?: IntNullableFilter<"ReceivingStat"> | number | null
+    contestedTargets?: IntNullableFilter<"ReceivingStat"> | number | null
+    declinedPenalties?: IntNullableFilter<"ReceivingStat"> | number | null
+    dropRate?: FloatNullableFilter<"ReceivingStat"> | number | null
+    drops?: IntNullableFilter<"ReceivingStat"> | number | null
+    firstDowns?: IntNullableFilter<"ReceivingStat"> | number | null
+    franchiseId?: IntNullableFilter<"ReceivingStat"> | number | null
+    fumbles?: IntNullableFilter<"ReceivingStat"> | number | null
+    gradesHandsDrop?: FloatNullableFilter<"ReceivingStat"> | number | null
+    gradesHandsFumble?: FloatNullableFilter<"ReceivingStat"> | number | null
+    gradesOffense?: FloatNullableFilter<"ReceivingStat"> | number | null
+    gradesPassBlock?: FloatNullableFilter<"ReceivingStat"> | number | null
+    gradesPassRoute?: FloatNullableFilter<"ReceivingStat"> | number | null
+    inlineRate?: FloatNullableFilter<"ReceivingStat"> | number | null
+    inlineSnaps?: IntNullableFilter<"ReceivingStat"> | number | null
+    interceptions?: IntNullableFilter<"ReceivingStat"> | number | null
+    longest?: IntNullableFilter<"ReceivingStat"> | number | null
+    passBlockRate?: FloatNullableFilter<"ReceivingStat"> | number | null
+    passBlocks?: IntNullableFilter<"ReceivingStat"> | number | null
+    passPlays?: IntNullableFilter<"ReceivingStat"> | number | null
+    penalties?: IntNullableFilter<"ReceivingStat"> | number | null
+    receptions?: IntNullableFilter<"ReceivingStat"> | number | null
+    routeRate?: FloatNullableFilter<"ReceivingStat"> | number | null
+    routes?: IntNullableFilter<"ReceivingStat"> | number | null
+    slotRate?: FloatNullableFilter<"ReceivingStat"> | number | null
+    slotSnaps?: IntNullableFilter<"ReceivingStat"> | number | null
+    targetedQbRating?: FloatNullableFilter<"ReceivingStat"> | number | null
+    targets?: IntNullableFilter<"ReceivingStat"> | number | null
+    touchdowns?: IntNullableFilter<"ReceivingStat"> | number | null
+    wideRate?: FloatNullableFilter<"ReceivingStat"> | number | null
+    wideSnaps?: IntNullableFilter<"ReceivingStat"> | number | null
+    yards?: IntNullableFilter<"ReceivingStat"> | number | null
+    yardsAfterCatch?: IntNullableFilter<"ReceivingStat"> | number | null
+    yardsAfterCatchPerReception?: FloatNullableFilter<"ReceivingStat"> | number | null
+    yardsPerReception?: FloatNullableFilter<"ReceivingStat"> | number | null
+    yprr?: FloatNullableFilter<"ReceivingStat"> | number | null
+  }
+
+  export type ReceivingStatOrderByWithRelationInput = {
+    id?: SortOrder
+    player?: SortOrderInput | SortOrder
+    playerId?: SortOrderInput | SortOrder
+    position?: SortOrderInput | SortOrder
+    teamName?: SortOrderInput | SortOrder
+    playerGameCount?: SortOrderInput | SortOrder
+    avgDepthOfTarget?: SortOrderInput | SortOrder
+    avoidedTackles?: SortOrderInput | SortOrder
+    caughtPercent?: SortOrderInput | SortOrder
+    contestedCatchRate?: SortOrderInput | SortOrder
+    contestedReceptions?: SortOrderInput | SortOrder
+    contestedTargets?: SortOrderInput | SortOrder
+    declinedPenalties?: SortOrderInput | SortOrder
+    dropRate?: SortOrderInput | SortOrder
+    drops?: SortOrderInput | SortOrder
+    firstDowns?: SortOrderInput | SortOrder
+    franchiseId?: SortOrderInput | SortOrder
+    fumbles?: SortOrderInput | SortOrder
+    gradesHandsDrop?: SortOrderInput | SortOrder
+    gradesHandsFumble?: SortOrderInput | SortOrder
+    gradesOffense?: SortOrderInput | SortOrder
+    gradesPassBlock?: SortOrderInput | SortOrder
+    gradesPassRoute?: SortOrderInput | SortOrder
+    inlineRate?: SortOrderInput | SortOrder
+    inlineSnaps?: SortOrderInput | SortOrder
+    interceptions?: SortOrderInput | SortOrder
+    longest?: SortOrderInput | SortOrder
+    passBlockRate?: SortOrderInput | SortOrder
+    passBlocks?: SortOrderInput | SortOrder
+    passPlays?: SortOrderInput | SortOrder
+    penalties?: SortOrderInput | SortOrder
+    receptions?: SortOrderInput | SortOrder
+    routeRate?: SortOrderInput | SortOrder
+    routes?: SortOrderInput | SortOrder
+    slotRate?: SortOrderInput | SortOrder
+    slotSnaps?: SortOrderInput | SortOrder
+    targetedQbRating?: SortOrderInput | SortOrder
+    targets?: SortOrderInput | SortOrder
+    touchdowns?: SortOrderInput | SortOrder
+    wideRate?: SortOrderInput | SortOrder
+    wideSnaps?: SortOrderInput | SortOrder
+    yards?: SortOrderInput | SortOrder
+    yardsAfterCatch?: SortOrderInput | SortOrder
+    yardsAfterCatchPerReception?: SortOrderInput | SortOrder
+    yardsPerReception?: SortOrderInput | SortOrder
+    yprr?: SortOrderInput | SortOrder
+  }
+
+  export type ReceivingStatWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ReceivingStatWhereInput | ReceivingStatWhereInput[]
+    OR?: ReceivingStatWhereInput[]
+    NOT?: ReceivingStatWhereInput | ReceivingStatWhereInput[]
+    player?: StringNullableFilter<"ReceivingStat"> | string | null
+    playerId?: StringNullableFilter<"ReceivingStat"> | string | null
+    position?: StringNullableFilter<"ReceivingStat"> | string | null
+    teamName?: StringNullableFilter<"ReceivingStat"> | string | null
+    playerGameCount?: IntNullableFilter<"ReceivingStat"> | number | null
+    avgDepthOfTarget?: FloatNullableFilter<"ReceivingStat"> | number | null
+    avoidedTackles?: IntNullableFilter<"ReceivingStat"> | number | null
+    caughtPercent?: FloatNullableFilter<"ReceivingStat"> | number | null
+    contestedCatchRate?: FloatNullableFilter<"ReceivingStat"> | number | null
+    contestedReceptions?: IntNullableFilter<"ReceivingStat"> | number | null
+    contestedTargets?: IntNullableFilter<"ReceivingStat"> | number | null
+    declinedPenalties?: IntNullableFilter<"ReceivingStat"> | number | null
+    dropRate?: FloatNullableFilter<"ReceivingStat"> | number | null
+    drops?: IntNullableFilter<"ReceivingStat"> | number | null
+    firstDowns?: IntNullableFilter<"ReceivingStat"> | number | null
+    franchiseId?: IntNullableFilter<"ReceivingStat"> | number | null
+    fumbles?: IntNullableFilter<"ReceivingStat"> | number | null
+    gradesHandsDrop?: FloatNullableFilter<"ReceivingStat"> | number | null
+    gradesHandsFumble?: FloatNullableFilter<"ReceivingStat"> | number | null
+    gradesOffense?: FloatNullableFilter<"ReceivingStat"> | number | null
+    gradesPassBlock?: FloatNullableFilter<"ReceivingStat"> | number | null
+    gradesPassRoute?: FloatNullableFilter<"ReceivingStat"> | number | null
+    inlineRate?: FloatNullableFilter<"ReceivingStat"> | number | null
+    inlineSnaps?: IntNullableFilter<"ReceivingStat"> | number | null
+    interceptions?: IntNullableFilter<"ReceivingStat"> | number | null
+    longest?: IntNullableFilter<"ReceivingStat"> | number | null
+    passBlockRate?: FloatNullableFilter<"ReceivingStat"> | number | null
+    passBlocks?: IntNullableFilter<"ReceivingStat"> | number | null
+    passPlays?: IntNullableFilter<"ReceivingStat"> | number | null
+    penalties?: IntNullableFilter<"ReceivingStat"> | number | null
+    receptions?: IntNullableFilter<"ReceivingStat"> | number | null
+    routeRate?: FloatNullableFilter<"ReceivingStat"> | number | null
+    routes?: IntNullableFilter<"ReceivingStat"> | number | null
+    slotRate?: FloatNullableFilter<"ReceivingStat"> | number | null
+    slotSnaps?: IntNullableFilter<"ReceivingStat"> | number | null
+    targetedQbRating?: FloatNullableFilter<"ReceivingStat"> | number | null
+    targets?: IntNullableFilter<"ReceivingStat"> | number | null
+    touchdowns?: IntNullableFilter<"ReceivingStat"> | number | null
+    wideRate?: FloatNullableFilter<"ReceivingStat"> | number | null
+    wideSnaps?: IntNullableFilter<"ReceivingStat"> | number | null
+    yards?: IntNullableFilter<"ReceivingStat"> | number | null
+    yardsAfterCatch?: IntNullableFilter<"ReceivingStat"> | number | null
+    yardsAfterCatchPerReception?: FloatNullableFilter<"ReceivingStat"> | number | null
+    yardsPerReception?: FloatNullableFilter<"ReceivingStat"> | number | null
+    yprr?: FloatNullableFilter<"ReceivingStat"> | number | null
+  }, "id">
+
+  export type ReceivingStatOrderByWithAggregationInput = {
+    id?: SortOrder
+    player?: SortOrderInput | SortOrder
+    playerId?: SortOrderInput | SortOrder
+    position?: SortOrderInput | SortOrder
+    teamName?: SortOrderInput | SortOrder
+    playerGameCount?: SortOrderInput | SortOrder
+    avgDepthOfTarget?: SortOrderInput | SortOrder
+    avoidedTackles?: SortOrderInput | SortOrder
+    caughtPercent?: SortOrderInput | SortOrder
+    contestedCatchRate?: SortOrderInput | SortOrder
+    contestedReceptions?: SortOrderInput | SortOrder
+    contestedTargets?: SortOrderInput | SortOrder
+    declinedPenalties?: SortOrderInput | SortOrder
+    dropRate?: SortOrderInput | SortOrder
+    drops?: SortOrderInput | SortOrder
+    firstDowns?: SortOrderInput | SortOrder
+    franchiseId?: SortOrderInput | SortOrder
+    fumbles?: SortOrderInput | SortOrder
+    gradesHandsDrop?: SortOrderInput | SortOrder
+    gradesHandsFumble?: SortOrderInput | SortOrder
+    gradesOffense?: SortOrderInput | SortOrder
+    gradesPassBlock?: SortOrderInput | SortOrder
+    gradesPassRoute?: SortOrderInput | SortOrder
+    inlineRate?: SortOrderInput | SortOrder
+    inlineSnaps?: SortOrderInput | SortOrder
+    interceptions?: SortOrderInput | SortOrder
+    longest?: SortOrderInput | SortOrder
+    passBlockRate?: SortOrderInput | SortOrder
+    passBlocks?: SortOrderInput | SortOrder
+    passPlays?: SortOrderInput | SortOrder
+    penalties?: SortOrderInput | SortOrder
+    receptions?: SortOrderInput | SortOrder
+    routeRate?: SortOrderInput | SortOrder
+    routes?: SortOrderInput | SortOrder
+    slotRate?: SortOrderInput | SortOrder
+    slotSnaps?: SortOrderInput | SortOrder
+    targetedQbRating?: SortOrderInput | SortOrder
+    targets?: SortOrderInput | SortOrder
+    touchdowns?: SortOrderInput | SortOrder
+    wideRate?: SortOrderInput | SortOrder
+    wideSnaps?: SortOrderInput | SortOrder
+    yards?: SortOrderInput | SortOrder
+    yardsAfterCatch?: SortOrderInput | SortOrder
+    yardsAfterCatchPerReception?: SortOrderInput | SortOrder
+    yardsPerReception?: SortOrderInput | SortOrder
+    yprr?: SortOrderInput | SortOrder
+    _count?: ReceivingStatCountOrderByAggregateInput
+    _avg?: ReceivingStatAvgOrderByAggregateInput
+    _max?: ReceivingStatMaxOrderByAggregateInput
+    _min?: ReceivingStatMinOrderByAggregateInput
+    _sum?: ReceivingStatSumOrderByAggregateInput
+  }
+
+  export type ReceivingStatScalarWhereWithAggregatesInput = {
+    AND?: ReceivingStatScalarWhereWithAggregatesInput | ReceivingStatScalarWhereWithAggregatesInput[]
+    OR?: ReceivingStatScalarWhereWithAggregatesInput[]
+    NOT?: ReceivingStatScalarWhereWithAggregatesInput | ReceivingStatScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ReceivingStat"> | string
+    player?: StringNullableWithAggregatesFilter<"ReceivingStat"> | string | null
+    playerId?: StringNullableWithAggregatesFilter<"ReceivingStat"> | string | null
+    position?: StringNullableWithAggregatesFilter<"ReceivingStat"> | string | null
+    teamName?: StringNullableWithAggregatesFilter<"ReceivingStat"> | string | null
+    playerGameCount?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    avgDepthOfTarget?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    avoidedTackles?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    caughtPercent?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    contestedCatchRate?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    contestedReceptions?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    contestedTargets?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    declinedPenalties?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    dropRate?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    drops?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    firstDowns?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    franchiseId?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    fumbles?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    gradesHandsDrop?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    gradesHandsFumble?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    gradesOffense?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    gradesPassBlock?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    gradesPassRoute?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    inlineRate?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    inlineSnaps?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    interceptions?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    longest?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    passBlockRate?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    passBlocks?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    passPlays?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    penalties?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    receptions?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    routeRate?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    routes?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    slotRate?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    slotSnaps?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    targetedQbRating?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    targets?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    touchdowns?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    wideRate?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    wideSnaps?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    yards?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    yardsAfterCatch?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    yardsAfterCatchPerReception?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    yardsPerReception?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    yprr?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+  }
+
   export type tradeAnalyzerDataCreateInput = {
     id?: string
     name?: string | null
@@ -2458,6 +6870,748 @@ export namespace Prisma {
     travValue?: NullableFloatFieldUpdateOperationsInput | number | null
     joeValue?: NullableFloatFieldUpdateOperationsInput | number | null
     consensusValue?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type PlayerStatCreateInput = {
+    id?: string
+    playerId?: string | null
+    playerName?: string | null
+    playerDisplayName?: string | null
+    position?: string | null
+    positionGroup?: string | null
+    headshotUrl?: string | null
+    recentTeam?: string | null
+    season?: number | null
+    week?: number | null
+    seasonType?: string | null
+    opponentTeam?: string | null
+    completions?: number | null
+    attempts?: number | null
+    passingYards?: number | null
+    passingTds?: number | null
+    interceptions?: number | null
+    sacks?: number | null
+    sackYards?: number | null
+    sackFumbles?: number | null
+    sackFumblesLost?: number | null
+    passingAirYards?: number | null
+    passingYardsAfterCatch?: number | null
+    passingFirstDowns?: number | null
+    passingEpa?: number | null
+    passing2ptConversions?: number | null
+    pacr?: number | null
+    dakota?: number | null
+    carries?: number | null
+    rushingYards?: number | null
+    rushingTds?: number | null
+    rushingFumbles?: number | null
+    rushingFumblesLost?: number | null
+    rushingFirstDowns?: number | null
+    rushingEpa?: number | null
+    rushing2ptConversions?: number | null
+    receptions?: number | null
+    targets?: number | null
+    receivingYards?: number | null
+    receivingTds?: number | null
+    receivingFumbles?: number | null
+    receivingFumblesLost?: number | null
+    receivingAirYards?: number | null
+    receivingYardsAfterCatch?: number | null
+    receivingFirstDowns?: number | null
+    receivingEpa?: number | null
+    receiving2ptConversions?: number | null
+    racr?: number | null
+    targetShare?: number | null
+    airYardsShare?: number | null
+    wopr?: number | null
+    specialTeamsTds?: number | null
+    fantasyPoints?: number | null
+    fantasyPointsPpr?: number | null
+  }
+
+  export type PlayerStatUncheckedCreateInput = {
+    id?: string
+    playerId?: string | null
+    playerName?: string | null
+    playerDisplayName?: string | null
+    position?: string | null
+    positionGroup?: string | null
+    headshotUrl?: string | null
+    recentTeam?: string | null
+    season?: number | null
+    week?: number | null
+    seasonType?: string | null
+    opponentTeam?: string | null
+    completions?: number | null
+    attempts?: number | null
+    passingYards?: number | null
+    passingTds?: number | null
+    interceptions?: number | null
+    sacks?: number | null
+    sackYards?: number | null
+    sackFumbles?: number | null
+    sackFumblesLost?: number | null
+    passingAirYards?: number | null
+    passingYardsAfterCatch?: number | null
+    passingFirstDowns?: number | null
+    passingEpa?: number | null
+    passing2ptConversions?: number | null
+    pacr?: number | null
+    dakota?: number | null
+    carries?: number | null
+    rushingYards?: number | null
+    rushingTds?: number | null
+    rushingFumbles?: number | null
+    rushingFumblesLost?: number | null
+    rushingFirstDowns?: number | null
+    rushingEpa?: number | null
+    rushing2ptConversions?: number | null
+    receptions?: number | null
+    targets?: number | null
+    receivingYards?: number | null
+    receivingTds?: number | null
+    receivingFumbles?: number | null
+    receivingFumblesLost?: number | null
+    receivingAirYards?: number | null
+    receivingYardsAfterCatch?: number | null
+    receivingFirstDowns?: number | null
+    receivingEpa?: number | null
+    receiving2ptConversions?: number | null
+    racr?: number | null
+    targetShare?: number | null
+    airYardsShare?: number | null
+    wopr?: number | null
+    specialTeamsTds?: number | null
+    fantasyPoints?: number | null
+    fantasyPointsPpr?: number | null
+  }
+
+  export type PlayerStatUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    playerId?: NullableStringFieldUpdateOperationsInput | string | null
+    playerName?: NullableStringFieldUpdateOperationsInput | string | null
+    playerDisplayName?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    positionGroup?: NullableStringFieldUpdateOperationsInput | string | null
+    headshotUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    recentTeam?: NullableStringFieldUpdateOperationsInput | string | null
+    season?: NullableIntFieldUpdateOperationsInput | number | null
+    week?: NullableIntFieldUpdateOperationsInput | number | null
+    seasonType?: NullableStringFieldUpdateOperationsInput | string | null
+    opponentTeam?: NullableStringFieldUpdateOperationsInput | string | null
+    completions?: NullableIntFieldUpdateOperationsInput | number | null
+    attempts?: NullableIntFieldUpdateOperationsInput | number | null
+    passingYards?: NullableFloatFieldUpdateOperationsInput | number | null
+    passingTds?: NullableIntFieldUpdateOperationsInput | number | null
+    interceptions?: NullableIntFieldUpdateOperationsInput | number | null
+    sacks?: NullableIntFieldUpdateOperationsInput | number | null
+    sackYards?: NullableFloatFieldUpdateOperationsInput | number | null
+    sackFumbles?: NullableIntFieldUpdateOperationsInput | number | null
+    sackFumblesLost?: NullableIntFieldUpdateOperationsInput | number | null
+    passingAirYards?: NullableFloatFieldUpdateOperationsInput | number | null
+    passingYardsAfterCatch?: NullableFloatFieldUpdateOperationsInput | number | null
+    passingFirstDowns?: NullableIntFieldUpdateOperationsInput | number | null
+    passingEpa?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing2ptConversions?: NullableIntFieldUpdateOperationsInput | number | null
+    pacr?: NullableFloatFieldUpdateOperationsInput | number | null
+    dakota?: NullableFloatFieldUpdateOperationsInput | number | null
+    carries?: NullableIntFieldUpdateOperationsInput | number | null
+    rushingYards?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushingTds?: NullableIntFieldUpdateOperationsInput | number | null
+    rushingFumbles?: NullableIntFieldUpdateOperationsInput | number | null
+    rushingFumblesLost?: NullableIntFieldUpdateOperationsInput | number | null
+    rushingFirstDowns?: NullableIntFieldUpdateOperationsInput | number | null
+    rushingEpa?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing2ptConversions?: NullableIntFieldUpdateOperationsInput | number | null
+    receptions?: NullableIntFieldUpdateOperationsInput | number | null
+    targets?: NullableIntFieldUpdateOperationsInput | number | null
+    receivingYards?: NullableFloatFieldUpdateOperationsInput | number | null
+    receivingTds?: NullableIntFieldUpdateOperationsInput | number | null
+    receivingFumbles?: NullableIntFieldUpdateOperationsInput | number | null
+    receivingFumblesLost?: NullableIntFieldUpdateOperationsInput | number | null
+    receivingAirYards?: NullableFloatFieldUpdateOperationsInput | number | null
+    receivingYardsAfterCatch?: NullableFloatFieldUpdateOperationsInput | number | null
+    receivingFirstDowns?: NullableIntFieldUpdateOperationsInput | number | null
+    receivingEpa?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving2ptConversions?: NullableIntFieldUpdateOperationsInput | number | null
+    racr?: NullableFloatFieldUpdateOperationsInput | number | null
+    targetShare?: NullableFloatFieldUpdateOperationsInput | number | null
+    airYardsShare?: NullableFloatFieldUpdateOperationsInput | number | null
+    wopr?: NullableFloatFieldUpdateOperationsInput | number | null
+    specialTeamsTds?: NullableIntFieldUpdateOperationsInput | number | null
+    fantasyPoints?: NullableFloatFieldUpdateOperationsInput | number | null
+    fantasyPointsPpr?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type PlayerStatUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    playerId?: NullableStringFieldUpdateOperationsInput | string | null
+    playerName?: NullableStringFieldUpdateOperationsInput | string | null
+    playerDisplayName?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    positionGroup?: NullableStringFieldUpdateOperationsInput | string | null
+    headshotUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    recentTeam?: NullableStringFieldUpdateOperationsInput | string | null
+    season?: NullableIntFieldUpdateOperationsInput | number | null
+    week?: NullableIntFieldUpdateOperationsInput | number | null
+    seasonType?: NullableStringFieldUpdateOperationsInput | string | null
+    opponentTeam?: NullableStringFieldUpdateOperationsInput | string | null
+    completions?: NullableIntFieldUpdateOperationsInput | number | null
+    attempts?: NullableIntFieldUpdateOperationsInput | number | null
+    passingYards?: NullableFloatFieldUpdateOperationsInput | number | null
+    passingTds?: NullableIntFieldUpdateOperationsInput | number | null
+    interceptions?: NullableIntFieldUpdateOperationsInput | number | null
+    sacks?: NullableIntFieldUpdateOperationsInput | number | null
+    sackYards?: NullableFloatFieldUpdateOperationsInput | number | null
+    sackFumbles?: NullableIntFieldUpdateOperationsInput | number | null
+    sackFumblesLost?: NullableIntFieldUpdateOperationsInput | number | null
+    passingAirYards?: NullableFloatFieldUpdateOperationsInput | number | null
+    passingYardsAfterCatch?: NullableFloatFieldUpdateOperationsInput | number | null
+    passingFirstDowns?: NullableIntFieldUpdateOperationsInput | number | null
+    passingEpa?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing2ptConversions?: NullableIntFieldUpdateOperationsInput | number | null
+    pacr?: NullableFloatFieldUpdateOperationsInput | number | null
+    dakota?: NullableFloatFieldUpdateOperationsInput | number | null
+    carries?: NullableIntFieldUpdateOperationsInput | number | null
+    rushingYards?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushingTds?: NullableIntFieldUpdateOperationsInput | number | null
+    rushingFumbles?: NullableIntFieldUpdateOperationsInput | number | null
+    rushingFumblesLost?: NullableIntFieldUpdateOperationsInput | number | null
+    rushingFirstDowns?: NullableIntFieldUpdateOperationsInput | number | null
+    rushingEpa?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing2ptConversions?: NullableIntFieldUpdateOperationsInput | number | null
+    receptions?: NullableIntFieldUpdateOperationsInput | number | null
+    targets?: NullableIntFieldUpdateOperationsInput | number | null
+    receivingYards?: NullableFloatFieldUpdateOperationsInput | number | null
+    receivingTds?: NullableIntFieldUpdateOperationsInput | number | null
+    receivingFumbles?: NullableIntFieldUpdateOperationsInput | number | null
+    receivingFumblesLost?: NullableIntFieldUpdateOperationsInput | number | null
+    receivingAirYards?: NullableFloatFieldUpdateOperationsInput | number | null
+    receivingYardsAfterCatch?: NullableFloatFieldUpdateOperationsInput | number | null
+    receivingFirstDowns?: NullableIntFieldUpdateOperationsInput | number | null
+    receivingEpa?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving2ptConversions?: NullableIntFieldUpdateOperationsInput | number | null
+    racr?: NullableFloatFieldUpdateOperationsInput | number | null
+    targetShare?: NullableFloatFieldUpdateOperationsInput | number | null
+    airYardsShare?: NullableFloatFieldUpdateOperationsInput | number | null
+    wopr?: NullableFloatFieldUpdateOperationsInput | number | null
+    specialTeamsTds?: NullableIntFieldUpdateOperationsInput | number | null
+    fantasyPoints?: NullableFloatFieldUpdateOperationsInput | number | null
+    fantasyPointsPpr?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type PlayerStatCreateManyInput = {
+    id?: string
+    playerId?: string | null
+    playerName?: string | null
+    playerDisplayName?: string | null
+    position?: string | null
+    positionGroup?: string | null
+    headshotUrl?: string | null
+    recentTeam?: string | null
+    season?: number | null
+    week?: number | null
+    seasonType?: string | null
+    opponentTeam?: string | null
+    completions?: number | null
+    attempts?: number | null
+    passingYards?: number | null
+    passingTds?: number | null
+    interceptions?: number | null
+    sacks?: number | null
+    sackYards?: number | null
+    sackFumbles?: number | null
+    sackFumblesLost?: number | null
+    passingAirYards?: number | null
+    passingYardsAfterCatch?: number | null
+    passingFirstDowns?: number | null
+    passingEpa?: number | null
+    passing2ptConversions?: number | null
+    pacr?: number | null
+    dakota?: number | null
+    carries?: number | null
+    rushingYards?: number | null
+    rushingTds?: number | null
+    rushingFumbles?: number | null
+    rushingFumblesLost?: number | null
+    rushingFirstDowns?: number | null
+    rushingEpa?: number | null
+    rushing2ptConversions?: number | null
+    receptions?: number | null
+    targets?: number | null
+    receivingYards?: number | null
+    receivingTds?: number | null
+    receivingFumbles?: number | null
+    receivingFumblesLost?: number | null
+    receivingAirYards?: number | null
+    receivingYardsAfterCatch?: number | null
+    receivingFirstDowns?: number | null
+    receivingEpa?: number | null
+    receiving2ptConversions?: number | null
+    racr?: number | null
+    targetShare?: number | null
+    airYardsShare?: number | null
+    wopr?: number | null
+    specialTeamsTds?: number | null
+    fantasyPoints?: number | null
+    fantasyPointsPpr?: number | null
+  }
+
+  export type PlayerStatUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    playerId?: NullableStringFieldUpdateOperationsInput | string | null
+    playerName?: NullableStringFieldUpdateOperationsInput | string | null
+    playerDisplayName?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    positionGroup?: NullableStringFieldUpdateOperationsInput | string | null
+    headshotUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    recentTeam?: NullableStringFieldUpdateOperationsInput | string | null
+    season?: NullableIntFieldUpdateOperationsInput | number | null
+    week?: NullableIntFieldUpdateOperationsInput | number | null
+    seasonType?: NullableStringFieldUpdateOperationsInput | string | null
+    opponentTeam?: NullableStringFieldUpdateOperationsInput | string | null
+    completions?: NullableIntFieldUpdateOperationsInput | number | null
+    attempts?: NullableIntFieldUpdateOperationsInput | number | null
+    passingYards?: NullableFloatFieldUpdateOperationsInput | number | null
+    passingTds?: NullableIntFieldUpdateOperationsInput | number | null
+    interceptions?: NullableIntFieldUpdateOperationsInput | number | null
+    sacks?: NullableIntFieldUpdateOperationsInput | number | null
+    sackYards?: NullableFloatFieldUpdateOperationsInput | number | null
+    sackFumbles?: NullableIntFieldUpdateOperationsInput | number | null
+    sackFumblesLost?: NullableIntFieldUpdateOperationsInput | number | null
+    passingAirYards?: NullableFloatFieldUpdateOperationsInput | number | null
+    passingYardsAfterCatch?: NullableFloatFieldUpdateOperationsInput | number | null
+    passingFirstDowns?: NullableIntFieldUpdateOperationsInput | number | null
+    passingEpa?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing2ptConversions?: NullableIntFieldUpdateOperationsInput | number | null
+    pacr?: NullableFloatFieldUpdateOperationsInput | number | null
+    dakota?: NullableFloatFieldUpdateOperationsInput | number | null
+    carries?: NullableIntFieldUpdateOperationsInput | number | null
+    rushingYards?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushingTds?: NullableIntFieldUpdateOperationsInput | number | null
+    rushingFumbles?: NullableIntFieldUpdateOperationsInput | number | null
+    rushingFumblesLost?: NullableIntFieldUpdateOperationsInput | number | null
+    rushingFirstDowns?: NullableIntFieldUpdateOperationsInput | number | null
+    rushingEpa?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing2ptConversions?: NullableIntFieldUpdateOperationsInput | number | null
+    receptions?: NullableIntFieldUpdateOperationsInput | number | null
+    targets?: NullableIntFieldUpdateOperationsInput | number | null
+    receivingYards?: NullableFloatFieldUpdateOperationsInput | number | null
+    receivingTds?: NullableIntFieldUpdateOperationsInput | number | null
+    receivingFumbles?: NullableIntFieldUpdateOperationsInput | number | null
+    receivingFumblesLost?: NullableIntFieldUpdateOperationsInput | number | null
+    receivingAirYards?: NullableFloatFieldUpdateOperationsInput | number | null
+    receivingYardsAfterCatch?: NullableFloatFieldUpdateOperationsInput | number | null
+    receivingFirstDowns?: NullableIntFieldUpdateOperationsInput | number | null
+    receivingEpa?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving2ptConversions?: NullableIntFieldUpdateOperationsInput | number | null
+    racr?: NullableFloatFieldUpdateOperationsInput | number | null
+    targetShare?: NullableFloatFieldUpdateOperationsInput | number | null
+    airYardsShare?: NullableFloatFieldUpdateOperationsInput | number | null
+    wopr?: NullableFloatFieldUpdateOperationsInput | number | null
+    specialTeamsTds?: NullableIntFieldUpdateOperationsInput | number | null
+    fantasyPoints?: NullableFloatFieldUpdateOperationsInput | number | null
+    fantasyPointsPpr?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type PlayerStatUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    playerId?: NullableStringFieldUpdateOperationsInput | string | null
+    playerName?: NullableStringFieldUpdateOperationsInput | string | null
+    playerDisplayName?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    positionGroup?: NullableStringFieldUpdateOperationsInput | string | null
+    headshotUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    recentTeam?: NullableStringFieldUpdateOperationsInput | string | null
+    season?: NullableIntFieldUpdateOperationsInput | number | null
+    week?: NullableIntFieldUpdateOperationsInput | number | null
+    seasonType?: NullableStringFieldUpdateOperationsInput | string | null
+    opponentTeam?: NullableStringFieldUpdateOperationsInput | string | null
+    completions?: NullableIntFieldUpdateOperationsInput | number | null
+    attempts?: NullableIntFieldUpdateOperationsInput | number | null
+    passingYards?: NullableFloatFieldUpdateOperationsInput | number | null
+    passingTds?: NullableIntFieldUpdateOperationsInput | number | null
+    interceptions?: NullableIntFieldUpdateOperationsInput | number | null
+    sacks?: NullableIntFieldUpdateOperationsInput | number | null
+    sackYards?: NullableFloatFieldUpdateOperationsInput | number | null
+    sackFumbles?: NullableIntFieldUpdateOperationsInput | number | null
+    sackFumblesLost?: NullableIntFieldUpdateOperationsInput | number | null
+    passingAirYards?: NullableFloatFieldUpdateOperationsInput | number | null
+    passingYardsAfterCatch?: NullableFloatFieldUpdateOperationsInput | number | null
+    passingFirstDowns?: NullableIntFieldUpdateOperationsInput | number | null
+    passingEpa?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing2ptConversions?: NullableIntFieldUpdateOperationsInput | number | null
+    pacr?: NullableFloatFieldUpdateOperationsInput | number | null
+    dakota?: NullableFloatFieldUpdateOperationsInput | number | null
+    carries?: NullableIntFieldUpdateOperationsInput | number | null
+    rushingYards?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushingTds?: NullableIntFieldUpdateOperationsInput | number | null
+    rushingFumbles?: NullableIntFieldUpdateOperationsInput | number | null
+    rushingFumblesLost?: NullableIntFieldUpdateOperationsInput | number | null
+    rushingFirstDowns?: NullableIntFieldUpdateOperationsInput | number | null
+    rushingEpa?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing2ptConversions?: NullableIntFieldUpdateOperationsInput | number | null
+    receptions?: NullableIntFieldUpdateOperationsInput | number | null
+    targets?: NullableIntFieldUpdateOperationsInput | number | null
+    receivingYards?: NullableFloatFieldUpdateOperationsInput | number | null
+    receivingTds?: NullableIntFieldUpdateOperationsInput | number | null
+    receivingFumbles?: NullableIntFieldUpdateOperationsInput | number | null
+    receivingFumblesLost?: NullableIntFieldUpdateOperationsInput | number | null
+    receivingAirYards?: NullableFloatFieldUpdateOperationsInput | number | null
+    receivingYardsAfterCatch?: NullableFloatFieldUpdateOperationsInput | number | null
+    receivingFirstDowns?: NullableIntFieldUpdateOperationsInput | number | null
+    receivingEpa?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving2ptConversions?: NullableIntFieldUpdateOperationsInput | number | null
+    racr?: NullableFloatFieldUpdateOperationsInput | number | null
+    targetShare?: NullableFloatFieldUpdateOperationsInput | number | null
+    airYardsShare?: NullableFloatFieldUpdateOperationsInput | number | null
+    wopr?: NullableFloatFieldUpdateOperationsInput | number | null
+    specialTeamsTds?: NullableIntFieldUpdateOperationsInput | number | null
+    fantasyPoints?: NullableFloatFieldUpdateOperationsInput | number | null
+    fantasyPointsPpr?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type ReceivingStatCreateInput = {
+    id?: string
+    player?: string | null
+    playerId?: string | null
+    position?: string | null
+    teamName?: string | null
+    playerGameCount?: number | null
+    avgDepthOfTarget?: number | null
+    avoidedTackles?: number | null
+    caughtPercent?: number | null
+    contestedCatchRate?: number | null
+    contestedReceptions?: number | null
+    contestedTargets?: number | null
+    declinedPenalties?: number | null
+    dropRate?: number | null
+    drops?: number | null
+    firstDowns?: number | null
+    franchiseId?: number | null
+    fumbles?: number | null
+    gradesHandsDrop?: number | null
+    gradesHandsFumble?: number | null
+    gradesOffense?: number | null
+    gradesPassBlock?: number | null
+    gradesPassRoute?: number | null
+    inlineRate?: number | null
+    inlineSnaps?: number | null
+    interceptions?: number | null
+    longest?: number | null
+    passBlockRate?: number | null
+    passBlocks?: number | null
+    passPlays?: number | null
+    penalties?: number | null
+    receptions?: number | null
+    routeRate?: number | null
+    routes?: number | null
+    slotRate?: number | null
+    slotSnaps?: number | null
+    targetedQbRating?: number | null
+    targets?: number | null
+    touchdowns?: number | null
+    wideRate?: number | null
+    wideSnaps?: number | null
+    yards?: number | null
+    yardsAfterCatch?: number | null
+    yardsAfterCatchPerReception?: number | null
+    yardsPerReception?: number | null
+    yprr?: number | null
+  }
+
+  export type ReceivingStatUncheckedCreateInput = {
+    id?: string
+    player?: string | null
+    playerId?: string | null
+    position?: string | null
+    teamName?: string | null
+    playerGameCount?: number | null
+    avgDepthOfTarget?: number | null
+    avoidedTackles?: number | null
+    caughtPercent?: number | null
+    contestedCatchRate?: number | null
+    contestedReceptions?: number | null
+    contestedTargets?: number | null
+    declinedPenalties?: number | null
+    dropRate?: number | null
+    drops?: number | null
+    firstDowns?: number | null
+    franchiseId?: number | null
+    fumbles?: number | null
+    gradesHandsDrop?: number | null
+    gradesHandsFumble?: number | null
+    gradesOffense?: number | null
+    gradesPassBlock?: number | null
+    gradesPassRoute?: number | null
+    inlineRate?: number | null
+    inlineSnaps?: number | null
+    interceptions?: number | null
+    longest?: number | null
+    passBlockRate?: number | null
+    passBlocks?: number | null
+    passPlays?: number | null
+    penalties?: number | null
+    receptions?: number | null
+    routeRate?: number | null
+    routes?: number | null
+    slotRate?: number | null
+    slotSnaps?: number | null
+    targetedQbRating?: number | null
+    targets?: number | null
+    touchdowns?: number | null
+    wideRate?: number | null
+    wideSnaps?: number | null
+    yards?: number | null
+    yardsAfterCatch?: number | null
+    yardsAfterCatchPerReception?: number | null
+    yardsPerReception?: number | null
+    yprr?: number | null
+  }
+
+  export type ReceivingStatUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    player?: NullableStringFieldUpdateOperationsInput | string | null
+    playerId?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    teamName?: NullableStringFieldUpdateOperationsInput | string | null
+    playerGameCount?: NullableIntFieldUpdateOperationsInput | number | null
+    avgDepthOfTarget?: NullableFloatFieldUpdateOperationsInput | number | null
+    avoidedTackles?: NullableIntFieldUpdateOperationsInput | number | null
+    caughtPercent?: NullableFloatFieldUpdateOperationsInput | number | null
+    contestedCatchRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    contestedReceptions?: NullableIntFieldUpdateOperationsInput | number | null
+    contestedTargets?: NullableIntFieldUpdateOperationsInput | number | null
+    declinedPenalties?: NullableIntFieldUpdateOperationsInput | number | null
+    dropRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    drops?: NullableIntFieldUpdateOperationsInput | number | null
+    firstDowns?: NullableIntFieldUpdateOperationsInput | number | null
+    franchiseId?: NullableIntFieldUpdateOperationsInput | number | null
+    fumbles?: NullableIntFieldUpdateOperationsInput | number | null
+    gradesHandsDrop?: NullableFloatFieldUpdateOperationsInput | number | null
+    gradesHandsFumble?: NullableFloatFieldUpdateOperationsInput | number | null
+    gradesOffense?: NullableFloatFieldUpdateOperationsInput | number | null
+    gradesPassBlock?: NullableFloatFieldUpdateOperationsInput | number | null
+    gradesPassRoute?: NullableFloatFieldUpdateOperationsInput | number | null
+    inlineRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    inlineSnaps?: NullableIntFieldUpdateOperationsInput | number | null
+    interceptions?: NullableIntFieldUpdateOperationsInput | number | null
+    longest?: NullableIntFieldUpdateOperationsInput | number | null
+    passBlockRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    passBlocks?: NullableIntFieldUpdateOperationsInput | number | null
+    passPlays?: NullableIntFieldUpdateOperationsInput | number | null
+    penalties?: NullableIntFieldUpdateOperationsInput | number | null
+    receptions?: NullableIntFieldUpdateOperationsInput | number | null
+    routeRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    routes?: NullableIntFieldUpdateOperationsInput | number | null
+    slotRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    slotSnaps?: NullableIntFieldUpdateOperationsInput | number | null
+    targetedQbRating?: NullableFloatFieldUpdateOperationsInput | number | null
+    targets?: NullableIntFieldUpdateOperationsInput | number | null
+    touchdowns?: NullableIntFieldUpdateOperationsInput | number | null
+    wideRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    wideSnaps?: NullableIntFieldUpdateOperationsInput | number | null
+    yards?: NullableIntFieldUpdateOperationsInput | number | null
+    yardsAfterCatch?: NullableIntFieldUpdateOperationsInput | number | null
+    yardsAfterCatchPerReception?: NullableFloatFieldUpdateOperationsInput | number | null
+    yardsPerReception?: NullableFloatFieldUpdateOperationsInput | number | null
+    yprr?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type ReceivingStatUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    player?: NullableStringFieldUpdateOperationsInput | string | null
+    playerId?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    teamName?: NullableStringFieldUpdateOperationsInput | string | null
+    playerGameCount?: NullableIntFieldUpdateOperationsInput | number | null
+    avgDepthOfTarget?: NullableFloatFieldUpdateOperationsInput | number | null
+    avoidedTackles?: NullableIntFieldUpdateOperationsInput | number | null
+    caughtPercent?: NullableFloatFieldUpdateOperationsInput | number | null
+    contestedCatchRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    contestedReceptions?: NullableIntFieldUpdateOperationsInput | number | null
+    contestedTargets?: NullableIntFieldUpdateOperationsInput | number | null
+    declinedPenalties?: NullableIntFieldUpdateOperationsInput | number | null
+    dropRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    drops?: NullableIntFieldUpdateOperationsInput | number | null
+    firstDowns?: NullableIntFieldUpdateOperationsInput | number | null
+    franchiseId?: NullableIntFieldUpdateOperationsInput | number | null
+    fumbles?: NullableIntFieldUpdateOperationsInput | number | null
+    gradesHandsDrop?: NullableFloatFieldUpdateOperationsInput | number | null
+    gradesHandsFumble?: NullableFloatFieldUpdateOperationsInput | number | null
+    gradesOffense?: NullableFloatFieldUpdateOperationsInput | number | null
+    gradesPassBlock?: NullableFloatFieldUpdateOperationsInput | number | null
+    gradesPassRoute?: NullableFloatFieldUpdateOperationsInput | number | null
+    inlineRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    inlineSnaps?: NullableIntFieldUpdateOperationsInput | number | null
+    interceptions?: NullableIntFieldUpdateOperationsInput | number | null
+    longest?: NullableIntFieldUpdateOperationsInput | number | null
+    passBlockRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    passBlocks?: NullableIntFieldUpdateOperationsInput | number | null
+    passPlays?: NullableIntFieldUpdateOperationsInput | number | null
+    penalties?: NullableIntFieldUpdateOperationsInput | number | null
+    receptions?: NullableIntFieldUpdateOperationsInput | number | null
+    routeRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    routes?: NullableIntFieldUpdateOperationsInput | number | null
+    slotRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    slotSnaps?: NullableIntFieldUpdateOperationsInput | number | null
+    targetedQbRating?: NullableFloatFieldUpdateOperationsInput | number | null
+    targets?: NullableIntFieldUpdateOperationsInput | number | null
+    touchdowns?: NullableIntFieldUpdateOperationsInput | number | null
+    wideRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    wideSnaps?: NullableIntFieldUpdateOperationsInput | number | null
+    yards?: NullableIntFieldUpdateOperationsInput | number | null
+    yardsAfterCatch?: NullableIntFieldUpdateOperationsInput | number | null
+    yardsAfterCatchPerReception?: NullableFloatFieldUpdateOperationsInput | number | null
+    yardsPerReception?: NullableFloatFieldUpdateOperationsInput | number | null
+    yprr?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type ReceivingStatCreateManyInput = {
+    id?: string
+    player?: string | null
+    playerId?: string | null
+    position?: string | null
+    teamName?: string | null
+    playerGameCount?: number | null
+    avgDepthOfTarget?: number | null
+    avoidedTackles?: number | null
+    caughtPercent?: number | null
+    contestedCatchRate?: number | null
+    contestedReceptions?: number | null
+    contestedTargets?: number | null
+    declinedPenalties?: number | null
+    dropRate?: number | null
+    drops?: number | null
+    firstDowns?: number | null
+    franchiseId?: number | null
+    fumbles?: number | null
+    gradesHandsDrop?: number | null
+    gradesHandsFumble?: number | null
+    gradesOffense?: number | null
+    gradesPassBlock?: number | null
+    gradesPassRoute?: number | null
+    inlineRate?: number | null
+    inlineSnaps?: number | null
+    interceptions?: number | null
+    longest?: number | null
+    passBlockRate?: number | null
+    passBlocks?: number | null
+    passPlays?: number | null
+    penalties?: number | null
+    receptions?: number | null
+    routeRate?: number | null
+    routes?: number | null
+    slotRate?: number | null
+    slotSnaps?: number | null
+    targetedQbRating?: number | null
+    targets?: number | null
+    touchdowns?: number | null
+    wideRate?: number | null
+    wideSnaps?: number | null
+    yards?: number | null
+    yardsAfterCatch?: number | null
+    yardsAfterCatchPerReception?: number | null
+    yardsPerReception?: number | null
+    yprr?: number | null
+  }
+
+  export type ReceivingStatUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    player?: NullableStringFieldUpdateOperationsInput | string | null
+    playerId?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    teamName?: NullableStringFieldUpdateOperationsInput | string | null
+    playerGameCount?: NullableIntFieldUpdateOperationsInput | number | null
+    avgDepthOfTarget?: NullableFloatFieldUpdateOperationsInput | number | null
+    avoidedTackles?: NullableIntFieldUpdateOperationsInput | number | null
+    caughtPercent?: NullableFloatFieldUpdateOperationsInput | number | null
+    contestedCatchRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    contestedReceptions?: NullableIntFieldUpdateOperationsInput | number | null
+    contestedTargets?: NullableIntFieldUpdateOperationsInput | number | null
+    declinedPenalties?: NullableIntFieldUpdateOperationsInput | number | null
+    dropRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    drops?: NullableIntFieldUpdateOperationsInput | number | null
+    firstDowns?: NullableIntFieldUpdateOperationsInput | number | null
+    franchiseId?: NullableIntFieldUpdateOperationsInput | number | null
+    fumbles?: NullableIntFieldUpdateOperationsInput | number | null
+    gradesHandsDrop?: NullableFloatFieldUpdateOperationsInput | number | null
+    gradesHandsFumble?: NullableFloatFieldUpdateOperationsInput | number | null
+    gradesOffense?: NullableFloatFieldUpdateOperationsInput | number | null
+    gradesPassBlock?: NullableFloatFieldUpdateOperationsInput | number | null
+    gradesPassRoute?: NullableFloatFieldUpdateOperationsInput | number | null
+    inlineRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    inlineSnaps?: NullableIntFieldUpdateOperationsInput | number | null
+    interceptions?: NullableIntFieldUpdateOperationsInput | number | null
+    longest?: NullableIntFieldUpdateOperationsInput | number | null
+    passBlockRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    passBlocks?: NullableIntFieldUpdateOperationsInput | number | null
+    passPlays?: NullableIntFieldUpdateOperationsInput | number | null
+    penalties?: NullableIntFieldUpdateOperationsInput | number | null
+    receptions?: NullableIntFieldUpdateOperationsInput | number | null
+    routeRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    routes?: NullableIntFieldUpdateOperationsInput | number | null
+    slotRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    slotSnaps?: NullableIntFieldUpdateOperationsInput | number | null
+    targetedQbRating?: NullableFloatFieldUpdateOperationsInput | number | null
+    targets?: NullableIntFieldUpdateOperationsInput | number | null
+    touchdowns?: NullableIntFieldUpdateOperationsInput | number | null
+    wideRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    wideSnaps?: NullableIntFieldUpdateOperationsInput | number | null
+    yards?: NullableIntFieldUpdateOperationsInput | number | null
+    yardsAfterCatch?: NullableIntFieldUpdateOperationsInput | number | null
+    yardsAfterCatchPerReception?: NullableFloatFieldUpdateOperationsInput | number | null
+    yardsPerReception?: NullableFloatFieldUpdateOperationsInput | number | null
+    yprr?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type ReceivingStatUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    player?: NullableStringFieldUpdateOperationsInput | string | null
+    playerId?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    teamName?: NullableStringFieldUpdateOperationsInput | string | null
+    playerGameCount?: NullableIntFieldUpdateOperationsInput | number | null
+    avgDepthOfTarget?: NullableFloatFieldUpdateOperationsInput | number | null
+    avoidedTackles?: NullableIntFieldUpdateOperationsInput | number | null
+    caughtPercent?: NullableFloatFieldUpdateOperationsInput | number | null
+    contestedCatchRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    contestedReceptions?: NullableIntFieldUpdateOperationsInput | number | null
+    contestedTargets?: NullableIntFieldUpdateOperationsInput | number | null
+    declinedPenalties?: NullableIntFieldUpdateOperationsInput | number | null
+    dropRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    drops?: NullableIntFieldUpdateOperationsInput | number | null
+    firstDowns?: NullableIntFieldUpdateOperationsInput | number | null
+    franchiseId?: NullableIntFieldUpdateOperationsInput | number | null
+    fumbles?: NullableIntFieldUpdateOperationsInput | number | null
+    gradesHandsDrop?: NullableFloatFieldUpdateOperationsInput | number | null
+    gradesHandsFumble?: NullableFloatFieldUpdateOperationsInput | number | null
+    gradesOffense?: NullableFloatFieldUpdateOperationsInput | number | null
+    gradesPassBlock?: NullableFloatFieldUpdateOperationsInput | number | null
+    gradesPassRoute?: NullableFloatFieldUpdateOperationsInput | number | null
+    inlineRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    inlineSnaps?: NullableIntFieldUpdateOperationsInput | number | null
+    interceptions?: NullableIntFieldUpdateOperationsInput | number | null
+    longest?: NullableIntFieldUpdateOperationsInput | number | null
+    passBlockRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    passBlocks?: NullableIntFieldUpdateOperationsInput | number | null
+    passPlays?: NullableIntFieldUpdateOperationsInput | number | null
+    penalties?: NullableIntFieldUpdateOperationsInput | number | null
+    receptions?: NullableIntFieldUpdateOperationsInput | number | null
+    routeRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    routes?: NullableIntFieldUpdateOperationsInput | number | null
+    slotRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    slotSnaps?: NullableIntFieldUpdateOperationsInput | number | null
+    targetedQbRating?: NullableFloatFieldUpdateOperationsInput | number | null
+    targets?: NullableIntFieldUpdateOperationsInput | number | null
+    touchdowns?: NullableIntFieldUpdateOperationsInput | number | null
+    wideRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    wideSnaps?: NullableIntFieldUpdateOperationsInput | number | null
+    yards?: NullableIntFieldUpdateOperationsInput | number | null
+    yardsAfterCatch?: NullableIntFieldUpdateOperationsInput | number | null
+    yardsAfterCatchPerReception?: NullableFloatFieldUpdateOperationsInput | number | null
+    yardsPerReception?: NullableFloatFieldUpdateOperationsInput | number | null
+    yprr?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -2690,6 +7844,533 @@ export namespace Prisma {
     _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type PlayerStatCountOrderByAggregateInput = {
+    id?: SortOrder
+    playerId?: SortOrder
+    playerName?: SortOrder
+    playerDisplayName?: SortOrder
+    position?: SortOrder
+    positionGroup?: SortOrder
+    headshotUrl?: SortOrder
+    recentTeam?: SortOrder
+    season?: SortOrder
+    week?: SortOrder
+    seasonType?: SortOrder
+    opponentTeam?: SortOrder
+    completions?: SortOrder
+    attempts?: SortOrder
+    passingYards?: SortOrder
+    passingTds?: SortOrder
+    interceptions?: SortOrder
+    sacks?: SortOrder
+    sackYards?: SortOrder
+    sackFumbles?: SortOrder
+    sackFumblesLost?: SortOrder
+    passingAirYards?: SortOrder
+    passingYardsAfterCatch?: SortOrder
+    passingFirstDowns?: SortOrder
+    passingEpa?: SortOrder
+    passing2ptConversions?: SortOrder
+    pacr?: SortOrder
+    dakota?: SortOrder
+    carries?: SortOrder
+    rushingYards?: SortOrder
+    rushingTds?: SortOrder
+    rushingFumbles?: SortOrder
+    rushingFumblesLost?: SortOrder
+    rushingFirstDowns?: SortOrder
+    rushingEpa?: SortOrder
+    rushing2ptConversions?: SortOrder
+    receptions?: SortOrder
+    targets?: SortOrder
+    receivingYards?: SortOrder
+    receivingTds?: SortOrder
+    receivingFumbles?: SortOrder
+    receivingFumblesLost?: SortOrder
+    receivingAirYards?: SortOrder
+    receivingYardsAfterCatch?: SortOrder
+    receivingFirstDowns?: SortOrder
+    receivingEpa?: SortOrder
+    receiving2ptConversions?: SortOrder
+    racr?: SortOrder
+    targetShare?: SortOrder
+    airYardsShare?: SortOrder
+    wopr?: SortOrder
+    specialTeamsTds?: SortOrder
+    fantasyPoints?: SortOrder
+    fantasyPointsPpr?: SortOrder
+  }
+
+  export type PlayerStatAvgOrderByAggregateInput = {
+    season?: SortOrder
+    week?: SortOrder
+    completions?: SortOrder
+    attempts?: SortOrder
+    passingYards?: SortOrder
+    passingTds?: SortOrder
+    interceptions?: SortOrder
+    sacks?: SortOrder
+    sackYards?: SortOrder
+    sackFumbles?: SortOrder
+    sackFumblesLost?: SortOrder
+    passingAirYards?: SortOrder
+    passingYardsAfterCatch?: SortOrder
+    passingFirstDowns?: SortOrder
+    passingEpa?: SortOrder
+    passing2ptConversions?: SortOrder
+    pacr?: SortOrder
+    dakota?: SortOrder
+    carries?: SortOrder
+    rushingYards?: SortOrder
+    rushingTds?: SortOrder
+    rushingFumbles?: SortOrder
+    rushingFumblesLost?: SortOrder
+    rushingFirstDowns?: SortOrder
+    rushingEpa?: SortOrder
+    rushing2ptConversions?: SortOrder
+    receptions?: SortOrder
+    targets?: SortOrder
+    receivingYards?: SortOrder
+    receivingTds?: SortOrder
+    receivingFumbles?: SortOrder
+    receivingFumblesLost?: SortOrder
+    receivingAirYards?: SortOrder
+    receivingYardsAfterCatch?: SortOrder
+    receivingFirstDowns?: SortOrder
+    receivingEpa?: SortOrder
+    receiving2ptConversions?: SortOrder
+    racr?: SortOrder
+    targetShare?: SortOrder
+    airYardsShare?: SortOrder
+    wopr?: SortOrder
+    specialTeamsTds?: SortOrder
+    fantasyPoints?: SortOrder
+    fantasyPointsPpr?: SortOrder
+  }
+
+  export type PlayerStatMaxOrderByAggregateInput = {
+    id?: SortOrder
+    playerId?: SortOrder
+    playerName?: SortOrder
+    playerDisplayName?: SortOrder
+    position?: SortOrder
+    positionGroup?: SortOrder
+    headshotUrl?: SortOrder
+    recentTeam?: SortOrder
+    season?: SortOrder
+    week?: SortOrder
+    seasonType?: SortOrder
+    opponentTeam?: SortOrder
+    completions?: SortOrder
+    attempts?: SortOrder
+    passingYards?: SortOrder
+    passingTds?: SortOrder
+    interceptions?: SortOrder
+    sacks?: SortOrder
+    sackYards?: SortOrder
+    sackFumbles?: SortOrder
+    sackFumblesLost?: SortOrder
+    passingAirYards?: SortOrder
+    passingYardsAfterCatch?: SortOrder
+    passingFirstDowns?: SortOrder
+    passingEpa?: SortOrder
+    passing2ptConversions?: SortOrder
+    pacr?: SortOrder
+    dakota?: SortOrder
+    carries?: SortOrder
+    rushingYards?: SortOrder
+    rushingTds?: SortOrder
+    rushingFumbles?: SortOrder
+    rushingFumblesLost?: SortOrder
+    rushingFirstDowns?: SortOrder
+    rushingEpa?: SortOrder
+    rushing2ptConversions?: SortOrder
+    receptions?: SortOrder
+    targets?: SortOrder
+    receivingYards?: SortOrder
+    receivingTds?: SortOrder
+    receivingFumbles?: SortOrder
+    receivingFumblesLost?: SortOrder
+    receivingAirYards?: SortOrder
+    receivingYardsAfterCatch?: SortOrder
+    receivingFirstDowns?: SortOrder
+    receivingEpa?: SortOrder
+    receiving2ptConversions?: SortOrder
+    racr?: SortOrder
+    targetShare?: SortOrder
+    airYardsShare?: SortOrder
+    wopr?: SortOrder
+    specialTeamsTds?: SortOrder
+    fantasyPoints?: SortOrder
+    fantasyPointsPpr?: SortOrder
+  }
+
+  export type PlayerStatMinOrderByAggregateInput = {
+    id?: SortOrder
+    playerId?: SortOrder
+    playerName?: SortOrder
+    playerDisplayName?: SortOrder
+    position?: SortOrder
+    positionGroup?: SortOrder
+    headshotUrl?: SortOrder
+    recentTeam?: SortOrder
+    season?: SortOrder
+    week?: SortOrder
+    seasonType?: SortOrder
+    opponentTeam?: SortOrder
+    completions?: SortOrder
+    attempts?: SortOrder
+    passingYards?: SortOrder
+    passingTds?: SortOrder
+    interceptions?: SortOrder
+    sacks?: SortOrder
+    sackYards?: SortOrder
+    sackFumbles?: SortOrder
+    sackFumblesLost?: SortOrder
+    passingAirYards?: SortOrder
+    passingYardsAfterCatch?: SortOrder
+    passingFirstDowns?: SortOrder
+    passingEpa?: SortOrder
+    passing2ptConversions?: SortOrder
+    pacr?: SortOrder
+    dakota?: SortOrder
+    carries?: SortOrder
+    rushingYards?: SortOrder
+    rushingTds?: SortOrder
+    rushingFumbles?: SortOrder
+    rushingFumblesLost?: SortOrder
+    rushingFirstDowns?: SortOrder
+    rushingEpa?: SortOrder
+    rushing2ptConversions?: SortOrder
+    receptions?: SortOrder
+    targets?: SortOrder
+    receivingYards?: SortOrder
+    receivingTds?: SortOrder
+    receivingFumbles?: SortOrder
+    receivingFumblesLost?: SortOrder
+    receivingAirYards?: SortOrder
+    receivingYardsAfterCatch?: SortOrder
+    receivingFirstDowns?: SortOrder
+    receivingEpa?: SortOrder
+    receiving2ptConversions?: SortOrder
+    racr?: SortOrder
+    targetShare?: SortOrder
+    airYardsShare?: SortOrder
+    wopr?: SortOrder
+    specialTeamsTds?: SortOrder
+    fantasyPoints?: SortOrder
+    fantasyPointsPpr?: SortOrder
+  }
+
+  export type PlayerStatSumOrderByAggregateInput = {
+    season?: SortOrder
+    week?: SortOrder
+    completions?: SortOrder
+    attempts?: SortOrder
+    passingYards?: SortOrder
+    passingTds?: SortOrder
+    interceptions?: SortOrder
+    sacks?: SortOrder
+    sackYards?: SortOrder
+    sackFumbles?: SortOrder
+    sackFumblesLost?: SortOrder
+    passingAirYards?: SortOrder
+    passingYardsAfterCatch?: SortOrder
+    passingFirstDowns?: SortOrder
+    passingEpa?: SortOrder
+    passing2ptConversions?: SortOrder
+    pacr?: SortOrder
+    dakota?: SortOrder
+    carries?: SortOrder
+    rushingYards?: SortOrder
+    rushingTds?: SortOrder
+    rushingFumbles?: SortOrder
+    rushingFumblesLost?: SortOrder
+    rushingFirstDowns?: SortOrder
+    rushingEpa?: SortOrder
+    rushing2ptConversions?: SortOrder
+    receptions?: SortOrder
+    targets?: SortOrder
+    receivingYards?: SortOrder
+    receivingTds?: SortOrder
+    receivingFumbles?: SortOrder
+    receivingFumblesLost?: SortOrder
+    receivingAirYards?: SortOrder
+    receivingYardsAfterCatch?: SortOrder
+    receivingFirstDowns?: SortOrder
+    receivingEpa?: SortOrder
+    receiving2ptConversions?: SortOrder
+    racr?: SortOrder
+    targetShare?: SortOrder
+    airYardsShare?: SortOrder
+    wopr?: SortOrder
+    specialTeamsTds?: SortOrder
+    fantasyPoints?: SortOrder
+    fantasyPointsPpr?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type ReceivingStatCountOrderByAggregateInput = {
+    id?: SortOrder
+    player?: SortOrder
+    playerId?: SortOrder
+    position?: SortOrder
+    teamName?: SortOrder
+    playerGameCount?: SortOrder
+    avgDepthOfTarget?: SortOrder
+    avoidedTackles?: SortOrder
+    caughtPercent?: SortOrder
+    contestedCatchRate?: SortOrder
+    contestedReceptions?: SortOrder
+    contestedTargets?: SortOrder
+    declinedPenalties?: SortOrder
+    dropRate?: SortOrder
+    drops?: SortOrder
+    firstDowns?: SortOrder
+    franchiseId?: SortOrder
+    fumbles?: SortOrder
+    gradesHandsDrop?: SortOrder
+    gradesHandsFumble?: SortOrder
+    gradesOffense?: SortOrder
+    gradesPassBlock?: SortOrder
+    gradesPassRoute?: SortOrder
+    inlineRate?: SortOrder
+    inlineSnaps?: SortOrder
+    interceptions?: SortOrder
+    longest?: SortOrder
+    passBlockRate?: SortOrder
+    passBlocks?: SortOrder
+    passPlays?: SortOrder
+    penalties?: SortOrder
+    receptions?: SortOrder
+    routeRate?: SortOrder
+    routes?: SortOrder
+    slotRate?: SortOrder
+    slotSnaps?: SortOrder
+    targetedQbRating?: SortOrder
+    targets?: SortOrder
+    touchdowns?: SortOrder
+    wideRate?: SortOrder
+    wideSnaps?: SortOrder
+    yards?: SortOrder
+    yardsAfterCatch?: SortOrder
+    yardsAfterCatchPerReception?: SortOrder
+    yardsPerReception?: SortOrder
+    yprr?: SortOrder
+  }
+
+  export type ReceivingStatAvgOrderByAggregateInput = {
+    playerGameCount?: SortOrder
+    avgDepthOfTarget?: SortOrder
+    avoidedTackles?: SortOrder
+    caughtPercent?: SortOrder
+    contestedCatchRate?: SortOrder
+    contestedReceptions?: SortOrder
+    contestedTargets?: SortOrder
+    declinedPenalties?: SortOrder
+    dropRate?: SortOrder
+    drops?: SortOrder
+    firstDowns?: SortOrder
+    franchiseId?: SortOrder
+    fumbles?: SortOrder
+    gradesHandsDrop?: SortOrder
+    gradesHandsFumble?: SortOrder
+    gradesOffense?: SortOrder
+    gradesPassBlock?: SortOrder
+    gradesPassRoute?: SortOrder
+    inlineRate?: SortOrder
+    inlineSnaps?: SortOrder
+    interceptions?: SortOrder
+    longest?: SortOrder
+    passBlockRate?: SortOrder
+    passBlocks?: SortOrder
+    passPlays?: SortOrder
+    penalties?: SortOrder
+    receptions?: SortOrder
+    routeRate?: SortOrder
+    routes?: SortOrder
+    slotRate?: SortOrder
+    slotSnaps?: SortOrder
+    targetedQbRating?: SortOrder
+    targets?: SortOrder
+    touchdowns?: SortOrder
+    wideRate?: SortOrder
+    wideSnaps?: SortOrder
+    yards?: SortOrder
+    yardsAfterCatch?: SortOrder
+    yardsAfterCatchPerReception?: SortOrder
+    yardsPerReception?: SortOrder
+    yprr?: SortOrder
+  }
+
+  export type ReceivingStatMaxOrderByAggregateInput = {
+    id?: SortOrder
+    player?: SortOrder
+    playerId?: SortOrder
+    position?: SortOrder
+    teamName?: SortOrder
+    playerGameCount?: SortOrder
+    avgDepthOfTarget?: SortOrder
+    avoidedTackles?: SortOrder
+    caughtPercent?: SortOrder
+    contestedCatchRate?: SortOrder
+    contestedReceptions?: SortOrder
+    contestedTargets?: SortOrder
+    declinedPenalties?: SortOrder
+    dropRate?: SortOrder
+    drops?: SortOrder
+    firstDowns?: SortOrder
+    franchiseId?: SortOrder
+    fumbles?: SortOrder
+    gradesHandsDrop?: SortOrder
+    gradesHandsFumble?: SortOrder
+    gradesOffense?: SortOrder
+    gradesPassBlock?: SortOrder
+    gradesPassRoute?: SortOrder
+    inlineRate?: SortOrder
+    inlineSnaps?: SortOrder
+    interceptions?: SortOrder
+    longest?: SortOrder
+    passBlockRate?: SortOrder
+    passBlocks?: SortOrder
+    passPlays?: SortOrder
+    penalties?: SortOrder
+    receptions?: SortOrder
+    routeRate?: SortOrder
+    routes?: SortOrder
+    slotRate?: SortOrder
+    slotSnaps?: SortOrder
+    targetedQbRating?: SortOrder
+    targets?: SortOrder
+    touchdowns?: SortOrder
+    wideRate?: SortOrder
+    wideSnaps?: SortOrder
+    yards?: SortOrder
+    yardsAfterCatch?: SortOrder
+    yardsAfterCatchPerReception?: SortOrder
+    yardsPerReception?: SortOrder
+    yprr?: SortOrder
+  }
+
+  export type ReceivingStatMinOrderByAggregateInput = {
+    id?: SortOrder
+    player?: SortOrder
+    playerId?: SortOrder
+    position?: SortOrder
+    teamName?: SortOrder
+    playerGameCount?: SortOrder
+    avgDepthOfTarget?: SortOrder
+    avoidedTackles?: SortOrder
+    caughtPercent?: SortOrder
+    contestedCatchRate?: SortOrder
+    contestedReceptions?: SortOrder
+    contestedTargets?: SortOrder
+    declinedPenalties?: SortOrder
+    dropRate?: SortOrder
+    drops?: SortOrder
+    firstDowns?: SortOrder
+    franchiseId?: SortOrder
+    fumbles?: SortOrder
+    gradesHandsDrop?: SortOrder
+    gradesHandsFumble?: SortOrder
+    gradesOffense?: SortOrder
+    gradesPassBlock?: SortOrder
+    gradesPassRoute?: SortOrder
+    inlineRate?: SortOrder
+    inlineSnaps?: SortOrder
+    interceptions?: SortOrder
+    longest?: SortOrder
+    passBlockRate?: SortOrder
+    passBlocks?: SortOrder
+    passPlays?: SortOrder
+    penalties?: SortOrder
+    receptions?: SortOrder
+    routeRate?: SortOrder
+    routes?: SortOrder
+    slotRate?: SortOrder
+    slotSnaps?: SortOrder
+    targetedQbRating?: SortOrder
+    targets?: SortOrder
+    touchdowns?: SortOrder
+    wideRate?: SortOrder
+    wideSnaps?: SortOrder
+    yards?: SortOrder
+    yardsAfterCatch?: SortOrder
+    yardsAfterCatchPerReception?: SortOrder
+    yardsPerReception?: SortOrder
+    yprr?: SortOrder
+  }
+
+  export type ReceivingStatSumOrderByAggregateInput = {
+    playerGameCount?: SortOrder
+    avgDepthOfTarget?: SortOrder
+    avoidedTackles?: SortOrder
+    caughtPercent?: SortOrder
+    contestedCatchRate?: SortOrder
+    contestedReceptions?: SortOrder
+    contestedTargets?: SortOrder
+    declinedPenalties?: SortOrder
+    dropRate?: SortOrder
+    drops?: SortOrder
+    firstDowns?: SortOrder
+    franchiseId?: SortOrder
+    fumbles?: SortOrder
+    gradesHandsDrop?: SortOrder
+    gradesHandsFumble?: SortOrder
+    gradesOffense?: SortOrder
+    gradesPassBlock?: SortOrder
+    gradesPassRoute?: SortOrder
+    inlineRate?: SortOrder
+    inlineSnaps?: SortOrder
+    interceptions?: SortOrder
+    longest?: SortOrder
+    passBlockRate?: SortOrder
+    passBlocks?: SortOrder
+    passPlays?: SortOrder
+    penalties?: SortOrder
+    receptions?: SortOrder
+    routeRate?: SortOrder
+    routes?: SortOrder
+    slotRate?: SortOrder
+    slotSnaps?: SortOrder
+    targetedQbRating?: SortOrder
+    targets?: SortOrder
+    touchdowns?: SortOrder
+    wideRate?: SortOrder
+    wideSnaps?: SortOrder
+    yards?: SortOrder
+    yardsAfterCatch?: SortOrder
+    yardsAfterCatchPerReception?: SortOrder
+    yardsPerReception?: SortOrder
+    yprr?: SortOrder
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -2699,6 +8380,14 @@ export namespace Prisma {
   }
 
   export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
     set?: number | null
     increment?: number
     decrement?: number
@@ -2838,6 +8527,22 @@ export namespace Prisma {
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
 

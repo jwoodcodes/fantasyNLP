@@ -35,3 +35,109 @@ datasource db {
     joeValue Float?
     consensusValue Float?
   }
+
+model PlayerStat {
+  id                          String   @id @default(cuid())
+  playerId                    String?  @map("player_id")
+  playerName                  String?  @map("player_name")
+  playerDisplayName           String?  @map("player_display_name")
+  position                    String?
+  positionGroup               String?  @map("position_group")
+  headshotUrl                 String?  @map("headshot_url")
+  recentTeam                  String?  @map("recent_team")
+  season                      Int?
+  week                        Int?
+  seasonType                  String?  @map("season_type")
+  opponentTeam                String?  @map("opponent_team")
+  completions                 Int?
+  attempts                    Int?
+  passingYards                Float?   @map("passing_yards")
+  passingTds                  Int?     @map("passing_tds")
+  interceptions               Int?
+  sacks                       Int?
+  sackYards                   Float?   @map("sack_yards")
+  sackFumbles                 Int?     @map("sack_fumbles")
+  sackFumblesLost             Int?     @map("sack_fumbles_lost")
+  passingAirYards             Float?   @map("passing_air_yards")
+  passingYardsAfterCatch      Float?   @map("passing_yards_after_catch")
+  passingFirstDowns           Int?     @map("passing_first_downs")
+  passingEpa                  Float?   @map("passing_epa")
+  passing2ptConversions       Int?     @map("passing_2pt_conversions")
+  pacr                        Float?
+  dakota                      Float?
+  carries                     Int?
+  rushingYards                Float?   @map("rushing_yards")
+  rushingTds                  Int?     @map("rushing_tds")
+  rushingFumbles              Int?     @map("rushing_fumbles")
+  rushingFumblesLost          Int?     @map("rushing_fumbles_lost")
+  rushingFirstDowns           Int?     @map("rushing_first_downs")
+  rushingEpa                  Float?   @map("rushing_epa")
+  rushing2ptConversions       Int?     @map("rushing_2pt_conversions")
+  receptions                  Int?
+  targets                     Int?
+  receivingYards              Float?   @map("receiving_yards")
+  receivingTds                Int?     @map("receiving_tds")
+  receivingFumbles            Int?     @map("receiving_fumbles")
+  receivingFumblesLost        Int?     @map("receiving_fumbles_lost")
+  receivingAirYards           Float?   @map("receiving_air_yards")
+  receivingYardsAfterCatch    Float?   @map("receiving_yards_after_catch")
+  receivingFirstDowns         Int?     @map("receiving_first_downs")
+  receivingEpa                Float?   @map("receiving_epa")
+  receiving2ptConversions     Int?     @map("receiving_2pt_conversions")
+  racr                        Float?
+  targetShare                 Float?   @map("target_share")
+  airYardsShare               Float?   @map("air_yards_share")
+  wopr                        Float?
+  specialTeamsTds             Int?     @map("special_teams_tds")
+  fantasyPoints               Float?   @map("fantasy_points")
+  fantasyPointsPpr            Float?   @map("fantasy_points_ppr")
+}
+
+model ReceivingStat {
+  id                              String   @id @default(cuid())
+  player                          String?
+  playerId                        String?  @map("player_id")
+  position                        String?
+  teamName                        String?  @map("team_name")
+  playerGameCount                 Int?     @map("player_game_count")
+  avgDepthOfTarget                Float?   @map("avg_depth_of_target")
+  avoidedTackles                  Int?     @map("avoided_tackles")
+  caughtPercent                   Float?   @map("caught_percent")
+  contestedCatchRate              Float?   @map("contested_catch_rate")
+  contestedReceptions             Int?     @map("contested_receptions")
+  contestedTargets                Int?     @map("contested_targets")
+  declinedPenalties               Int?     @map("declined_penalties")
+  dropRate                        Float?   @map("drop_rate")
+  drops                           Int?
+  firstDowns                      Int?     @map("first_downs")
+  franchiseId                     Int?     @map("franchise_id")
+  fumbles                         Int?
+  gradesHandsDrop                 Float?   @map("grades_hands_drop")
+  gradesHandsFumble               Float?   @map("grades_hands_fumble")
+  gradesOffense                   Float?   @map("grades_offense")
+  gradesPassBlock                 Float?   @map("grades_pass_block")
+  gradesPassRoute                 Float?   @map("grades_pass_route")
+  inlineRate                      Float?   @map("inline_rate")
+  inlineSnaps                     Int?     @map("inline_snaps")
+  interceptions                   Int?
+  longest                         Int?
+  passBlockRate                   Float?   @map("pass_block_rate")
+  passBlocks                      Int?     @map("pass_blocks")
+  passPlays                       Int?     @map("pass_plays")
+  penalties                       Int?
+  receptions                      Int?
+  routeRate                       Float?   @map("route_rate")
+  routes                          Int?
+  slotRate                        Float?   @map("slot_rate")
+  slotSnaps                       Int?     @map("slot_snaps")
+  targetedQbRating                Float?   @map("targeted_qb_rating")
+  targets                         Int?
+  touchdowns                      Int?
+  wideRate                        Float?   @map("wide_rate")
+  wideSnaps                       Int?     @map("wide_snaps")
+  yards                           Int?
+  yardsAfterCatch                 Int?     @map("yards_after_catch")
+  yardsAfterCatchPerReception     Float?   @map("yards_after_catch_per_reception")
+  yardsPerReception               Float?   @map("yards_per_reception")
+  yprr                            Float?
+}
