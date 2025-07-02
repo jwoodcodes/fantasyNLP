@@ -245,6 +245,67 @@ exports.Prisma.ReceivingStatScalarFieldEnum = {
   yprr: 'yprr'
 };
 
+exports.Prisma.PlayerSeasonScalarFieldEnum = {
+  player_id: 'player_id',
+  player_name: 'player_name',
+  season: 'season',
+  games_played: 'games_played',
+  position: 'position',
+  completions_total: 'completions_total',
+  attempts_total: 'attempts_total',
+  passing_yards_total: 'passing_yards_total',
+  passing_tds_total: 'passing_tds_total',
+  interceptions_total: 'interceptions_total',
+  passing_first_downs_total: 'passing_first_downs_total',
+  carries_total: 'carries_total',
+  rushing_yards_total: 'rushing_yards_total',
+  rushing_tds_total: 'rushing_tds_total',
+  rushing_fumbles_total: 'rushing_fumbles_total',
+  rushing_fumbles_lost_total: 'rushing_fumbles_lost_total',
+  rushing_first_downs_total: 'rushing_first_downs_total',
+  targets_total: 'targets_total',
+  receiving_yards_total: 'receiving_yards_total',
+  receiving_tds_total: 'receiving_tds_total',
+  receiving_air_yards_total: 'receiving_air_yards_total',
+  receiving_yards_after_catch_total: 'receiving_yards_after_catch_total',
+  receiving_first_downs_total: 'receiving_first_downs_total',
+  fantasy_points_total: 'fantasy_points_total',
+  completions_avg: 'completions_avg',
+  attempts_avg: 'attempts_avg',
+  passing_yards_avg: 'passing_yards_avg',
+  passing_tds_avg: 'passing_tds_avg',
+  interceptions_avg: 'interceptions_avg',
+  passing_air_yards_avg: 'passing_air_yards_avg',
+  passing_yards_after_catch_avg: 'passing_yards_after_catch_avg',
+  passing_first_downs_avg: 'passing_first_downs_avg',
+  carries_avg: 'carries_avg',
+  rushing_yards_avg: 'rushing_yards_avg',
+  rushing_tds_avg: 'rushing_tds_avg',
+  rushing_fumbles_avg: 'rushing_fumbles_avg',
+  rushing_fumbles_lost_avg: 'rushing_fumbles_lost_avg',
+  rushing_first_downs_avg: 'rushing_first_downs_avg',
+  rushing_epa_avg: 'rushing_epa_avg',
+  receptions_avg: 'receptions_avg',
+  targets_avg: 'targets_avg',
+  receiving_yards_avg: 'receiving_yards_avg',
+  receiving_tds_avg: 'receiving_tds_avg',
+  receiving_air_yards_avg: 'receiving_air_yards_avg',
+  receiving_yards_after_catch_avg: 'receiving_yards_after_catch_avg',
+  receiving_first_downs_avg: 'receiving_first_downs_avg',
+  receiving_epa_avg: 'receiving_epa_avg',
+  racr_avg: 'racr_avg',
+  target_share_avg: 'target_share_avg',
+  air_yards_share_avg: 'air_yards_share_avg',
+  wopr_avg: 'wopr_avg',
+  fantasy_points_avg: 'fantasy_points_avg',
+  fantasy_points_ppr_avg: 'fantasy_points_ppr_avg',
+  YPRR: 'YPRR',
+  routes: 'routes',
+  routes_per_game: 'routes_per_game',
+  TPRR: 'TPRR',
+  firstDPRR: 'firstDPRR'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -275,7 +336,8 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   tradeAnalyzerData: 'tradeAnalyzerData',
   PlayerStat: 'PlayerStat',
-  ReceivingStat: 'ReceivingStat'
+  ReceivingStat: 'ReceivingStat',
+  PlayerSeason: 'PlayerSeason'
 };
 
 /**
