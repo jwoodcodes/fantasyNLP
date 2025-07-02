@@ -160,6 +160,7 @@ async function getCompleteSeasonalStats(): Promise<{ [key: string]: PlayerSeason
               matchedPlayer.YPRR = YPRR;
               
 
+              
               if (routes !== undefined && typeof routes === 'number') {
                 matchedPlayer.routes = routes;
 
