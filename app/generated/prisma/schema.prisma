@@ -138,3 +138,67 @@ model ReceivingStat {
   yardsPerReception           Float?  @map("yards_per_reception")
   yprr                        Float?
 }
+
+model PlayerSeason {
+  player_id                         String
+  player_name                       String
+  season                            Int
+  games_played                      Int
+  position                          String? // Added position field
+  completions_total                 Float?
+  attempts_total                    Float?
+  passing_yards_total               Float?
+  passing_tds_total                 Float?
+  interceptions_total               Float?
+  passing_first_downs_total         Float?
+  carries_total                     Float?
+  rushing_yards_total               Float?
+  rushing_tds_total                 Float?
+  rushing_fumbles_total             Float?
+  rushing_fumbles_lost_total        Float?
+  rushing_first_downs_total         Float?
+  targets_total                     Float?
+  receiving_yards_total             Float?
+  receiving_tds_total               Float?
+  receiving_air_yards_total         Float?
+  receiving_yards_after_catch_total Float?
+  receiving_first_downs_total       Float?
+  fantasy_points_total              Float?
+  completions_avg                   Float?
+  attempts_avg                      Float?
+  passing_yards_avg                 Float?
+  passing_tds_avg                   Float?
+  interceptions_avg                 Float?
+  passing_air_yards_avg             Float?
+  passing_yards_after_catch_avg     Float?
+  passing_first_downs_avg           Float?
+  carries_avg                       Float?
+  rushing_yards_avg                 Float?
+  rushing_tds_avg                   Float?
+  rushing_fumbles_avg               Float?
+  rushing_fumbles_lost_avg          Float?
+  rushing_first_downs_avg           Float?
+  rushing_epa_avg                   Float?
+  receptions_avg                    Float?
+  targets_avg                       Float?
+  receiving_yards_avg               Float?
+  receiving_tds_avg                 Float?
+  receiving_air_yards_avg           Float?
+  receiving_yards_after_catch_avg   Float?
+  receiving_first_downs_avg         Float?
+  receiving_epa_avg                 Float?
+  racr_avg                          Float?
+  target_share_avg                  Float?
+  air_yards_share_avg               Float?
+  wopr_avg                          Float?
+  fantasy_points_avg                Float?
+  fantasy_points_ppr_avg            Float?
+  YPRR                              Float?
+  routes                            Float?
+  routes_per_game                   Float?
+  TPRR                              Float?
+  firstDPRR                         Float?
+
+  @@id([player_id, season])
+  @@map("playerSeasons")
+}

@@ -39,6 +39,7 @@ const dataWorker = async () => {
       yac: matchingRoute?.yardsPerReception || null,
       yacPerRec: matchingRoute?.yardsAfterCatchPerReception || null,
     };
+
     return holder;
   });
 

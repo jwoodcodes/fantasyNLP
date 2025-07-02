@@ -28,6 +28,11 @@ export type PlayerStat = $Result.DefaultSelection<Prisma.$PlayerStatPayload>
  * 
  */
 export type ReceivingStat = $Result.DefaultSelection<Prisma.$ReceivingStatPayload>
+/**
+ * Model PlayerSeason
+ * 
+ */
+export type PlayerSeason = $Result.DefaultSelection<Prisma.$PlayerSeasonPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -183,6 +188,16 @@ export class PrismaClient<
     * ```
     */
   get receivingStat(): Prisma.ReceivingStatDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.playerSeason`: Exposes CRUD operations for the **PlayerSeason** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PlayerSeasons
+    * const playerSeasons = await prisma.playerSeason.findMany()
+    * ```
+    */
+  get playerSeason(): Prisma.PlayerSeasonDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -625,7 +640,8 @@ export namespace Prisma {
   export const ModelName: {
     tradeAnalyzerData: 'tradeAnalyzerData',
     PlayerStat: 'PlayerStat',
-    ReceivingStat: 'ReceivingStat'
+    ReceivingStat: 'ReceivingStat',
+    PlayerSeason: 'PlayerSeason'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -644,7 +660,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "tradeAnalyzerData" | "playerStat" | "receivingStat"
+      modelProps: "tradeAnalyzerData" | "playerStat" | "receivingStat" | "playerSeason"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -870,6 +886,80 @@ export namespace Prisma {
           }
         }
       }
+      PlayerSeason: {
+        payload: Prisma.$PlayerSeasonPayload<ExtArgs>
+        fields: Prisma.PlayerSeasonFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PlayerSeasonFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerSeasonPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PlayerSeasonFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerSeasonPayload>
+          }
+          findFirst: {
+            args: Prisma.PlayerSeasonFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerSeasonPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PlayerSeasonFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerSeasonPayload>
+          }
+          findMany: {
+            args: Prisma.PlayerSeasonFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerSeasonPayload>[]
+          }
+          create: {
+            args: Prisma.PlayerSeasonCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerSeasonPayload>
+          }
+          createMany: {
+            args: Prisma.PlayerSeasonCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PlayerSeasonCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerSeasonPayload>[]
+          }
+          delete: {
+            args: Prisma.PlayerSeasonDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerSeasonPayload>
+          }
+          update: {
+            args: Prisma.PlayerSeasonUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerSeasonPayload>
+          }
+          deleteMany: {
+            args: Prisma.PlayerSeasonDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PlayerSeasonUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PlayerSeasonUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerSeasonPayload>[]
+          }
+          upsert: {
+            args: Prisma.PlayerSeasonUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlayerSeasonPayload>
+          }
+          aggregate: {
+            args: Prisma.PlayerSeasonAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePlayerSeason>
+          }
+          groupBy: {
+            args: Prisma.PlayerSeasonGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PlayerSeasonGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PlayerSeasonCountArgs<ExtArgs>
+            result: $Utils.Optional<PlayerSeasonCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -957,6 +1047,7 @@ export namespace Prisma {
     tradeAnalyzerData?: tradeAnalyzerDataOmit
     playerStat?: PlayerStatOmit
     receivingStat?: ReceivingStatOmit
+    playerSeason?: PlayerSeasonOmit
   }
 
   /* Types for Logging */
@@ -5820,6 +5911,1940 @@ export namespace Prisma {
 
 
   /**
+   * Model PlayerSeason
+   */
+
+  export type AggregatePlayerSeason = {
+    _count: PlayerSeasonCountAggregateOutputType | null
+    _avg: PlayerSeasonAvgAggregateOutputType | null
+    _sum: PlayerSeasonSumAggregateOutputType | null
+    _min: PlayerSeasonMinAggregateOutputType | null
+    _max: PlayerSeasonMaxAggregateOutputType | null
+  }
+
+  export type PlayerSeasonAvgAggregateOutputType = {
+    season: number | null
+    games_played: number | null
+    completions_total: number | null
+    attempts_total: number | null
+    passing_yards_total: number | null
+    passing_tds_total: number | null
+    interceptions_total: number | null
+    passing_first_downs_total: number | null
+    carries_total: number | null
+    rushing_yards_total: number | null
+    rushing_tds_total: number | null
+    rushing_fumbles_total: number | null
+    rushing_fumbles_lost_total: number | null
+    rushing_first_downs_total: number | null
+    targets_total: number | null
+    receiving_yards_total: number | null
+    receiving_tds_total: number | null
+    receiving_air_yards_total: number | null
+    receiving_yards_after_catch_total: number | null
+    receiving_first_downs_total: number | null
+    fantasy_points_total: number | null
+    completions_avg: number | null
+    attempts_avg: number | null
+    passing_yards_avg: number | null
+    passing_tds_avg: number | null
+    interceptions_avg: number | null
+    passing_air_yards_avg: number | null
+    passing_yards_after_catch_avg: number | null
+    passing_first_downs_avg: number | null
+    carries_avg: number | null
+    rushing_yards_avg: number | null
+    rushing_tds_avg: number | null
+    rushing_fumbles_avg: number | null
+    rushing_fumbles_lost_avg: number | null
+    rushing_first_downs_avg: number | null
+    rushing_epa_avg: number | null
+    receptions_avg: number | null
+    targets_avg: number | null
+    receiving_yards_avg: number | null
+    receiving_tds_avg: number | null
+    receiving_air_yards_avg: number | null
+    receiving_yards_after_catch_avg: number | null
+    receiving_first_downs_avg: number | null
+    receiving_epa_avg: number | null
+    racr_avg: number | null
+    target_share_avg: number | null
+    air_yards_share_avg: number | null
+    wopr_avg: number | null
+    fantasy_points_avg: number | null
+    fantasy_points_ppr_avg: number | null
+    YPRR: number | null
+    routes: number | null
+    routes_per_game: number | null
+    TPRR: number | null
+    firstDPRR: number | null
+  }
+
+  export type PlayerSeasonSumAggregateOutputType = {
+    season: number | null
+    games_played: number | null
+    completions_total: number | null
+    attempts_total: number | null
+    passing_yards_total: number | null
+    passing_tds_total: number | null
+    interceptions_total: number | null
+    passing_first_downs_total: number | null
+    carries_total: number | null
+    rushing_yards_total: number | null
+    rushing_tds_total: number | null
+    rushing_fumbles_total: number | null
+    rushing_fumbles_lost_total: number | null
+    rushing_first_downs_total: number | null
+    targets_total: number | null
+    receiving_yards_total: number | null
+    receiving_tds_total: number | null
+    receiving_air_yards_total: number | null
+    receiving_yards_after_catch_total: number | null
+    receiving_first_downs_total: number | null
+    fantasy_points_total: number | null
+    completions_avg: number | null
+    attempts_avg: number | null
+    passing_yards_avg: number | null
+    passing_tds_avg: number | null
+    interceptions_avg: number | null
+    passing_air_yards_avg: number | null
+    passing_yards_after_catch_avg: number | null
+    passing_first_downs_avg: number | null
+    carries_avg: number | null
+    rushing_yards_avg: number | null
+    rushing_tds_avg: number | null
+    rushing_fumbles_avg: number | null
+    rushing_fumbles_lost_avg: number | null
+    rushing_first_downs_avg: number | null
+    rushing_epa_avg: number | null
+    receptions_avg: number | null
+    targets_avg: number | null
+    receiving_yards_avg: number | null
+    receiving_tds_avg: number | null
+    receiving_air_yards_avg: number | null
+    receiving_yards_after_catch_avg: number | null
+    receiving_first_downs_avg: number | null
+    receiving_epa_avg: number | null
+    racr_avg: number | null
+    target_share_avg: number | null
+    air_yards_share_avg: number | null
+    wopr_avg: number | null
+    fantasy_points_avg: number | null
+    fantasy_points_ppr_avg: number | null
+    YPRR: number | null
+    routes: number | null
+    routes_per_game: number | null
+    TPRR: number | null
+    firstDPRR: number | null
+  }
+
+  export type PlayerSeasonMinAggregateOutputType = {
+    player_id: string | null
+    player_name: string | null
+    season: number | null
+    games_played: number | null
+    position: string | null
+    completions_total: number | null
+    attempts_total: number | null
+    passing_yards_total: number | null
+    passing_tds_total: number | null
+    interceptions_total: number | null
+    passing_first_downs_total: number | null
+    carries_total: number | null
+    rushing_yards_total: number | null
+    rushing_tds_total: number | null
+    rushing_fumbles_total: number | null
+    rushing_fumbles_lost_total: number | null
+    rushing_first_downs_total: number | null
+    targets_total: number | null
+    receiving_yards_total: number | null
+    receiving_tds_total: number | null
+    receiving_air_yards_total: number | null
+    receiving_yards_after_catch_total: number | null
+    receiving_first_downs_total: number | null
+    fantasy_points_total: number | null
+    completions_avg: number | null
+    attempts_avg: number | null
+    passing_yards_avg: number | null
+    passing_tds_avg: number | null
+    interceptions_avg: number | null
+    passing_air_yards_avg: number | null
+    passing_yards_after_catch_avg: number | null
+    passing_first_downs_avg: number | null
+    carries_avg: number | null
+    rushing_yards_avg: number | null
+    rushing_tds_avg: number | null
+    rushing_fumbles_avg: number | null
+    rushing_fumbles_lost_avg: number | null
+    rushing_first_downs_avg: number | null
+    rushing_epa_avg: number | null
+    receptions_avg: number | null
+    targets_avg: number | null
+    receiving_yards_avg: number | null
+    receiving_tds_avg: number | null
+    receiving_air_yards_avg: number | null
+    receiving_yards_after_catch_avg: number | null
+    receiving_first_downs_avg: number | null
+    receiving_epa_avg: number | null
+    racr_avg: number | null
+    target_share_avg: number | null
+    air_yards_share_avg: number | null
+    wopr_avg: number | null
+    fantasy_points_avg: number | null
+    fantasy_points_ppr_avg: number | null
+    YPRR: number | null
+    routes: number | null
+    routes_per_game: number | null
+    TPRR: number | null
+    firstDPRR: number | null
+  }
+
+  export type PlayerSeasonMaxAggregateOutputType = {
+    player_id: string | null
+    player_name: string | null
+    season: number | null
+    games_played: number | null
+    position: string | null
+    completions_total: number | null
+    attempts_total: number | null
+    passing_yards_total: number | null
+    passing_tds_total: number | null
+    interceptions_total: number | null
+    passing_first_downs_total: number | null
+    carries_total: number | null
+    rushing_yards_total: number | null
+    rushing_tds_total: number | null
+    rushing_fumbles_total: number | null
+    rushing_fumbles_lost_total: number | null
+    rushing_first_downs_total: number | null
+    targets_total: number | null
+    receiving_yards_total: number | null
+    receiving_tds_total: number | null
+    receiving_air_yards_total: number | null
+    receiving_yards_after_catch_total: number | null
+    receiving_first_downs_total: number | null
+    fantasy_points_total: number | null
+    completions_avg: number | null
+    attempts_avg: number | null
+    passing_yards_avg: number | null
+    passing_tds_avg: number | null
+    interceptions_avg: number | null
+    passing_air_yards_avg: number | null
+    passing_yards_after_catch_avg: number | null
+    passing_first_downs_avg: number | null
+    carries_avg: number | null
+    rushing_yards_avg: number | null
+    rushing_tds_avg: number | null
+    rushing_fumbles_avg: number | null
+    rushing_fumbles_lost_avg: number | null
+    rushing_first_downs_avg: number | null
+    rushing_epa_avg: number | null
+    receptions_avg: number | null
+    targets_avg: number | null
+    receiving_yards_avg: number | null
+    receiving_tds_avg: number | null
+    receiving_air_yards_avg: number | null
+    receiving_yards_after_catch_avg: number | null
+    receiving_first_downs_avg: number | null
+    receiving_epa_avg: number | null
+    racr_avg: number | null
+    target_share_avg: number | null
+    air_yards_share_avg: number | null
+    wopr_avg: number | null
+    fantasy_points_avg: number | null
+    fantasy_points_ppr_avg: number | null
+    YPRR: number | null
+    routes: number | null
+    routes_per_game: number | null
+    TPRR: number | null
+    firstDPRR: number | null
+  }
+
+  export type PlayerSeasonCountAggregateOutputType = {
+    player_id: number
+    player_name: number
+    season: number
+    games_played: number
+    position: number
+    completions_total: number
+    attempts_total: number
+    passing_yards_total: number
+    passing_tds_total: number
+    interceptions_total: number
+    passing_first_downs_total: number
+    carries_total: number
+    rushing_yards_total: number
+    rushing_tds_total: number
+    rushing_fumbles_total: number
+    rushing_fumbles_lost_total: number
+    rushing_first_downs_total: number
+    targets_total: number
+    receiving_yards_total: number
+    receiving_tds_total: number
+    receiving_air_yards_total: number
+    receiving_yards_after_catch_total: number
+    receiving_first_downs_total: number
+    fantasy_points_total: number
+    completions_avg: number
+    attempts_avg: number
+    passing_yards_avg: number
+    passing_tds_avg: number
+    interceptions_avg: number
+    passing_air_yards_avg: number
+    passing_yards_after_catch_avg: number
+    passing_first_downs_avg: number
+    carries_avg: number
+    rushing_yards_avg: number
+    rushing_tds_avg: number
+    rushing_fumbles_avg: number
+    rushing_fumbles_lost_avg: number
+    rushing_first_downs_avg: number
+    rushing_epa_avg: number
+    receptions_avg: number
+    targets_avg: number
+    receiving_yards_avg: number
+    receiving_tds_avg: number
+    receiving_air_yards_avg: number
+    receiving_yards_after_catch_avg: number
+    receiving_first_downs_avg: number
+    receiving_epa_avg: number
+    racr_avg: number
+    target_share_avg: number
+    air_yards_share_avg: number
+    wopr_avg: number
+    fantasy_points_avg: number
+    fantasy_points_ppr_avg: number
+    YPRR: number
+    routes: number
+    routes_per_game: number
+    TPRR: number
+    firstDPRR: number
+    _all: number
+  }
+
+
+  export type PlayerSeasonAvgAggregateInputType = {
+    season?: true
+    games_played?: true
+    completions_total?: true
+    attempts_total?: true
+    passing_yards_total?: true
+    passing_tds_total?: true
+    interceptions_total?: true
+    passing_first_downs_total?: true
+    carries_total?: true
+    rushing_yards_total?: true
+    rushing_tds_total?: true
+    rushing_fumbles_total?: true
+    rushing_fumbles_lost_total?: true
+    rushing_first_downs_total?: true
+    targets_total?: true
+    receiving_yards_total?: true
+    receiving_tds_total?: true
+    receiving_air_yards_total?: true
+    receiving_yards_after_catch_total?: true
+    receiving_first_downs_total?: true
+    fantasy_points_total?: true
+    completions_avg?: true
+    attempts_avg?: true
+    passing_yards_avg?: true
+    passing_tds_avg?: true
+    interceptions_avg?: true
+    passing_air_yards_avg?: true
+    passing_yards_after_catch_avg?: true
+    passing_first_downs_avg?: true
+    carries_avg?: true
+    rushing_yards_avg?: true
+    rushing_tds_avg?: true
+    rushing_fumbles_avg?: true
+    rushing_fumbles_lost_avg?: true
+    rushing_first_downs_avg?: true
+    rushing_epa_avg?: true
+    receptions_avg?: true
+    targets_avg?: true
+    receiving_yards_avg?: true
+    receiving_tds_avg?: true
+    receiving_air_yards_avg?: true
+    receiving_yards_after_catch_avg?: true
+    receiving_first_downs_avg?: true
+    receiving_epa_avg?: true
+    racr_avg?: true
+    target_share_avg?: true
+    air_yards_share_avg?: true
+    wopr_avg?: true
+    fantasy_points_avg?: true
+    fantasy_points_ppr_avg?: true
+    YPRR?: true
+    routes?: true
+    routes_per_game?: true
+    TPRR?: true
+    firstDPRR?: true
+  }
+
+  export type PlayerSeasonSumAggregateInputType = {
+    season?: true
+    games_played?: true
+    completions_total?: true
+    attempts_total?: true
+    passing_yards_total?: true
+    passing_tds_total?: true
+    interceptions_total?: true
+    passing_first_downs_total?: true
+    carries_total?: true
+    rushing_yards_total?: true
+    rushing_tds_total?: true
+    rushing_fumbles_total?: true
+    rushing_fumbles_lost_total?: true
+    rushing_first_downs_total?: true
+    targets_total?: true
+    receiving_yards_total?: true
+    receiving_tds_total?: true
+    receiving_air_yards_total?: true
+    receiving_yards_after_catch_total?: true
+    receiving_first_downs_total?: true
+    fantasy_points_total?: true
+    completions_avg?: true
+    attempts_avg?: true
+    passing_yards_avg?: true
+    passing_tds_avg?: true
+    interceptions_avg?: true
+    passing_air_yards_avg?: true
+    passing_yards_after_catch_avg?: true
+    passing_first_downs_avg?: true
+    carries_avg?: true
+    rushing_yards_avg?: true
+    rushing_tds_avg?: true
+    rushing_fumbles_avg?: true
+    rushing_fumbles_lost_avg?: true
+    rushing_first_downs_avg?: true
+    rushing_epa_avg?: true
+    receptions_avg?: true
+    targets_avg?: true
+    receiving_yards_avg?: true
+    receiving_tds_avg?: true
+    receiving_air_yards_avg?: true
+    receiving_yards_after_catch_avg?: true
+    receiving_first_downs_avg?: true
+    receiving_epa_avg?: true
+    racr_avg?: true
+    target_share_avg?: true
+    air_yards_share_avg?: true
+    wopr_avg?: true
+    fantasy_points_avg?: true
+    fantasy_points_ppr_avg?: true
+    YPRR?: true
+    routes?: true
+    routes_per_game?: true
+    TPRR?: true
+    firstDPRR?: true
+  }
+
+  export type PlayerSeasonMinAggregateInputType = {
+    player_id?: true
+    player_name?: true
+    season?: true
+    games_played?: true
+    position?: true
+    completions_total?: true
+    attempts_total?: true
+    passing_yards_total?: true
+    passing_tds_total?: true
+    interceptions_total?: true
+    passing_first_downs_total?: true
+    carries_total?: true
+    rushing_yards_total?: true
+    rushing_tds_total?: true
+    rushing_fumbles_total?: true
+    rushing_fumbles_lost_total?: true
+    rushing_first_downs_total?: true
+    targets_total?: true
+    receiving_yards_total?: true
+    receiving_tds_total?: true
+    receiving_air_yards_total?: true
+    receiving_yards_after_catch_total?: true
+    receiving_first_downs_total?: true
+    fantasy_points_total?: true
+    completions_avg?: true
+    attempts_avg?: true
+    passing_yards_avg?: true
+    passing_tds_avg?: true
+    interceptions_avg?: true
+    passing_air_yards_avg?: true
+    passing_yards_after_catch_avg?: true
+    passing_first_downs_avg?: true
+    carries_avg?: true
+    rushing_yards_avg?: true
+    rushing_tds_avg?: true
+    rushing_fumbles_avg?: true
+    rushing_fumbles_lost_avg?: true
+    rushing_first_downs_avg?: true
+    rushing_epa_avg?: true
+    receptions_avg?: true
+    targets_avg?: true
+    receiving_yards_avg?: true
+    receiving_tds_avg?: true
+    receiving_air_yards_avg?: true
+    receiving_yards_after_catch_avg?: true
+    receiving_first_downs_avg?: true
+    receiving_epa_avg?: true
+    racr_avg?: true
+    target_share_avg?: true
+    air_yards_share_avg?: true
+    wopr_avg?: true
+    fantasy_points_avg?: true
+    fantasy_points_ppr_avg?: true
+    YPRR?: true
+    routes?: true
+    routes_per_game?: true
+    TPRR?: true
+    firstDPRR?: true
+  }
+
+  export type PlayerSeasonMaxAggregateInputType = {
+    player_id?: true
+    player_name?: true
+    season?: true
+    games_played?: true
+    position?: true
+    completions_total?: true
+    attempts_total?: true
+    passing_yards_total?: true
+    passing_tds_total?: true
+    interceptions_total?: true
+    passing_first_downs_total?: true
+    carries_total?: true
+    rushing_yards_total?: true
+    rushing_tds_total?: true
+    rushing_fumbles_total?: true
+    rushing_fumbles_lost_total?: true
+    rushing_first_downs_total?: true
+    targets_total?: true
+    receiving_yards_total?: true
+    receiving_tds_total?: true
+    receiving_air_yards_total?: true
+    receiving_yards_after_catch_total?: true
+    receiving_first_downs_total?: true
+    fantasy_points_total?: true
+    completions_avg?: true
+    attempts_avg?: true
+    passing_yards_avg?: true
+    passing_tds_avg?: true
+    interceptions_avg?: true
+    passing_air_yards_avg?: true
+    passing_yards_after_catch_avg?: true
+    passing_first_downs_avg?: true
+    carries_avg?: true
+    rushing_yards_avg?: true
+    rushing_tds_avg?: true
+    rushing_fumbles_avg?: true
+    rushing_fumbles_lost_avg?: true
+    rushing_first_downs_avg?: true
+    rushing_epa_avg?: true
+    receptions_avg?: true
+    targets_avg?: true
+    receiving_yards_avg?: true
+    receiving_tds_avg?: true
+    receiving_air_yards_avg?: true
+    receiving_yards_after_catch_avg?: true
+    receiving_first_downs_avg?: true
+    receiving_epa_avg?: true
+    racr_avg?: true
+    target_share_avg?: true
+    air_yards_share_avg?: true
+    wopr_avg?: true
+    fantasy_points_avg?: true
+    fantasy_points_ppr_avg?: true
+    YPRR?: true
+    routes?: true
+    routes_per_game?: true
+    TPRR?: true
+    firstDPRR?: true
+  }
+
+  export type PlayerSeasonCountAggregateInputType = {
+    player_id?: true
+    player_name?: true
+    season?: true
+    games_played?: true
+    position?: true
+    completions_total?: true
+    attempts_total?: true
+    passing_yards_total?: true
+    passing_tds_total?: true
+    interceptions_total?: true
+    passing_first_downs_total?: true
+    carries_total?: true
+    rushing_yards_total?: true
+    rushing_tds_total?: true
+    rushing_fumbles_total?: true
+    rushing_fumbles_lost_total?: true
+    rushing_first_downs_total?: true
+    targets_total?: true
+    receiving_yards_total?: true
+    receiving_tds_total?: true
+    receiving_air_yards_total?: true
+    receiving_yards_after_catch_total?: true
+    receiving_first_downs_total?: true
+    fantasy_points_total?: true
+    completions_avg?: true
+    attempts_avg?: true
+    passing_yards_avg?: true
+    passing_tds_avg?: true
+    interceptions_avg?: true
+    passing_air_yards_avg?: true
+    passing_yards_after_catch_avg?: true
+    passing_first_downs_avg?: true
+    carries_avg?: true
+    rushing_yards_avg?: true
+    rushing_tds_avg?: true
+    rushing_fumbles_avg?: true
+    rushing_fumbles_lost_avg?: true
+    rushing_first_downs_avg?: true
+    rushing_epa_avg?: true
+    receptions_avg?: true
+    targets_avg?: true
+    receiving_yards_avg?: true
+    receiving_tds_avg?: true
+    receiving_air_yards_avg?: true
+    receiving_yards_after_catch_avg?: true
+    receiving_first_downs_avg?: true
+    receiving_epa_avg?: true
+    racr_avg?: true
+    target_share_avg?: true
+    air_yards_share_avg?: true
+    wopr_avg?: true
+    fantasy_points_avg?: true
+    fantasy_points_ppr_avg?: true
+    YPRR?: true
+    routes?: true
+    routes_per_game?: true
+    TPRR?: true
+    firstDPRR?: true
+    _all?: true
+  }
+
+  export type PlayerSeasonAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PlayerSeason to aggregate.
+     */
+    where?: PlayerSeasonWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PlayerSeasons to fetch.
+     */
+    orderBy?: PlayerSeasonOrderByWithRelationInput | PlayerSeasonOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PlayerSeasonWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PlayerSeasons from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PlayerSeasons.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PlayerSeasons
+    **/
+    _count?: true | PlayerSeasonCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PlayerSeasonAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PlayerSeasonSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PlayerSeasonMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PlayerSeasonMaxAggregateInputType
+  }
+
+  export type GetPlayerSeasonAggregateType<T extends PlayerSeasonAggregateArgs> = {
+        [P in keyof T & keyof AggregatePlayerSeason]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePlayerSeason[P]>
+      : GetScalarType<T[P], AggregatePlayerSeason[P]>
+  }
+
+
+
+
+  export type PlayerSeasonGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PlayerSeasonWhereInput
+    orderBy?: PlayerSeasonOrderByWithAggregationInput | PlayerSeasonOrderByWithAggregationInput[]
+    by: PlayerSeasonScalarFieldEnum[] | PlayerSeasonScalarFieldEnum
+    having?: PlayerSeasonScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PlayerSeasonCountAggregateInputType | true
+    _avg?: PlayerSeasonAvgAggregateInputType
+    _sum?: PlayerSeasonSumAggregateInputType
+    _min?: PlayerSeasonMinAggregateInputType
+    _max?: PlayerSeasonMaxAggregateInputType
+  }
+
+  export type PlayerSeasonGroupByOutputType = {
+    player_id: string
+    player_name: string
+    season: number
+    games_played: number
+    position: string | null
+    completions_total: number | null
+    attempts_total: number | null
+    passing_yards_total: number | null
+    passing_tds_total: number | null
+    interceptions_total: number | null
+    passing_first_downs_total: number | null
+    carries_total: number | null
+    rushing_yards_total: number | null
+    rushing_tds_total: number | null
+    rushing_fumbles_total: number | null
+    rushing_fumbles_lost_total: number | null
+    rushing_first_downs_total: number | null
+    targets_total: number | null
+    receiving_yards_total: number | null
+    receiving_tds_total: number | null
+    receiving_air_yards_total: number | null
+    receiving_yards_after_catch_total: number | null
+    receiving_first_downs_total: number | null
+    fantasy_points_total: number | null
+    completions_avg: number | null
+    attempts_avg: number | null
+    passing_yards_avg: number | null
+    passing_tds_avg: number | null
+    interceptions_avg: number | null
+    passing_air_yards_avg: number | null
+    passing_yards_after_catch_avg: number | null
+    passing_first_downs_avg: number | null
+    carries_avg: number | null
+    rushing_yards_avg: number | null
+    rushing_tds_avg: number | null
+    rushing_fumbles_avg: number | null
+    rushing_fumbles_lost_avg: number | null
+    rushing_first_downs_avg: number | null
+    rushing_epa_avg: number | null
+    receptions_avg: number | null
+    targets_avg: number | null
+    receiving_yards_avg: number | null
+    receiving_tds_avg: number | null
+    receiving_air_yards_avg: number | null
+    receiving_yards_after_catch_avg: number | null
+    receiving_first_downs_avg: number | null
+    receiving_epa_avg: number | null
+    racr_avg: number | null
+    target_share_avg: number | null
+    air_yards_share_avg: number | null
+    wopr_avg: number | null
+    fantasy_points_avg: number | null
+    fantasy_points_ppr_avg: number | null
+    YPRR: number | null
+    routes: number | null
+    routes_per_game: number | null
+    TPRR: number | null
+    firstDPRR: number | null
+    _count: PlayerSeasonCountAggregateOutputType | null
+    _avg: PlayerSeasonAvgAggregateOutputType | null
+    _sum: PlayerSeasonSumAggregateOutputType | null
+    _min: PlayerSeasonMinAggregateOutputType | null
+    _max: PlayerSeasonMaxAggregateOutputType | null
+  }
+
+  type GetPlayerSeasonGroupByPayload<T extends PlayerSeasonGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PlayerSeasonGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PlayerSeasonGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PlayerSeasonGroupByOutputType[P]>
+            : GetScalarType<T[P], PlayerSeasonGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PlayerSeasonSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    player_id?: boolean
+    player_name?: boolean
+    season?: boolean
+    games_played?: boolean
+    position?: boolean
+    completions_total?: boolean
+    attempts_total?: boolean
+    passing_yards_total?: boolean
+    passing_tds_total?: boolean
+    interceptions_total?: boolean
+    passing_first_downs_total?: boolean
+    carries_total?: boolean
+    rushing_yards_total?: boolean
+    rushing_tds_total?: boolean
+    rushing_fumbles_total?: boolean
+    rushing_fumbles_lost_total?: boolean
+    rushing_first_downs_total?: boolean
+    targets_total?: boolean
+    receiving_yards_total?: boolean
+    receiving_tds_total?: boolean
+    receiving_air_yards_total?: boolean
+    receiving_yards_after_catch_total?: boolean
+    receiving_first_downs_total?: boolean
+    fantasy_points_total?: boolean
+    completions_avg?: boolean
+    attempts_avg?: boolean
+    passing_yards_avg?: boolean
+    passing_tds_avg?: boolean
+    interceptions_avg?: boolean
+    passing_air_yards_avg?: boolean
+    passing_yards_after_catch_avg?: boolean
+    passing_first_downs_avg?: boolean
+    carries_avg?: boolean
+    rushing_yards_avg?: boolean
+    rushing_tds_avg?: boolean
+    rushing_fumbles_avg?: boolean
+    rushing_fumbles_lost_avg?: boolean
+    rushing_first_downs_avg?: boolean
+    rushing_epa_avg?: boolean
+    receptions_avg?: boolean
+    targets_avg?: boolean
+    receiving_yards_avg?: boolean
+    receiving_tds_avg?: boolean
+    receiving_air_yards_avg?: boolean
+    receiving_yards_after_catch_avg?: boolean
+    receiving_first_downs_avg?: boolean
+    receiving_epa_avg?: boolean
+    racr_avg?: boolean
+    target_share_avg?: boolean
+    air_yards_share_avg?: boolean
+    wopr_avg?: boolean
+    fantasy_points_avg?: boolean
+    fantasy_points_ppr_avg?: boolean
+    YPRR?: boolean
+    routes?: boolean
+    routes_per_game?: boolean
+    TPRR?: boolean
+    firstDPRR?: boolean
+  }, ExtArgs["result"]["playerSeason"]>
+
+  export type PlayerSeasonSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    player_id?: boolean
+    player_name?: boolean
+    season?: boolean
+    games_played?: boolean
+    position?: boolean
+    completions_total?: boolean
+    attempts_total?: boolean
+    passing_yards_total?: boolean
+    passing_tds_total?: boolean
+    interceptions_total?: boolean
+    passing_first_downs_total?: boolean
+    carries_total?: boolean
+    rushing_yards_total?: boolean
+    rushing_tds_total?: boolean
+    rushing_fumbles_total?: boolean
+    rushing_fumbles_lost_total?: boolean
+    rushing_first_downs_total?: boolean
+    targets_total?: boolean
+    receiving_yards_total?: boolean
+    receiving_tds_total?: boolean
+    receiving_air_yards_total?: boolean
+    receiving_yards_after_catch_total?: boolean
+    receiving_first_downs_total?: boolean
+    fantasy_points_total?: boolean
+    completions_avg?: boolean
+    attempts_avg?: boolean
+    passing_yards_avg?: boolean
+    passing_tds_avg?: boolean
+    interceptions_avg?: boolean
+    passing_air_yards_avg?: boolean
+    passing_yards_after_catch_avg?: boolean
+    passing_first_downs_avg?: boolean
+    carries_avg?: boolean
+    rushing_yards_avg?: boolean
+    rushing_tds_avg?: boolean
+    rushing_fumbles_avg?: boolean
+    rushing_fumbles_lost_avg?: boolean
+    rushing_first_downs_avg?: boolean
+    rushing_epa_avg?: boolean
+    receptions_avg?: boolean
+    targets_avg?: boolean
+    receiving_yards_avg?: boolean
+    receiving_tds_avg?: boolean
+    receiving_air_yards_avg?: boolean
+    receiving_yards_after_catch_avg?: boolean
+    receiving_first_downs_avg?: boolean
+    receiving_epa_avg?: boolean
+    racr_avg?: boolean
+    target_share_avg?: boolean
+    air_yards_share_avg?: boolean
+    wopr_avg?: boolean
+    fantasy_points_avg?: boolean
+    fantasy_points_ppr_avg?: boolean
+    YPRR?: boolean
+    routes?: boolean
+    routes_per_game?: boolean
+    TPRR?: boolean
+    firstDPRR?: boolean
+  }, ExtArgs["result"]["playerSeason"]>
+
+  export type PlayerSeasonSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    player_id?: boolean
+    player_name?: boolean
+    season?: boolean
+    games_played?: boolean
+    position?: boolean
+    completions_total?: boolean
+    attempts_total?: boolean
+    passing_yards_total?: boolean
+    passing_tds_total?: boolean
+    interceptions_total?: boolean
+    passing_first_downs_total?: boolean
+    carries_total?: boolean
+    rushing_yards_total?: boolean
+    rushing_tds_total?: boolean
+    rushing_fumbles_total?: boolean
+    rushing_fumbles_lost_total?: boolean
+    rushing_first_downs_total?: boolean
+    targets_total?: boolean
+    receiving_yards_total?: boolean
+    receiving_tds_total?: boolean
+    receiving_air_yards_total?: boolean
+    receiving_yards_after_catch_total?: boolean
+    receiving_first_downs_total?: boolean
+    fantasy_points_total?: boolean
+    completions_avg?: boolean
+    attempts_avg?: boolean
+    passing_yards_avg?: boolean
+    passing_tds_avg?: boolean
+    interceptions_avg?: boolean
+    passing_air_yards_avg?: boolean
+    passing_yards_after_catch_avg?: boolean
+    passing_first_downs_avg?: boolean
+    carries_avg?: boolean
+    rushing_yards_avg?: boolean
+    rushing_tds_avg?: boolean
+    rushing_fumbles_avg?: boolean
+    rushing_fumbles_lost_avg?: boolean
+    rushing_first_downs_avg?: boolean
+    rushing_epa_avg?: boolean
+    receptions_avg?: boolean
+    targets_avg?: boolean
+    receiving_yards_avg?: boolean
+    receiving_tds_avg?: boolean
+    receiving_air_yards_avg?: boolean
+    receiving_yards_after_catch_avg?: boolean
+    receiving_first_downs_avg?: boolean
+    receiving_epa_avg?: boolean
+    racr_avg?: boolean
+    target_share_avg?: boolean
+    air_yards_share_avg?: boolean
+    wopr_avg?: boolean
+    fantasy_points_avg?: boolean
+    fantasy_points_ppr_avg?: boolean
+    YPRR?: boolean
+    routes?: boolean
+    routes_per_game?: boolean
+    TPRR?: boolean
+    firstDPRR?: boolean
+  }, ExtArgs["result"]["playerSeason"]>
+
+  export type PlayerSeasonSelectScalar = {
+    player_id?: boolean
+    player_name?: boolean
+    season?: boolean
+    games_played?: boolean
+    position?: boolean
+    completions_total?: boolean
+    attempts_total?: boolean
+    passing_yards_total?: boolean
+    passing_tds_total?: boolean
+    interceptions_total?: boolean
+    passing_first_downs_total?: boolean
+    carries_total?: boolean
+    rushing_yards_total?: boolean
+    rushing_tds_total?: boolean
+    rushing_fumbles_total?: boolean
+    rushing_fumbles_lost_total?: boolean
+    rushing_first_downs_total?: boolean
+    targets_total?: boolean
+    receiving_yards_total?: boolean
+    receiving_tds_total?: boolean
+    receiving_air_yards_total?: boolean
+    receiving_yards_after_catch_total?: boolean
+    receiving_first_downs_total?: boolean
+    fantasy_points_total?: boolean
+    completions_avg?: boolean
+    attempts_avg?: boolean
+    passing_yards_avg?: boolean
+    passing_tds_avg?: boolean
+    interceptions_avg?: boolean
+    passing_air_yards_avg?: boolean
+    passing_yards_after_catch_avg?: boolean
+    passing_first_downs_avg?: boolean
+    carries_avg?: boolean
+    rushing_yards_avg?: boolean
+    rushing_tds_avg?: boolean
+    rushing_fumbles_avg?: boolean
+    rushing_fumbles_lost_avg?: boolean
+    rushing_first_downs_avg?: boolean
+    rushing_epa_avg?: boolean
+    receptions_avg?: boolean
+    targets_avg?: boolean
+    receiving_yards_avg?: boolean
+    receiving_tds_avg?: boolean
+    receiving_air_yards_avg?: boolean
+    receiving_yards_after_catch_avg?: boolean
+    receiving_first_downs_avg?: boolean
+    receiving_epa_avg?: boolean
+    racr_avg?: boolean
+    target_share_avg?: boolean
+    air_yards_share_avg?: boolean
+    wopr_avg?: boolean
+    fantasy_points_avg?: boolean
+    fantasy_points_ppr_avg?: boolean
+    YPRR?: boolean
+    routes?: boolean
+    routes_per_game?: boolean
+    TPRR?: boolean
+    firstDPRR?: boolean
+  }
+
+  export type PlayerSeasonOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"player_id" | "player_name" | "season" | "games_played" | "position" | "completions_total" | "attempts_total" | "passing_yards_total" | "passing_tds_total" | "interceptions_total" | "passing_first_downs_total" | "carries_total" | "rushing_yards_total" | "rushing_tds_total" | "rushing_fumbles_total" | "rushing_fumbles_lost_total" | "rushing_first_downs_total" | "targets_total" | "receiving_yards_total" | "receiving_tds_total" | "receiving_air_yards_total" | "receiving_yards_after_catch_total" | "receiving_first_downs_total" | "fantasy_points_total" | "completions_avg" | "attempts_avg" | "passing_yards_avg" | "passing_tds_avg" | "interceptions_avg" | "passing_air_yards_avg" | "passing_yards_after_catch_avg" | "passing_first_downs_avg" | "carries_avg" | "rushing_yards_avg" | "rushing_tds_avg" | "rushing_fumbles_avg" | "rushing_fumbles_lost_avg" | "rushing_first_downs_avg" | "rushing_epa_avg" | "receptions_avg" | "targets_avg" | "receiving_yards_avg" | "receiving_tds_avg" | "receiving_air_yards_avg" | "receiving_yards_after_catch_avg" | "receiving_first_downs_avg" | "receiving_epa_avg" | "racr_avg" | "target_share_avg" | "air_yards_share_avg" | "wopr_avg" | "fantasy_points_avg" | "fantasy_points_ppr_avg" | "YPRR" | "routes" | "routes_per_game" | "TPRR" | "firstDPRR", ExtArgs["result"]["playerSeason"]>
+
+  export type $PlayerSeasonPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PlayerSeason"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      player_id: string
+      player_name: string
+      season: number
+      games_played: number
+      position: string | null
+      completions_total: number | null
+      attempts_total: number | null
+      passing_yards_total: number | null
+      passing_tds_total: number | null
+      interceptions_total: number | null
+      passing_first_downs_total: number | null
+      carries_total: number | null
+      rushing_yards_total: number | null
+      rushing_tds_total: number | null
+      rushing_fumbles_total: number | null
+      rushing_fumbles_lost_total: number | null
+      rushing_first_downs_total: number | null
+      targets_total: number | null
+      receiving_yards_total: number | null
+      receiving_tds_total: number | null
+      receiving_air_yards_total: number | null
+      receiving_yards_after_catch_total: number | null
+      receiving_first_downs_total: number | null
+      fantasy_points_total: number | null
+      completions_avg: number | null
+      attempts_avg: number | null
+      passing_yards_avg: number | null
+      passing_tds_avg: number | null
+      interceptions_avg: number | null
+      passing_air_yards_avg: number | null
+      passing_yards_after_catch_avg: number | null
+      passing_first_downs_avg: number | null
+      carries_avg: number | null
+      rushing_yards_avg: number | null
+      rushing_tds_avg: number | null
+      rushing_fumbles_avg: number | null
+      rushing_fumbles_lost_avg: number | null
+      rushing_first_downs_avg: number | null
+      rushing_epa_avg: number | null
+      receptions_avg: number | null
+      targets_avg: number | null
+      receiving_yards_avg: number | null
+      receiving_tds_avg: number | null
+      receiving_air_yards_avg: number | null
+      receiving_yards_after_catch_avg: number | null
+      receiving_first_downs_avg: number | null
+      receiving_epa_avg: number | null
+      racr_avg: number | null
+      target_share_avg: number | null
+      air_yards_share_avg: number | null
+      wopr_avg: number | null
+      fantasy_points_avg: number | null
+      fantasy_points_ppr_avg: number | null
+      YPRR: number | null
+      routes: number | null
+      routes_per_game: number | null
+      TPRR: number | null
+      firstDPRR: number | null
+    }, ExtArgs["result"]["playerSeason"]>
+    composites: {}
+  }
+
+  type PlayerSeasonGetPayload<S extends boolean | null | undefined | PlayerSeasonDefaultArgs> = $Result.GetResult<Prisma.$PlayerSeasonPayload, S>
+
+  type PlayerSeasonCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PlayerSeasonFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PlayerSeasonCountAggregateInputType | true
+    }
+
+  export interface PlayerSeasonDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PlayerSeason'], meta: { name: 'PlayerSeason' } }
+    /**
+     * Find zero or one PlayerSeason that matches the filter.
+     * @param {PlayerSeasonFindUniqueArgs} args - Arguments to find a PlayerSeason
+     * @example
+     * // Get one PlayerSeason
+     * const playerSeason = await prisma.playerSeason.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PlayerSeasonFindUniqueArgs>(args: SelectSubset<T, PlayerSeasonFindUniqueArgs<ExtArgs>>): Prisma__PlayerSeasonClient<$Result.GetResult<Prisma.$PlayerSeasonPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PlayerSeason that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PlayerSeasonFindUniqueOrThrowArgs} args - Arguments to find a PlayerSeason
+     * @example
+     * // Get one PlayerSeason
+     * const playerSeason = await prisma.playerSeason.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PlayerSeasonFindUniqueOrThrowArgs>(args: SelectSubset<T, PlayerSeasonFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PlayerSeasonClient<$Result.GetResult<Prisma.$PlayerSeasonPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PlayerSeason that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerSeasonFindFirstArgs} args - Arguments to find a PlayerSeason
+     * @example
+     * // Get one PlayerSeason
+     * const playerSeason = await prisma.playerSeason.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PlayerSeasonFindFirstArgs>(args?: SelectSubset<T, PlayerSeasonFindFirstArgs<ExtArgs>>): Prisma__PlayerSeasonClient<$Result.GetResult<Prisma.$PlayerSeasonPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PlayerSeason that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerSeasonFindFirstOrThrowArgs} args - Arguments to find a PlayerSeason
+     * @example
+     * // Get one PlayerSeason
+     * const playerSeason = await prisma.playerSeason.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PlayerSeasonFindFirstOrThrowArgs>(args?: SelectSubset<T, PlayerSeasonFindFirstOrThrowArgs<ExtArgs>>): Prisma__PlayerSeasonClient<$Result.GetResult<Prisma.$PlayerSeasonPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PlayerSeasons that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerSeasonFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PlayerSeasons
+     * const playerSeasons = await prisma.playerSeason.findMany()
+     * 
+     * // Get first 10 PlayerSeasons
+     * const playerSeasons = await prisma.playerSeason.findMany({ take: 10 })
+     * 
+     * // Only select the `player_id`
+     * const playerSeasonWithPlayer_idOnly = await prisma.playerSeason.findMany({ select: { player_id: true } })
+     * 
+     */
+    findMany<T extends PlayerSeasonFindManyArgs>(args?: SelectSubset<T, PlayerSeasonFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerSeasonPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PlayerSeason.
+     * @param {PlayerSeasonCreateArgs} args - Arguments to create a PlayerSeason.
+     * @example
+     * // Create one PlayerSeason
+     * const PlayerSeason = await prisma.playerSeason.create({
+     *   data: {
+     *     // ... data to create a PlayerSeason
+     *   }
+     * })
+     * 
+     */
+    create<T extends PlayerSeasonCreateArgs>(args: SelectSubset<T, PlayerSeasonCreateArgs<ExtArgs>>): Prisma__PlayerSeasonClient<$Result.GetResult<Prisma.$PlayerSeasonPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PlayerSeasons.
+     * @param {PlayerSeasonCreateManyArgs} args - Arguments to create many PlayerSeasons.
+     * @example
+     * // Create many PlayerSeasons
+     * const playerSeason = await prisma.playerSeason.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PlayerSeasonCreateManyArgs>(args?: SelectSubset<T, PlayerSeasonCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PlayerSeasons and returns the data saved in the database.
+     * @param {PlayerSeasonCreateManyAndReturnArgs} args - Arguments to create many PlayerSeasons.
+     * @example
+     * // Create many PlayerSeasons
+     * const playerSeason = await prisma.playerSeason.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PlayerSeasons and only return the `player_id`
+     * const playerSeasonWithPlayer_idOnly = await prisma.playerSeason.createManyAndReturn({
+     *   select: { player_id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PlayerSeasonCreateManyAndReturnArgs>(args?: SelectSubset<T, PlayerSeasonCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerSeasonPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PlayerSeason.
+     * @param {PlayerSeasonDeleteArgs} args - Arguments to delete one PlayerSeason.
+     * @example
+     * // Delete one PlayerSeason
+     * const PlayerSeason = await prisma.playerSeason.delete({
+     *   where: {
+     *     // ... filter to delete one PlayerSeason
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PlayerSeasonDeleteArgs>(args: SelectSubset<T, PlayerSeasonDeleteArgs<ExtArgs>>): Prisma__PlayerSeasonClient<$Result.GetResult<Prisma.$PlayerSeasonPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PlayerSeason.
+     * @param {PlayerSeasonUpdateArgs} args - Arguments to update one PlayerSeason.
+     * @example
+     * // Update one PlayerSeason
+     * const playerSeason = await prisma.playerSeason.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PlayerSeasonUpdateArgs>(args: SelectSubset<T, PlayerSeasonUpdateArgs<ExtArgs>>): Prisma__PlayerSeasonClient<$Result.GetResult<Prisma.$PlayerSeasonPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PlayerSeasons.
+     * @param {PlayerSeasonDeleteManyArgs} args - Arguments to filter PlayerSeasons to delete.
+     * @example
+     * // Delete a few PlayerSeasons
+     * const { count } = await prisma.playerSeason.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PlayerSeasonDeleteManyArgs>(args?: SelectSubset<T, PlayerSeasonDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PlayerSeasons.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerSeasonUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PlayerSeasons
+     * const playerSeason = await prisma.playerSeason.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PlayerSeasonUpdateManyArgs>(args: SelectSubset<T, PlayerSeasonUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PlayerSeasons and returns the data updated in the database.
+     * @param {PlayerSeasonUpdateManyAndReturnArgs} args - Arguments to update many PlayerSeasons.
+     * @example
+     * // Update many PlayerSeasons
+     * const playerSeason = await prisma.playerSeason.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PlayerSeasons and only return the `player_id`
+     * const playerSeasonWithPlayer_idOnly = await prisma.playerSeason.updateManyAndReturn({
+     *   select: { player_id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PlayerSeasonUpdateManyAndReturnArgs>(args: SelectSubset<T, PlayerSeasonUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlayerSeasonPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PlayerSeason.
+     * @param {PlayerSeasonUpsertArgs} args - Arguments to update or create a PlayerSeason.
+     * @example
+     * // Update or create a PlayerSeason
+     * const playerSeason = await prisma.playerSeason.upsert({
+     *   create: {
+     *     // ... data to create a PlayerSeason
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PlayerSeason we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PlayerSeasonUpsertArgs>(args: SelectSubset<T, PlayerSeasonUpsertArgs<ExtArgs>>): Prisma__PlayerSeasonClient<$Result.GetResult<Prisma.$PlayerSeasonPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PlayerSeasons.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerSeasonCountArgs} args - Arguments to filter PlayerSeasons to count.
+     * @example
+     * // Count the number of PlayerSeasons
+     * const count = await prisma.playerSeason.count({
+     *   where: {
+     *     // ... the filter for the PlayerSeasons we want to count
+     *   }
+     * })
+    **/
+    count<T extends PlayerSeasonCountArgs>(
+      args?: Subset<T, PlayerSeasonCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PlayerSeasonCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PlayerSeason.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerSeasonAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PlayerSeasonAggregateArgs>(args: Subset<T, PlayerSeasonAggregateArgs>): Prisma.PrismaPromise<GetPlayerSeasonAggregateType<T>>
+
+    /**
+     * Group by PlayerSeason.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlayerSeasonGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PlayerSeasonGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PlayerSeasonGroupByArgs['orderBy'] }
+        : { orderBy?: PlayerSeasonGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PlayerSeasonGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPlayerSeasonGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PlayerSeason model
+   */
+  readonly fields: PlayerSeasonFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PlayerSeason.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PlayerSeasonClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PlayerSeason model
+   */
+  interface PlayerSeasonFieldRefs {
+    readonly player_id: FieldRef<"PlayerSeason", 'String'>
+    readonly player_name: FieldRef<"PlayerSeason", 'String'>
+    readonly season: FieldRef<"PlayerSeason", 'Int'>
+    readonly games_played: FieldRef<"PlayerSeason", 'Int'>
+    readonly position: FieldRef<"PlayerSeason", 'String'>
+    readonly completions_total: FieldRef<"PlayerSeason", 'Float'>
+    readonly attempts_total: FieldRef<"PlayerSeason", 'Float'>
+    readonly passing_yards_total: FieldRef<"PlayerSeason", 'Float'>
+    readonly passing_tds_total: FieldRef<"PlayerSeason", 'Float'>
+    readonly interceptions_total: FieldRef<"PlayerSeason", 'Float'>
+    readonly passing_first_downs_total: FieldRef<"PlayerSeason", 'Float'>
+    readonly carries_total: FieldRef<"PlayerSeason", 'Float'>
+    readonly rushing_yards_total: FieldRef<"PlayerSeason", 'Float'>
+    readonly rushing_tds_total: FieldRef<"PlayerSeason", 'Float'>
+    readonly rushing_fumbles_total: FieldRef<"PlayerSeason", 'Float'>
+    readonly rushing_fumbles_lost_total: FieldRef<"PlayerSeason", 'Float'>
+    readonly rushing_first_downs_total: FieldRef<"PlayerSeason", 'Float'>
+    readonly targets_total: FieldRef<"PlayerSeason", 'Float'>
+    readonly receiving_yards_total: FieldRef<"PlayerSeason", 'Float'>
+    readonly receiving_tds_total: FieldRef<"PlayerSeason", 'Float'>
+    readonly receiving_air_yards_total: FieldRef<"PlayerSeason", 'Float'>
+    readonly receiving_yards_after_catch_total: FieldRef<"PlayerSeason", 'Float'>
+    readonly receiving_first_downs_total: FieldRef<"PlayerSeason", 'Float'>
+    readonly fantasy_points_total: FieldRef<"PlayerSeason", 'Float'>
+    readonly completions_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly attempts_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly passing_yards_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly passing_tds_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly interceptions_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly passing_air_yards_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly passing_yards_after_catch_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly passing_first_downs_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly carries_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly rushing_yards_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly rushing_tds_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly rushing_fumbles_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly rushing_fumbles_lost_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly rushing_first_downs_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly rushing_epa_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly receptions_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly targets_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly receiving_yards_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly receiving_tds_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly receiving_air_yards_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly receiving_yards_after_catch_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly receiving_first_downs_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly receiving_epa_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly racr_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly target_share_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly air_yards_share_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly wopr_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly fantasy_points_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly fantasy_points_ppr_avg: FieldRef<"PlayerSeason", 'Float'>
+    readonly YPRR: FieldRef<"PlayerSeason", 'Float'>
+    readonly routes: FieldRef<"PlayerSeason", 'Float'>
+    readonly routes_per_game: FieldRef<"PlayerSeason", 'Float'>
+    readonly TPRR: FieldRef<"PlayerSeason", 'Float'>
+    readonly firstDPRR: FieldRef<"PlayerSeason", 'Float'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PlayerSeason findUnique
+   */
+  export type PlayerSeasonFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerSeason
+     */
+    select?: PlayerSeasonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerSeason
+     */
+    omit?: PlayerSeasonOmit<ExtArgs> | null
+    /**
+     * Filter, which PlayerSeason to fetch.
+     */
+    where: PlayerSeasonWhereUniqueInput
+  }
+
+  /**
+   * PlayerSeason findUniqueOrThrow
+   */
+  export type PlayerSeasonFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerSeason
+     */
+    select?: PlayerSeasonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerSeason
+     */
+    omit?: PlayerSeasonOmit<ExtArgs> | null
+    /**
+     * Filter, which PlayerSeason to fetch.
+     */
+    where: PlayerSeasonWhereUniqueInput
+  }
+
+  /**
+   * PlayerSeason findFirst
+   */
+  export type PlayerSeasonFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerSeason
+     */
+    select?: PlayerSeasonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerSeason
+     */
+    omit?: PlayerSeasonOmit<ExtArgs> | null
+    /**
+     * Filter, which PlayerSeason to fetch.
+     */
+    where?: PlayerSeasonWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PlayerSeasons to fetch.
+     */
+    orderBy?: PlayerSeasonOrderByWithRelationInput | PlayerSeasonOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PlayerSeasons.
+     */
+    cursor?: PlayerSeasonWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PlayerSeasons from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PlayerSeasons.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PlayerSeasons.
+     */
+    distinct?: PlayerSeasonScalarFieldEnum | PlayerSeasonScalarFieldEnum[]
+  }
+
+  /**
+   * PlayerSeason findFirstOrThrow
+   */
+  export type PlayerSeasonFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerSeason
+     */
+    select?: PlayerSeasonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerSeason
+     */
+    omit?: PlayerSeasonOmit<ExtArgs> | null
+    /**
+     * Filter, which PlayerSeason to fetch.
+     */
+    where?: PlayerSeasonWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PlayerSeasons to fetch.
+     */
+    orderBy?: PlayerSeasonOrderByWithRelationInput | PlayerSeasonOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PlayerSeasons.
+     */
+    cursor?: PlayerSeasonWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PlayerSeasons from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PlayerSeasons.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PlayerSeasons.
+     */
+    distinct?: PlayerSeasonScalarFieldEnum | PlayerSeasonScalarFieldEnum[]
+  }
+
+  /**
+   * PlayerSeason findMany
+   */
+  export type PlayerSeasonFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerSeason
+     */
+    select?: PlayerSeasonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerSeason
+     */
+    omit?: PlayerSeasonOmit<ExtArgs> | null
+    /**
+     * Filter, which PlayerSeasons to fetch.
+     */
+    where?: PlayerSeasonWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PlayerSeasons to fetch.
+     */
+    orderBy?: PlayerSeasonOrderByWithRelationInput | PlayerSeasonOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PlayerSeasons.
+     */
+    cursor?: PlayerSeasonWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PlayerSeasons from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PlayerSeasons.
+     */
+    skip?: number
+    distinct?: PlayerSeasonScalarFieldEnum | PlayerSeasonScalarFieldEnum[]
+  }
+
+  /**
+   * PlayerSeason create
+   */
+  export type PlayerSeasonCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerSeason
+     */
+    select?: PlayerSeasonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerSeason
+     */
+    omit?: PlayerSeasonOmit<ExtArgs> | null
+    /**
+     * The data needed to create a PlayerSeason.
+     */
+    data: XOR<PlayerSeasonCreateInput, PlayerSeasonUncheckedCreateInput>
+  }
+
+  /**
+   * PlayerSeason createMany
+   */
+  export type PlayerSeasonCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PlayerSeasons.
+     */
+    data: PlayerSeasonCreateManyInput | PlayerSeasonCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PlayerSeason createManyAndReturn
+   */
+  export type PlayerSeasonCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerSeason
+     */
+    select?: PlayerSeasonSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerSeason
+     */
+    omit?: PlayerSeasonOmit<ExtArgs> | null
+    /**
+     * The data used to create many PlayerSeasons.
+     */
+    data: PlayerSeasonCreateManyInput | PlayerSeasonCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PlayerSeason update
+   */
+  export type PlayerSeasonUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerSeason
+     */
+    select?: PlayerSeasonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerSeason
+     */
+    omit?: PlayerSeasonOmit<ExtArgs> | null
+    /**
+     * The data needed to update a PlayerSeason.
+     */
+    data: XOR<PlayerSeasonUpdateInput, PlayerSeasonUncheckedUpdateInput>
+    /**
+     * Choose, which PlayerSeason to update.
+     */
+    where: PlayerSeasonWhereUniqueInput
+  }
+
+  /**
+   * PlayerSeason updateMany
+   */
+  export type PlayerSeasonUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PlayerSeasons.
+     */
+    data: XOR<PlayerSeasonUpdateManyMutationInput, PlayerSeasonUncheckedUpdateManyInput>
+    /**
+     * Filter which PlayerSeasons to update
+     */
+    where?: PlayerSeasonWhereInput
+    /**
+     * Limit how many PlayerSeasons to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PlayerSeason updateManyAndReturn
+   */
+  export type PlayerSeasonUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerSeason
+     */
+    select?: PlayerSeasonSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerSeason
+     */
+    omit?: PlayerSeasonOmit<ExtArgs> | null
+    /**
+     * The data used to update PlayerSeasons.
+     */
+    data: XOR<PlayerSeasonUpdateManyMutationInput, PlayerSeasonUncheckedUpdateManyInput>
+    /**
+     * Filter which PlayerSeasons to update
+     */
+    where?: PlayerSeasonWhereInput
+    /**
+     * Limit how many PlayerSeasons to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PlayerSeason upsert
+   */
+  export type PlayerSeasonUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerSeason
+     */
+    select?: PlayerSeasonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerSeason
+     */
+    omit?: PlayerSeasonOmit<ExtArgs> | null
+    /**
+     * The filter to search for the PlayerSeason to update in case it exists.
+     */
+    where: PlayerSeasonWhereUniqueInput
+    /**
+     * In case the PlayerSeason found by the `where` argument doesn't exist, create a new PlayerSeason with this data.
+     */
+    create: XOR<PlayerSeasonCreateInput, PlayerSeasonUncheckedCreateInput>
+    /**
+     * In case the PlayerSeason was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PlayerSeasonUpdateInput, PlayerSeasonUncheckedUpdateInput>
+  }
+
+  /**
+   * PlayerSeason delete
+   */
+  export type PlayerSeasonDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerSeason
+     */
+    select?: PlayerSeasonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerSeason
+     */
+    omit?: PlayerSeasonOmit<ExtArgs> | null
+    /**
+     * Filter which PlayerSeason to delete.
+     */
+    where: PlayerSeasonWhereUniqueInput
+  }
+
+  /**
+   * PlayerSeason deleteMany
+   */
+  export type PlayerSeasonDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PlayerSeasons to delete
+     */
+    where?: PlayerSeasonWhereInput
+    /**
+     * Limit how many PlayerSeasons to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PlayerSeason without action
+   */
+  export type PlayerSeasonDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PlayerSeason
+     */
+    select?: PlayerSeasonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PlayerSeason
+     */
+    omit?: PlayerSeasonOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -5965,6 +7990,70 @@ export namespace Prisma {
   };
 
   export type ReceivingStatScalarFieldEnum = (typeof ReceivingStatScalarFieldEnum)[keyof typeof ReceivingStatScalarFieldEnum]
+
+
+  export const PlayerSeasonScalarFieldEnum: {
+    player_id: 'player_id',
+    player_name: 'player_name',
+    season: 'season',
+    games_played: 'games_played',
+    position: 'position',
+    completions_total: 'completions_total',
+    attempts_total: 'attempts_total',
+    passing_yards_total: 'passing_yards_total',
+    passing_tds_total: 'passing_tds_total',
+    interceptions_total: 'interceptions_total',
+    passing_first_downs_total: 'passing_first_downs_total',
+    carries_total: 'carries_total',
+    rushing_yards_total: 'rushing_yards_total',
+    rushing_tds_total: 'rushing_tds_total',
+    rushing_fumbles_total: 'rushing_fumbles_total',
+    rushing_fumbles_lost_total: 'rushing_fumbles_lost_total',
+    rushing_first_downs_total: 'rushing_first_downs_total',
+    targets_total: 'targets_total',
+    receiving_yards_total: 'receiving_yards_total',
+    receiving_tds_total: 'receiving_tds_total',
+    receiving_air_yards_total: 'receiving_air_yards_total',
+    receiving_yards_after_catch_total: 'receiving_yards_after_catch_total',
+    receiving_first_downs_total: 'receiving_first_downs_total',
+    fantasy_points_total: 'fantasy_points_total',
+    completions_avg: 'completions_avg',
+    attempts_avg: 'attempts_avg',
+    passing_yards_avg: 'passing_yards_avg',
+    passing_tds_avg: 'passing_tds_avg',
+    interceptions_avg: 'interceptions_avg',
+    passing_air_yards_avg: 'passing_air_yards_avg',
+    passing_yards_after_catch_avg: 'passing_yards_after_catch_avg',
+    passing_first_downs_avg: 'passing_first_downs_avg',
+    carries_avg: 'carries_avg',
+    rushing_yards_avg: 'rushing_yards_avg',
+    rushing_tds_avg: 'rushing_tds_avg',
+    rushing_fumbles_avg: 'rushing_fumbles_avg',
+    rushing_fumbles_lost_avg: 'rushing_fumbles_lost_avg',
+    rushing_first_downs_avg: 'rushing_first_downs_avg',
+    rushing_epa_avg: 'rushing_epa_avg',
+    receptions_avg: 'receptions_avg',
+    targets_avg: 'targets_avg',
+    receiving_yards_avg: 'receiving_yards_avg',
+    receiving_tds_avg: 'receiving_tds_avg',
+    receiving_air_yards_avg: 'receiving_air_yards_avg',
+    receiving_yards_after_catch_avg: 'receiving_yards_after_catch_avg',
+    receiving_first_downs_avg: 'receiving_first_downs_avg',
+    receiving_epa_avg: 'receiving_epa_avg',
+    racr_avg: 'racr_avg',
+    target_share_avg: 'target_share_avg',
+    air_yards_share_avg: 'air_yards_share_avg',
+    wopr_avg: 'wopr_avg',
+    fantasy_points_avg: 'fantasy_points_avg',
+    fantasy_points_ppr_avg: 'fantasy_points_ppr_avg',
+    YPRR: 'YPRR',
+    routes: 'routes',
+    routes_per_game: 'routes_per_game',
+    TPRR: 'TPRR',
+    firstDPRR: 'firstDPRR'
+  };
+
+  export type PlayerSeasonScalarFieldEnum = (typeof PlayerSeasonScalarFieldEnum)[keyof typeof PlayerSeasonScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -6737,6 +8826,326 @@ export namespace Prisma {
     yardsAfterCatchPerReception?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
     yardsPerReception?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
     yprr?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+  }
+
+  export type PlayerSeasonWhereInput = {
+    AND?: PlayerSeasonWhereInput | PlayerSeasonWhereInput[]
+    OR?: PlayerSeasonWhereInput[]
+    NOT?: PlayerSeasonWhereInput | PlayerSeasonWhereInput[]
+    player_id?: StringFilter<"PlayerSeason"> | string
+    player_name?: StringFilter<"PlayerSeason"> | string
+    season?: IntFilter<"PlayerSeason"> | number
+    games_played?: IntFilter<"PlayerSeason"> | number
+    position?: StringNullableFilter<"PlayerSeason"> | string | null
+    completions_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    attempts_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    passing_yards_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    passing_tds_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    interceptions_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    passing_first_downs_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    carries_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    rushing_yards_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    rushing_tds_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    rushing_fumbles_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    rushing_fumbles_lost_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    rushing_first_downs_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    targets_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    receiving_yards_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    receiving_tds_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    receiving_air_yards_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    receiving_yards_after_catch_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    receiving_first_downs_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    fantasy_points_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    completions_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    attempts_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    passing_yards_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    passing_tds_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    interceptions_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    passing_air_yards_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    passing_yards_after_catch_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    passing_first_downs_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    carries_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    rushing_yards_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    rushing_tds_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    rushing_fumbles_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    rushing_fumbles_lost_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    rushing_first_downs_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    rushing_epa_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    receptions_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    targets_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    receiving_yards_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    receiving_tds_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    receiving_air_yards_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    receiving_yards_after_catch_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    receiving_first_downs_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    receiving_epa_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    racr_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    target_share_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    air_yards_share_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    wopr_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    fantasy_points_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    fantasy_points_ppr_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    YPRR?: FloatNullableFilter<"PlayerSeason"> | number | null
+    routes?: FloatNullableFilter<"PlayerSeason"> | number | null
+    routes_per_game?: FloatNullableFilter<"PlayerSeason"> | number | null
+    TPRR?: FloatNullableFilter<"PlayerSeason"> | number | null
+    firstDPRR?: FloatNullableFilter<"PlayerSeason"> | number | null
+  }
+
+  export type PlayerSeasonOrderByWithRelationInput = {
+    player_id?: SortOrder
+    player_name?: SortOrder
+    season?: SortOrder
+    games_played?: SortOrder
+    position?: SortOrderInput | SortOrder
+    completions_total?: SortOrderInput | SortOrder
+    attempts_total?: SortOrderInput | SortOrder
+    passing_yards_total?: SortOrderInput | SortOrder
+    passing_tds_total?: SortOrderInput | SortOrder
+    interceptions_total?: SortOrderInput | SortOrder
+    passing_first_downs_total?: SortOrderInput | SortOrder
+    carries_total?: SortOrderInput | SortOrder
+    rushing_yards_total?: SortOrderInput | SortOrder
+    rushing_tds_total?: SortOrderInput | SortOrder
+    rushing_fumbles_total?: SortOrderInput | SortOrder
+    rushing_fumbles_lost_total?: SortOrderInput | SortOrder
+    rushing_first_downs_total?: SortOrderInput | SortOrder
+    targets_total?: SortOrderInput | SortOrder
+    receiving_yards_total?: SortOrderInput | SortOrder
+    receiving_tds_total?: SortOrderInput | SortOrder
+    receiving_air_yards_total?: SortOrderInput | SortOrder
+    receiving_yards_after_catch_total?: SortOrderInput | SortOrder
+    receiving_first_downs_total?: SortOrderInput | SortOrder
+    fantasy_points_total?: SortOrderInput | SortOrder
+    completions_avg?: SortOrderInput | SortOrder
+    attempts_avg?: SortOrderInput | SortOrder
+    passing_yards_avg?: SortOrderInput | SortOrder
+    passing_tds_avg?: SortOrderInput | SortOrder
+    interceptions_avg?: SortOrderInput | SortOrder
+    passing_air_yards_avg?: SortOrderInput | SortOrder
+    passing_yards_after_catch_avg?: SortOrderInput | SortOrder
+    passing_first_downs_avg?: SortOrderInput | SortOrder
+    carries_avg?: SortOrderInput | SortOrder
+    rushing_yards_avg?: SortOrderInput | SortOrder
+    rushing_tds_avg?: SortOrderInput | SortOrder
+    rushing_fumbles_avg?: SortOrderInput | SortOrder
+    rushing_fumbles_lost_avg?: SortOrderInput | SortOrder
+    rushing_first_downs_avg?: SortOrderInput | SortOrder
+    rushing_epa_avg?: SortOrderInput | SortOrder
+    receptions_avg?: SortOrderInput | SortOrder
+    targets_avg?: SortOrderInput | SortOrder
+    receiving_yards_avg?: SortOrderInput | SortOrder
+    receiving_tds_avg?: SortOrderInput | SortOrder
+    receiving_air_yards_avg?: SortOrderInput | SortOrder
+    receiving_yards_after_catch_avg?: SortOrderInput | SortOrder
+    receiving_first_downs_avg?: SortOrderInput | SortOrder
+    receiving_epa_avg?: SortOrderInput | SortOrder
+    racr_avg?: SortOrderInput | SortOrder
+    target_share_avg?: SortOrderInput | SortOrder
+    air_yards_share_avg?: SortOrderInput | SortOrder
+    wopr_avg?: SortOrderInput | SortOrder
+    fantasy_points_avg?: SortOrderInput | SortOrder
+    fantasy_points_ppr_avg?: SortOrderInput | SortOrder
+    YPRR?: SortOrderInput | SortOrder
+    routes?: SortOrderInput | SortOrder
+    routes_per_game?: SortOrderInput | SortOrder
+    TPRR?: SortOrderInput | SortOrder
+    firstDPRR?: SortOrderInput | SortOrder
+  }
+
+  export type PlayerSeasonWhereUniqueInput = Prisma.AtLeast<{
+    player_id_season?: PlayerSeasonPlayer_idSeasonCompoundUniqueInput
+    AND?: PlayerSeasonWhereInput | PlayerSeasonWhereInput[]
+    OR?: PlayerSeasonWhereInput[]
+    NOT?: PlayerSeasonWhereInput | PlayerSeasonWhereInput[]
+    player_id?: StringFilter<"PlayerSeason"> | string
+    player_name?: StringFilter<"PlayerSeason"> | string
+    season?: IntFilter<"PlayerSeason"> | number
+    games_played?: IntFilter<"PlayerSeason"> | number
+    position?: StringNullableFilter<"PlayerSeason"> | string | null
+    completions_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    attempts_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    passing_yards_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    passing_tds_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    interceptions_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    passing_first_downs_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    carries_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    rushing_yards_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    rushing_tds_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    rushing_fumbles_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    rushing_fumbles_lost_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    rushing_first_downs_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    targets_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    receiving_yards_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    receiving_tds_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    receiving_air_yards_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    receiving_yards_after_catch_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    receiving_first_downs_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    fantasy_points_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    completions_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    attempts_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    passing_yards_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    passing_tds_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    interceptions_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    passing_air_yards_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    passing_yards_after_catch_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    passing_first_downs_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    carries_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    rushing_yards_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    rushing_tds_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    rushing_fumbles_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    rushing_fumbles_lost_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    rushing_first_downs_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    rushing_epa_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    receptions_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    targets_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    receiving_yards_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    receiving_tds_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    receiving_air_yards_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    receiving_yards_after_catch_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    receiving_first_downs_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    receiving_epa_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    racr_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    target_share_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    air_yards_share_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    wopr_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    fantasy_points_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    fantasy_points_ppr_avg?: FloatNullableFilter<"PlayerSeason"> | number | null
+    YPRR?: FloatNullableFilter<"PlayerSeason"> | number | null
+    routes?: FloatNullableFilter<"PlayerSeason"> | number | null
+    routes_per_game?: FloatNullableFilter<"PlayerSeason"> | number | null
+    TPRR?: FloatNullableFilter<"PlayerSeason"> | number | null
+    firstDPRR?: FloatNullableFilter<"PlayerSeason"> | number | null
+  }, "player_id_season">
+
+  export type PlayerSeasonOrderByWithAggregationInput = {
+    player_id?: SortOrder
+    player_name?: SortOrder
+    season?: SortOrder
+    games_played?: SortOrder
+    position?: SortOrderInput | SortOrder
+    completions_total?: SortOrderInput | SortOrder
+    attempts_total?: SortOrderInput | SortOrder
+    passing_yards_total?: SortOrderInput | SortOrder
+    passing_tds_total?: SortOrderInput | SortOrder
+    interceptions_total?: SortOrderInput | SortOrder
+    passing_first_downs_total?: SortOrderInput | SortOrder
+    carries_total?: SortOrderInput | SortOrder
+    rushing_yards_total?: SortOrderInput | SortOrder
+    rushing_tds_total?: SortOrderInput | SortOrder
+    rushing_fumbles_total?: SortOrderInput | SortOrder
+    rushing_fumbles_lost_total?: SortOrderInput | SortOrder
+    rushing_first_downs_total?: SortOrderInput | SortOrder
+    targets_total?: SortOrderInput | SortOrder
+    receiving_yards_total?: SortOrderInput | SortOrder
+    receiving_tds_total?: SortOrderInput | SortOrder
+    receiving_air_yards_total?: SortOrderInput | SortOrder
+    receiving_yards_after_catch_total?: SortOrderInput | SortOrder
+    receiving_first_downs_total?: SortOrderInput | SortOrder
+    fantasy_points_total?: SortOrderInput | SortOrder
+    completions_avg?: SortOrderInput | SortOrder
+    attempts_avg?: SortOrderInput | SortOrder
+    passing_yards_avg?: SortOrderInput | SortOrder
+    passing_tds_avg?: SortOrderInput | SortOrder
+    interceptions_avg?: SortOrderInput | SortOrder
+    passing_air_yards_avg?: SortOrderInput | SortOrder
+    passing_yards_after_catch_avg?: SortOrderInput | SortOrder
+    passing_first_downs_avg?: SortOrderInput | SortOrder
+    carries_avg?: SortOrderInput | SortOrder
+    rushing_yards_avg?: SortOrderInput | SortOrder
+    rushing_tds_avg?: SortOrderInput | SortOrder
+    rushing_fumbles_avg?: SortOrderInput | SortOrder
+    rushing_fumbles_lost_avg?: SortOrderInput | SortOrder
+    rushing_first_downs_avg?: SortOrderInput | SortOrder
+    rushing_epa_avg?: SortOrderInput | SortOrder
+    receptions_avg?: SortOrderInput | SortOrder
+    targets_avg?: SortOrderInput | SortOrder
+    receiving_yards_avg?: SortOrderInput | SortOrder
+    receiving_tds_avg?: SortOrderInput | SortOrder
+    receiving_air_yards_avg?: SortOrderInput | SortOrder
+    receiving_yards_after_catch_avg?: SortOrderInput | SortOrder
+    receiving_first_downs_avg?: SortOrderInput | SortOrder
+    receiving_epa_avg?: SortOrderInput | SortOrder
+    racr_avg?: SortOrderInput | SortOrder
+    target_share_avg?: SortOrderInput | SortOrder
+    air_yards_share_avg?: SortOrderInput | SortOrder
+    wopr_avg?: SortOrderInput | SortOrder
+    fantasy_points_avg?: SortOrderInput | SortOrder
+    fantasy_points_ppr_avg?: SortOrderInput | SortOrder
+    YPRR?: SortOrderInput | SortOrder
+    routes?: SortOrderInput | SortOrder
+    routes_per_game?: SortOrderInput | SortOrder
+    TPRR?: SortOrderInput | SortOrder
+    firstDPRR?: SortOrderInput | SortOrder
+    _count?: PlayerSeasonCountOrderByAggregateInput
+    _avg?: PlayerSeasonAvgOrderByAggregateInput
+    _max?: PlayerSeasonMaxOrderByAggregateInput
+    _min?: PlayerSeasonMinOrderByAggregateInput
+    _sum?: PlayerSeasonSumOrderByAggregateInput
+  }
+
+  export type PlayerSeasonScalarWhereWithAggregatesInput = {
+    AND?: PlayerSeasonScalarWhereWithAggregatesInput | PlayerSeasonScalarWhereWithAggregatesInput[]
+    OR?: PlayerSeasonScalarWhereWithAggregatesInput[]
+    NOT?: PlayerSeasonScalarWhereWithAggregatesInput | PlayerSeasonScalarWhereWithAggregatesInput[]
+    player_id?: StringWithAggregatesFilter<"PlayerSeason"> | string
+    player_name?: StringWithAggregatesFilter<"PlayerSeason"> | string
+    season?: IntWithAggregatesFilter<"PlayerSeason"> | number
+    games_played?: IntWithAggregatesFilter<"PlayerSeason"> | number
+    position?: StringNullableWithAggregatesFilter<"PlayerSeason"> | string | null
+    completions_total?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    attempts_total?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    passing_yards_total?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    passing_tds_total?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    interceptions_total?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    passing_first_downs_total?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    carries_total?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    rushing_yards_total?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    rushing_tds_total?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    rushing_fumbles_total?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    rushing_fumbles_lost_total?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    rushing_first_downs_total?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    targets_total?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    receiving_yards_total?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    receiving_tds_total?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    receiving_air_yards_total?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    receiving_yards_after_catch_total?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    receiving_first_downs_total?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    fantasy_points_total?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    completions_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    attempts_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    passing_yards_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    passing_tds_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    interceptions_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    passing_air_yards_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    passing_yards_after_catch_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    passing_first_downs_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    carries_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    rushing_yards_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    rushing_tds_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    rushing_fumbles_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    rushing_fumbles_lost_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    rushing_first_downs_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    rushing_epa_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    receptions_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    targets_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    receiving_yards_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    receiving_tds_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    receiving_air_yards_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    receiving_yards_after_catch_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    receiving_first_downs_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    receiving_epa_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    racr_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    target_share_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    air_yards_share_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    wopr_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    fantasy_points_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    fantasy_points_ppr_avg?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    YPRR?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    routes?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    routes_per_game?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    TPRR?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    firstDPRR?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
   }
 
   export type tradeAnalyzerDataCreateInput = {
@@ -7614,6 +10023,433 @@ export namespace Prisma {
     yprr?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
+  export type PlayerSeasonCreateInput = {
+    player_id: string
+    player_name: string
+    season: number
+    games_played: number
+    position?: string | null
+    completions_total?: number | null
+    attempts_total?: number | null
+    passing_yards_total?: number | null
+    passing_tds_total?: number | null
+    interceptions_total?: number | null
+    passing_first_downs_total?: number | null
+    carries_total?: number | null
+    rushing_yards_total?: number | null
+    rushing_tds_total?: number | null
+    rushing_fumbles_total?: number | null
+    rushing_fumbles_lost_total?: number | null
+    rushing_first_downs_total?: number | null
+    targets_total?: number | null
+    receiving_yards_total?: number | null
+    receiving_tds_total?: number | null
+    receiving_air_yards_total?: number | null
+    receiving_yards_after_catch_total?: number | null
+    receiving_first_downs_total?: number | null
+    fantasy_points_total?: number | null
+    completions_avg?: number | null
+    attempts_avg?: number | null
+    passing_yards_avg?: number | null
+    passing_tds_avg?: number | null
+    interceptions_avg?: number | null
+    passing_air_yards_avg?: number | null
+    passing_yards_after_catch_avg?: number | null
+    passing_first_downs_avg?: number | null
+    carries_avg?: number | null
+    rushing_yards_avg?: number | null
+    rushing_tds_avg?: number | null
+    rushing_fumbles_avg?: number | null
+    rushing_fumbles_lost_avg?: number | null
+    rushing_first_downs_avg?: number | null
+    rushing_epa_avg?: number | null
+    receptions_avg?: number | null
+    targets_avg?: number | null
+    receiving_yards_avg?: number | null
+    receiving_tds_avg?: number | null
+    receiving_air_yards_avg?: number | null
+    receiving_yards_after_catch_avg?: number | null
+    receiving_first_downs_avg?: number | null
+    receiving_epa_avg?: number | null
+    racr_avg?: number | null
+    target_share_avg?: number | null
+    air_yards_share_avg?: number | null
+    wopr_avg?: number | null
+    fantasy_points_avg?: number | null
+    fantasy_points_ppr_avg?: number | null
+    YPRR?: number | null
+    routes?: number | null
+    routes_per_game?: number | null
+    TPRR?: number | null
+    firstDPRR?: number | null
+  }
+
+  export type PlayerSeasonUncheckedCreateInput = {
+    player_id: string
+    player_name: string
+    season: number
+    games_played: number
+    position?: string | null
+    completions_total?: number | null
+    attempts_total?: number | null
+    passing_yards_total?: number | null
+    passing_tds_total?: number | null
+    interceptions_total?: number | null
+    passing_first_downs_total?: number | null
+    carries_total?: number | null
+    rushing_yards_total?: number | null
+    rushing_tds_total?: number | null
+    rushing_fumbles_total?: number | null
+    rushing_fumbles_lost_total?: number | null
+    rushing_first_downs_total?: number | null
+    targets_total?: number | null
+    receiving_yards_total?: number | null
+    receiving_tds_total?: number | null
+    receiving_air_yards_total?: number | null
+    receiving_yards_after_catch_total?: number | null
+    receiving_first_downs_total?: number | null
+    fantasy_points_total?: number | null
+    completions_avg?: number | null
+    attempts_avg?: number | null
+    passing_yards_avg?: number | null
+    passing_tds_avg?: number | null
+    interceptions_avg?: number | null
+    passing_air_yards_avg?: number | null
+    passing_yards_after_catch_avg?: number | null
+    passing_first_downs_avg?: number | null
+    carries_avg?: number | null
+    rushing_yards_avg?: number | null
+    rushing_tds_avg?: number | null
+    rushing_fumbles_avg?: number | null
+    rushing_fumbles_lost_avg?: number | null
+    rushing_first_downs_avg?: number | null
+    rushing_epa_avg?: number | null
+    receptions_avg?: number | null
+    targets_avg?: number | null
+    receiving_yards_avg?: number | null
+    receiving_tds_avg?: number | null
+    receiving_air_yards_avg?: number | null
+    receiving_yards_after_catch_avg?: number | null
+    receiving_first_downs_avg?: number | null
+    receiving_epa_avg?: number | null
+    racr_avg?: number | null
+    target_share_avg?: number | null
+    air_yards_share_avg?: number | null
+    wopr_avg?: number | null
+    fantasy_points_avg?: number | null
+    fantasy_points_ppr_avg?: number | null
+    YPRR?: number | null
+    routes?: number | null
+    routes_per_game?: number | null
+    TPRR?: number | null
+    firstDPRR?: number | null
+  }
+
+  export type PlayerSeasonUpdateInput = {
+    player_id?: StringFieldUpdateOperationsInput | string
+    player_name?: StringFieldUpdateOperationsInput | string
+    season?: IntFieldUpdateOperationsInput | number
+    games_played?: IntFieldUpdateOperationsInput | number
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    completions_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    attempts_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_yards_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_tds_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    interceptions_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_first_downs_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    carries_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_yards_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_tds_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_fumbles_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_fumbles_lost_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_first_downs_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    targets_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_yards_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_tds_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_air_yards_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_yards_after_catch_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_first_downs_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    fantasy_points_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    completions_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    attempts_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_yards_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_tds_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    interceptions_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_air_yards_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_yards_after_catch_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_first_downs_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    carries_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_yards_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_tds_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_fumbles_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_fumbles_lost_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_first_downs_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_epa_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    receptions_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    targets_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_yards_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_tds_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_air_yards_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_yards_after_catch_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_first_downs_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_epa_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    racr_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    target_share_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    air_yards_share_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    wopr_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    fantasy_points_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    fantasy_points_ppr_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    YPRR?: NullableFloatFieldUpdateOperationsInput | number | null
+    routes?: NullableFloatFieldUpdateOperationsInput | number | null
+    routes_per_game?: NullableFloatFieldUpdateOperationsInput | number | null
+    TPRR?: NullableFloatFieldUpdateOperationsInput | number | null
+    firstDPRR?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type PlayerSeasonUncheckedUpdateInput = {
+    player_id?: StringFieldUpdateOperationsInput | string
+    player_name?: StringFieldUpdateOperationsInput | string
+    season?: IntFieldUpdateOperationsInput | number
+    games_played?: IntFieldUpdateOperationsInput | number
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    completions_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    attempts_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_yards_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_tds_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    interceptions_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_first_downs_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    carries_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_yards_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_tds_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_fumbles_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_fumbles_lost_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_first_downs_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    targets_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_yards_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_tds_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_air_yards_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_yards_after_catch_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_first_downs_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    fantasy_points_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    completions_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    attempts_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_yards_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_tds_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    interceptions_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_air_yards_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_yards_after_catch_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_first_downs_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    carries_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_yards_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_tds_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_fumbles_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_fumbles_lost_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_first_downs_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_epa_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    receptions_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    targets_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_yards_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_tds_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_air_yards_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_yards_after_catch_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_first_downs_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_epa_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    racr_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    target_share_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    air_yards_share_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    wopr_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    fantasy_points_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    fantasy_points_ppr_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    YPRR?: NullableFloatFieldUpdateOperationsInput | number | null
+    routes?: NullableFloatFieldUpdateOperationsInput | number | null
+    routes_per_game?: NullableFloatFieldUpdateOperationsInput | number | null
+    TPRR?: NullableFloatFieldUpdateOperationsInput | number | null
+    firstDPRR?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type PlayerSeasonCreateManyInput = {
+    player_id: string
+    player_name: string
+    season: number
+    games_played: number
+    position?: string | null
+    completions_total?: number | null
+    attempts_total?: number | null
+    passing_yards_total?: number | null
+    passing_tds_total?: number | null
+    interceptions_total?: number | null
+    passing_first_downs_total?: number | null
+    carries_total?: number | null
+    rushing_yards_total?: number | null
+    rushing_tds_total?: number | null
+    rushing_fumbles_total?: number | null
+    rushing_fumbles_lost_total?: number | null
+    rushing_first_downs_total?: number | null
+    targets_total?: number | null
+    receiving_yards_total?: number | null
+    receiving_tds_total?: number | null
+    receiving_air_yards_total?: number | null
+    receiving_yards_after_catch_total?: number | null
+    receiving_first_downs_total?: number | null
+    fantasy_points_total?: number | null
+    completions_avg?: number | null
+    attempts_avg?: number | null
+    passing_yards_avg?: number | null
+    passing_tds_avg?: number | null
+    interceptions_avg?: number | null
+    passing_air_yards_avg?: number | null
+    passing_yards_after_catch_avg?: number | null
+    passing_first_downs_avg?: number | null
+    carries_avg?: number | null
+    rushing_yards_avg?: number | null
+    rushing_tds_avg?: number | null
+    rushing_fumbles_avg?: number | null
+    rushing_fumbles_lost_avg?: number | null
+    rushing_first_downs_avg?: number | null
+    rushing_epa_avg?: number | null
+    receptions_avg?: number | null
+    targets_avg?: number | null
+    receiving_yards_avg?: number | null
+    receiving_tds_avg?: number | null
+    receiving_air_yards_avg?: number | null
+    receiving_yards_after_catch_avg?: number | null
+    receiving_first_downs_avg?: number | null
+    receiving_epa_avg?: number | null
+    racr_avg?: number | null
+    target_share_avg?: number | null
+    air_yards_share_avg?: number | null
+    wopr_avg?: number | null
+    fantasy_points_avg?: number | null
+    fantasy_points_ppr_avg?: number | null
+    YPRR?: number | null
+    routes?: number | null
+    routes_per_game?: number | null
+    TPRR?: number | null
+    firstDPRR?: number | null
+  }
+
+  export type PlayerSeasonUpdateManyMutationInput = {
+    player_id?: StringFieldUpdateOperationsInput | string
+    player_name?: StringFieldUpdateOperationsInput | string
+    season?: IntFieldUpdateOperationsInput | number
+    games_played?: IntFieldUpdateOperationsInput | number
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    completions_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    attempts_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_yards_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_tds_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    interceptions_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_first_downs_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    carries_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_yards_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_tds_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_fumbles_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_fumbles_lost_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_first_downs_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    targets_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_yards_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_tds_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_air_yards_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_yards_after_catch_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_first_downs_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    fantasy_points_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    completions_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    attempts_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_yards_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_tds_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    interceptions_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_air_yards_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_yards_after_catch_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_first_downs_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    carries_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_yards_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_tds_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_fumbles_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_fumbles_lost_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_first_downs_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_epa_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    receptions_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    targets_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_yards_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_tds_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_air_yards_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_yards_after_catch_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_first_downs_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_epa_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    racr_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    target_share_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    air_yards_share_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    wopr_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    fantasy_points_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    fantasy_points_ppr_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    YPRR?: NullableFloatFieldUpdateOperationsInput | number | null
+    routes?: NullableFloatFieldUpdateOperationsInput | number | null
+    routes_per_game?: NullableFloatFieldUpdateOperationsInput | number | null
+    TPRR?: NullableFloatFieldUpdateOperationsInput | number | null
+    firstDPRR?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
+  export type PlayerSeasonUncheckedUpdateManyInput = {
+    player_id?: StringFieldUpdateOperationsInput | string
+    player_name?: StringFieldUpdateOperationsInput | string
+    season?: IntFieldUpdateOperationsInput | number
+    games_played?: IntFieldUpdateOperationsInput | number
+    position?: NullableStringFieldUpdateOperationsInput | string | null
+    completions_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    attempts_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_yards_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_tds_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    interceptions_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_first_downs_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    carries_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_yards_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_tds_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_fumbles_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_fumbles_lost_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_first_downs_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    targets_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_yards_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_tds_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_air_yards_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_yards_after_catch_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_first_downs_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    fantasy_points_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    completions_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    attempts_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_yards_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_tds_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    interceptions_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_air_yards_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_yards_after_catch_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    passing_first_downs_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    carries_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_yards_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_tds_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_fumbles_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_fumbles_lost_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_first_downs_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    rushing_epa_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    receptions_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    targets_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_yards_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_tds_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_air_yards_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_yards_after_catch_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_first_downs_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    receiving_epa_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    racr_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    target_share_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    air_yards_share_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    wopr_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    fantasy_points_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    fantasy_points_ppr_avg?: NullableFloatFieldUpdateOperationsInput | number | null
+    YPRR?: NullableFloatFieldUpdateOperationsInput | number | null
+    routes?: NullableFloatFieldUpdateOperationsInput | number | null
+    routes_per_game?: NullableFloatFieldUpdateOperationsInput | number | null
+    TPRR?: NullableFloatFieldUpdateOperationsInput | number | null
+    firstDPRR?: NullableFloatFieldUpdateOperationsInput | number | null
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -8371,6 +11207,337 @@ export namespace Prisma {
     yprr?: SortOrder
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type PlayerSeasonPlayer_idSeasonCompoundUniqueInput = {
+    player_id: string
+    season: number
+  }
+
+  export type PlayerSeasonCountOrderByAggregateInput = {
+    player_id?: SortOrder
+    player_name?: SortOrder
+    season?: SortOrder
+    games_played?: SortOrder
+    position?: SortOrder
+    completions_total?: SortOrder
+    attempts_total?: SortOrder
+    passing_yards_total?: SortOrder
+    passing_tds_total?: SortOrder
+    interceptions_total?: SortOrder
+    passing_first_downs_total?: SortOrder
+    carries_total?: SortOrder
+    rushing_yards_total?: SortOrder
+    rushing_tds_total?: SortOrder
+    rushing_fumbles_total?: SortOrder
+    rushing_fumbles_lost_total?: SortOrder
+    rushing_first_downs_total?: SortOrder
+    targets_total?: SortOrder
+    receiving_yards_total?: SortOrder
+    receiving_tds_total?: SortOrder
+    receiving_air_yards_total?: SortOrder
+    receiving_yards_after_catch_total?: SortOrder
+    receiving_first_downs_total?: SortOrder
+    fantasy_points_total?: SortOrder
+    completions_avg?: SortOrder
+    attempts_avg?: SortOrder
+    passing_yards_avg?: SortOrder
+    passing_tds_avg?: SortOrder
+    interceptions_avg?: SortOrder
+    passing_air_yards_avg?: SortOrder
+    passing_yards_after_catch_avg?: SortOrder
+    passing_first_downs_avg?: SortOrder
+    carries_avg?: SortOrder
+    rushing_yards_avg?: SortOrder
+    rushing_tds_avg?: SortOrder
+    rushing_fumbles_avg?: SortOrder
+    rushing_fumbles_lost_avg?: SortOrder
+    rushing_first_downs_avg?: SortOrder
+    rushing_epa_avg?: SortOrder
+    receptions_avg?: SortOrder
+    targets_avg?: SortOrder
+    receiving_yards_avg?: SortOrder
+    receiving_tds_avg?: SortOrder
+    receiving_air_yards_avg?: SortOrder
+    receiving_yards_after_catch_avg?: SortOrder
+    receiving_first_downs_avg?: SortOrder
+    receiving_epa_avg?: SortOrder
+    racr_avg?: SortOrder
+    target_share_avg?: SortOrder
+    air_yards_share_avg?: SortOrder
+    wopr_avg?: SortOrder
+    fantasy_points_avg?: SortOrder
+    fantasy_points_ppr_avg?: SortOrder
+    YPRR?: SortOrder
+    routes?: SortOrder
+    routes_per_game?: SortOrder
+    TPRR?: SortOrder
+    firstDPRR?: SortOrder
+  }
+
+  export type PlayerSeasonAvgOrderByAggregateInput = {
+    season?: SortOrder
+    games_played?: SortOrder
+    completions_total?: SortOrder
+    attempts_total?: SortOrder
+    passing_yards_total?: SortOrder
+    passing_tds_total?: SortOrder
+    interceptions_total?: SortOrder
+    passing_first_downs_total?: SortOrder
+    carries_total?: SortOrder
+    rushing_yards_total?: SortOrder
+    rushing_tds_total?: SortOrder
+    rushing_fumbles_total?: SortOrder
+    rushing_fumbles_lost_total?: SortOrder
+    rushing_first_downs_total?: SortOrder
+    targets_total?: SortOrder
+    receiving_yards_total?: SortOrder
+    receiving_tds_total?: SortOrder
+    receiving_air_yards_total?: SortOrder
+    receiving_yards_after_catch_total?: SortOrder
+    receiving_first_downs_total?: SortOrder
+    fantasy_points_total?: SortOrder
+    completions_avg?: SortOrder
+    attempts_avg?: SortOrder
+    passing_yards_avg?: SortOrder
+    passing_tds_avg?: SortOrder
+    interceptions_avg?: SortOrder
+    passing_air_yards_avg?: SortOrder
+    passing_yards_after_catch_avg?: SortOrder
+    passing_first_downs_avg?: SortOrder
+    carries_avg?: SortOrder
+    rushing_yards_avg?: SortOrder
+    rushing_tds_avg?: SortOrder
+    rushing_fumbles_avg?: SortOrder
+    rushing_fumbles_lost_avg?: SortOrder
+    rushing_first_downs_avg?: SortOrder
+    rushing_epa_avg?: SortOrder
+    receptions_avg?: SortOrder
+    targets_avg?: SortOrder
+    receiving_yards_avg?: SortOrder
+    receiving_tds_avg?: SortOrder
+    receiving_air_yards_avg?: SortOrder
+    receiving_yards_after_catch_avg?: SortOrder
+    receiving_first_downs_avg?: SortOrder
+    receiving_epa_avg?: SortOrder
+    racr_avg?: SortOrder
+    target_share_avg?: SortOrder
+    air_yards_share_avg?: SortOrder
+    wopr_avg?: SortOrder
+    fantasy_points_avg?: SortOrder
+    fantasy_points_ppr_avg?: SortOrder
+    YPRR?: SortOrder
+    routes?: SortOrder
+    routes_per_game?: SortOrder
+    TPRR?: SortOrder
+    firstDPRR?: SortOrder
+  }
+
+  export type PlayerSeasonMaxOrderByAggregateInput = {
+    player_id?: SortOrder
+    player_name?: SortOrder
+    season?: SortOrder
+    games_played?: SortOrder
+    position?: SortOrder
+    completions_total?: SortOrder
+    attempts_total?: SortOrder
+    passing_yards_total?: SortOrder
+    passing_tds_total?: SortOrder
+    interceptions_total?: SortOrder
+    passing_first_downs_total?: SortOrder
+    carries_total?: SortOrder
+    rushing_yards_total?: SortOrder
+    rushing_tds_total?: SortOrder
+    rushing_fumbles_total?: SortOrder
+    rushing_fumbles_lost_total?: SortOrder
+    rushing_first_downs_total?: SortOrder
+    targets_total?: SortOrder
+    receiving_yards_total?: SortOrder
+    receiving_tds_total?: SortOrder
+    receiving_air_yards_total?: SortOrder
+    receiving_yards_after_catch_total?: SortOrder
+    receiving_first_downs_total?: SortOrder
+    fantasy_points_total?: SortOrder
+    completions_avg?: SortOrder
+    attempts_avg?: SortOrder
+    passing_yards_avg?: SortOrder
+    passing_tds_avg?: SortOrder
+    interceptions_avg?: SortOrder
+    passing_air_yards_avg?: SortOrder
+    passing_yards_after_catch_avg?: SortOrder
+    passing_first_downs_avg?: SortOrder
+    carries_avg?: SortOrder
+    rushing_yards_avg?: SortOrder
+    rushing_tds_avg?: SortOrder
+    rushing_fumbles_avg?: SortOrder
+    rushing_fumbles_lost_avg?: SortOrder
+    rushing_first_downs_avg?: SortOrder
+    rushing_epa_avg?: SortOrder
+    receptions_avg?: SortOrder
+    targets_avg?: SortOrder
+    receiving_yards_avg?: SortOrder
+    receiving_tds_avg?: SortOrder
+    receiving_air_yards_avg?: SortOrder
+    receiving_yards_after_catch_avg?: SortOrder
+    receiving_first_downs_avg?: SortOrder
+    receiving_epa_avg?: SortOrder
+    racr_avg?: SortOrder
+    target_share_avg?: SortOrder
+    air_yards_share_avg?: SortOrder
+    wopr_avg?: SortOrder
+    fantasy_points_avg?: SortOrder
+    fantasy_points_ppr_avg?: SortOrder
+    YPRR?: SortOrder
+    routes?: SortOrder
+    routes_per_game?: SortOrder
+    TPRR?: SortOrder
+    firstDPRR?: SortOrder
+  }
+
+  export type PlayerSeasonMinOrderByAggregateInput = {
+    player_id?: SortOrder
+    player_name?: SortOrder
+    season?: SortOrder
+    games_played?: SortOrder
+    position?: SortOrder
+    completions_total?: SortOrder
+    attempts_total?: SortOrder
+    passing_yards_total?: SortOrder
+    passing_tds_total?: SortOrder
+    interceptions_total?: SortOrder
+    passing_first_downs_total?: SortOrder
+    carries_total?: SortOrder
+    rushing_yards_total?: SortOrder
+    rushing_tds_total?: SortOrder
+    rushing_fumbles_total?: SortOrder
+    rushing_fumbles_lost_total?: SortOrder
+    rushing_first_downs_total?: SortOrder
+    targets_total?: SortOrder
+    receiving_yards_total?: SortOrder
+    receiving_tds_total?: SortOrder
+    receiving_air_yards_total?: SortOrder
+    receiving_yards_after_catch_total?: SortOrder
+    receiving_first_downs_total?: SortOrder
+    fantasy_points_total?: SortOrder
+    completions_avg?: SortOrder
+    attempts_avg?: SortOrder
+    passing_yards_avg?: SortOrder
+    passing_tds_avg?: SortOrder
+    interceptions_avg?: SortOrder
+    passing_air_yards_avg?: SortOrder
+    passing_yards_after_catch_avg?: SortOrder
+    passing_first_downs_avg?: SortOrder
+    carries_avg?: SortOrder
+    rushing_yards_avg?: SortOrder
+    rushing_tds_avg?: SortOrder
+    rushing_fumbles_avg?: SortOrder
+    rushing_fumbles_lost_avg?: SortOrder
+    rushing_first_downs_avg?: SortOrder
+    rushing_epa_avg?: SortOrder
+    receptions_avg?: SortOrder
+    targets_avg?: SortOrder
+    receiving_yards_avg?: SortOrder
+    receiving_tds_avg?: SortOrder
+    receiving_air_yards_avg?: SortOrder
+    receiving_yards_after_catch_avg?: SortOrder
+    receiving_first_downs_avg?: SortOrder
+    receiving_epa_avg?: SortOrder
+    racr_avg?: SortOrder
+    target_share_avg?: SortOrder
+    air_yards_share_avg?: SortOrder
+    wopr_avg?: SortOrder
+    fantasy_points_avg?: SortOrder
+    fantasy_points_ppr_avg?: SortOrder
+    YPRR?: SortOrder
+    routes?: SortOrder
+    routes_per_game?: SortOrder
+    TPRR?: SortOrder
+    firstDPRR?: SortOrder
+  }
+
+  export type PlayerSeasonSumOrderByAggregateInput = {
+    season?: SortOrder
+    games_played?: SortOrder
+    completions_total?: SortOrder
+    attempts_total?: SortOrder
+    passing_yards_total?: SortOrder
+    passing_tds_total?: SortOrder
+    interceptions_total?: SortOrder
+    passing_first_downs_total?: SortOrder
+    carries_total?: SortOrder
+    rushing_yards_total?: SortOrder
+    rushing_tds_total?: SortOrder
+    rushing_fumbles_total?: SortOrder
+    rushing_fumbles_lost_total?: SortOrder
+    rushing_first_downs_total?: SortOrder
+    targets_total?: SortOrder
+    receiving_yards_total?: SortOrder
+    receiving_tds_total?: SortOrder
+    receiving_air_yards_total?: SortOrder
+    receiving_yards_after_catch_total?: SortOrder
+    receiving_first_downs_total?: SortOrder
+    fantasy_points_total?: SortOrder
+    completions_avg?: SortOrder
+    attempts_avg?: SortOrder
+    passing_yards_avg?: SortOrder
+    passing_tds_avg?: SortOrder
+    interceptions_avg?: SortOrder
+    passing_air_yards_avg?: SortOrder
+    passing_yards_after_catch_avg?: SortOrder
+    passing_first_downs_avg?: SortOrder
+    carries_avg?: SortOrder
+    rushing_yards_avg?: SortOrder
+    rushing_tds_avg?: SortOrder
+    rushing_fumbles_avg?: SortOrder
+    rushing_fumbles_lost_avg?: SortOrder
+    rushing_first_downs_avg?: SortOrder
+    rushing_epa_avg?: SortOrder
+    receptions_avg?: SortOrder
+    targets_avg?: SortOrder
+    receiving_yards_avg?: SortOrder
+    receiving_tds_avg?: SortOrder
+    receiving_air_yards_avg?: SortOrder
+    receiving_yards_after_catch_avg?: SortOrder
+    receiving_first_downs_avg?: SortOrder
+    receiving_epa_avg?: SortOrder
+    racr_avg?: SortOrder
+    target_share_avg?: SortOrder
+    air_yards_share_avg?: SortOrder
+    wopr_avg?: SortOrder
+    fantasy_points_avg?: SortOrder
+    fantasy_points_ppr_avg?: SortOrder
+    YPRR?: SortOrder
+    routes?: SortOrder
+    routes_per_game?: SortOrder
+    TPRR?: SortOrder
+    firstDPRR?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -8389,6 +11556,14 @@ export namespace Prisma {
 
   export type NullableIntFieldUpdateOperationsInput = {
     set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
     increment?: number
     decrement?: number
     multiply?: number
@@ -8543,6 +11718,33 @@ export namespace Prisma {
     _sum?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedIntNullableFilter<$PrismaModel>
     _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
 
