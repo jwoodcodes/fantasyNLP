@@ -9,7 +9,7 @@ export const SuggestedQueries = ({
   const suggestionQueries = [
     {
       desktop: "Show games where Xavier Worthy played and Rashee Rice did not play",
-      // mobile: "SF vs NY",
+      mobile: "",
     },
    
   ];
