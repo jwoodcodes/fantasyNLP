@@ -110,6 +110,11 @@ export default function Page() {
                     <SuggestedQueries
                       handleSuggestionClick={handleSuggestionClick}
                     />
+                    // <div>
+                    //   <p>
+                    //     enter query to display data
+                    //   </p>
+                    // </div>
                   ) : (
                     <motion.div
                       key="results"

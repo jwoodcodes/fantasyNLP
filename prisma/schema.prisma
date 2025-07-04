@@ -138,6 +138,7 @@ model ReceivingStat {
   yardsAfterCatchPerReception     Float?   @map("yards_after_catch_per_reception")
   yardsPerReception               Float?   @map("yards_per_reception")
   yprr                            Float?
+  season                          Int?
 }
 
 model PlayerSeason {
