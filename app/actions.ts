@@ -342,7 +342,7 @@ export const generateQuery = async (input: string) => {
      - if the user ask for a stat per game in a season, return the avg version of that stat.
     - If the user asks for a rate, return it as a decimal (e.g., 10% should be 0.1).
     - All queries must limit the number of returned entries to 100.
-    - if the user says, "show the top 10 players in a stat" return the top 10 players in that stat. change the limit from 100 to whatever number the user specifies as long as it's not greater than 100.
+    - if the user says, "show the top 10 players in a stat" return the top 10 players in that stat. change the limit from 100 to whatever number the user specifies, as long as it's not greater than 100.
     
     `,
       prompt: `Generate the query necessary to retrieve the data the user wants: ${input}`,
