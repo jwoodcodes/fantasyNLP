@@ -73,6 +73,7 @@ async function getCompleteSeasonalStats(): Promise<{ [key: string]: PlayerSeason
           seasonalStats[key].games_played += 1;
 
           for (const stat in game) {
+            if (game.season_type === 'REG') {
             if (
               typeof game[stat] === 'number' &&
               stat !== 'season' &&
@@ -84,6 +85,7 @@ async function getCompleteSeasonalStats(): Promise<{ [key: string]: PlayerSeason
               seasonalStats[key][`${stat}_total`] += game[stat];
             }
           }
+        }
         });
 
         const desiredProperties = [
@@ -94,7 +96,7 @@ async function getCompleteSeasonalStats(): Promise<{ [key: string]: PlayerSeason
           'receiving_first_downs_total', 'fantasy_points_total', 'completions_avg', 'attempts_avg', 'passing_yards_avg', 'passing_tds_avg',
           'interceptions_avg', 'passing_air_yards_avg', 'passing_yards_after_catch_avg', 'passing_first_downs_avg', 'carries_avg',
           'rushing_yards_avg', 'rushing_tds_avg', 'rushing_fumbles_avg', 'rushing_fumbles_lost_avg', 'rushing_first_downs_avg',
-          'rushing_epa_avg', 'receptions_avg', 'targets_avg', 'receiving_yards_avg', 'receiving_tds_avg', 'receiving_air_yards_avg',
+          'rushing_epa_avg', 'receptions_avg', 'receptions_total','targets_avg', 'receiving_yards_avg', 'receiving_tds_avg', 'receiving_air_yards_avg',
           'receiving_yards_after_catch_avg', 'receiving_first_downs_avg', 'receiving_epa_avg', 'racr_avg', 'target_share_avg',
           'air_yards_share_avg', 'wopr_avg', 'fantasy_points_avg', 'fantasy_points_ppr_avg', 'YPRR', 'routes', 'routes_per_game',
           'TPRR', 'firstDPRR'

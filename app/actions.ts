@@ -165,7 +165,7 @@ export const generateQuery = async (input: string) => {
     - When a user asks for data "over time", this should be interpreted as by season.
     - Every query must return quantitative data that can be plotted on a chart. This means at least two columns are required.
     - Every query must return all columns for the matched records except headshot_url, never return headshot_url.
-    - if the players postion is QB and the user is asking for gamesthen return colums for: - 
+    - if the players postion is QB and the user is asking for games then return colums for: - 
       - "player_name": String
       - "player_display_name": String
       - "position": String
@@ -339,9 +339,10 @@ export const generateQuery = async (input: string) => {
       - "fantasy_points_ppr_avg": Float
 
       if the user asks for multiple players and one has a postion of QB and the others postions is not QB return all columns except headshot_url
-     
+     - if the user ask for a stat per game in a season return the avg version of that stat.
     - If the user asks for a rate, return it as a decimal (e.g., 10% should be 0.1).
     - All queries must limit the number of returned entries to 100.
+    - if the user says, "show the top 10 players in a stat" return the top 10 players in that stat. change the limit from 100 to whatever number the user specifies as long as it's not greater than 100.
     
     `,
       prompt: `Generate the query necessary to retrieve the data the user wants: ${input}`,

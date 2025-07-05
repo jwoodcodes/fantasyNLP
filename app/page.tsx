@@ -158,7 +158,7 @@ export default function Page() {
               </div>
             </div>
           </div>
-          <ProjectInfo />
+          {/* <ProjectInfo /> */}
         </motion.div>
       </div>
     </div>

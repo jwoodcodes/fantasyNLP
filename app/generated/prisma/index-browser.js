@@ -242,7 +242,8 @@ exports.Prisma.ReceivingStatScalarFieldEnum = {
   yardsAfterCatch: 'yardsAfterCatch',
   yardsAfterCatchPerReception: 'yardsAfterCatchPerReception',
   yardsPerReception: 'yardsPerReception',
-  yprr: 'yprr'
+  yprr: 'yprr',
+  season: 'season'
 };
 
 exports.Prisma.PlayerSeasonScalarFieldEnum = {
@@ -264,6 +265,7 @@ exports.Prisma.PlayerSeasonScalarFieldEnum = {
   rushing_fumbles_lost_total: 'rushing_fumbles_lost_total',
   rushing_first_downs_total: 'rushing_first_downs_total',
   targets_total: 'targets_total',
+  receptions_total: 'receptions_total',
   receiving_yards_total: 'receiving_yards_total',
   receiving_tds_total: 'receiving_tds_total',
   receiving_air_yards_total: 'receiving_air_yards_total',
