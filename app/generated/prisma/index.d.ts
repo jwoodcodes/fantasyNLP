@@ -4242,6 +4242,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception: number | null
     yardsPerReception: number | null
     yprr: number | null
+    season: number | null
   }
 
   export type ReceivingStatSumAggregateOutputType = {
@@ -4286,6 +4287,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception: number | null
     yardsPerReception: number | null
     yprr: number | null
+    season: number | null
   }
 
   export type ReceivingStatMinAggregateOutputType = {
@@ -4335,6 +4337,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception: number | null
     yardsPerReception: number | null
     yprr: number | null
+    season: number | null
   }
 
   export type ReceivingStatMaxAggregateOutputType = {
@@ -4384,6 +4387,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception: number | null
     yardsPerReception: number | null
     yprr: number | null
+    season: number | null
   }
 
   export type ReceivingStatCountAggregateOutputType = {
@@ -4433,6 +4437,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception: number
     yardsPerReception: number
     yprr: number
+    season: number
     _all: number
   }
 
@@ -4479,6 +4484,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception?: true
     yardsPerReception?: true
     yprr?: true
+    season?: true
   }
 
   export type ReceivingStatSumAggregateInputType = {
@@ -4523,6 +4529,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception?: true
     yardsPerReception?: true
     yprr?: true
+    season?: true
   }
 
   export type ReceivingStatMinAggregateInputType = {
@@ -4572,6 +4579,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception?: true
     yardsPerReception?: true
     yprr?: true
+    season?: true
   }
 
   export type ReceivingStatMaxAggregateInputType = {
@@ -4621,6 +4629,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception?: true
     yardsPerReception?: true
     yprr?: true
+    season?: true
   }
 
   export type ReceivingStatCountAggregateInputType = {
@@ -4670,6 +4679,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception?: true
     yardsPerReception?: true
     yprr?: true
+    season?: true
     _all?: true
   }
 
@@ -4806,6 +4816,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception: number | null
     yardsPerReception: number | null
     yprr: number | null
+    season: number | null
     _count: ReceivingStatCountAggregateOutputType | null
     _avg: ReceivingStatAvgAggregateOutputType | null
     _sum: ReceivingStatSumAggregateOutputType | null
@@ -4874,6 +4885,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception?: boolean
     yardsPerReception?: boolean
     yprr?: boolean
+    season?: boolean
   }, ExtArgs["result"]["receivingStat"]>
 
   export type ReceivingStatSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4923,6 +4935,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception?: boolean
     yardsPerReception?: boolean
     yprr?: boolean
+    season?: boolean
   }, ExtArgs["result"]["receivingStat"]>
 
   export type ReceivingStatSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4972,6 +4985,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception?: boolean
     yardsPerReception?: boolean
     yprr?: boolean
+    season?: boolean
   }, ExtArgs["result"]["receivingStat"]>
 
   export type ReceivingStatSelectScalar = {
@@ -5021,9 +5035,10 @@ export namespace Prisma {
     yardsAfterCatchPerReception?: boolean
     yardsPerReception?: boolean
     yprr?: boolean
+    season?: boolean
   }
 
-  export type ReceivingStatOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "player" | "playerId" | "position" | "teamName" | "playerGameCount" | "avgDepthOfTarget" | "avoidedTackles" | "caughtPercent" | "contestedCatchRate" | "contestedReceptions" | "contestedTargets" | "declinedPenalties" | "dropRate" | "drops" | "firstDowns" | "franchiseId" | "fumbles" | "gradesHandsDrop" | "gradesHandsFumble" | "gradesOffense" | "gradesPassBlock" | "gradesPassRoute" | "inlineRate" | "inlineSnaps" | "interceptions" | "longest" | "passBlockRate" | "passBlocks" | "passPlays" | "penalties" | "receptions" | "routeRate" | "routes" | "slotRate" | "slotSnaps" | "targetedQbRating" | "targets" | "touchdowns" | "wideRate" | "wideSnaps" | "yards" | "yardsAfterCatch" | "yardsAfterCatchPerReception" | "yardsPerReception" | "yprr", ExtArgs["result"]["receivingStat"]>
+  export type ReceivingStatOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "player" | "playerId" | "position" | "teamName" | "playerGameCount" | "avgDepthOfTarget" | "avoidedTackles" | "caughtPercent" | "contestedCatchRate" | "contestedReceptions" | "contestedTargets" | "declinedPenalties" | "dropRate" | "drops" | "firstDowns" | "franchiseId" | "fumbles" | "gradesHandsDrop" | "gradesHandsFumble" | "gradesOffense" | "gradesPassBlock" | "gradesPassRoute" | "inlineRate" | "inlineSnaps" | "interceptions" | "longest" | "passBlockRate" | "passBlocks" | "passPlays" | "penalties" | "receptions" | "routeRate" | "routes" | "slotRate" | "slotSnaps" | "targetedQbRating" | "targets" | "touchdowns" | "wideRate" | "wideSnaps" | "yards" | "yardsAfterCatch" | "yardsAfterCatchPerReception" | "yardsPerReception" | "yprr" | "season", ExtArgs["result"]["receivingStat"]>
 
   export type $ReceivingStatPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "ReceivingStat"
@@ -5075,6 +5090,7 @@ export namespace Prisma {
       yardsAfterCatchPerReception: number | null
       yardsPerReception: number | null
       yprr: number | null
+      season: number | null
     }, ExtArgs["result"]["receivingStat"]>
     composites: {}
   }
@@ -5544,6 +5560,7 @@ export namespace Prisma {
     readonly yardsAfterCatchPerReception: FieldRef<"ReceivingStat", 'Float'>
     readonly yardsPerReception: FieldRef<"ReceivingStat", 'Float'>
     readonly yprr: FieldRef<"ReceivingStat", 'Float'>
+    readonly season: FieldRef<"ReceivingStat", 'Int'>
   }
     
 
@@ -5938,6 +5955,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total: number | null
     rushing_first_downs_total: number | null
     targets_total: number | null
+    receptions_total: number | null
     receiving_yards_total: number | null
     receiving_tds_total: number | null
     receiving_air_yards_total: number | null
@@ -5996,6 +6014,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total: number | null
     rushing_first_downs_total: number | null
     targets_total: number | null
+    receptions_total: number | null
     receiving_yards_total: number | null
     receiving_tds_total: number | null
     receiving_air_yards_total: number | null
@@ -6057,6 +6076,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total: number | null
     rushing_first_downs_total: number | null
     targets_total: number | null
+    receptions_total: number | null
     receiving_yards_total: number | null
     receiving_tds_total: number | null
     receiving_air_yards_total: number | null
@@ -6118,6 +6138,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total: number | null
     rushing_first_downs_total: number | null
     targets_total: number | null
+    receptions_total: number | null
     receiving_yards_total: number | null
     receiving_tds_total: number | null
     receiving_air_yards_total: number | null
@@ -6179,6 +6200,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total: number
     rushing_first_downs_total: number
     targets_total: number
+    receptions_total: number
     receiving_yards_total: number
     receiving_tds_total: number
     receiving_air_yards_total: number
@@ -6239,6 +6261,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total?: true
     rushing_first_downs_total?: true
     targets_total?: true
+    receptions_total?: true
     receiving_yards_total?: true
     receiving_tds_total?: true
     receiving_air_yards_total?: true
@@ -6297,6 +6320,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total?: true
     rushing_first_downs_total?: true
     targets_total?: true
+    receptions_total?: true
     receiving_yards_total?: true
     receiving_tds_total?: true
     receiving_air_yards_total?: true
@@ -6358,6 +6382,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total?: true
     rushing_first_downs_total?: true
     targets_total?: true
+    receptions_total?: true
     receiving_yards_total?: true
     receiving_tds_total?: true
     receiving_air_yards_total?: true
@@ -6419,6 +6444,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total?: true
     rushing_first_downs_total?: true
     targets_total?: true
+    receptions_total?: true
     receiving_yards_total?: true
     receiving_tds_total?: true
     receiving_air_yards_total?: true
@@ -6480,6 +6506,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total?: true
     rushing_first_downs_total?: true
     targets_total?: true
+    receptions_total?: true
     receiving_yards_total?: true
     receiving_tds_total?: true
     receiving_air_yards_total?: true
@@ -6628,6 +6655,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total: number | null
     rushing_first_downs_total: number | null
     targets_total: number | null
+    receptions_total: number | null
     receiving_yards_total: number | null
     receiving_tds_total: number | null
     receiving_air_yards_total: number | null
@@ -6708,6 +6736,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total?: boolean
     rushing_first_downs_total?: boolean
     targets_total?: boolean
+    receptions_total?: boolean
     receiving_yards_total?: boolean
     receiving_tds_total?: boolean
     receiving_air_yards_total?: boolean
@@ -6769,6 +6798,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total?: boolean
     rushing_first_downs_total?: boolean
     targets_total?: boolean
+    receptions_total?: boolean
     receiving_yards_total?: boolean
     receiving_tds_total?: boolean
     receiving_air_yards_total?: boolean
@@ -6830,6 +6860,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total?: boolean
     rushing_first_downs_total?: boolean
     targets_total?: boolean
+    receptions_total?: boolean
     receiving_yards_total?: boolean
     receiving_tds_total?: boolean
     receiving_air_yards_total?: boolean
@@ -6891,6 +6922,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total?: boolean
     rushing_first_downs_total?: boolean
     targets_total?: boolean
+    receptions_total?: boolean
     receiving_yards_total?: boolean
     receiving_tds_total?: boolean
     receiving_air_yards_total?: boolean
@@ -6933,7 +6965,7 @@ export namespace Prisma {
     firstDPRR?: boolean
   }
 
-  export type PlayerSeasonOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"player_id" | "player_name" | "season" | "games_played" | "position" | "completions_total" | "attempts_total" | "passing_yards_total" | "passing_tds_total" | "interceptions_total" | "passing_first_downs_total" | "carries_total" | "rushing_yards_total" | "rushing_tds_total" | "rushing_fumbles_total" | "rushing_fumbles_lost_total" | "rushing_first_downs_total" | "targets_total" | "receiving_yards_total" | "receiving_tds_total" | "receiving_air_yards_total" | "receiving_yards_after_catch_total" | "receiving_first_downs_total" | "fantasy_points_total" | "completions_avg" | "attempts_avg" | "passing_yards_avg" | "passing_tds_avg" | "interceptions_avg" | "passing_air_yards_avg" | "passing_yards_after_catch_avg" | "passing_first_downs_avg" | "carries_avg" | "rushing_yards_avg" | "rushing_tds_avg" | "rushing_fumbles_avg" | "rushing_fumbles_lost_avg" | "rushing_first_downs_avg" | "rushing_epa_avg" | "receptions_avg" | "targets_avg" | "receiving_yards_avg" | "receiving_tds_avg" | "receiving_air_yards_avg" | "receiving_yards_after_catch_avg" | "receiving_first_downs_avg" | "receiving_epa_avg" | "racr_avg" | "target_share_avg" | "air_yards_share_avg" | "wopr_avg" | "fantasy_points_avg" | "fantasy_points_ppr_avg" | "YPRR" | "routes" | "routes_per_game" | "TPRR" | "firstDPRR", ExtArgs["result"]["playerSeason"]>
+  export type PlayerSeasonOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"player_id" | "player_name" | "season" | "games_played" | "position" | "completions_total" | "attempts_total" | "passing_yards_total" | "passing_tds_total" | "interceptions_total" | "passing_first_downs_total" | "carries_total" | "rushing_yards_total" | "rushing_tds_total" | "rushing_fumbles_total" | "rushing_fumbles_lost_total" | "rushing_first_downs_total" | "targets_total" | "receptions_total" | "receiving_yards_total" | "receiving_tds_total" | "receiving_air_yards_total" | "receiving_yards_after_catch_total" | "receiving_first_downs_total" | "fantasy_points_total" | "completions_avg" | "attempts_avg" | "passing_yards_avg" | "passing_tds_avg" | "interceptions_avg" | "passing_air_yards_avg" | "passing_yards_after_catch_avg" | "passing_first_downs_avg" | "carries_avg" | "rushing_yards_avg" | "rushing_tds_avg" | "rushing_fumbles_avg" | "rushing_fumbles_lost_avg" | "rushing_first_downs_avg" | "rushing_epa_avg" | "receptions_avg" | "targets_avg" | "receiving_yards_avg" | "receiving_tds_avg" | "receiving_air_yards_avg" | "receiving_yards_after_catch_avg" | "receiving_first_downs_avg" | "receiving_epa_avg" | "racr_avg" | "target_share_avg" | "air_yards_share_avg" | "wopr_avg" | "fantasy_points_avg" | "fantasy_points_ppr_avg" | "YPRR" | "routes" | "routes_per_game" | "TPRR" | "firstDPRR", ExtArgs["result"]["playerSeason"]>
 
   export type $PlayerSeasonPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "PlayerSeason"
@@ -6957,6 +6989,7 @@ export namespace Prisma {
       rushing_fumbles_lost_total: number | null
       rushing_first_downs_total: number | null
       targets_total: number | null
+      receptions_total: number | null
       receiving_yards_total: number | null
       receiving_tds_total: number | null
       receiving_air_yards_total: number | null
@@ -7438,6 +7471,7 @@ export namespace Prisma {
     readonly rushing_fumbles_lost_total: FieldRef<"PlayerSeason", 'Float'>
     readonly rushing_first_downs_total: FieldRef<"PlayerSeason", 'Float'>
     readonly targets_total: FieldRef<"PlayerSeason", 'Float'>
+    readonly receptions_total: FieldRef<"PlayerSeason", 'Float'>
     readonly receiving_yards_total: FieldRef<"PlayerSeason", 'Float'>
     readonly receiving_tds_total: FieldRef<"PlayerSeason", 'Float'>
     readonly receiving_air_yards_total: FieldRef<"PlayerSeason", 'Float'>
@@ -7986,7 +8020,8 @@ export namespace Prisma {
     yardsAfterCatch: 'yardsAfterCatch',
     yardsAfterCatchPerReception: 'yardsAfterCatchPerReception',
     yardsPerReception: 'yardsPerReception',
-    yprr: 'yprr'
+    yprr: 'yprr',
+    season: 'season'
   };
 
   export type ReceivingStatScalarFieldEnum = (typeof ReceivingStatScalarFieldEnum)[keyof typeof ReceivingStatScalarFieldEnum]
@@ -8011,6 +8046,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total: 'rushing_fumbles_lost_total',
     rushing_first_downs_total: 'rushing_first_downs_total',
     targets_total: 'targets_total',
+    receptions_total: 'receptions_total',
     receiving_yards_total: 'receiving_yards_total',
     receiving_tds_total: 'receiving_tds_total',
     receiving_air_yards_total: 'receiving_air_yards_total',
@@ -8619,6 +8655,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception?: FloatNullableFilter<"ReceivingStat"> | number | null
     yardsPerReception?: FloatNullableFilter<"ReceivingStat"> | number | null
     yprr?: FloatNullableFilter<"ReceivingStat"> | number | null
+    season?: IntNullableFilter<"ReceivingStat"> | number | null
   }
 
   export type ReceivingStatOrderByWithRelationInput = {
@@ -8668,6 +8705,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception?: SortOrderInput | SortOrder
     yardsPerReception?: SortOrderInput | SortOrder
     yprr?: SortOrderInput | SortOrder
+    season?: SortOrderInput | SortOrder
   }
 
   export type ReceivingStatWhereUniqueInput = Prisma.AtLeast<{
@@ -8720,6 +8758,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception?: FloatNullableFilter<"ReceivingStat"> | number | null
     yardsPerReception?: FloatNullableFilter<"ReceivingStat"> | number | null
     yprr?: FloatNullableFilter<"ReceivingStat"> | number | null
+    season?: IntNullableFilter<"ReceivingStat"> | number | null
   }, "id">
 
   export type ReceivingStatOrderByWithAggregationInput = {
@@ -8769,6 +8808,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception?: SortOrderInput | SortOrder
     yardsPerReception?: SortOrderInput | SortOrder
     yprr?: SortOrderInput | SortOrder
+    season?: SortOrderInput | SortOrder
     _count?: ReceivingStatCountOrderByAggregateInput
     _avg?: ReceivingStatAvgOrderByAggregateInput
     _max?: ReceivingStatMaxOrderByAggregateInput
@@ -8826,6 +8866,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
     yardsPerReception?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
     yprr?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
+    season?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
   }
 
   export type PlayerSeasonWhereInput = {
@@ -8850,6 +8891,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total?: FloatNullableFilter<"PlayerSeason"> | number | null
     rushing_first_downs_total?: FloatNullableFilter<"PlayerSeason"> | number | null
     targets_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    receptions_total?: FloatNullableFilter<"PlayerSeason"> | number | null
     receiving_yards_total?: FloatNullableFilter<"PlayerSeason"> | number | null
     receiving_tds_total?: FloatNullableFilter<"PlayerSeason"> | number | null
     receiving_air_yards_total?: FloatNullableFilter<"PlayerSeason"> | number | null
@@ -8911,6 +8953,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total?: SortOrderInput | SortOrder
     rushing_first_downs_total?: SortOrderInput | SortOrder
     targets_total?: SortOrderInput | SortOrder
+    receptions_total?: SortOrderInput | SortOrder
     receiving_yards_total?: SortOrderInput | SortOrder
     receiving_tds_total?: SortOrderInput | SortOrder
     receiving_air_yards_total?: SortOrderInput | SortOrder
@@ -8976,6 +9019,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total?: FloatNullableFilter<"PlayerSeason"> | number | null
     rushing_first_downs_total?: FloatNullableFilter<"PlayerSeason"> | number | null
     targets_total?: FloatNullableFilter<"PlayerSeason"> | number | null
+    receptions_total?: FloatNullableFilter<"PlayerSeason"> | number | null
     receiving_yards_total?: FloatNullableFilter<"PlayerSeason"> | number | null
     receiving_tds_total?: FloatNullableFilter<"PlayerSeason"> | number | null
     receiving_air_yards_total?: FloatNullableFilter<"PlayerSeason"> | number | null
@@ -9037,6 +9081,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total?: SortOrderInput | SortOrder
     rushing_first_downs_total?: SortOrderInput | SortOrder
     targets_total?: SortOrderInput | SortOrder
+    receptions_total?: SortOrderInput | SortOrder
     receiving_yards_total?: SortOrderInput | SortOrder
     receiving_tds_total?: SortOrderInput | SortOrder
     receiving_air_yards_total?: SortOrderInput | SortOrder
@@ -9106,6 +9151,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     rushing_first_downs_total?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     targets_total?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
+    receptions_total?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     receiving_yards_total?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     receiving_tds_total?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     receiving_air_yards_total?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
@@ -9727,6 +9773,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception?: number | null
     yardsPerReception?: number | null
     yprr?: number | null
+    season?: number | null
   }
 
   export type ReceivingStatUncheckedCreateInput = {
@@ -9776,6 +9823,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception?: number | null
     yardsPerReception?: number | null
     yprr?: number | null
+    season?: number | null
   }
 
   export type ReceivingStatUpdateInput = {
@@ -9825,6 +9873,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception?: NullableFloatFieldUpdateOperationsInput | number | null
     yardsPerReception?: NullableFloatFieldUpdateOperationsInput | number | null
     yprr?: NullableFloatFieldUpdateOperationsInput | number | null
+    season?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ReceivingStatUncheckedUpdateInput = {
@@ -9874,6 +9923,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception?: NullableFloatFieldUpdateOperationsInput | number | null
     yardsPerReception?: NullableFloatFieldUpdateOperationsInput | number | null
     yprr?: NullableFloatFieldUpdateOperationsInput | number | null
+    season?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ReceivingStatCreateManyInput = {
@@ -9923,6 +9973,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception?: number | null
     yardsPerReception?: number | null
     yprr?: number | null
+    season?: number | null
   }
 
   export type ReceivingStatUpdateManyMutationInput = {
@@ -9972,6 +10023,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception?: NullableFloatFieldUpdateOperationsInput | number | null
     yardsPerReception?: NullableFloatFieldUpdateOperationsInput | number | null
     yprr?: NullableFloatFieldUpdateOperationsInput | number | null
+    season?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type ReceivingStatUncheckedUpdateManyInput = {
@@ -10021,6 +10073,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception?: NullableFloatFieldUpdateOperationsInput | number | null
     yardsPerReception?: NullableFloatFieldUpdateOperationsInput | number | null
     yprr?: NullableFloatFieldUpdateOperationsInput | number | null
+    season?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type PlayerSeasonCreateInput = {
@@ -10042,6 +10095,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total?: number | null
     rushing_first_downs_total?: number | null
     targets_total?: number | null
+    receptions_total?: number | null
     receiving_yards_total?: number | null
     receiving_tds_total?: number | null
     receiving_air_yards_total?: number | null
@@ -10103,6 +10157,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total?: number | null
     rushing_first_downs_total?: number | null
     targets_total?: number | null
+    receptions_total?: number | null
     receiving_yards_total?: number | null
     receiving_tds_total?: number | null
     receiving_air_yards_total?: number | null
@@ -10164,6 +10219,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total?: NullableFloatFieldUpdateOperationsInput | number | null
     rushing_first_downs_total?: NullableFloatFieldUpdateOperationsInput | number | null
     targets_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    receptions_total?: NullableFloatFieldUpdateOperationsInput | number | null
     receiving_yards_total?: NullableFloatFieldUpdateOperationsInput | number | null
     receiving_tds_total?: NullableFloatFieldUpdateOperationsInput | number | null
     receiving_air_yards_total?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -10225,6 +10281,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total?: NullableFloatFieldUpdateOperationsInput | number | null
     rushing_first_downs_total?: NullableFloatFieldUpdateOperationsInput | number | null
     targets_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    receptions_total?: NullableFloatFieldUpdateOperationsInput | number | null
     receiving_yards_total?: NullableFloatFieldUpdateOperationsInput | number | null
     receiving_tds_total?: NullableFloatFieldUpdateOperationsInput | number | null
     receiving_air_yards_total?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -10286,6 +10343,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total?: number | null
     rushing_first_downs_total?: number | null
     targets_total?: number | null
+    receptions_total?: number | null
     receiving_yards_total?: number | null
     receiving_tds_total?: number | null
     receiving_air_yards_total?: number | null
@@ -10347,6 +10405,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total?: NullableFloatFieldUpdateOperationsInput | number | null
     rushing_first_downs_total?: NullableFloatFieldUpdateOperationsInput | number | null
     targets_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    receptions_total?: NullableFloatFieldUpdateOperationsInput | number | null
     receiving_yards_total?: NullableFloatFieldUpdateOperationsInput | number | null
     receiving_tds_total?: NullableFloatFieldUpdateOperationsInput | number | null
     receiving_air_yards_total?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -10408,6 +10467,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total?: NullableFloatFieldUpdateOperationsInput | number | null
     rushing_first_downs_total?: NullableFloatFieldUpdateOperationsInput | number | null
     targets_total?: NullableFloatFieldUpdateOperationsInput | number | null
+    receptions_total?: NullableFloatFieldUpdateOperationsInput | number | null
     receiving_yards_total?: NullableFloatFieldUpdateOperationsInput | number | null
     receiving_tds_total?: NullableFloatFieldUpdateOperationsInput | number | null
     receiving_air_yards_total?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -11019,6 +11079,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception?: SortOrder
     yardsPerReception?: SortOrder
     yprr?: SortOrder
+    season?: SortOrder
   }
 
   export type ReceivingStatAvgOrderByAggregateInput = {
@@ -11063,6 +11124,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception?: SortOrder
     yardsPerReception?: SortOrder
     yprr?: SortOrder
+    season?: SortOrder
   }
 
   export type ReceivingStatMaxOrderByAggregateInput = {
@@ -11112,6 +11174,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception?: SortOrder
     yardsPerReception?: SortOrder
     yprr?: SortOrder
+    season?: SortOrder
   }
 
   export type ReceivingStatMinOrderByAggregateInput = {
@@ -11161,6 +11224,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception?: SortOrder
     yardsPerReception?: SortOrder
     yprr?: SortOrder
+    season?: SortOrder
   }
 
   export type ReceivingStatSumOrderByAggregateInput = {
@@ -11205,6 +11269,7 @@ export namespace Prisma {
     yardsAfterCatchPerReception?: SortOrder
     yardsPerReception?: SortOrder
     yprr?: SortOrder
+    season?: SortOrder
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -11242,6 +11307,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total?: SortOrder
     rushing_first_downs_total?: SortOrder
     targets_total?: SortOrder
+    receptions_total?: SortOrder
     receiving_yards_total?: SortOrder
     receiving_tds_total?: SortOrder
     receiving_air_yards_total?: SortOrder
@@ -11300,6 +11366,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total?: SortOrder
     rushing_first_downs_total?: SortOrder
     targets_total?: SortOrder
+    receptions_total?: SortOrder
     receiving_yards_total?: SortOrder
     receiving_tds_total?: SortOrder
     receiving_air_yards_total?: SortOrder
@@ -11361,6 +11428,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total?: SortOrder
     rushing_first_downs_total?: SortOrder
     targets_total?: SortOrder
+    receptions_total?: SortOrder
     receiving_yards_total?: SortOrder
     receiving_tds_total?: SortOrder
     receiving_air_yards_total?: SortOrder
@@ -11422,6 +11490,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total?: SortOrder
     rushing_first_downs_total?: SortOrder
     targets_total?: SortOrder
+    receptions_total?: SortOrder
     receiving_yards_total?: SortOrder
     receiving_tds_total?: SortOrder
     receiving_air_yards_total?: SortOrder
@@ -11480,6 +11549,7 @@ export namespace Prisma {
     rushing_fumbles_lost_total?: SortOrder
     rushing_first_downs_total?: SortOrder
     targets_total?: SortOrder
+    receptions_total?: SortOrder
     receiving_yards_total?: SortOrder
     receiving_tds_total?: SortOrder
     receiving_air_yards_total?: SortOrder

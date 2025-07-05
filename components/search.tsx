@@ -27,7 +27,7 @@ export const Search = ({
         <div className="relative flex-grow">
           <Input
             type="text"
-            placeholder="say how games where... or season where..."
+            placeholder="say: show games where... or show season where..."
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             className="pr-10 text-base"

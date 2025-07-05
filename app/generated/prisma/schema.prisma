@@ -137,6 +137,7 @@ model ReceivingStat {
   yardsAfterCatchPerReception Float?  @map("yards_after_catch_per_reception")
   yardsPerReception           Float?  @map("yards_per_reception")
   yprr                        Float?
+  season                      Int?
 }
 
 model PlayerSeason {
@@ -158,6 +159,7 @@ model PlayerSeason {
   rushing_fumbles_lost_total        Float?
   rushing_first_downs_total         Float?
   targets_total                     Float?
+  receptions_total                  Float?
   receiving_yards_total             Float?
   receiving_tds_total               Float?
   receiving_air_yards_total         Float?

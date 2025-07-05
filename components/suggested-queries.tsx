@@ -7,12 +7,17 @@ export const SuggestedQueries = ({
   handleSuggestionClick: (suggestion: string) => void;
 }) => {
   const suggestionQueries = [
-    {
-      desktop: "Show games where Xavier Worthy played and Rashee Rice did not play",
-      mobile: "",
-    },
-   
+        {
+          desktop: "Show games where Xavier Worthy played and Rashee Rice did not play",
+          mobile: "worthy no rice games",
+        },
+        {
+          desktop: "Show the 10 highest ppr scoring games in 2024",
+          mobile: "top 10 ppr games 2024",
+        },
   ];
+
+  
 
   return (
     <motion.div
@@ -24,7 +29,7 @@ export const SuggestedQueries = ({
       className="h-full overflow-y-auto"
     >
       <h2 className="text-lg sm:text-xl font-semibold text-foreground mb-4">
-        Try these queries:
+        Example queries (click to run):
       </h2>
       <div className="flex flex-wrap gap-2">
         {suggestionQueries.map((suggestion, index) => (
