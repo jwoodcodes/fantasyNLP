@@ -28,7 +28,7 @@ export const SuggestedQueries = ({
       exit={{ opacity: 0 }}
       className="h-full overflow-y-auto"
     >
-      <h2 className="text-lg sm:text-xl font-semibold text-foreground mb-4">
+      <h2 className="text-lg text-center mt-4 mb-8 sm:text-xl font-semibold text-foreground mb-4">
         Example queries (click to run):
       </h2>
       <div className="flex flex-wrap gap-2">
