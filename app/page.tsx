@@ -50,24 +50,24 @@ export default function Page() {
       setActiveQuery(query);
       setLoadingStep(2);
       if (typeof query === 'string') {
-        const companies = await runGenerateSQLQuery(query);
-        const cols = companies.length > 0 ? Object.keys(companies[0]) : [];
-        setResults1(companies as Result[]);
-        setColumns1(cols);
-        setResults2([]);
-        setColumns2([]);
-        if (companies.length > 0) {
-          const generation = await generateChartConfig(companies as Result[], question);
-          setChartConfig(generation.config);
-        } else {
-          setChartConfig(null);
-        }
+        setActiveQuery(query);
+      } else if ('query' in query) {
+        setActiveQuery(query.query);
       } else {
-        const dualResults = await runGenerateSQLQuery(query as { query1: string; query2: string });
-        setResults1(dualResults.table1Data);
-        setColumns1(dualResults.table1Data.length > 0 ? Object.keys(dualResults.table1Data[0]) : []);
-        setResults2(dualResults.table2Data);
-        setColumns2(dualResults.table2Data.length > 0 ? Object.keys(dualResults.table2Data[0]) : []);
+        // Handle the case where query is an object with query1 and query2
+        setActiveQuery(query.query1); // Example: setting query1 as the active query
+      }
+
+      // Ensure to handle the results correctly
+      const dualResults = await runGenerateSQLQuery(query as { query1: string; query2: string });
+      setResults1(dualResults.table1Data);
+      setColumns1(dualResults.table1Data.length > 0 ? Object.keys(dualResults.table1Data[0]) : []);
+      setResults2(dualResults.table2Data);
+      setColumns2(dualResults.table2Data.length > 0 ? Object.keys(dualResults.table2Data[0]) : []);
+      if (dualResults.table1Data.length > 0) {
+        const generation = await generateChartConfig(dualResults.table1Data, question);
+        setChartConfig(generation.config);
+      } else {
         setChartConfig(null);
       }
     } catch (e) {
