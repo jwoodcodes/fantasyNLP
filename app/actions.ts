@@ -30,7 +30,11 @@ export const generateQuery = async (input: string) => {
       model: openrouter("mistralai/mistral-small-3.2-24b-instruct:free"),
     
       
-      system: `You are a SQL (postgres) and data visualization expert. Your job is to help the user write a SQL query to retrieve  all data (except headshot_url) for seasons or games that meet the query criteria. The user will ask a question about player stats, and you will need to determine whether they are asking about game-level stats or season-level stats.
+      system: `You are a SQL (postgres) and data visualization expert. Your job is to help the user write SQL queries to retrieve data.
+      If the user's query is in the format "show two tables, one for X and one for Y", you must generate two separate SQL queries, one for X and one for Y. Return these as an object with keys 'query1' and 'query2'.
+      Otherwise, if the user asks for a single set of data, generate a single SQL query and return it as an object with a 'query' key.
+
+      If the user's query implies game-level data (e.g., "games where a player scored more than 2 touchdowns"), use the "PlayerStat" table. If the query implies season-level data (e.g., "seasons where a player had over 1000 receiving yards"), use the "playerSeasons" table.
 
       If the user's query implies game-level data (e.g., "games where a player scored more than 2 touchdowns"), use the "PlayerStat" table. If the query implies season-level data (e.g., "seasons where a player had over 1000 receiving yards"), use the "playerSeasons" table.
 
@@ -314,64 +318,167 @@ export const generateQuery = async (input: string) => {
     - All queries must limit the number of returned entries to 100.
     - if the user says, "show the top 10 players in a stat" return the top 10 players in that stat. change the limit from 100 to whatever number the user specifies as long as it's not greater than 100.
     - if user says in... then puts a year, like in 2024 or in 2002, this means where season is equal to that year
-
+    
 
     `,
       prompt: `Generate the query necessary to retrieve the data the user wants: ${input}`,
-      schema: z.object({
-        query: z.string(),
-      }),
+      schema: z.union([
+        z.object({ query: z.string() }),
+        z.object({ query1: z.string(), query2: z.string() }),
+      ]),
       
       
     });
-    console.log('original query', result.object.query)
-    
-  
-    
-
-
-
-    return result.object.query;
+    console.log('original query', result.object)
+    return result.object;
   } catch (e) {
     console.error(e);
-    throw new Error("Failed to generate query: " + (e instanceof Error ? e.message : String(e)));
+    if (e instanceof Error) {
+      if (e.message.includes('Rate limit exceeded') || e.message.includes('Too Many Requests')) {
+        // Throw a specific error message that can be caught by the frontend to display a toast.
+        throw new Error('RATE_LIMIT_EXCEEDED');
+      }
+      throw new Error("Failed to generate query: " + e.message);
+    }
+    throw new Error("Failed to generate query: " + String(e));
   }
 };
 
-export const runGenerateSQLQuery = async (query: string) => {
+export const runGenerateSQLQuery = async (query: string | { query1: string; query2: string }) => {
   "use server";
-  // Check if the query is a SELECT statement
-  if (
-    !query.trim().toLowerCase().startsWith("select") ||
-    query.trim().toLowerCase().includes("drop") ||
-    query.trim().toLowerCase().includes("delete") ||
-    query.trim().toLowerCase().includes("insert") ||
-    query.trim().toLowerCase().includes("update") ||
-    query.trim().toLowerCase().includes("alter") ||
-    query.trim().toLowerCase().includes("truncate") ||
-    query.trim().toLowerCase().includes("create") ||
-    query.trim().toLowerCase().includes("grant") ||
-    query.trim().toLowerCase().includes("revoke")
-  ) {
-    throw new Error("Only SELECT queries are allowed");
-  }
-
   let data: any;
-  try {
-    data = await prisma.$queryRawUnsafe(query);
-  } catch (e: any) {
-    if (e.message.includes('relation "unicorns" does not exist')) {
-      console.log(
-        "Table does not exist, creating and seeding it with dummy data now...",
-      );
-      // throw error
-      throw Error("Table does not exist");
-    } else {
-      throw e;
+  if (typeof query === 'string') {
+    // Check if the query is a SELECT statement
+    if (
+      !query.trim().toLowerCase().startsWith("select") ||
+      query.trim().toLowerCase().includes("drop") ||
+      query.trim().toLowerCase().includes("delete") ||
+      query.trim().toLowerCase().includes("insert") ||
+      query.trim().toLowerCase().includes("update") ||
+      query.trim().toLowerCase().includes("alter") ||
+      query.trim().toLowerCase().includes("truncate") ||
+      query.trim().toLowerCase().includes("create") ||
+      query.trim().toLowerCase().includes("grant") ||
+      query.trim().toLowerCase().includes("revoke")
+    ) {
+      throw new Error("Only SELECT queries are allowed");
     }
-  }
+    try {
+      data = await prisma.$queryRawUnsafe(query);
+    } catch (e: any) {
+      if (e.message.includes('relation "unicorns" does not exist')) {
+        console.log(
+          "Table does not exist, creating and seeding it with dummy data now...",
+        );
+        // throw error
+        throw Error("Table does not exist");
+      } else {
+        throw e;
+      }
+    }
+    const roundedData = (data as any[]).map((row) => {
+      const newRow: Record<string, any> = { ...row }; // Create a shallow copy
+      for (const key in newRow) {
+        const value = newRow[key];
+        // Check if the value is a number and not null
+        if (typeof value === 'number') {
+          // Use Math.round for safer rounding
+          newRow[key] = Math.round((value + Number.EPSILON) * 100) / 100;
+        }
+      }
+      return newRow;
+    });
+    return roundedData as Result[];
+  } else {
+    // Handle two queries
+    const query1 = query.query1;
+    const query2 = query.query2;
 
-  return data as Result[];
+    // Validate query1
+    if (
+      !query1.trim().toLowerCase().startsWith("select") ||
+      query1.trim().toLowerCase().includes("drop") ||
+      query1.trim().toLowerCase().includes("delete") ||
+      query1.trim().toLowerCase().includes("insert") ||
+      query1.trim().toLowerCase().includes("update") ||
+      query1.trim().toLowerCase().includes("alter") ||
+      query1.trim().toLowerCase().includes("truncate") ||
+      query1.trim().toLowerCase().includes("create") ||
+      query1.trim().toLowerCase().includes("grant") ||
+      query1.trim().toLowerCase().includes("revoke")
+    ) {
+      throw new Error("Only SELECT queries are allowed for query1");
+    }
+
+    // Validate query2
+    if (
+      !query2.trim().toLowerCase().startsWith("select") ||
+      query2.trim().toLowerCase().includes("drop") ||
+      query2.trim().toLowerCase().includes("delete") ||
+      query2.trim().toLowerCase().includes("insert") ||
+      query2.trim().toLowerCase().includes("update") ||
+      query2.trim().toLowerCase().includes("alter") ||
+      query2.trim().toLowerCase().includes("truncate") ||
+      query2.trim().toLowerCase().includes("create") ||
+      query2.trim().toLowerCase().includes("grant") ||
+      query2.trim().toLowerCase().includes("revoke")
+    ) {
+      throw new Error("Only SELECT queries are allowed for query2");
+    }
+
+    let data1: any;
+    let data2: any;
+
+    try {
+      data1 = await prisma.$queryRawUnsafe(query1);
+    } catch (e: any) {
+      if (e.message.includes('relation "unicorns" does not exist')) {
+        console.log(
+          "Table does not exist, creating and seeding it with dummy data now...",
+        );
+        throw Error("Table does not exist for query1");
+      } else {
+        throw e;
+      }
+    }
+
+    try {
+      data2 = await prisma.$queryRawUnsafe(query2);
+    } catch (e: any) {
+      if (e.message.includes('relation "unicorns" does not exist')) {
+        console.log(
+          "Table does not exist, creating and seeding it with dummy data now...",
+        );
+        throw Error("Table does not exist for query2");
+      } else {
+        throw e;
+      }
+    }
+
+    const roundedData1 = (data1 as any[]).map((row) => {
+      const newRow: Record<string, any> = { ...row };
+      for (const key in newRow) {
+        const value = newRow[key];
+        if (typeof value === 'number') {
+          newRow[key] = Math.round((value + Number.EPSILON) * 100) / 100;
+        }
+      }
+      return newRow;
+    });
+
+    const roundedData2 = (data2 as any[]).map((row) => {
+      const newRow: Record<string, any> = { ...row };
+      for (const key in newRow) {
+        const value = newRow[key];
+        if (typeof value === 'number') {
+          newRow[key] = Math.round((value + Number.EPSILON) * 100) / 100;
+        }
+      }
+      return newRow;
+    });
+
+    return { table1Data: roundedData1 as Result[], table2Data: roundedData2 as Result[] };
+  }
 };
 
 export const explainQuery = async (input: string, sqlQuery: string) => {
@@ -534,8 +641,6 @@ export const generateChartConfig = async (
   userQuery: string,
 ) => {
   "use server";
-  const system = `You are a data visualization expert. `;
-
   try {
     const { object: config } = await generateObject({
         // model: openai("gpt-4o"),
@@ -545,8 +650,7 @@ export const generateChartConfig = async (
       model: openrouter("mistralai/mistral-small-3.2-24b-instruct:free"),
       // model: openrouter("mistralai/mistral-nemo:free"),
       
-      system,
-      prompt: `Given the following data from a SQL query result, generate the chart config that best visualises the data and answers the users query.
+      system: `You are a data visualization expert. Given the following data from a SQL query result, generate the chart config that best visualises the data and answers the users query.
       For multiple groups use multi-lines.
 
       Here is an example complete config:
@@ -561,8 +665,8 @@ export const generateChartConfig = async (
         },
         legend: true
       }
-
-      User Query:
+      `,
+      prompt: `User Query:
       ${userQuery}
 
       Data:
@@ -578,8 +682,7 @@ export const generateChartConfig = async (
     const updatedConfig: Config = { ...config, colors };
     return { config: updatedConfig };
   } catch (e) {
-    // @ts-expect-errore
-    console.error(e.message);
+    console.error(e);
     throw new Error("Failed to generate chart suggestion");
   }
 };

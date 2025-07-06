@@ -7,12 +7,16 @@ import AgGridTable from './ui/ag-grid-table';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 
 export const Results = ({
-  results,
-  columns,
+  results1,
+  columns1,
+  results2,
+  columns2,
   chartConfig,
 }: {
-  results: Result[];
-  columns: string[];
+  results1: Result[];
+  columns1: string[];
+  results2: Result[];
+  columns2: string[];
   chartConfig: Config | null;
 }) => {
   const formatColumnTitle = (title: string) => {
@@ -28,39 +32,70 @@ export const Results = ({
 
   return (
     <div className="flex-grow flex flex-col">
-      <Tabs defaultValue="table" className="w-full flex-grow flex flex-col">
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="table">Table</TabsTrigger>
-          <TabsTrigger
-            value="charts"
-            disabled={
-              Object.keys(results[0] || {}).length <= 1 || results.length < 2
-            }
-          >
-            Chart
-          </TabsTrigger>
-        </TabsList>
-        <TabsContent value="table" className="flex-grow">
-          <div className="sm:min-h-[10px] relative">
-            <AgGridTable
-              rowData={results}
-              columnDefs={columns.map((col) => ({
-                headerName: formatColumnTitle(col),
-                field: col,
-              }))}
-            />
-          </div>
-        </TabsContent>
-        <TabsContent value="charts" className="flex-grow overflow-auto">
-          <div className="mt-4">
-            {chartConfig && results.length > 0 ? (
-              <DynamicChart chartData={results} chartConfig={chartConfig} />
-            ) : (
-              <SkeletonCard />
-            )}
-          </div>
-        </TabsContent>
-      </Tabs>
+      {results2 && results2.length > 0 ? (
+        <Tabs defaultValue="table1" className="w-full flex-grow flex flex-col">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="table1">Table 1</TabsTrigger>
+            <TabsTrigger value="table2">Table 2</TabsTrigger>
+          </TabsList>
+          <TabsContent value="table1" className="flex-grow">
+            <div className="sm:min-h-[10px] relative">
+              <AgGridTable
+                rowData={results1}
+                columnDefs={columns1.map((col) => ({
+                  headerName: formatColumnTitle(col),
+                  field: col,
+                }))}
+              />
+            </div>
+          </TabsContent>
+          <TabsContent value="table2" className="flex-grow">
+            <div className="sm:min-h-[10px] relative">
+              <AgGridTable
+                rowData={results2}
+                columnDefs={columns2.map((col) => ({
+                  headerName: formatColumnTitle(col),
+                  field: col,
+                }))}
+              />
+            </div>
+          </TabsContent>
+        </Tabs>
+      ) : (
+        <Tabs defaultValue="table" className="w-full flex-grow flex flex-col">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="table">Table</TabsTrigger>
+            <TabsTrigger
+              value="charts"
+              disabled={
+                Object.keys(results1[0] || {}).length <= 1 || results1.length < 2
+              }
+            >
+              Chart
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="table" className="flex-grow">
+            <div className="sm:min-h-[10px] relative">
+              <AgGridTable
+                rowData={results1}
+                columnDefs={columns1.map((col) => ({
+                  headerName: formatColumnTitle(col),
+                  field: col,
+                }))}
+              />
+            </div>
+          </TabsContent>
+          <TabsContent value="charts" className="flex-grow overflow-auto">
+            <div className="mt-4">
+              {chartConfig && results1.length > 0 ? (
+                <DynamicChart chartData={results1} chartConfig={chartConfig} />
+              ) : (
+                <SkeletonCard />
+              )}
+            </div>
+          </TabsContent>
+        </Tabs>
+      )}
     </div>
   );
 };
