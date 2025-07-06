@@ -21,8 +21,10 @@ import { Header } from "@/components/header";
 export default function Page() {
   const [inputValue, setInputValue] = useState("");
   const [submitted, setSubmitted] = useState(false);
-  const [results, setResults] = useState<Result[]>([]);
-  const [columns, setColumns] = useState<string[]>([]);
+  const [results1, setResults1] = useState<Result[]>([]);
+  const [columns1, setColumns1] = useState<string[]>([]);
+  const [results2, setResults2] = useState<Result[]>([]);
+  const [columns2, setColumns2] = useState<string[]>([]);
   const [activeQuery, setActiveQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState(1);
@@ -47,15 +49,33 @@ export default function Page() {
       }
       setActiveQuery(query);
       setLoadingStep(2);
-      const companies = await runGenerateSQLQuery(query);
-      const columns = companies.length > 0 ? Object.keys(companies[0]) : [];
-      setResults(companies);
-      setColumns(columns);
-      setLoading(false);
-      const generation = await generateChartConfig(companies, question);
-      setChartConfig(generation.config);
+      if (typeof query === 'string') {
+        const companies = await runGenerateSQLQuery(query);
+        const cols = companies.length > 0 ? Object.keys(companies[0]) : [];
+        setResults1(companies as Result[]);
+        setColumns1(cols);
+        setResults2([]);
+        setColumns2([]);
+        if (companies.length > 0) {
+          const generation = await generateChartConfig(companies as Result[], question);
+          setChartConfig(generation.config);
+        } else {
+          setChartConfig(null);
+        }
+      } else {
+        const dualResults = await runGenerateSQLQuery(query as { query1: string; query2: string });
+        setResults1(dualResults.table1Data);
+        setColumns1(dualResults.table1Data.length > 0 ? Object.keys(dualResults.table1Data[0]) : []);
+        setResults2(dualResults.table2Data);
+        setColumns2(dualResults.table2Data.length > 0 ? Object.keys(dualResults.table2Data[0]) : []);
+        setChartConfig(null);
+      }
     } catch (e) {
-      toast.error("An error occurred. Please try again.");
+      if (e instanceof Error && e.message.includes('Rate limit exceeded')) {
+        toast.error('Rate limit exceeded. Please try again later.');
+      } else {
+        toast.error("An error occurred. Please try again.");
+      }
       setLoading(false);
     }
   };
@@ -71,8 +91,10 @@ export default function Page() {
 
   const clearExistingData = () => {
     setActiveQuery("");
-    setResults([]);
-    setColumns([]);
+    setResults1([]);
+    setColumns1([]);
+    setResults2([]);
+    setColumns2([]);
     setChartConfig(null);
   };
 
@@ -135,11 +157,11 @@ export default function Page() {
                           <Loader2 className="h-12 w-12 animate-spin text-muted-foreground" />
                           <p className="text-foreground">
                             {loadingStep === 1
-                              ? "Generating SQL query..."
-                              : "Running SQL query..."}
+                              ? "fetching data..."
+                              : "Returning data..."}
                           </p>
                         </div>
-                      ) : results.length === 0 ? (
+                      ) : results1.length === 0 ? (
                         <div className="flex-grow flex items-center justify-center">
                           <p className="text-center text-muted-foreground">
                             No results found.
@@ -147,9 +169,11 @@ export default function Page() {
                         </div>
                       ) : (
                         <Results
-                          results={results}
+                          results1={results1}
+                          columns1={columns1}
+                          results2={results2}
+                          columns2={columns2}
                           chartConfig={chartConfig}
-                          columns={columns}
                         />
                       )}
                     </motion.div>

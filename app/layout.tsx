@@ -2,12 +2,13 @@ import "./globals.css";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import { ThemeProvider } from "next-themes";
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata = {
-  metadataBase: new URL("https://natural-language-postgres.vercel.app"),
-  title: "Natural Language Postgres",
+  metadataBase: new URL("https://fantasy-nlp.vercel.app/"),
+  title: "NLP fantasy Data",
   description:
-    "Chat with a Postgres database using natural language powered by the AI SDK by Vercel.",
+    "get fantasy football data with natural language questions",
 };
 
 export default function RootLayout({
@@ -21,6 +22,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
