@@ -84,14 +84,14 @@ export default function Page() {
 
   return (
     <div className="bg-neutral-50 dark:bg-neutral-900 flex items-start justify-center p-0 sm:p-8">
-      <div className="w-full max-w-4xl min-h-dvh sm:min-h-0 flex flex-col ">
+      <div className="w-full max-w-90% min-h-dvh sm:min-h-0 flex flex-col ">
         <motion.div
           className="bg-card rounded-xl sm:border sm:border-border flex-grow flex flex-col"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <div className="p-6 sm:p-8 flex flex-col flex-grow">
+          <div className="p-6 sm:p-8 flex flex-col flex-grow min-h-dvh">
             <Header handleClear={handleClear} />
             <Search
               handleClear={handleClear}

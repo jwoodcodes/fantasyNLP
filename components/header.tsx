@@ -7,14 +7,14 @@ export const Header = ({ handleClear }: { handleClear: () => void }) => {
   const { theme, setTheme } = useTheme();
 
   return (
-    <div className="flex items-center justify-between mb-6">
+    <div className="flex items-center justify-center mb-6">
       <h1
-        className="text-2xl sm:text-3xl font-bold text-foreground flex items-center cursor-pointer"
+        className="text-2xl sm:text-3xl font-bold text-foreground text-center flex items-center cursor-pointer"
         onClick={() => handleClear()}
       >
-       Fantasy NLP
+       NLP Data
       </h1>
-      <div className="flex items-center justify-center space-x-2">
+      <div className="absolute top-8 right-8 flex items-center justify-center space-x-2">
         <Button
           variant="ghost"
           size="icon"
