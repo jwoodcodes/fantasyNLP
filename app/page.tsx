@@ -47,28 +47,30 @@ export default function Page() {
         setLoading(false);
         return;
       }
-      setActiveQuery(query);
-      setLoadingStep(2);
       if (typeof query === 'string') {
         setActiveQuery(query);
       } else if ('query' in query) {
         setActiveQuery(query.query);
       } else {
-        // Handle the case where query is an object with query1 and query2
-        setActiveQuery(query.query1); // Example: setting query1 as the active query
+        setActiveQuery(query.query1);
       }
 
       // Ensure to handle the results correctly
       const dualResults = await runGenerateSQLQuery(query as { query1: string; query2: string });
-      setResults1(dualResults.table1Data);
-      setColumns1(dualResults.table1Data.length > 0 ? Object.keys(dualResults.table1Data[0]) : []);
-      setResults2(dualResults.table2Data);
-      setColumns2(dualResults.table2Data.length > 0 ? Object.keys(dualResults.table2Data[0]) : []);
-      if (dualResults.table1Data.length > 0) {
-        const generation = await generateChartConfig(dualResults.table1Data, question);
-        setChartConfig(generation.config);
+      if ('table1Data' in dualResults) {
+        setResults1(dualResults.table1Data);
+        setColumns1(dualResults.table1Data.length > 0 ? Object.keys(dualResults.table1Data[0]) : []);
+        setResults2(dualResults.table2Data);
+        setColumns2(dualResults.table2Data.length > 0 ? Object.keys(dualResults.table2Data[0]) : []);
+        if (dualResults.table1Data.length > 0) {
+          const generation = await generateChartConfig(dualResults.table1Data, question);
+          setChartConfig(generation.config);
+        } else {
+          setChartConfig(null);
+        }
       } else {
-        setChartConfig(null);
+        // Handle the case where dualResults is not as expected
+        toast.error("Unexpected results format.");
       }
     } catch (e) {
       if (e instanceof Error && e.message.includes('Rate limit exceeded')) {
