@@ -47,16 +47,20 @@ export default function Page() {
         setLoading(false);
         return;
       }
+      let dualResults;
+
       if (typeof query === 'string') {
         setActiveQuery(query);
+        dualResults = await runGenerateSQLQuery({ query1: query, query2: '' });
       } else if ('query' in query) {
         setActiveQuery(query.query);
+        dualResults = await runGenerateSQLQuery({ query1: query.query, query2: '' });
       } else {
         setActiveQuery(query.query1);
+        dualResults = await runGenerateSQLQuery({ query1: query.query1, query2: '' });
       }
 
       // Ensure to handle the results correctly
-      const dualResults = await runGenerateSQLQuery(query as { query1: string; query2: string });
       if ('table1Data' in dualResults) {
         setResults1(dualResults.table1Data);
         setColumns1(dualResults.table1Data.length > 0 ? Object.keys(dualResults.table1Data[0]) : []);
@@ -73,11 +77,13 @@ export default function Page() {
         toast.error("Unexpected results format.");
       }
     } catch (e) {
-      if (e instanceof Error && e.message.includes('Rate limit exceeded')) {
+      console.log(e);
+      if (e instanceof Error && e.message === 'RATE_LIMIT_EXCEEDED') {
         toast.error('Rate limit exceeded. Please try again later.');
       } else {
         toast.error("An error occurred. Please try again.");
       }
+    } finally {
       setLoading(false);
     }
   };
@@ -190,3 +196,4 @@ export default function Page() {
     </div>
   );
 }
+
