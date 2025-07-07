@@ -31,7 +31,7 @@ export const generateQuery = async (input: string) => {
     
       
       system: `You are a SQL (postgres) and data visualization expert. Your job is to help the user write SQL queries to retrieve data.
-      If the user's query is in the format "show two tables, one for X and one for Y", you must generate two separate SQL queries, one for X and one for Y. Return these as an object with keys 'query1' and 'query2'.
+      If the user's query is in the format "show two tables, one for X and one for Y", you must generate two separate SQL queries, one for X and one for Y. Both query1 and query2 MUST be valid SELECT statements. Return these as an object with keys 'query1' and 'query2'.
       Otherwise, if the user asks for a single set of data, generate a single SQL query and return it as an object with a 'query' key.
 
       If the user's query implies game-level data (e.g., "games where a player scored more than 2 touchdowns"), use the "PlayerStat" table. If the query implies season-level data (e.g., "seasons where a player had over 1000 receiving yards"), use the "playerSeasons" table.
@@ -123,6 +123,7 @@ export const generateQuery = async (input: string) => {
       - "receiving_yards_after_catch_total": Float
       - "receiving_first_downs_total": Float
       - "fantasy_points_total": Float
+      - "fantasy_points_ppr_total": Float
       - "completions_avg": Float
       - "attempts_avg": Float
       - "passing_yards_avg": Float
@@ -164,7 +165,8 @@ export const generateQuery = async (input: string) => {
     Guidelines:
     - Always wrap table and column names in double quotes (e.g., "playerSeasons", "player_name").
     - Use the snake_case column names provided in the schema.
-    - Only retrieval queries (SELECT) are allowed.
+    - All generated queries MUST be valid SELECT statements and adhere to security guidelines (no DDL or DML statements).
+      - Only retrieval queries (SELECT) are allowed.
     - For string comparisons, use the ILIKE operator and convert both the search term and the field to lowercase using LOWER().
     - When a user asks for data "over time", this should be interpreted as by season.
     - Every query must return quantitative data that can be plotted on a chart. This means at least two columns are required.
@@ -227,7 +229,6 @@ export const generateQuery = async (input: string) => {
           - "target_share": Float
           - "air_yards_share": Float
           - "wopr": Float
-          - "special_teams_tds": Int
           - "fantasy_points": Float
           - "fantasy_points_ppr": Float
         
@@ -246,6 +247,8 @@ export const generateQuery = async (input: string) => {
       - "carries_total": Float
       - "rushing_yards_total": Float
       - "rushing_tds_total": Float
+      - "rushing_fumbles_total": Float
+      - "rushing_fumbles_lost_total": Float
       - "rushing_first_downs_total": Float
       - "fantasy_points_total": Float
       - "fantasy_points_ppr_total": Float
@@ -318,18 +321,22 @@ export const generateQuery = async (input: string) => {
     - All queries must limit the number of returned entries to 100.
     - if the user says, "show the top 10 players in a stat" return the top 10 players in that stat. change the limit from 100 to whatever number the user specifies as long as it's not greater than 100.
     - if user says in... then puts a year, like in 2024 or in 2002, this means where season is equal to that year
+    - do not add anything, including a players name, to the column headers
     
 
     `,
       prompt: `Generate the query necessary to retrieve the data the user wants: ${input}`,
       schema: z.union([
         z.object({ query: z.string() }),
-        z.object({ query1: z.string(), query2: z.string() }),
+        z.object({ query1: z.string(), query2: z.string().optional() }),
       ]),
       
       
     });
-    console.log('original query', result.object)
+    console.log('Generated query result:', result.object);
+    // Ensure query2 is set to an empty string if not used
+    const resultObject = result.object as { query1: string; query2?: string }; // Type assertion
+    resultObject.query2 = resultObject.query2 || '';
     return result.object;
   } catch (e) {
     console.error(e);
@@ -344,23 +351,27 @@ export const generateQuery = async (input: string) => {
   }
 };
 
-export const runGenerateSQLQuery = async (query: string | { query1: string; query2: string }) => {
+const validateQuery = (query: string | undefined) => {
+    if (!query || typeof query !== 'string') return false;
+    const trimmedQuery = query.trim().toLowerCase();
+    return trimmedQuery.startsWith("select") &&
+           !trimmedQuery.includes("drop") &&
+           !trimmedQuery.includes("delete") &&
+           !trimmedQuery.includes("insert") &&
+           !trimmedQuery.includes("update") &&
+           !trimmedQuery.includes("alter") &&
+           !trimmedQuery.includes("truncate") &&
+           !trimmedQuery.includes("create") &&
+           !trimmedQuery.includes("grant") &&
+           !trimmedQuery.includes("revoke");
+};
+
+export const runGenerateSQLQuery = async (query: string | { query1: string; query2?: string }) => {
   "use server";
   let data: any;
   if (typeof query === 'string') {
     // Check if the query is a SELECT statement
-    if (
-      !query.trim().toLowerCase().startsWith("select") ||
-      query.trim().toLowerCase().includes("drop") ||
-      query.trim().toLowerCase().includes("delete") ||
-      query.trim().toLowerCase().includes("insert") ||
-      query.trim().toLowerCase().includes("update") ||
-      query.trim().toLowerCase().includes("alter") ||
-      query.trim().toLowerCase().includes("truncate") ||
-      query.trim().toLowerCase().includes("create") ||
-      query.trim().toLowerCase().includes("grant") ||
-      query.trim().toLowerCase().includes("revoke")
-    ) {
+    if (!validateQuery(query)) {
       throw new Error("Only SELECT queries are allowed");
     }
     try {
@@ -370,7 +381,6 @@ export const runGenerateSQLQuery = async (query: string | { query1: string; quer
         console.log(
           "Table does not exist, creating and seeding it with dummy data now...",
         );
-        // throw error
         throw Error("Table does not exist");
       } else {
         throw e;
@@ -395,35 +405,14 @@ export const runGenerateSQLQuery = async (query: string | { query1: string; quer
     const query2 = query.query2;
 
     // Validate query1
-    if (
-      !query1.trim().toLowerCase().startsWith("select") ||
-      query1.trim().toLowerCase().includes("drop") ||
-      query1.trim().toLowerCase().includes("delete") ||
-      query1.trim().toLowerCase().includes("insert") ||
-      query1.trim().toLowerCase().includes("update") ||
-      query1.trim().toLowerCase().includes("alter") ||
-      query1.trim().toLowerCase().includes("truncate") ||
-      query1.trim().toLowerCase().includes("create") ||
-      query1.trim().toLowerCase().includes("grant") ||
-      query1.trim().toLowerCase().includes("revoke")
-    ) {
-      throw new Error("Only SELECT queries are allowed for query1");
+    console.log('Validating query1:', query1);
+    if (!validateQuery(query1)) {
+        throw new Error("Only SELECT queries are allowed for query1");
     }
 
-    // Validate query2
-    if (
-      !query2.trim().toLowerCase().startsWith("select") ||
-      query2.trim().toLowerCase().includes("drop") ||
-      query2.trim().toLowerCase().includes("delete") ||
-      query2.trim().toLowerCase().includes("insert") ||
-      query2.trim().toLowerCase().includes("update") ||
-      query2.trim().toLowerCase().includes("alter") ||
-      query2.trim().toLowerCase().includes("truncate") ||
-      query2.trim().toLowerCase().includes("create") ||
-      query2.trim().toLowerCase().includes("grant") ||
-      query2.trim().toLowerCase().includes("revoke")
-    ) {
-      throw new Error("Only SELECT queries are allowed for query2");
+    // Validate query2 only if it exists
+    if (query2 && !validateQuery(query2)) {
+        throw new Error("Only SELECT queries are allowed for query2");
     }
 
     let data1: any;
@@ -442,18 +431,25 @@ export const runGenerateSQLQuery = async (query: string | { query1: string; quer
       }
     }
 
-    try {
-      data2 = await prisma.$queryRawUnsafe(query2);
-    } catch (e: any) {
-      if (e.message.includes('relation "unicorns" does not exist')) {
-        console.log(
-          "Table does not exist, creating and seeding it with dummy data now...",
-        );
-        throw Error("Table does not exist for query2");
-      } else {
-        throw e;
+    if (query2) {
+      try {
+        data2 = await prisma.$queryRawUnsafe(query2);
+      } catch (e: any) {
+        if (e.message.includes('relation "unicorns" does not exist')) {
+          console.log(
+            "Table does not exist, creating and seeding it with dummy data now...",
+          );
+          throw Error("Table does not exist for query2");
+        } else {
+          throw e;
+        }
       }
+    } else {
+      data2 = [];
     }
+
+    console.log('Results for query1:', data1);
+    console.log('Results for query2:', data2);
 
     const roundedData1 = (data1 as any[]).map((row) => {
       const newRow: Record<string, any> = { ...row };
@@ -476,6 +472,19 @@ export const runGenerateSQLQuery = async (query: string | { query1: string; quer
       }
       return newRow;
     });
+
+    if (data1.length === 0 && data2.length === 0) {
+        console.log('No results found for both queries.');
+        return { table1Data: [], table2Data: [] };
+    }
+
+    if (data1.length === 0) {
+        console.log('No results found for query1.');
+    }
+
+    if (data2.length === 0) {
+        console.log('No results found for query2.');
+    }
 
     return { table1Data: roundedData1 as Result[], table2Data: roundedData2 as Result[] };
   }
@@ -578,6 +587,7 @@ export const explainQuery = async (input: string, sqlQuery: string) => {
       - "receiving_yards_after_catch_total": Float
       - "receiving_first_downs_total": Float
       - "fantasy_points_total": Float
+      - "fantasy_points_ppr_total": Float
       - "completions_avg": Float
       - "attempts_avg": Float
       - "passing_yards_avg": Float
@@ -686,3 +696,8 @@ export const generateChartConfig = async (
     throw new Error("Failed to generate chart suggestion");
   }
 };
+
+
+
+
+// show two TabletSmartphone, one for games where xavier worthy played and rashee rice also player and one for games where xavier worthy played and rashee rice did not play
