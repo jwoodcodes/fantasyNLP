@@ -40,6 +40,8 @@ export const generateQuery = async (input: string) => {
 
       when searching for a player by name, use the "player_display_name" column if querying the "PlayerStat" table. and the "player_name" column is querying the "playerSeasons" table.
 
+   
+
       Table Schemas:
 
       "PlayerStat" (for game-level data):
@@ -322,7 +324,7 @@ export const generateQuery = async (input: string) => {
     - if the user says, "show the top 10 players in a stat" return the top 10 players in that stat. change the limit from 100 to whatever number the user specifies as long as it's not greater than 100.
     - if user says in... then puts a year, like in 2024 or in 2002, this means where season is equal to that year
     - do not add anything, including a players name, to the column headers
-    
+    - always return all columns for the players position specified above. do not limit the columns to just what is asked for by the user
 
     `,
       prompt: `Generate the query necessary to retrieve the data the user wants: ${input}`,
