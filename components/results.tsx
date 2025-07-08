@@ -1,8 +1,6 @@
 "use client";
 
-import { Config, Result } from "@/lib/types";
-import { DynamicChart } from "./dynamic-chart";
-import { SkeletonCard } from "./skeleton-card";
+import { Result } from "@/lib/types";
 import AgGridTable from './ui/ag-grid-table';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 
@@ -11,13 +9,11 @@ export const Results = ({
   columns1,
   results2,
   columns2,
-  chartConfig,
 }: {
   results1: Result[];
   columns1: string[];
   results2: Result[];
   columns2: string[];
-  chartConfig: Config | null;
 }) => {
   const formatColumnTitle = (title: string) => {
     return title
@@ -63,17 +59,9 @@ export const Results = ({
         </Tabs>
       ) : (
         <Tabs defaultValue="table" className="w-full flex-grow flex flex-col">
-          <TabsList className="grid w-full grid-cols-2">
+          {/* <TabsList className="grid w-full grid-cols-1">
             <TabsTrigger value="table">Table</TabsTrigger>
-            <TabsTrigger
-              value="charts"
-              disabled={
-                Object.keys(results1[0] || {}).length <= 1 || results1.length < 2
-              }
-            >
-              Chart
-            </TabsTrigger>
-          </TabsList>
+          </TabsList> */}
           <TabsContent value="table" className="flex-grow">
             <div className="sm:min-h-[10px] relative">
               <AgGridTable
@@ -83,15 +71,6 @@ export const Results = ({
                   field: col,
                 }))}
               />
-            </div>
-          </TabsContent>
-          <TabsContent value="charts" className="flex-grow overflow-auto">
-            <div className="mt-4">
-              {chartConfig && results1.length > 0 ? (
-                <DynamicChart chartData={results1} chartConfig={chartConfig} />
-              ) : (
-                <SkeletonCard />
-              )}
             </div>
           </TabsContent>
         </Tabs>

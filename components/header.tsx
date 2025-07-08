@@ -9,12 +9,13 @@ export const Header = ({ handleClear }: { handleClear: () => void }) => {
   return (
     <div className="flex items-center justify-center mb-6">
       <h1
-        className="text-2xl sm:text-3xl font-bold text-foreground text-center flex items-center cursor-pointer"
+        className="text-3xl sm:text-4xl mt-8  text-foreground text-center flex items-center cursor-pointer tracking-wider"
         onClick={() => handleClear()}
       >
-       NLP Data
+       NLP Fantasy Data
       </h1>
-      <div className="absolute top-8 right-8 flex items-center justify-center space-x-2">
+      
+      <div className="absolute top-10 right-10 flex items-center justify-center space-x-2">
         <Button
           variant="ghost"
           size="icon"

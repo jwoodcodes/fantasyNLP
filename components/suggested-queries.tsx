@@ -31,11 +31,11 @@ export const SuggestedQueries = ({
       <h2 className="text-lg text-center mt-4 mb-8 sm:text-xl font-semibold text-foreground mb-4">
         Example queries (click to run):
       </h2>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap flex-col gap-2 w-1/4 text-center ml-auto mr-auto">
         {suggestionQueries.map((suggestion, index) => (
           <Button
             key={index}
-            className={index > 5 ? "hidden sm:inline-block" : ""}
+            className={index > 5 ? "hidden sm:inline-block mb-2 border-blue-300" : "mb-4 border-blue-300"}
             type="button"
             variant="outline"
             onClick={() => handleSuggestionClick(suggestion.desktop)}

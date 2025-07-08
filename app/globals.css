@@ -6,6 +6,7 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+ 
 }
 
 
@@ -68,5 +69,55 @@
 }
 
 body {
-    @apply bg-neutral-50 dark:bg-neutral-900;
+    /* background-color: hsl(var(--background)); Set initial background */
+    background-color: oklch(0.2867 0.071 203.29); 
+  
 }
+
+/* Hide scrollbars on the main grid container */
+.ag-grid-wrapper {
+  overflow: hidden !important;
+}
+
+.ag-theme-alpine-dark .ag-root-wrapper,
+.ag-theme-alpine-dark .ag-body-viewport {
+  overflow: auto !important;
+  scrollbar-width: none !important; /* For Firefox */
+  -ms-overflow-style: none !important;  /* For Internet Explorer and Edge */
+}
+
+.ag-theme-alpine-dark .ag-root-wrapper::-webkit-scrollbar,
+.ag-theme-alpine-dark .ag-body-viewport::-webkit-scrollbar {
+  display: none !important;
+}
+
+/* Custom scrollbar styles for the dedicated scrollbar elements */
+.ag-theme-alpine-dark .ag-body-horizontal-scroll,
+.ag-theme-alpine-dark .ag-body-vertical-scroll,
+.ag-theme-alpine-dark .ag-pinned-bottoms-viewport {
+  /* For WebKit browsers (Chrome, Safari, Edge) */
+  &::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: hsl(216 12% 24%) !important; /* slate-800 */
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: hsl(200 96% 60%) !important; /* sky-400 */
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: hsl(200 96% 70%) !important; /* slightly lighter sky on hover */
+  }
+
+  /* For Firefox */
+  scrollbar-width: thin !important;
+  scrollbar-color: hsl(200 96% 60%) hsl(216 12% 24%) !important; /* thumb color and track color */
+}
+
+/* Use Tailwind classes in your components instead of @apply in globals.css */

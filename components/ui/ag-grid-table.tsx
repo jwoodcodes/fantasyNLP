@@ -31,19 +31,20 @@ const AgGridTable = ({ rowData, columnDefs }: { rowData: any[]; columnDefs: any[
       return [{}];
     }
 
-    const averages: { [key: string]: any } = { };
-    let rowCount = 0;
+    const averages: { [key: string]: any } = {};
+    
+    const filteredRowData = rowData.filter(row => row.fantasy_points_ppr >= 1);
+    const rowCount = filteredRowData.length;
 
     // Initialize sums and count for numeric columns
     columnDefs.forEach(col => {
       const field = col.field;
-      if (field && typeof rowData[0][field] === 'number') {
+      if (field && rowData.length > 0 && typeof rowData[0][field] === 'number') {
         averages[field] = 0;
       }
     });
 
-    rowData.forEach(row => {
-      rowCount++;
+    filteredRowData.forEach(row => {
       for (const key in averages) {
         if (typeof row[key] === 'number') {
           averages[key] += row[key];
@@ -69,13 +70,14 @@ const AgGridTable = ({ rowData, columnDefs }: { rowData: any[]; columnDefs: any[
   }, [rowData, columnDefs]);
 
   return (
-    <div className="ag-theme-alpine-dark" style={{ height: 800, width: '100%', maxHeight: 'fit-content' }}>
+    <div className="ag-theme-alpine-dark ag-grid-wrapper" style={{ height: '600px', width: '100%', maxHeight: '800px' }}>
       <AgGridReact
         rowData={rowData}
         columnDefs={columnDefs.map(col => ({ ...col, sortable: true, filter: true }))}
         modules={[AllCommunityModule]}
         theme={theme}
         pinnedBottomRowData={pinnedBottomRowData}
+        domLayout="normal"
       />
     </div>
   );
