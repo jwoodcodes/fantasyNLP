@@ -3,17 +3,15 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  generateChartConfig,
   generateQuery,
   runGenerateSQLQuery,
 } from "./actions";
-import { Config, Result } from "@/lib/types";
+import { Result } from "@/lib/types";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { ProjectInfo } from "@/components/project-info";
 import { Results } from "@/components/results";
 import { SuggestedQueries } from "@/components/suggested-queries";
-import { QueryViewer } from "@/components/query-viewer";
 import { Search } from "@/components/search";
 import { Header } from "@/components/header";
 
@@ -28,7 +26,6 @@ export default function Page() {
   const [activeQuery, setActiveQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState(1);
-  const [chartConfig, setChartConfig] = useState<Config | null>(null);
 
   const handleSubmit = async (suggestion?: string) => {
     const question = suggestion ?? inputValue;
@@ -66,12 +63,6 @@ export default function Page() {
         setColumns1(dualResults.table1Data.length > 0 ? Object.keys(dualResults.table1Data[0]) : []);
         setResults2(dualResults.table2Data);
         setColumns2(dualResults.table2Data.length > 0 ? Object.keys(dualResults.table2Data[0]) : []);
-        if (dualResults.table1Data.length > 0) {
-          const generation = await generateChartConfig(dualResults.table1Data, question);
-          setChartConfig(generation.config);
-        } else {
-          setChartConfig(null);
-        }
       } else {
         // Handle the case where dualResults is not as expected
         toast.error("Unexpected results format.");
@@ -103,7 +94,6 @@ export default function Page() {
     setColumns1([]);
     setResults2([]);
     setColumns2([]);
-    setChartConfig(null);
   };
 
   const handleClear = () => {
@@ -113,16 +103,22 @@ export default function Page() {
   };
 
   return (
-    <div className="bg-neutral-50 dark:bg-neutral-900 flex items-start justify-center p-0 sm:p-8">
-      <div className="w-full max-w-90% min-h-dvh sm:min-h-0 flex flex-col ">
+    <div className="bg-neutral-50 dark:bg-gray-950 flex items-start justify-center p-0 sm:p-8">
+      <div className="w-full max-w-90% min-h-dvh  sm:min-h-0 flex flex-col ">
         <motion.div
           className="bg-card rounded-xl sm:border sm:border-border flex-grow flex flex-col"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <div className="p-6 sm:p-8 flex flex-col flex-grow min-h-dvh">
+          <div className="p-6 sm:p-8 flex flex-col flex-grow min-h-dvh dark:bg-gray-950">
             <Header handleClear={handleClear} />
+            <h2
+        className="text-l sm:text-xl ml-auto mr-auto mb-20 text-foreground text-center flex items-center  tracking-wide text-sky-400"
+        
+      >
+       <i>Use simple, natural language, to find complex football data</i>
+      </h2>
             <Search
               handleClear={handleClear}
               handleSubmit={handleSubmit}
@@ -154,12 +150,6 @@ export default function Page() {
                       layout
                       className="sm:h-full min-h-[400px] flex flex-col"
                     >
-                      {activeQuery.length > 0 && (
-                        <QueryViewer
-                          activeQuery={activeQuery}
-                          inputValue={inputValue}
-                        />
-                      )}
                       {loading ? (
                         <div className="h-full absolute bg-background/50 w-full flex flex-col items-center justify-center space-y-4">
                           <Loader2 className="h-12 w-12 animate-spin text-muted-foreground" />
@@ -181,7 +171,6 @@ export default function Page() {
                           columns1={columns1}
                           results2={results2}
                           columns2={columns2}
-                          chartConfig={chartConfig}
                         />
                       )}
                     </motion.div>

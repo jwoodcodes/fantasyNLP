@@ -21,16 +21,16 @@ export const Search = ({
         e.preventDefault();
         await handleSubmit();
       }}
-      className="mb-6"
+      className="mb-12"
     >
       <div className="flex flex-col w-1/2 m-auto sm:flex-row items-stretch sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
         <div className="w-full">
           <Input
             type="text"
-            placeholder="show games where...     OR    show seasons where..."
+            placeholder="Enter show games where...     OR    show seasons where..."
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            className=" text-base text-center"
+            className=" text-base text-center border-blue-300"
           />
           {/* <SearchIcon className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" /> */}
         </div>
@@ -46,7 +46,7 @@ export const Search = ({
             </Button>
           ) : (
             <Button type="submit" className="w-full sm:w-auto">
-              Send
+              Run
             </Button>
           )}
         </div>
