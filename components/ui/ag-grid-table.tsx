@@ -9,36 +9,11 @@ import {
   themeAlpine,
   ColDef,
 } from "ag-grid-community";
+import { Result } from "@/lib/types";
 ModuleRegistry.registerModules([AllCommunityModule]);
 
 
-
-interface PlayerStats {
-  player_name: string;
-  player_display_name: string;
-  fantasy_points_ppr: number;
-  fantasy_points: number;
-  position: string;
-  recent_team: string;
-  season_type?: string;
-  opponent_team?: string;
-  passing_yards?: number;
-  passing_tds?: number;
-  passing_yards_after_catch?: number;
-  rushing_yards?: number;
-  rushing_tds?: number;
-  rushing_fumbles?: number;
-  rushing_fumbles_lost?: number;
-  rushing_first_downs?: number;
-  week?: number;
-  season?: number;
-  fantasy_points_avg?: number;
-  fantasy_points_ppr_avg?: number;
-  carries?: number;
-  [key: string]: string | number | undefined; // Add index signature for dynamic access
-}
-
-const AgGridTable = ({ rowData, columnDefs }: { rowData: PlayerStats[]; columnDefs: ColDef[]; }) => {
+const AgGridTable = ({ rowData, columnDefs }: { rowData: Result[]; columnDefs: ColDef[]; }) => {
   const myTheme = themeAlpine.withParams({
     backgroundColor: "hsl(210deg, 15%, 25%)",
     foregroundColor: "hsl(210deg, 20%, 77%)",
@@ -146,7 +121,7 @@ const AgGridTable = ({ rowData, columnDefs }: { rowData: PlayerStats[]; columnDe
 
     const averages: { [key: string]: any } = {};
     
-    const filteredRowData = rowData.filter(row => row.fantasy_points_ppr >= 1);
+    const filteredRowData = rowData.filter(row => typeof row.fantasy_points_ppr === 'number' && row.fantasy_points_ppr >= 1);
     const rowCount = filteredRowData.length;
 
     // Initialize sums and count for numeric columns

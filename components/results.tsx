@@ -1,6 +1,6 @@
 "use client";
 
-import { PlayerStats } from "@/lib/types";
+import { PlayerStats, Result } from "@/lib/types";
 import AgGridTable from './ui/ag-grid-table';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 
