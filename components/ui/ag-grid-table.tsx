@@ -2,82 +2,72 @@
 
 import React, { useMemo } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import {
-  AllCommunityModule,
-  ModuleRegistry,
-  createGrid,
-  themeAlpine,
-} from "ag-grid-community";
+import { AllCommunityModule, ModuleRegistry, ColDef } from "ag-grid-community";
 ModuleRegistry.registerModules([AllCommunityModule]);
 
+// Define a type for your column fields
+type ColumnField = 'player_name' | 'player_display_name' | 'fantasy_points_ppr' | 'fantasy_points' | 'position' | 'recent_team' | 'season_type' | 'opponent_team' | 'week' | 'season' | 'carries' | 'rushing_yards' | 'rushing_tds' | 'rushing_fumbles' | 'rushing_fumbles_lost' | 'rushing_first_downs';
 
+interface CustomColDef extends ColDef {
+  field: ColumnField; // Ensure field is one of the defined ColumnField types
+}
 
-const AgGridTable = ({ rowData, columnDefs }: { rowData: any[]; columnDefs: any[]; }) => {
-  const myTheme = themeAlpine.withParams({
-    backgroundColor: "hsl(210deg, 15%, 25%)",
-    foregroundColor: "hsl(210deg, 20%, 77%)",
-    headerTextColor: "hsl(210deg, 20%, 77%)",
-    headerBackgroundColor: "hsl(210deg, 15%, 20%)",
-    oddRowBackgroundColor: "hsl(210deg, 10%, 40%)",
-    headerColumnResizeHandleColor: "hsl(210deg, 19%, 10%)",
-  });
+const AgGridTable = ({ rowData, columnDefs }: { rowData: any[]; columnDefs: CustomColDef[]; }) => {
+  const headerNameMapping: Record<ColumnField, string> = {
+    'player_name': 'Name',
+    'player_display_name': 'Name',
+    'fantasy_points_ppr': 'PPR',
+    'fantasy_points': '1/2 PPR',
+    'position': 'Pos',
+    'recent_team': 'Team',
+    'season_type': 'Game Type',
+    'opponent_team': 'Opp',
+    'passing_yards': 'Pa. Yards',
+    'passing_tds': 'Pa. TDs',
+    'passing_yards_after_catch': 'Pa. YAC',
+    'rushing_yards': 'Ru. Yrds',
+    'rushing_tds': 'Ru. TDs',
+    'rushing_fumbles': 'Fumbles',
+    'rushing_fumbles_lost': 'Fum. Lost',
+    'rushing_first_downs': 'Ru. 1Ds',
+    'week': 'Week',
+    'season': 'Season',
+    'carries': 'Carries',
+  };
 
-  const theme = useMemo(() => {
-    return myTheme;
-  }, [myTheme]);
+  const columnWidthMapping: Record<ColumnField, number> = {
+    'player_name': 140,
+    'player_display_name': 140,
+    'season': 95,
+    'week': 90,
+    'fantasy_points': 100,
+    'fantasy_points_ppr': 100,
+    'position': 80,
+    'recent_team': 90,
+    'season_type': 120,
+    'opponent_team': 90,
+    'carries': 90,
+    'rushing_yards': 100,
+    'rushing_tds': 100,
+    'rushing_fumbles': 100,
+    'rushing_fumbles_lost': 110,
+    'rushing_first_downs': 100,
+  };
 
   const processedColumnDefs = useMemo(() => {
-    const pinnedColumnFields = ['player_name', 'player_display_name', 'week', 'season'];
-    const fantasyPointsFields = ['position', 'recent_team', 'fantasy_points', 'fantasy_points_ppr', 'fantasy_points_avg', 'fantasy_points_ppr_avg'];
+    const pinnedColumnFields: ColumnField[] = ['player_name', 'player_display_name', 'week', 'season'];
+    const fantasyPointsFields: ColumnField[] = ['position', 'recent_team', 'fantasy_points', 'fantasy_points_ppr'];
 
-    const headerNameMapping = {
-      'player_name': 'Name',
-      'player_display_name': 'Name',
-      'fantasy_points_ppr': 'PPR',
-      'fantasy_points': '1/2 PPR',
-      'position': 'Pos',
-      'recent_team': 'Team',
-      'season_type': 'Game Type',
-      'opponent_team': 'Opp',
-      'passing_yards': 'Pa. Yards',
-      'passing_tds': 'Pa. TDs',
-      'passing_yards_after_catch': 'Pa. YAC',
-      'rushing_yards': 'Ru. Yrds',
-      'rushing_tds': 'Ru. TDs',
-      'rushing_fumbles': 'Fumbles',
-      'rushing_fumbles_lost': 'Fum. Lost',
-      'rushing_first_downs': 'Ru. 1Ds'
-    };
-
-    const columnWidthMapping = {
-      'player_name': 140,
-      'player_display_name': 140,
-      'season': 95,
-      'week': 90,
-      'fantasy_points': 100,
-      'fantasy_points_ppr': 100,
-      'position': 80,
-      'recent_team': 90,
-      'season_type': 120,
-      'opponent_team': 90,
-      'carries': 90,
-      'rushing_yards': 100,
-      'rushing_tds': 100,
-      'rushing_fumbles': 100,
-      'rushing_fumbles_lost': 110,
-      'rushing_first_downs': 100
-    };
-
-    const pinnedColumns = [];
-    const fantasyPointsColumns = [];
-    const otherColumns = [];
+    const pinnedColumns: CustomColDef[] = [];
+    const fantasyPointsColumns: CustomColDef[] = [];
+    const otherColumns: CustomColDef[] = [];
 
     columnDefs.forEach(colDef => {
-      const newColDef = { ...colDef };
-      if (headerNameMapping[newColDef.field]) {
+      const newColDef: CustomColDef = { ...colDef };
+      if (newColDef.field && headerNameMapping[newColDef.field]) {
         newColDef.headerName = headerNameMapping[newColDef.field];
       }
-      if (columnWidthMapping[newColDef.field]) {
+      if (newColDef.field && columnWidthMapping[newColDef.field]) {
         newColDef.width = columnWidthMapping[newColDef.field];
       }
 
@@ -92,25 +82,13 @@ const AgGridTable = ({ rowData, columnDefs }: { rowData: any[]; columnDefs: any[
 
     const sortedColumnDefs = [...pinnedColumns, ...fantasyPointsColumns, ...otherColumns];
 
-    const finalDefs = sortedColumnDefs.map(col => ({
+    return sortedColumnDefs.map(col => ({
       ...col,
       sortable: true,
       filter: true,
       cellClass: 'ag-center-aligned-cell',
       headerClass: 'ag-center-aligned-cell'
     }));
-
-    const rowNumberColDef = {
-      headerName: '#',
-      pinned: 'left',
-      width: 50,
-      sortable: false,
-      filter: false,
-      cellClass: 'ag-row-number-cell',
-      headerClass: 'ag-center-aligned-cell'
-    };
-
-    return [rowNumberColDef, ...finalDefs];
   }, [columnDefs]);
 
   const pinnedBottomRowData = useMemo(() => {
@@ -162,8 +140,6 @@ const AgGridTable = ({ rowData, columnDefs }: { rowData: any[]; columnDefs: any[
         rowData={rowData}
         columnDefs={processedColumnDefs}
         modules={[AllCommunityModule]}
-        theme={theme}
-        pinnedBottomRowData={pinnedBottomRowData}
         domLayout="normal"
       />
     </div>
