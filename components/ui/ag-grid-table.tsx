@@ -35,6 +35,7 @@ interface PlayerStats {
   fantasy_points_avg?: number;
   fantasy_points_ppr_avg?: number;
   carries?: number;
+  [key: string]: string | number | undefined; // Add index signature for dynamic access
 }
 
 const AgGridTable = ({ rowData, columnDefs }: { rowData: PlayerStats[]; columnDefs: ColDef[]; }) => {
@@ -55,7 +56,7 @@ const AgGridTable = ({ rowData, columnDefs }: { rowData: PlayerStats[]; columnDe
     const pinnedColumnFields = ['player_name', 'player_display_name', 'week', 'season'];
     const fantasyPointsFields = ['position', 'recent_team', 'fantasy_points', 'fantasy_points_ppr', 'fantasy_points_avg', 'fantasy_points_ppr_avg'];
 
-    const headerNameMapping = {
+    const headerNameMapping: Record<string, string> = {
       'player_name': 'Name',
       'player_display_name': 'Name',
       'fantasy_points_ppr': 'PPR',
@@ -74,7 +75,7 @@ const AgGridTable = ({ rowData, columnDefs }: { rowData: PlayerStats[]; columnDe
       'rushing_first_downs': 'Ru. 1Ds'
     };
 
-    const columnWidthMapping = {
+    const columnWidthMapping: Record<string, number> = {
       'player_name': 140,
       'player_display_name': 140,
       'season': 95,
@@ -99,16 +100,16 @@ const AgGridTable = ({ rowData, columnDefs }: { rowData: PlayerStats[]; columnDe
 
     columnDefs.forEach(colDef => {
       const newColDef = { ...colDef };
-      if (headerNameMapping[newColDef.field]) {
+      if (typeof newColDef.field === 'string' && headerNameMapping[newColDef.field]) {
         newColDef.headerName = headerNameMapping[newColDef.field];
       }
-      if (columnWidthMapping[newColDef.field]) {
+      if (typeof newColDef.field === 'string' && columnWidthMapping[newColDef.field]) {
         newColDef.width = columnWidthMapping[newColDef.field];
       }
 
-      if (pinnedColumnFields.includes(newColDef.field)) {
-        pinnedColumns.push({ ...newColDef, pinned: 'left' });
-      } else if (fantasyPointsFields.includes(newColDef.field)) {
+      if (typeof newColDef.field === 'string' && pinnedColumnFields.includes(newColDef.field)) {
+        pinnedColumns.push({ ...newColDef, pinned: 'left' as const });
+      } else if (typeof newColDef.field === 'string' && fantasyPointsFields.includes(newColDef.field)) {
         fantasyPointsColumns.push(newColDef);
       } else {
         otherColumns.push(newColDef);
@@ -125,9 +126,9 @@ const AgGridTable = ({ rowData, columnDefs }: { rowData: PlayerStats[]; columnDe
       headerClass: 'ag-center-aligned-cell'
     }));
 
-    const rowNumberColDef = {
+    const rowNumberColDef: ColDef = {
       headerName: '#',
-      pinned: 'left',
+      pinned: 'left' as const,
       width: 50,
       sortable: false,
       filter: false,
@@ -135,7 +136,7 @@ const AgGridTable = ({ rowData, columnDefs }: { rowData: PlayerStats[]; columnDe
       headerClass: 'ag-center-aligned-cell'
     };
 
-    return [rowNumberColDef, ...finalDefs];
+    return [rowNumberColDef, ...finalDefs] as ColDef[];
   }, [columnDefs]);
 
   const pinnedBottomRowData = useMemo(() => {
@@ -151,7 +152,7 @@ const AgGridTable = ({ rowData, columnDefs }: { rowData: PlayerStats[]; columnDe
     // Initialize sums and count for numeric columns
     columnDefs.forEach(col => {
       const field = col.field;
-      if (field && rowData.length > 0 && typeof rowData[0][field] === 'number') {
+      if (typeof field === 'string' && rowData.length > 0 && typeof rowData[0][field] === 'number') {
         averages[field] = 0;
       }
     });
@@ -159,7 +160,7 @@ const AgGridTable = ({ rowData, columnDefs }: { rowData: PlayerStats[]; columnDe
     filteredRowData.forEach(row => {
       for (const key in averages) {
         if (typeof row[key] === 'number') {
-          averages[key] += row[key];
+          averages[key] += row[key] as number;
         }
       }
     });
@@ -174,8 +175,8 @@ const AgGridTable = ({ rowData, columnDefs }: { rowData: PlayerStats[]; columnDe
     }
 
     // Add a label for the average row
-    if (columnDefs.length > 0) {
-      averages[columnDefs[0].field] = 'Average';
+    if (columnDefs.length > 0 && typeof columnDefs[0].field === 'string') {
+      averages[columnDefs[0].field as string] = 'Average';
     }
 
     return [averages];
