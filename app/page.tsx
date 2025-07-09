@@ -9,7 +9,7 @@ import {
 import { Result } from "@/lib/types";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { ProjectInfo } from "@/components/project-info";
+
 import { Results } from "@/components/results";
 import { SuggestedQueries } from "@/components/suggested-queries";
 import { Search } from "@/components/search";
@@ -103,7 +103,7 @@ export default function Page() {
   };
 
   return (
-    <div className="bg-neutral-50 dark:bg-gray-950 flex items-start justify-center p-0 sm:p-8">
+    <div className="dark:bg-gray-950">
       <div className="w-full max-w-90% min-h-dvh  sm:min-h-0 flex flex-col ">
         <motion.div
           className="bg-card rounded-xl sm:border sm:border-border flex-grow flex flex-col"
@@ -179,7 +179,7 @@ export default function Page() {
               </div>
             </div>
           </div>
-          {/* <ProjectInfo /> */}
+         
         </motion.div>
       </div>
     </div>

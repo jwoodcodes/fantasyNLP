@@ -35,15 +35,31 @@ export const generateQuery = async (input: string) => {
       If the user's query is in the format "show two tables, one for X and one for Y", you must generate two separate SQL queries, one for X and one for Y. Both query1 and query2 MUST be valid SELECT statements. Return these as an object with keys 'query1' and 'query2'.
       Otherwise, if the user asks for a single set of data, generate a single SQL query and return it as an object with a 'query' key.
 
-      If the user's query implies game-level data (e.g., "games where a player scored more than 2 touchdowns"), use the "PlayerStat" table. If the query implies season-level data (e.g., "seasons where a player had over 1000 receiving yards"), use the "playerSeasons" table.
+      -If the user's query implies game-level data (e.g., "games where a player scored more than 2 touchdowns"), use the "PlayerStat" table. If the query implies season-level data (e.g., "seasons where a player had over 1000 receiving yards"), use the "playerSeasons" table.
 
-      If the user's query implies game-level data (e.g., "games where a player scored more than 2 touchdowns"), use the "PlayerStat" table. If the query implies season-level data (e.g., "seasons where a player had over 1000 receiving yards"), use the "playerSeasons" table.
+      -If the user's query implies game-level data (e.g., "games where a player scored more than 2 touchdowns"), use the "PlayerStat" table. If the query implies season-level data (e.g., "seasons where a player had over 1000 receiving yards"), use the "playerSeasons" table.
 
-      When the user asks for games, only search the "PlayerStat" table. When the user asks for seasons, only search the "playerSeasons" table.
+      -When the user asks for games, only search the "PlayerStat" table. When the user asks for seasons, only search the "playerSeasons" table.
 
-      when searching for a player by name, use the "player_display_name" column if querying the "PlayerStat" table. and the "player_name" column is querying the "playerSeasons" table.
+      -when searching for a player by name, use the "player_display_name" column if querying the "PlayerStat" table. and the "player_name" column is querying the "playerSeasons" table.
 
-   
+    - Every query must return all columns for the matched records except headshot_url, never return headshot_url.
+
+      -Stats that should be considered "passing stats" in PlayerStat are:  "passing_air_yards", "passing_yards_after_catch", "passing_first_downs", "passing_epa", "passing_2pt_conversions" , "pacr", "dakota"
+
+       -Stats that should be considered "passing stats" in playerSeasons are:  "completions_total" ,"attempts_total","passing_yards_total","passing_tds_total","interceptions_total","passing_first_downs_total", "completions_avg","attempts_avg","passing_yards_avg","passing_tds_avg","interceptions_avg","passing_air_yards_avg","passing_yards_after_catch_avg","passing_first_downs_avg"
+
+       - If at least one of the players that is returned has a position of "QB", include the columns above considered passing stats for the given dataset (PlayerStat or playerSeasons).
+
+       -if all of the players that are returned have a position of "RB","WR", or "TE", do not return or include the columns above considered passing stats for the given dataset (PlayerStat or playerSeasons).
+
+       -stats that should be considered "recieving stats" in PlayerStat are: "receptions","targets","receiving_yards","receiving_tds","receiving_fumbles","receiving_fumbles_lost","receiving_air_yards","receiving_yards_after_catch","receiving_first_downs","receiving_epa","receiving_2pt_conversions","racr","target_share","air_yards_share","wopr"
+
+       -stats that should be considered "recieving stats" in playerSeasons are: "targets_total","receiving_yards_total","receiving_tds_total","receiving_air_yards_total","receiving_yards_after_catch_total","receiving_first_downs_total","receptions_avg","targets_avg","receiving_yards_avg","receiving_tds_avg","receiving_air_yards_avg","receiving_yards_after_catch_avg","receiving_first_downs_avg","receiving_epa_avg","racr_avg","target_share_avg","air_yards_share_avg","wopr_avg","YPRR","routes","routes_per_game","TPRR","firstDPRR"
+
+       - If all of the players that are returned has a position of "QB", do not include the columns above considered recieving stats for the given dataset (PlayerStat or playerSeasons).
+       
+       -the above limitations based on player position should be the only thing that limits what columns are returned and displayed. columns should never be filtred out simply by the users question. return and display all columns that aren't filtred out by the position limits above. 
 
       Table Schemas:
 
@@ -128,7 +144,6 @@ export const generateQuery = async (input: string) => {
       - "receiving_yards_after_catch_total": Float
       - "receiving_first_downs_total": Float
       - "fantasy_points_total": Float
-      
       - "completions_avg": Float
       - "attempts_avg": Float
       - "passing_yards_avg": Float
@@ -156,14 +171,13 @@ export const generateQuery = async (input: string) => {
       - "target_share_avg": Float
       - "air_yards_share_avg": Float
       - "wopr_avg": Float
-      - "fantasy_points_avg": Float
-      - "fantasy_points_ppr_avg": Float
       - "YPRR": Float
       - "routes": Float
       - "routes_per_game": Float
       - "TPRR": Float
       - "firstDPRR": Float
-
+      - "fantasy_points_avg": Float
+      - "fantasy_points_ppr_avg": Float
        .
     
     - When a user asks for games where player A played and player B did not play, return data for all the games that player A played but player B did not and not return the games where player B played. To achieve this, use a "NOT EXISTS" clause on the "PlayerStat" table, joining on both "season" and "week" to identify games where player B was present.
@@ -175,162 +189,20 @@ export const generateQuery = async (input: string) => {
     - All generated queries MUST be valid SELECT statements and adhere to security guidelines (no DDL or DML statements).
       - Only retrieval queries (SELECT) are allowed.
     - For string comparisons, use the ILIKE operator and convert both the search term and the field to lowercase using LOWER().
+    -when returning games, only return and use player_display_name, not player_name
     - When a user asks for data "over time", this should be interpreted as by season.
-    - Every query must return quantitative data that can be plotted on a chart. This means at least two columns are required.
-    - Every query must return all columns for the matched records except headshot_url, never return headshot_url.
     - if the user ask for a stat per game in a season, return the avg version of that stat.
     - If the user asks for a rate, return it as a decimal (e.g., 10% should be 0.1).
     - All queries must limit the number of returned entries to 100.
     - if the user says, "show the top 10 players in a stat" return the top 10 players in that stat. change the limit from 100 to whatever number the user specifies as long as it's not greater than 100.
     - if user says in... then puts a year, like "in 2024" or "in 2002", this means where season is equal to that year
-    - always return all columns for the players position specified above. do not limit the columns to just what is asked for by the user
     - never return duplicate rows. each unique row should only appear in a table once
-    
+    - never return id, player_id, headshot_url, position_group, rushing_fumbles_lost, rushing_2pt_conversion, or any column with the work "sack" in it
 
-    - if the players postion is QB and the user is asking for games then return columns for:  
-      - "player_display_name": String
-      - "position": String
-      - "recent_team": String
-      - "season": Int
-      - "week": Int
-      - "season_type": String
-      - "opponent_team": String
-      - "completions": Int
-      - "attempts": Int
-      - "passing_yards": Float
-      - "passing_tds": Int
-      - "interceptions": Int
-      - "passing_air_yards": Float
-      - "passing_yards_after_catch": Float
-      - "passing_first_downs": Int
-      - "passing_epa": Float
-      - "pacr": Float
-      - "carries": Int
-      - "rushing_yards": Float
-      - "rushing_tds": Int
-      - "rushing_fumbles": Int
-      - "rushing_fumbles_lost": Int
-      - "rushing_first_downs": Int
-      - "rushing_epa": Float
-      - "fantasy_points": Float
-      - "fantasy_points_ppr": Float
+    IMPORTANT: Before finalizing the query, double-check the player positions in the potential result set. If no players are QBs, you MUST exclude all passing-related columns from the SELECT statement. If all players are QBs, you MUST exclude all receiving-related columns. Reference above for what is considered a passing-related column and what is considered a receiving-related column!
 
-      - if the players postion is RB, WR, or TE and the user is asking for games then return the following columns, do not return any other columns for players at these postions when the user is asking for games other than these:  
-          - "player_display_name": String
-          - "position": String
-          - "recent_team": String
-          - "season": Int
-          - "week": Int
-          - "season_type": String
-          - "opponent_team": String
-          - "carries": Int
-          - "rushing_yards": Float
-          - "rushing_tds": Int
-          - "rushing_fumbles": Int
-          - "rushing_fumbles_lost": Int
-          - "rushing_first_downs": Int
-          - "rushing_epa": Float
-          - "receptions": Int
-          - "targets": Int
-          - "receiving_yards": Float
-          - "receiving_tds": Int
-          - "receiving_fumbles": Int
-          - "receiving_fumbles_lost": Int
-          - "receiving_air_yards": Float
-          - "receiving_yards_after_catch": Float
-          - "receiving_first_downs": Int
-          - "receiving_epa": Float
-          - "racr": Float
-          - "target_share": Float
-          - "air_yards_share": Float
-          - "wopr": Float
-          - "fantasy_points": Float
-          - "fantasy_points_ppr": Float
-        
-
-    - if the user ask for a player whose position is QB and they are asking for seasons data, return the columns for:  
-      - "player_name": String
-      - "season": Int
-      - "games_played": Int
-      - "position": String
-      - "completions_total": Float
-      - "attempts_total": Float
-      - "passing_yards_total": Float
-      - "passing_tds_total": Float
-      - "interceptions_total": Float
-      - "passing_first_downs_total": Float
-      - "carries_total": Float
-      - "rushing_yards_total": Float
-      - "rushing_tds_total": Float
-      - "rushing_fumbles_total": Float
-      - "rushing_fumbles_lost_total": Float
-      - "rushing_first_downs_total": Float
-      - "fantasy_points_total": Float
-      
-      - "completions_avg": Float
-      - "attempts_avg": Float
-      - "passing_yards_avg": Float
-      - "passing_tds_avg": Float
-      - "interceptions_avg": Float
-      - "passing_air_yards_avg": Float
-      - "passing_yards_after_catch_avg": Float
-      - "passing_first_downs_avg": Float
-      - "carries_avg": Float
-      - "rushing_yards_avg": Float
-      - "rushing_tds_avg": Float
-      - "rushing_first_downs_avg": Float
-      - "rushing_epa_avg": Float
-      - "fantasy_points_avg": Float
-      - "fantasy_points_ppr_avg": Float
-
-    - if the players position is RB, WR, or TE and the user is asking for seasons data then return columns for:  
+    IMPORTANT: ONLY INCLUDE "PASSING STATS" IF ONE OF THE PLAYERS RETURNED HAS A POSTION EQUAL TO "QB", OTHERWISE DO NOT RETURN ANY "PASSING STATS"
    
-       - "player_name": String
-      - "season": Int
-      - "games_played": Int
-      - "position": String
-      - "fantasy_points_avg": Float
-      - "fantasy_points_ppr_avg": Float
-      - "carries_total": Float
-      - "rushing_yards_total": Float
-      - "rushing_tds_total": Float
-      - "rushing_fumbles_total": Float
-      - "rushing_fumbles_lost_total": Float
-      - "rushing_first_downs_total": Float
-      - "targets_total": Float
-      - "receiving_yards_total": Float
-      - "receiving_tds_total": Float
-      - "receiving_air_yards_total": Float
-      - "receiving_yards_after_catch_total": Float
-      - "receiving_first_downs_total": Float
-      - "fantasy_points_total": Float
-      
-      - "carries_avg": Float
-      - "rushing_yards_avg": Float
-      - "rushing_tds_avg": Float
-      - "rushing_fumbles_avg": Float
-      - "rushing_fumbles_lost_avg": Float
-      - "rushing_first_downs_avg": Float
-      - "rushing_epa_avg": Float
-      - "routes": Float
-      - "routes_per_game": Float
-      - "targets_avg": Float
-      - "YPRR": Float 
-      - "TPRR": Float
-      - "firstDPRR": Float
-      - "wopr_avg": Float
-      - "target_share_avg": Float
-      - "receptions_avg": Float
-      - "receiving_yards_avg": Float
-      - "receiving_tds_avg": Float
-      - "receiving_air_yards_avg": Float
-      - "receiving_yards_after_catch_avg": Float
-      - "receiving_first_downs_avg": Float
-      - "receiving_epa_avg": Float
-      - "racr_avg": Float 
-      - "air_yards_share_avg": Float
-      
-    -if the user asks for multiple players and one has a postion of QB and the others postions is not QB, return all columns except headshot_url
     `,
       prompt: `Generate the query necessary to retrieve the data the user wants: ${input}`,
       schema: z.union([
@@ -373,6 +245,79 @@ const validateQuery = (query: string | undefined) => {
            !trimmedQuery.includes("revoke");
 };
 
+const filterColumnsByPosition = (data: any[], query: string) => {
+  console.log('--- filterColumnsByPosition START ---');
+  console.log('Input data length:', data.length);
+  console.log('Input query:', query);
+
+  if (!data || data.length === 0) {
+    console.log('Data is empty, returning as is.');
+    console.log('--- filterColumnsByPosition END ---');
+    return data;
+  }
+
+  const tableName = query.toLowerCase().includes('from "playerstat"') ? 'PlayerStat' : 'playerSeasons';
+  console.log('Detected tableName:', tableName);
+
+  const passingStatsPlayerStat = ["completions", "attempts", "passing_yards", "passing_tds", "interceptions", "passing_air_yards", "passing_yards_after_catch", "passing_first_downs", "passing_epa", "passing_2pt_conversions" , "pacr", "dakota"];
+  const passingStatsPlayerSeasons = ["completions_total" ,"attempts_total","passing_yards_total","passing_tds_total","interceptions_total","passing_first_downs_total", "completions_avg","attempts_avg","passing_yards_avg","passing_tds_avg","interceptions_avg","passing_air_yards_avg","passing_yards_after_catch_avg","passing_first_downs_avg"];
+  const receivingStatsPlayerStat = ["receptions","targets","receiving_yards","receiving_tds","receiving_fumbles","receiving_fumbles_lost","receiving_air_yards","receiving_yards_after_catch","receiving_first_downs","receiving_epa","receiving_2pt_conversions","racr","target_share","air_yards_share","wopr"];
+  const receivingStatsPlayerSeasons = ["targets_total","receiving_yards_total","receiving_tds_total","receiving_air_yards_total","receiving_yards_after_catch_total","receiving_first_downs_total","receptions_avg","targets_avg","receiving_yards_avg","receiving_tds_avg","receiving_air_yards_avg","receiving_yards_after_catch_avg","receiving_first_downs_avg","receiving_epa_avg","racr_avg","target_share_avg","air_yards_share_avg","wopr_avg","YPRR","routes","routes_per_game","TPRR","firstDPRR"];
+
+  const passingStats = tableName === 'PlayerStat' ? passingStatsPlayerStat : passingStatsPlayerSeasons;
+  const receivingStats = tableName === 'PlayerStat' ? receivingStatsPlayerStat : receivingStatsPlayerSeasons;
+  console.log('Using passingStats:', passingStats);
+  console.log('Using receivingStats:', receivingStats);
+
+
+  const hasQB = data.some(row => {
+    const isQB = row.position && row.position.toUpperCase() === 'QB';
+    if (row.position) {
+      console.log(`Row position: ${row.position}, isQB: ${isQB}`);
+    } else {
+      console.log('Row has no position field.');
+    }
+    return isQB;
+  });
+  console.log('hasQB:', hasQB);
+
+  const allQB = data.every(row => row.position && row.position.toUpperCase() === 'QB');
+  console.log('allQB:', allQB);
+
+  let processedData = data;
+
+  if (!hasQB) {
+    console.log('No QB found, removing passing stats.');
+    processedData = processedData.map(row => {
+      const newRow = { ...row };
+      for (const stat of passingStats) {
+        if (newRow.hasOwnProperty(stat)) {
+          console.log(`Removing stat: ${stat} from row.`);
+          delete newRow[stat];
+        }
+      }
+      return newRow;
+    });
+  }
+
+  if (allQB) {
+    console.log('All players are QBs, removing receiving stats.');
+    processedData = processedData.map(row => {
+      const newRow = { ...row };
+      for (const stat of receivingStats) {
+        if (newRow.hasOwnProperty(stat)) {
+          console.log(`Removing stat: ${stat} from row.`);
+          delete newRow[stat];
+        }
+      }
+      return newRow;
+    });
+  }
+
+  console.log('--- filterColumnsByPosition END ---');
+  return processedData;
+};
+
 export const runGenerateSQLQuery = async (query: string | { query1: string; query2?: string }) => {
   "use server";
   let data: any;
@@ -406,7 +351,8 @@ export const runGenerateSQLQuery = async (query: string | { query1: string; quer
       }
       return newRow;
     });
-    return roundedData as Result[];
+    const filteredData = filterColumnsByPosition(roundedData, query);
+    return filteredData as Result[];
   } else {
     // Handle two queries
     const query1 = query.query1;
@@ -501,11 +447,12 @@ export const runGenerateSQLQuery = async (query: string | { query1: string; quer
         console.log('No results found for query2.');
     }
 
-    return { table1Data: roundedData1 as Result[], table2Data: roundedData2 as Result[] };
+    const filteredData1 = filterColumnsByPosition(roundedData1, query1);
+    const filteredData2 = query2 ? filterColumnsByPosition(roundedData2, query2) : [];
+
+    return { table1Data: filteredData1 as Result[], table2Data: filteredData2 as Result[] };
   }
 };
-
-
 
 
 

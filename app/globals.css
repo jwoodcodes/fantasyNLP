@@ -77,6 +77,14 @@ body {
 /* Hide scrollbars on the main grid container */
 .ag-grid-wrapper {
   overflow: hidden !important;
+  counter-reset: row-number;
+}
+
+.ag-row-number-cell::before {
+  display: block;
+  counter-increment: row-number;
+  content: counter(row-number);
+  text-align: center;
 }
 
 .ag-theme-alpine-dark .ag-root-wrapper,
@@ -118,6 +126,14 @@ body {
   /* For Firefox */
   scrollbar-width: thin !important;
   scrollbar-color: hsl(200 96% 60%) hsl(216 12% 24%) !important; /* thumb color and track color */
+}
+
+.ag-center-aligned-cell {
+  text-align: center;
+}
+
+.ag-header-cell.ag-center-aligned-cell .ag-header-cell-label {
+    justify-content: center;
 }
 
 /* Use Tailwind classes in your components instead of @apply in globals.css */
