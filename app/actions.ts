@@ -43,9 +43,7 @@ export const generateQuery = async (input: string) => {
 
       -when searching for a player by name, use the "player_display_name" column if querying the "PlayerStat" table. and the "player_name" column is querying the "playerSeasons" table.
 
-    - Every query must return all columns for the matched records except headshot_url, never return headshot_url.
-
-      -Stats that should be considered "passing stats" in PlayerStat are:  "passing_air_yards", "passing_yards_after_catch", "passing_first_downs", "passing_epa", "passing_2pt_conversions" , "pacr", "dakota"
+    - CRITICAL RULE: Your primary job is to determine the correct table ("PlayerStat" or "playerSeasons") and build the "WHERE", "ORDER BY", and "LIMIT" clauses based on the user's request. The SELECT clause MUST ALWAYS be "SELECT *". My application code is responsible for filtering the columns based on player position after the query is run.
 
        -Stats that should be considered "passing stats" in playerSeasons are:  "completions_total" ,"attempts_total","passing_yards_total","passing_tds_total","interceptions_total","passing_first_downs_total", "completions_avg","attempts_avg","passing_yards_avg","passing_tds_avg","interceptions_avg","passing_air_yards_avg","passing_yards_after_catch_avg","passing_first_downs_avg"
 
@@ -197,7 +195,9 @@ export const generateQuery = async (input: string) => {
     - if the user says, "show the top 10 players in a stat" return the top 10 players in that stat. change the limit from 100 to whatever number the user specifies as long as it's not greater than 100.
     - if user says in... then puts a year, like "in 2024" or "in 2002", this means where season is equal to that year
     - never return duplicate rows. each unique row should only appear in a table once
-    - never return id, player_id, headshot_url, position_group, rushing_fumbles_lost, rushing_2pt_conversion, or any column with the work "sack" in it
+    - never return id, player_id, headshot_url, position_group, passing_2pt_conversions, rushing_fumbles_lost, rushing_2pt_conversions, special_teams_tds, Receiving_fumbles, Receiving_fumbles_lost, receiving_2pt_conversions, or any column with the word "sack" in it
+    -if user says, show games for [player A] with [player B], this means "show games where player A played and player B also played". Do not include games where player B did not play, just games for player A where player B also played in that game
+    - if the user says percent, for example, "show me running backs with greater than 20% target share" , use the decimel value, .2 in this example
 
     IMPORTANT: Before finalizing the query, double-check the player positions in the potential result set. If no players are QBs, you MUST exclude all passing-related columns from the SELECT statement. If all players are QBs, you MUST exclude all receiving-related columns. Reference above for what is considered a passing-related column and what is considered a receiving-related column!
 
@@ -245,20 +245,27 @@ const validateQuery = (query: string | undefined) => {
            !trimmedQuery.includes("revoke");
 };
 
-const filterColumnsByPosition = (data: any[], query: string) => {
-  console.log('--- filterColumnsByPosition START ---');
-  console.log('Input data length:', data.length);
-  console.log('Input query:', query);
-
-  if (!data || data.length === 0) {
-    console.log('Data is empty, returning as is.');
-    console.log('--- filterColumnsByPosition END ---');
-    return data;
-  }
+const processData = (data: any[], query: string) => {
+  const roundedData = (data as any[]).map((row) => {
+    const newRow: Record<string, any> = { ...row };
+    for (const key in newRow) {
+      const value = newRow[key];
+      if (typeof value === 'number') {
+        newRow[key] = Math.round((value + Number.EPSILON) * 100) / 100;
+      } else if (value !== null && typeof value === 'object' && value.hasOwnProperty('d')) {
+        // Handle Decimal-like objects from Prisma
+        try {
+          newRow[key] = Number(value.d.join(''));
+        } catch (e) {
+          console.error(`Could not convert decimal for key: ${key}`, e);
+          newRow[key] = null; // or some other default value
+        }
+      }
+    }
+    return newRow;
+  });
 
   const tableName = query.toLowerCase().includes('from "playerstat"') ? 'PlayerStat' : 'playerSeasons';
-  console.log('Detected tableName:', tableName);
-
   const passingStatsPlayerStat = ["completions", "attempts", "passing_yards", "passing_tds", "interceptions", "passing_air_yards", "passing_yards_after_catch", "passing_first_downs", "passing_epa", "passing_2pt_conversions" , "pacr", "dakota"];
   const passingStatsPlayerSeasons = ["completions_total" ,"attempts_total","passing_yards_total","passing_tds_total","interceptions_total","passing_first_downs_total", "completions_avg","attempts_avg","passing_yards_avg","passing_tds_avg","interceptions_avg","passing_air_yards_avg","passing_yards_after_catch_avg","passing_first_downs_avg"];
   const receivingStatsPlayerStat = ["receptions","targets","receiving_yards","receiving_tds","receiving_fumbles","receiving_fumbles_lost","receiving_air_yards","receiving_yards_after_catch","receiving_first_downs","receiving_epa","receiving_2pt_conversions","racr","target_share","air_yards_share","wopr"];
@@ -266,57 +273,33 @@ const filterColumnsByPosition = (data: any[], query: string) => {
 
   const passingStats = tableName === 'PlayerStat' ? passingStatsPlayerStat : passingStatsPlayerSeasons;
   const receivingStats = tableName === 'PlayerStat' ? receivingStatsPlayerStat : receivingStatsPlayerSeasons;
-  console.log('Using passingStats:', passingStats);
-  console.log('Using receivingStats:', receivingStats);
 
+  const hasQB = roundedData.some(row => row.position && row.position.toUpperCase() === 'QB');
+  const allQB = roundedData.every(row => row.position && row.position.toUpperCase() === 'QB');
 
-  const hasQB = data.some(row => {
-    const isQB = row.position && row.position.toUpperCase() === 'QB';
-    if (row.position) {
-      console.log(`Row position: ${row.position}, isQB: ${isQB}`);
-    } else {
-      console.log('Row has no position field.');
-    }
-    return isQB;
-  });
-  console.log('hasQB:', hasQB);
-
-  const allQB = data.every(row => row.position && row.position.toUpperCase() === 'QB');
-  console.log('allQB:', allQB);
-
-  let processedData = data;
+  const columnsToExclude = new Set(['id', 'player_id', 'headshot_url', 'position_group', 'rushing_fumbles_lost', 'rushing_2pt_conversion', 'special_teams_tds', 'receiving_fumbles', 'receiving_fumbles_lost', 'sack_fumbles', 'sack_fumbles_lost', 'sacks', 'sack_yards']);
 
   if (!hasQB) {
-    console.log('No QB found, removing passing stats.');
-    processedData = processedData.map(row => {
-      const newRow = { ...row };
-      for (const stat of passingStats) {
-        if (newRow.hasOwnProperty(stat)) {
-          console.log(`Removing stat: ${stat} from row.`);
-          delete newRow[stat];
-        }
-      }
-      return newRow;
-    });
+    passingStats.forEach(stat => columnsToExclude.add(stat));
   }
-
   if (allQB) {
-    console.log('All players are QBs, removing receiving stats.');
-    processedData = processedData.map(row => {
-      const newRow = { ...row };
-      for (const stat of receivingStats) {
-        if (newRow.hasOwnProperty(stat)) {
-          console.log(`Removing stat: ${stat} from row.`);
-          delete newRow[stat];
-        }
-      }
-      return newRow;
-    });
+    receivingStats.forEach(stat => columnsToExclude.add(stat));
   }
 
-  console.log('--- filterColumnsByPosition END ---');
-  return processedData;
+  const finalData = roundedData.map(row => {
+    const newRow: Record<string, any> = {};
+    for (const key in row) {
+      if (!columnsToExclude.has(key)) {
+        newRow[key] = row[key];
+      }
+    }
+    return newRow;
+  });
+
+  return finalData as Result[];
 };
+
+
 
 export const runGenerateSQLQuery = async (query: string | { query1: string; query2?: string }) => {
   "use server";
@@ -339,20 +322,7 @@ export const runGenerateSQLQuery = async (query: string | { query1: string; quer
         throw e;
       }
     }
-    const roundedData = (data as any[]).map((row) => {
-      const newRow: Record<string, any> = { ...row }; // Create a shallow copy
-      for (const key in newRow) {
-        const value = newRow[key];
-        // Check if the value is a number and not null
-        if (typeof value === 'number') {
-          // Use Math.round for safer rounding
-          newRow[key] = Math.round((value + Number.EPSILON) * 100) / 100;
-        }
-      }
-      return newRow;
-    });
-    const filteredData = filterColumnsByPosition(roundedData, query);
-    return filteredData as Result[];
+    return processData(data, query);
   } else {
     // Handle two queries
     const query1 = query.query1;
@@ -412,28 +382,6 @@ export const runGenerateSQLQuery = async (query: string | { query1: string; quer
     console.log('Results for query1:', data1);
     console.log('Results for query2:', data2);
 
-    const roundedData1 = (data1 as any[]).map((row) => {
-      const newRow: Record<string, any> = { ...row };
-      for (const key in newRow) {
-        const value = newRow[key];
-        if (typeof value === 'number') {
-          newRow[key] = Math.round((value + Number.EPSILON) * 100) / 100;
-        }
-      }
-      return newRow;
-    });
-
-    const roundedData2 = (data2 as any[]).map((row) => {
-      const newRow: Record<string, any> = { ...row };
-      for (const key in newRow) {
-        const value = newRow[key];
-        if (typeof value === 'number') {
-          newRow[key] = Math.round((value + Number.EPSILON) * 100) / 100;
-        }
-      }
-      return newRow;
-    });
-
     if (data1.length === 0 && data2.length === 0) {
         console.log('No results found for both queries.');
         return { table1Data: [], table2Data: [] };
@@ -447,8 +395,8 @@ export const runGenerateSQLQuery = async (query: string | { query1: string; quer
         console.log('No results found for query2.');
     }
 
-    const filteredData1 = filterColumnsByPosition(roundedData1, query1);
-    const filteredData2 = query2 ? filterColumnsByPosition(roundedData2, query2) : [];
+    const filteredData1 = processData(data1, query1);
+    const filteredData2 = query2 ? processData(data2, query2) : [];
 
     return { table1Data: filteredData1 as Result[], table2Data: filteredData2 as Result[] };
   }
