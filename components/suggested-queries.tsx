@@ -15,8 +15,18 @@ export const SuggestedQueries = ({
           desktop: "Show the 10 highest ppr scoring games in 2024",
           mobile: "top 10 ppr games 2024",
         },
+        {
+          desktop: "show games where brian thomas played and trevor lawrence also played",
+          mobile: "Brian Thomas games with Lawrence",
+        },
+        // {
+        //   desktop: "show seasons where RBs had greater than 20% target share in minimum 8 games",
+        //   mobile: "RB's higher then 20% target share",
+        // },
   ];
 
+
+  
   
 
   return (
