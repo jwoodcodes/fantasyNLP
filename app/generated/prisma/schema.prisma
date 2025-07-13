@@ -204,3 +204,12 @@ model PlayerSeason {
   @@id([player_id, season])
   @@map("playerSeasons")
 }
+
+model Feedback {
+  id         String   @id @default(cuid())
+  createdAt  DateTime @default(now())
+  query      String
+  sql        String
+  isExpected Boolean
+  reason     String?
+}

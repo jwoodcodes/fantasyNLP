@@ -1,0 +1,95 @@
+
+
+here is what I got when I ran npx tsx evals/run_evals.ts. please address and fix the failing test
+
+ npx tsx evals/run_evals.ts
+Running query: Show the 10 highest ppr scoring games in 2024
+Debug: actual object: {
+  result: {
+    generatedQuery: {
+      query: 'SELECT * FROM "PlayerStat" WHERE "season" = 2024 ORDER BY "fantasy_points_ppr" DESC LIMIT 10',
+      query2: ''
+    },
+    originalQuestion: 'Show the 10 highest ppr scoring games in 2024' 
+  }
+}
+Debug: actual.result: {
+  generatedQuery: {
+    query: 'SELECT * FROM "PlayerStat" WHERE "season" = 2024 ORDER BY "fantasy_points_ppr" DESC LIMIT 10',
+    query2: ''
+  },
+  originalQuestion: 'Show the 10 highest ppr scoring games in 2024'   
+}
+Debug: actual.result.generatedQuery: {
+  query: 'SELECT * FROM "PlayerStat" WHERE "season" = 2024 ORDER BY "fantasy_points_ppr" DESC LIMIT 10',
+  query2: ''
+}
+  ✅ Test passed
+Running query: Show games where Xavier Worthy played and Rashee Rice did not play
+Debug: actual object: {
+  result: {
+    generatedQuery: {
+      query: `SELECT * FROM "PlayerStat" AS A WHERE LOWER(A."player_display_name") = LOWER('Xavier Worthy') AND NOT EXISTS (SELECT 1 FROM "PlayerStat" AS B WHERE LOWER(B."player_display_name") = LOWER('Rashee Rice') AND B."season" = A."season" AND B."week" = A."week") LIMIT 100`,
+      query2: ''
+    },
+    originalQuestion: 'Show games where Xavier Worthy played and Rashee Rice did not play'
+  }
+}
+Debug: actual.result: {
+  generatedQuery: {
+    query: `SELECT * FROM "PlayerStat" AS A WHERE LOWER(A."player_display_name") = LOWER('Xavier Worthy') AND NOT EXISTS (SELECT 1 FROM "PlayerStat" AS B WHERE LOWER(B."player_display_name") = LOWER('Rashee Rice') AND B."season" = A."season" AND B."week" = A."week") LIMIT 100`,  
+    query2: ''
+  },
+  originalQuestion: 'Show games where Xavier Worthy played and Rashee Rice did not play'
+}
+Debug: actual.result.generatedQuery: {
+  query: `SELECT * FROM "PlayerStat" AS A WHERE LOWER(A."player_display_name") = LOWER('Xavier Worthy') AND NOT EXISTS (SELECT 1 FROM "PlayerStat" AS B WHERE LOWER(B."player_display_name") = LOWER('Rashee Rice') AND B."season" = A."season" AND B."week" = A."week") LIMIT 100`,    
+  query2: ''
+}
+  ✅ Test passed
+Running query: show games where brian thomas played and trevor lawrence also played
+Debug: actual object: {
+  result: {
+    generatedQuery: {
+      query: `SELECT * FROM "PlayerStat" AS A WHERE LOWER(A."player_display_name") = LOWER('Brian Thomas') AND EXISTS (SELECT 1 FROM "PlayerStat" AS B WHERE LOWER(B."player_display_name") = LOWER('Trevor Lawrence') AND B."season" = A."season" AND B."week" = A."week") LIMIT 100`, 
+      query2: ''
+    },
+    originalQuestion: 'show games where brian thomas played and trevor lawrence also played'
+  }
+}
+Debug: actual.result: {
+  generatedQuery: {
+    query: `SELECT * FROM "PlayerStat" AS A WHERE LOWER(A."player_display_name") = LOWER('Brian Thomas') AND EXISTS (SELECT 1 FROM "PlayerStat" AS B WHERE LOWER(B."player_display_name") = LOWER('Trevor Lawrence') AND B."season" = A."season" AND B."week" = A."week") LIMIT 100`,   
+    query2: ''
+  },
+  originalQuestion: 'show games where brian thomas played and trevor lawrence also played'
+}
+Debug: actual.result.generatedQuery: {
+  query: `SELECT * FROM "PlayerStat" AS A WHERE LOWER(A."player_display_name") = LOWER('Brian Thomas') AND EXISTS (SELECT 1 FROM "PlayerStat" AS B WHERE LOWER(B."player_display_name") = LOWER('Trevor Lawrence') AND B."season" = A."season" AND B."week" = A."week") LIMIT 100`,     
+  query2: ''
+}
+  ❌ Test failed
+    Expected: SELECT * FROM 'PlayerStat' WHERE LOWER('player_display_name') = LOWER('Brian Thomas') AND EXISTS (SELECT 1 FROM 'PlayerStat' AS ps2 WHERE LOWER(ps2.'player_display_name') = LOWER('Trevor Lawrence') AND ps2.'season' = 'PlayerStat'.'season' AND ps2.'week' = 'PlayerStat'.'week') LIMIT 100
+    Actual:   undefined
+Running query: show games for devon achane when he and tua tagovailoa both played
+Debug: actual object: {
+  result: {
+    generatedQuery: {
+      query: `SELECT * FROM "PlayerStat" AS A WHERE LOWER(A."player_display_name") = LOWER('Devon Achane') AND EXISTS (SELECT 1 FROM "PlayerStat" AS B WHERE LOWER(B."player_display_name") = LOWER('Tua Tagovailoa') AND B."season" = A."season" AND B."week" = A."week") LIMIT 100`,  
+      query2: ''
+    },
+    originalQuestion: 'show games for devon achane when he and tua tagovailoa both played'
+  }
+}
+Debug: actual.result: {
+  generatedQuery: {
+    query: `SELECT * FROM "PlayerStat" AS A WHERE LOWER(A."player_display_name") = LOWER('Devon Achane') AND EXISTS (SELECT 1 FROM "PlayerStat" AS B WHERE LOWER(B."player_display_name") = LOWER('Tua Tagovailoa') AND B."season" = A."season" AND B."week" = A."week") LIMIT 100`,    
+    query2: ''
+  },
+  originalQuestion: 'show games for devon achane when he and tua tagovailoa both played'
+}
+Debug: actual.result.generatedQuery: {
+  query: `SELECT * FROM "PlayerStat" AS A WHERE LOWER(A."player_display_name") = LOWER('Devon Achane') AND EXISTS (SELECT 1 FROM "PlayerStat" AS B WHERE LOWER(B."player_display_name") = LOWER('Tua Tagovailoa') AND B."season" = A."season" AND B."week" = A."week") LIMIT 100`,      
+  query2: ''
+}
+  ✅ Test passed

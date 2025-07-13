@@ -1,8 +1,18 @@
 
 {
   "queries": [
-    "show seasons of players top 10 in receiving yards in 2023",
-    "who had the most receptions in 2022"
-   
+    {
+      "query": "Show the 10 highest ppr scoring games in 2024"
+    },
+    {
+      "query": "Show games where Xavier Worthy played and Rashee Rice did not play"
+    },
+    {
+      "query": "show games where brian thomas played and trevor lawrence also played"
+    },
+    {
+      "query": "show games for devon achane when he and tua tagovailoa both played"
+    }
   ]
 }
+
