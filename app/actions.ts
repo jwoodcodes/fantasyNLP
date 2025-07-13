@@ -178,7 +178,7 @@ export const generateQuery = async (input: string) => {
       - "fantasy_points_ppr_avg": Float
        .
     
-    - When a user asks for games where player A played and player B did not play, return data for all the games that player A played but player B did not and not return the games where player B played. To achieve this, use a "NOT EXISTS" clause on the "PlayerStat" table, joining on both "season" and "week" to identify games where player B was present.
+    - When a user asks for games where player A played and player B did not play, return data for all the games that player A played but player B did not and not return the games where player B played. To achieve this, use a "NOT EXISTS" clause on the "PlayerStat" table, joining on both "season" and "week" to identify games where player B was present. For example, for 'Show games where Xavier Worthy played and Rashee Rice did not play', the query should look like: SELECT * FROM "PlayerStat" AS A WHERE LOWER(A."player_display_name") = LOWER('Xavier Worthy') AND NOT EXISTS (SELECT 1 FROM "PlayerStat" AS B WHERE LOWER(B."player_display_name") = LOWER('Rashee Rice') AND B."season" = A."season" AND B."week" = A."week") LIMIT 100.
 
     Guidelines:
     - CRITICAL: NEVER use aliases for column names in the SELECT statement. The column names in the output MUST be the exact names from the table schema (e.g., "player_name", "season"). For example, SELECT "player_name" FROM "playerSeasons" is CORRECT. SELECT "player_name" AS "Player" FROM "playerSeasons" is INCORRECT.
@@ -196,7 +196,7 @@ export const generateQuery = async (input: string) => {
     - if user says in... then puts a year, like "in 2024" or "in 2002", this means where season is equal to that year
     - never return duplicate rows. each unique row should only appear in a table once
     - never return id, player_id, headshot_url, position_group, passing_2pt_conversions, rushing_fumbles_lost, rushing_2pt_conversions, special_teams_tds, Receiving_fumbles, Receiving_fumbles_lost, receiving_2pt_conversions, or any column with the word "sack" in it
-    -if user says, show games for [player A] with [player B], this means "show games where player A played and player B also played". Do not include games where player B did not play, just games for player A where player B also played in that game
+    -if user says, show games for [player A] with [player B], this means "show games where player A played and player B also played". To achieve this, use an "EXISTS" clause on the "PlayerStat" table, joining on both "season" and "week" to ensure player B was present in the same game as player A. For example, for 'show games for devon achane when he and tua tagovailoa both played', the query should look like: SELECT * FROM "PlayerStat" AS A WHERE LOWER(A."player_display_name") = LOWER('Devon Achane') AND EXISTS (SELECT 1 FROM "PlayerStat" AS B WHERE LOWER(B."player_display_name") = LOWER('Tua Tagovailoa') AND B."season" = A."season" AND B."week" = A."week") LIMIT 100. Do not include games where player B did not play, just games for player A where player B also played in that game.
     - if the user says percent, for example, "show me running backs with greater than 20% target share" , use the decimel value, .2 in this example
 
     IMPORTANT: Before finalizing the query, double-check the player positions in the potential result set. If no players are QBs, you MUST exclude all passing-related columns from the SELECT statement. If all players are QBs, you MUST exclude all receiving-related columns. Reference above for what is considered a passing-related column and what is considered a receiving-related column!
@@ -209,14 +209,12 @@ export const generateQuery = async (input: string) => {
         z.object({ query: z.string() }),
         z.object({ query1: z.string(), query2: z.string().optional() }),
       ]),
-      
-      
     });
     console.log('Generated query result:', result.object);
     // Ensure query2 is set to an empty string if not used
     const resultObject = result.object as { query1: string; query2?: string }; // Type assertion
     resultObject.query2 = resultObject.query2 || '';
-    return result.object;
+    return { generatedQuery: result.object, originalQuestion: input };
   } catch (e) {
     console.error(e);
     if (e instanceof Error) {

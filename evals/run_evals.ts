@@ -1,6 +1,9 @@
 
 import { promises as fs } from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 async function main() {
   const queriesPath = path.join(__dirname, 'queries.json');
@@ -28,16 +31,27 @@ async function main() {
 
     const actual = await response.json();
 
-    if (expected && JSON.stringify(actual.result) === JSON.stringify(expected.result)) {
-      console.log('  ✅ Test passed');
-    } else {
-      console.log('  ❌ Test failed');
-      if (expected) {
-        console.log('    Expected:', expected.result);
-      } else {
-        console.log('    Expected: undefined');
+    if (expected) {
+      const normalize = (q: string) => q.replace(/"/g, "'").replace(/;\s*$/, "").trim();
+
+      let actualQuery = '';
+      if (actual.result && actual.result.generatedQuery) {
+        actualQuery = normalize(actual.result.generatedQuery.query || actual.result.generatedQuery.query1 || '');
       }
-      console.log('    Actual:', actual.result);
+
+      const expectedQuery = normalize(expected.result[0]);
+
+      if (actualQuery === expectedQuery) {
+        console.log('  ✅ Test passed');
+      } else {
+        console.log('  ❌ Test failed');
+        console.log('    Expected:', expected.result[0]);
+        console.log('    Actual:  ', actualQuery);
+      }
+    } else {
+        console.log('  ❌ Test failed');
+        console.log('    Expected: undefined');
+        console.log('    Actual:', actual.result);
     }
   }
 }

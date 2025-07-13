@@ -14,6 +14,7 @@ import { Results } from "@/components/results";
 import { SuggestedQueries } from "@/components/suggested-queries";
 import { Search } from "@/components/search";
 import { Header } from "@/components/header";
+import { FeedbackDisplay } from "@/components/feedback-display";
 
 
 export default function Page() {
@@ -24,6 +25,7 @@ export default function Page() {
   const [results2, setResults2] = useState<Result[]>([]);
   const [columns2, setColumns2] = useState<string[]>([]);
   const [activeQuery, setActiveQuery] = useState("");
+  const [activeSQL, setActiveSQL] = useState("");
   const [loading, setLoading] = useState(false);
   const [loadingStep, setLoadingStep] = useState(1);
 
@@ -38,23 +40,26 @@ export default function Page() {
     setLoadingStep(1);
     setActiveQuery("");
     try {
-      const query = await generateQuery(question);
-      if (query === undefined) {
+      const { generatedQuery, originalQuestion } = await generateQuery(question);
+      if (generatedQuery === undefined) {
         toast.error("An error occurred. Please try again.");
         setLoading(false);
         return;
       }
       let dualResults;
 
-      if (typeof query === 'string') {
-        setActiveQuery(query);
-        dualResults = await runGenerateSQLQuery({ query1: query, query2: '' });
-      } else if ('query' in query) {
-        setActiveQuery(query.query);
-        dualResults = await runGenerateSQLQuery({ query1: query.query, query2: '' });
+      if (typeof generatedQuery === 'string') {
+        setActiveQuery(originalQuestion);
+        setActiveSQL(generatedQuery);
+        dualResults = await runGenerateSQLQuery({ query1: generatedQuery, query2: '' });
+      } else if ('query' in generatedQuery) {
+        setActiveQuery(originalQuestion);
+        setActiveSQL(generatedQuery.query);
+        dualResults = await runGenerateSQLQuery({ query1: generatedQuery.query, query2: '' });
       } else {
-        setActiveQuery(query.query1);
-        dualResults = await runGenerateSQLQuery({ query1: query.query1, query2: '' });
+        setActiveQuery(originalQuestion);
+        setActiveSQL(generatedQuery.query1);
+        dualResults = await runGenerateSQLQuery({ query1: generatedQuery.query1, query2: generatedQuery.query2 });
       }
 
       // Ensure to handle the results correctly
@@ -104,7 +109,7 @@ export default function Page() {
 
   return (
     <div className="dark:bg-gray-950">
-      <div className="w-full max-w-90% min-h-dvh  sm:min-h-0 flex flex-col ">
+      <div className="w-full max-w-90% min-h-dvh sm:min-h-0 flex flex-col ">
         <motion.div
           className="bg-card rounded-xl sm:border sm:border-border flex-grow flex flex-col"
           initial={{ opacity: 0 }}
@@ -113,12 +118,9 @@ export default function Page() {
         >
           <div className="p-6 sm:p-8 flex flex-col flex-grow min-h-dvh dark:bg-gray-950">
             <Header handleClear={handleClear} />
-            <h2
-        className="text-l sm:text-xl ml-auto mr-auto mb-20 text-foreground text-center flex items-center  tracking-wide text-sky-400"
-        
-      >
-       <i>Use simple, natural language, to find complex football data</i>
-      </h2>
+            <h2 className="text-l sm:text-xl ml-auto mr-auto mb-20 text-foreground text-center flex items-center tracking-wide text-sky-400">
+              <i>Use simple, natural language, to find complex football data</i>
+            </h2>
             <Search
               handleClear={handleClear}
               handleSubmit={handleSubmit}
@@ -126,60 +128,29 @@ export default function Page() {
               setInputValue={setInputValue}
               submitted={submitted}
             />
-            <div
-              id="main-container"
-              className="flex-grow flex flex-col sm:min-h-[420px]"
-            >
+            <div id="main-container" className="flex-grow flex flex-col sm:min-h-[420px]">
               <div className="flex-grow h-full">
                 <AnimatePresence mode="wait">
-                  {!submitted ? (
-                    <SuggestedQueries
-                      handleSuggestionClick={handleSuggestionClick}
-                    />
-                    // <div>
-                    //   <p>
-                    //     enter query to display data
-                    //   </p>
-                    // </div>
+                  {loading ? ( // Check if loading
+                    <div className="flex justify-center items-center h-full">
+                      <Loader2 className="animate-spin" /> {/* Display loading spinner */}
+                    </div>
+                  ) : !submitted ? (
+                    <SuggestedQueries handleSuggestionClick={handleSuggestionClick} />
                   ) : (
-                    <motion.div
-                      key="results"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      layout
-                      className="sm:h-full min-h-[400px] flex flex-col"
-                    >
-                      {loading ? (
-                        <div className="h-full absolute bg-background/50 w-full flex flex-col items-center justify-center space-y-4">
-                          <Loader2 className="h-12 w-12 animate-spin text-muted-foreground" />
-                          <p className="text-foreground">
-                            {loadingStep === 1
-                              ? "fetching data..."
-                              : "Returning data..."}
-                          </p>
-                        </div>
-                      ) : results1.length === 0 ? (
-                        <div className="flex-grow flex items-center justify-center">
-                          <p className="text-center text-muted-foreground">
-                            No results found.
-                          </p>
-                        </div>
-                      ) : (
-                        <Results
-                          results1={results1}
-                          columns1={columns1}
-                          results2={results2}
-                          columns2={columns2}
-                        />
-                      )}
-                    </motion.div>
+                    <Results
+                      results1={results1}
+                      columns1={columns1}
+                      results2={results2}
+                      columns2={columns2}
+                      query={activeQuery}
+                      sql={activeSQL}
+                    />
                   )}
                 </AnimatePresence>
               </div>
             </div>
           </div>
-         
         </motion.div>
       </div>
     </div>

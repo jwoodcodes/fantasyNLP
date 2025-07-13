@@ -308,6 +308,15 @@ exports.Prisma.PlayerSeasonScalarFieldEnum = {
   firstDPRR: 'firstDPRR'
 };
 
+exports.Prisma.FeedbackScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  query: 'query',
+  sql: 'sql',
+  isExpected: 'isExpected',
+  reason: 'reason'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -339,7 +348,8 @@ exports.Prisma.ModelName = {
   tradeAnalyzerData: 'tradeAnalyzerData',
   PlayerStat: 'PlayerStat',
   ReceivingStat: 'ReceivingStat',
-  PlayerSeason: 'PlayerSeason'
+  PlayerSeason: 'PlayerSeason',
+  Feedback: 'Feedback'
 };
 
 /**
