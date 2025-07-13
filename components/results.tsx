@@ -91,7 +91,7 @@ export const Results = ({
           {feedback === "no" && (
             <div className="mb-4">
               <label htmlFor="reason" className="block mb-2">
-                Briefly describe why the data isn't as expected:
+                Briefly describe why the data is not as expected:
               </label>
               <textarea
                 id="reason"
