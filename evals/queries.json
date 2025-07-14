@@ -12,6 +12,12 @@
     },
     {
       "query": "show games for devon achane when he and tua tagovailoa both played"
+    },
+    {
+      "query": "show games where tyreek hill played for miami"
+    },
+    {
+      "query": "show games for michael pittman and josh downs in 2024 when anthony richardson was quarterback"
     }
   ]
 }

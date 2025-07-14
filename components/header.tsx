@@ -1,10 +1,20 @@
 import { Moon, Sun } from "lucide-react";
+import { useState, useEffect } from "react";
 
 import { Button } from "./ui/button";
 import { useTheme } from "next-themes";
 
 export const Header = ({ handleClear }: { handleClear: () => void }) => {
+  const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <div className="flex items-center justify-center mb-6">
@@ -13,6 +23,7 @@ export const Header = ({ handleClear }: { handleClear: () => void }) => {
         onClick={() => handleClear()}
       >
        NLP Fantasy Data
+       
       </h1>
       
       <div className="absolute top-10 right-10 flex items-center justify-center space-x-2">

@@ -1,0 +1,18 @@
+I am getting the below error, please fix:
+
+Generated query result: {
+  query: `SELECT * FROM "playerSeasons" WHERE "season" = 2024 AND LOWER("position") = LOWER('WR') AND "recent_team" = 'GB' LIMIT 100`
+}
+ POST / 200 in 4308ms
+Validating query1: SELECT * FROM "playerSeasons" WHERE "season" = 2024 AND LOWER("position") = LOWER('WR') AND "recent_team" = 'GB' LIMIT 100
+Executing query1: SELECT * FROM "playerSeasons" WHERE "season" = 2024 AND LOWER("position") = LOWER('WR') AND "recent_team" = 'GB' LIMIT 100
+Error executing query1: Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.$queryRawUnsafe()` invocation:
+
+
+Raw query failed. Code: `42703`. Message: `column "recent_team" does not exist`
+    at Xn.handleRequestError (c:\Users\Kitchen\projects\fantasyNLP\fantasyNLP\app\generated\prisma\runtime\library.js:124:7458)
+    at handleRequestError (c:\Users\Kitchen\projects\fantasyNLP\fantasyNLP\app\generated\prisma\runtime\library.js:124:6783)
+    at handleAndLogRequestError (c:\Users\Kitchen\projects\fantasyNLP\fantasyNLP\app\generated\prisma\runtime\library.js:124:6490)
+    at async l (c:\Users\Kitchen\projects\fantasyNLP\fantasyNLP\app\generated\prisma\runtime\library.js:133:9811)
+    at async runGenerateSQLQuery (c:\Users\Kitchen\projects\fantasyNLP\fantasyNLP\app\actions.ts:392:14)
