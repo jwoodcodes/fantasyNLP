@@ -17,8 +17,17 @@
     {
       "query": "show games for devon achane when he and tua tagovailoa both played",
       "result": ["SELECT * FROM 'PlayerStat' AS A WHERE LOWER(A.'player_display_name') = LOWER('Devon Achane') AND EXISTS (SELECT 1 FROM 'PlayerStat' AS B WHERE LOWER(B.'player_display_name') = LOWER('Tua Tagovailoa') AND B.'season' = A.'season' AND B.'week' = A.'week') LIMIT 100"]
+    },
+    {
+      "query": "show games where tyreek hill played for miami",
+      "result": [ "SELECT * FROM 'PlayerStat' WHERE LOWER('player_display_name') = LOWER('Tyreek Hill') AND 'recent_team' = 'MIA' LIMIT 100"]
+    },
+    {
+      "query": "show games for michael pittman and josh downs in 2024 when anthony richardson was quarterback",
+      "result": [ "SELECT * FROM 'PlayerStat' WHERE LOWER('player_display_name') IN (LOWER('Michael Pittman'), LOWER('Josh Downs')) AND 'season' = 2024 AND EXISTS (SELECT 1 FROM 'PlayerStat' AS B WHERE LOWER(B.'player_display_name') = LOWER('Anthony Richardson') AND B.'position' = 'QB' AND B.'season' = 'PlayerStat'.'season' AND B.'week' = 'PlayerStat'.'week') LIMIT 100"]
     }
   ]
 }
+
 
 

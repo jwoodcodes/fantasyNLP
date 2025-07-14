@@ -1,0 +1,11 @@
+Below is a user submitted feeback for a query that did not return the data and/or table they were expecting. Query is the original user question. SQL is the SQL query the model generated from the user query. reason is the reason that the data and/or table was not what the user was expecting. please look in app/actions.ts and/or app/components/ui/ag-grid-table.tsx
+
+below is the user feedback:
+
+Query: show games for michael pittman and josh downs in 2024 when anthony richardson was quarterback
+
+SQL: SELECT * FROM "PlayerStat" AS A WHERE LOWER(A."player_display_name") = LOWER('Michael Pittman') AND EXISTS (SELECT 1 FROM "PlayerStat" AS B WHERE LOWER(B."player_display_name") = LOWER('Josh Downs') AND B."season" = A."season" AND B."week" = A."week") AND EXISTS (SELECT 1 FROM "PlayerStat" AS C WHERE LOWER(C."player_display_name") = LOWER('Anthony Richardson') AND C."position" = 'QB' AND C."season" = A."season" AND C."week" = A."week") AND A."season" = 2024 LIMIT 100
+
+Was Expected: No
+
+Reason: this did return games where anthony richardson was quartback which is good but it only returned games for michael pittman and not any games for josh downs. when a user ask for data on two players by name I want the data for the query for both players

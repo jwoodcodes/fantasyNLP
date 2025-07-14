@@ -43,7 +43,45 @@ export const generateQuery = async (input: string) => {
 
       -when searching for a player by name, use the "player_display_name" column if querying the "PlayerStat" table. and the "player_name" column is querying the "playerSeasons" table.
 
-    - CRITICAL RULE: Your primary job is to determine the correct table ("PlayerStat" or "playerSeasons") and build the "WHERE", "ORDER BY", and "LIMIT" clauses based on the user's request. The SELECT clause MUST ALWAYS be "SELECT *". My application code is responsible for filtering the columns based on player position after the query is run.
+          - CRITICAL RULE: Your primary job is to determine the correct table ("PlayerStat" or "playerSeasons") and build the "WHERE", "ORDER BY", and "LIMIT" clauses based on the user's request. The SELECT clause MUST ALWAYS be "SELECT *". My application code is responsible for filtering the columns based on player position after the query is run.
+
+      Team Abbreviations:
+      Use the following abbreviations for team names and cities:
+      {
+        "Arizona": "ARI", "Cardinals": "ARI",
+        "Atlanta": "ATL", "Falcons": "ATL",
+        "Baltimore": "BAL", "Ravens": "BAL",
+        "Buffalo": "BUF", "Bills": "BUF",
+        "Carolina": "CAR", "Panthers": "CAR",
+        "Chicago": "CHI", "Bears": "CHI",
+        "Cincinnati": "CIN", "Bengals": "CIN",
+        "Cleveland": "CLE", "Browns": "CLE",
+        "Dallas": "DAL", "Cowboys": "DAL",
+        "Denver": "DEN", "Broncos": "DEN",
+        "Detroit": "DET", "Lions": "DET",
+        "Green Bay": "GB", "Packers": "GB",
+        "Houston": "HOU", "Texans": "HOU",
+        "Indianapolis": "IND", "Colts": "IND",
+        "Jacksonville": "JAX", "Jaguars": "JAX",
+        "Kansas City": "KC", "Chiefs": "KC",
+        "Las Vegas": "LV", "Raiders": "LV",
+        "Los Angeles Chargers": "LAC", "Chargers": "LAC",
+        "Los Angeles Rams": "LAR", "Rams": "LAR",
+        "Miami": "MIA", "Dolphins": "MIA",
+        "Minnesota": "MIN", "Vikings": "MIN",
+        "New England": "NE", "Patriots": "NE",
+        "New Orleans": "NO", "Saints": "NO",
+        "New York Giants": "NYG", "Giants": "NYG",
+        "New York Jets": "NYJ", "Jets": "NYJ",
+        "Philadelphia": "PHI", "Eagles": "PHI",
+        "Pittsburgh": "PIT", "Steelers": "PIT",
+        "San Francisco": "SF", "49ers": "SF",
+        "Seattle": "SEA", "Seahawks": "SEA",
+        "Tampa Bay": "TB", "Buccaneers": "TB",
+        "Tennessee": "TEN", "Titans": "TEN",
+        "Washington": "WAS", "Commanders": "WAS"
+      }
+      When the user mentions a team by city or name, convert it to the corresponding abbreviation for the "recent_team" column in the SQL query. For example, if the user says "Miami" or "Dolphins", use "MIA" in the query.
 
        -Stats that should be considered "passing stats" in playerSeasons are:  "completions_total" ,"attempts_total","passing_yards_total","passing_tds_total","interceptions_total","passing_first_downs_total", "completions_avg","attempts_avg","passing_yards_avg","passing_tds_avg","interceptions_avg","passing_air_yards_avg","passing_yards_after_catch_avg","passing_first_downs_avg"
 
@@ -178,6 +216,8 @@ export const generateQuery = async (input: string) => {
       - "fantasy_points_ppr_avg": Float
        .
     
+    - If the user explicitly asks for data *for* multiple players (e.g., "show games for Player A and Player B", "stats for Player X, Player Y, and Player Z"), the primary WHERE clause for player name should use an IN operator to include all specified players. For example, for 'show games for Michael Pittman and Josh Downs', the query should look like: SELECT * FROM "PlayerStat" WHERE LOWER("player_display_name") IN (LOWER('Michael Pittman'), LOWER('Josh Downs')) LIMIT 100. This applies to both "PlayerStat" and "playerSeasons" tables, using "player_display_name" and "player_name" respectively.
+
     - When a user asks for games where player A played and player B did not play, return data for all the games that player A played but player B did not and not return the games where player B played. To achieve this, use a "NOT EXISTS" clause on the "PlayerStat" table, joining on both "season" and "week" to identify games where player B was present. For example, for 'Show games where Xavier Worthy played and Rashee Rice did not play', the query should look like: SELECT * FROM "PlayerStat" AS A WHERE LOWER(A."player_display_name") = LOWER('Xavier Worthy') AND NOT EXISTS (SELECT 1 FROM "PlayerStat" AS B WHERE LOWER(B."player_display_name") = LOWER('Rashee Rice') AND B."season" = A."season" AND B."week" = A."week") LIMIT 100.
 
     Guidelines:
@@ -275,7 +315,13 @@ const processData = (data: any[], query: string) => {
   const hasQB = roundedData.some(row => row.position && row.position.toUpperCase() === 'QB');
   const allQB = roundedData.every(row => row.position && row.position.toUpperCase() === 'QB');
 
-  const columnsToExclude = new Set(['id', 'player_id', 'headshot_url', 'position_group', 'rushing_fumbles_lost', 'rushing_2pt_conversion', 'special_teams_tds', 'receiving_fumbles', 'receiving_fumbles_lost', 'sack_fumbles', 'sack_fumbles_lost', 'sacks', 'sack_yards']);
+  const columnsToExclude = new Set(['id', 'player_id', 'headshot_url', 'position_group', 'rushing_fumbles_lost', 'rushing_2pt_conversions', 'special_teams_tds', 'receiving_fumbles', 'receiving_fumbles_lost', 'receiving_2pt_conversions', 'sack_fumbles', 'sack_fumbles_lost', 'sacks', 'sack_yards']);
+
+  if (tableName === 'PlayerStat') {
+    columnsToExclude.add('player_name');
+  } else if (tableName === 'playerSeasons') {
+    columnsToExclude.add('player_display_name');
+  }
 
   if (!hasQB) {
     passingStats.forEach(stat => columnsToExclude.add(stat));
