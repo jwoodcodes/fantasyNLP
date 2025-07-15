@@ -20,6 +20,7 @@ interface PlayerSeasonStats {
   season: number;
   games_played: number;
   position?: string; // Added position field
+  team?: string;
   [key: string]: any;
 }
 
@@ -68,6 +69,7 @@ async function getCompleteSeasonalStats(): Promise<{ [key: string]: PlayerSeason
               season: game.season,
               games_played: 0,
               position: game.position, // Added position
+              team: game.recent_team,
             };
           }
           seasonalStats[key].games_played += 1;
