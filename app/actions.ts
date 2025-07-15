@@ -106,7 +106,6 @@ export const generateQuery = async (input: string) => {
       - "player_display_name": String
       - "position": String
       - "position_group": String
-      - "headshot_url": String
       - "recent_team": String
       - "season": Int
       - "week": Int
@@ -119,29 +118,21 @@ export const generateQuery = async (input: string) => {
       - "interceptions": Int
       - "sacks": Int
       - "sack_yards": Float
-      - "sack_fumbles": Int
-      - "sack_fumbles_lost": Int
       - "passing_air_yards": Float
       - "passing_yards_after_catch": Float
       - "passing_first_downs": Int
       - "passing_epa": Float
-      - "passing_2pt_conversions": Int
       - "pacr": Float
-      - "dakota": Float
       - "carries": Int
       - "rushing_yards": Float
       - "rushing_tds": Int
       - "rushing_fumbles": Int
-      - "rushing_fumbles_lost": Int
       - "rushing_first_downs": Int
       - "rushing_epa": Float
-      - "rushing_2pt_conversions": Int
       - "receptions": Int
       - "targets": Int
       - "receiving_yards": Float
       - "receiving_tds": Int
-      - "receiving_fumbles": Int
-      - "receiving_fumbles_lost": Int
       - "receiving_air_yards": Float
       - "receiving_yards_after_catch": Float
       - "receiving_first_downs": Int
@@ -151,7 +142,6 @@ export const generateQuery = async (input: string) => {
       - "target_share": Float
       - "air_yards_share": Float
       - "wopr": Float
-      - "special_teams_tds": Int
       - "fantasy_points": Float
       - "fantasy_points_ppr": Float
 
@@ -161,6 +151,7 @@ export const generateQuery = async (input: string) => {
       - "season": Int
       - "games_played": Int
       - "position": String
+      - "team": String
       - "completions_total": Float
       - "attempts_total": Float
       - "passing_yards_total": Float
