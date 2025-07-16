@@ -71,7 +71,6 @@ model PlayerStat {
   receivingAirYards           Float?   @map("receiving_air_yards")
   receivingYardsAfterCatch    Float?   @map("receiving_yards_after_catch")
   receivingFirstDowns         Int?     @map("receiving_first_downs")
-  receivingEpa                Float?   @map("receiving_epa")
   receiving2ptConversions     Int?     @map("receiving_2pt_conversions")
   racr                        Float?
   targetShare                 Float?   @map("target_share")
@@ -111,7 +110,7 @@ model ReceivingStat {
   longest                         Int?
   passBlockRate                   Float?   @map("pass_block_rate")
   passBlocks                      Int?     @map("pass_blocks")
-  passPlays                       Int?     @map("pass_plays")
+  passPlays                       Int?
   penalties                       Int?
   receptions                      Int?
   routeRate                       Float?   @map("route_rate")
@@ -172,7 +171,6 @@ model PlayerSeason {
   rushing_fumbles_avg             Float?
   rushing_fumbles_lost_avg        Float?
   rushing_first_downs_avg         Float?
-  rushing_epa_avg                 Float?
   receptions_avg                  Float?
   targets_avg                     Float?
   receiving_yards_avg             Float?
@@ -204,4 +202,79 @@ model Feedback {
   sql         String
   isExpected  Boolean
   reason      String?
+}
+
+model byDownData {
+  id                                          String   @id @default(cuid())
+  playerId                                    String
+  season                                      Int
+  down                                        Int
+  greenZoneCarries                            Int?
+  teamTotalGreenZoneCarries                   Int?
+  teamTotalGreenZoneCarriesInPlayedGames      Int?
+  pctTeamGreenZoneCarries                     Float?
+  pctTeamGreenZoneCarriesInPlayedGames        Float?
+  HVTs                                        Int?
+  HVTsPerGame                                 Float?
+  totalTeamRBHVTs                             Int?
+  pctTeamRBHVTs                               Float?
+  totalTeamRBHVTsInPlayedGames                Int?
+  pctTeamRBHVTsInPlayedGames                  Float?
+  totalTeamHVTsUnfiltered                     Int?
+
+  // Down-specific stats
+  attempts                                    Int?
+  completions                                 Int?
+  passing_yards                               Float?
+  passing_tds                                 Int?
+  interceptions                               Int?
+  sacks_taken                                 Int?
+  passing_first_downs                         Int?
+  carries                                     Int?
+  rushing_yards                               Float?
+  rushing_tds                                 Int?
+  fumbles                                     Int?
+  rushing_first_downs                         Int?
+  targets                                     Int?
+  receptions                                  Int?
+  receiving_yards                             Float?
+  receiving_tds                               Int?
+  receiving_first_downs                       Int?
+  total_first_downs                           Int?
+  position                                    String?
+  team                                        String?
+  games_played                                Int?
+  team_carries_in_played_games                Int?
+  team_targets_in_played_games                Int?
+  team_receptions_in_played_games             Int?
+  team_rush_fd_in_played_games                Int?
+  team_rec_fd_in_played_games                 Int?
+  team_carries_all_games                      Int?
+  team_targets_all_games                      Int?
+  team_receptions_all_games                   Int?
+  team_rush_fd_all_games                      Int?
+  team_rec_fd_all_games                       Int?
+  pct_team_carries_in_played_games            Float?
+  pct_team_targets_in_played_games            Float?
+  pct_team_receptions_in_played_games         Float?
+  pct_team_rush_fd_in_played_games            Float?
+  pct_team_rec_fd_in_played_games             Float?
+  yards_per_pass_attempt                      Float?
+  yards_per_completion                        Float?
+  yards_per_carry                             Float?
+  yards_per_target                            Float?
+  yards_per_reception                         Float?
+  pass_attempts_per_game                      Float?
+  completions_per_game                        Float?
+  passing_yards_per_game                      Float?
+  passing_first_downs_per_game                Float?
+  carries_per_game                            Float?
+  rushing_yards_per_game                      Float?
+  rushing_first_downs_per_game                Float?
+  targets_per_game                            Float?
+  receptions_per_game                         Float?
+  receiving_yards_per_game                    Float?
+  receiving_first_downs_per_game              Float?
+
+  @@unique([playerId, season, down])
 }

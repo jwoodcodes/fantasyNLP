@@ -1,8 +1,0 @@
-
-** things I can and would like to derive from current datasets  **
-
-    -players team in the seasons objects has already been added to the code and the prisma schema and that wil update next database migration.
-
-
-
-** new data I would like to get and add in **

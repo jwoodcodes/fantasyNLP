@@ -156,3 +156,11 @@ fast_scraper_schedules(2020) |>
 #> #   ydsnet <dbl>, desc <chr>, play_type <chr>, yards_gained <dbl>, …
 
 # }
+
+nflverse Play-by-Play Data
+There are three ways to obtain nflverse pbp data.
+
+We recommend using nflreadr::load_pbp() or nflfastR::load_pbp() as the primary method of retrieving pbp data. This uses our automated data infrastructure to download clean data, and we update this on a nightly basis after each game day (and additionally at specific points on game days) during the season.
+If this is not quick enough, nflfastR::build_nflfastR_pbp() parses raw pbp json files we save, usually available within 15 minutes after a game has ended.
+If you have a SQL database, nflfastR::update_db() helps maintain a pbp database. It uses nflfastR::build_nflfastR_pbp() so can be run on the same schedule (i.e. within 15 minutes after a game has ended).
+In all cases, it is recommended to update the data again during the night from Wednesday to Thursday in order to also receive the stat corrections that the NFL will incorporate from Monday to Wednesday at the latest. -> Thursday’s load_pbp() is the cleanest data we have.

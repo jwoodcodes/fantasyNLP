@@ -15,7 +15,8 @@
     "generate": "prisma generate",
     "migrate": "prisma migrate dev",
     "studio": "prisma studio",
-    "postinstall": "prisma generate --no-engine"
+    "postinstall": "prisma generate --no-engine",
+    "seed:byDownData": "ts-node prisma/seedByDownData.ts"
   },
   "dependencies": {
     "@ai-sdk/deepseek": "^0.2.14",
@@ -36,6 +37,7 @@
     "@vercel/analytics": "^1.5.0",
     "@vercel/postgres": "0.10.0",
     "ag-grid-community": "^34.0.0",
+    "csv-parse": "^6.0.0",
     "ag-grid-react": "^34.0.0",
     "ai": "^4.0.16",
     "autoprefixer": "^10.4.21",

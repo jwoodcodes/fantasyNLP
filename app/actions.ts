@@ -348,9 +348,9 @@ export const runGenerateSQLQuery = async (query: string | { query1: string; quer
     try {
       data = await prisma.$queryRawUnsafe(query);
     } catch (e: any) {
-      if (e.message.includes('relation "unicorns" does not exist')) {
+      if (e.message.includes('no data to return')) {
         console.log(
-          "Table does not exist, creating and seeding it with dummy data now...",
+          "Table does not exist",
         );
         throw Error("Table does not exist");
       } else {
@@ -385,9 +385,9 @@ export const runGenerateSQLQuery = async (query: string | { query1: string; quer
       data1 = await prisma.$queryRawUnsafe(query1);
     } catch (e: any) {
       console.error('Error executing query1:', e);
-      if (e.message.includes('relation "unicorns" does not exist')) {
+      if (e.message.includes('data does not exist')) {
         console.log(
-          "Table does not exist, creating and seeding it with dummy data now...",
+          "Table does not exist",
         );
         throw Error("Table does not exist for query1");
       } else {
@@ -401,9 +401,9 @@ export const runGenerateSQLQuery = async (query: string | { query1: string; quer
         data2 = await prisma.$queryRawUnsafe(query2);
       } catch (e: any) {
         console.error('Error executing query2:', e);
-        if (e.message.includes('relation "unicorns" does not exist')) {
+        if (e.message.includes('data does not exist')) {
           console.log(
-            "Table does not exist, creating and seeding it with dummy data now...",
+            "Table does not exist",
           );
           throw Error("Table does not exist for query2");
         } else {
@@ -442,4 +442,3 @@ export const runGenerateSQLQuery = async (query: string | { query1: string; quer
 
 
 
-// show two tables, one for games where xavier worthy played and rashee rice also player and one for games where xavier worthy played and rashee rice did not play
