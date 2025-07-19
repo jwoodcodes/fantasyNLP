@@ -182,6 +182,62 @@ for (year in 2017:2024) {
       pct_team_RB_HVTs_in_played_games = ifelse(total_team_RB_HVTs_in_played_games > 0, HVTs / total_team_RB_HVTs_in_played_games, 0)
     )
 
+  # --- Calculate QB Dropback Stats ---
+  qb_dropback_stats <- pbp_data %>%
+    filter(qb_dropback == 1) %>%
+    mutate(
+      player_id = ifelse(!is.na(passer_player_id), passer_player_id, rusher_player_id),
+      player_position = ifelse(!is.na(passer_player_id), passer_position, rusher_position)
+    ) %>%
+    filter(player_position == "QB") %>%
+    group_by(player_id) %>%
+    summarise(
+      total_dropbacks = n(),
+      pass_attempts_on_dropbacks = sum(play_type == 'pass' & sack == 0, na.rm = TRUE),
+      scrambles_on_dropbacks = sum(play_type == 'run', na.rm = TRUE),
+      sacks_on_dropbacks = sum(sack, na.rm = TRUE),
+      .groups = 'drop'
+    ) %>%
+    mutate(
+      pass_attempt_rate = ifelse(total_dropbacks > 0, pass_attempts_on_dropbacks / total_dropbacks, 0),
+      scramble_rate = ifelse(total_dropbacks > 0, scrambles_on_dropbacks / total_dropbacks, 0),
+      sack_rate = ifelse(total_dropbacks > 0, sacks_on_dropbacks / total_dropbacks, 0)
+    )
+
+  # Join QB dropback stats with season_player_stats
+  season_player_stats <- left_join(season_player_stats, qb_dropback_stats, by = "player_id")
+
+  # --- Calculate QB EPA by Pass Location and Length ---
+  qb_epa_stats <- pbp_data %>%
+    filter(pass_attempt == 1, !is.na(passer_player_id), !is.na(pass_location), !is.na(pass_length)) %>%
+    group_by(player_id = passer_player_id, pass_length, pass_location) %>%
+    summarise(avg_epa = mean(epa, na.rm = TRUE), .groups = 'drop') %>%
+    tidyr::pivot_wider(
+      names_from = c(pass_length, pass_location),
+      values_from = avg_epa,
+      names_prefix = "avg_epa_",
+      values_fill = 0
+    )
+
+  # Join QB EPA stats with season_player_stats
+  season_player_stats <- left_join(season_player_stats, qb_epa_stats, by = "player_id")
+
+  # --- Calculate RB Tackled for Loss Stats (All Downs) ---
+  rb_tfl_stats <- pbp_data %>%
+    filter(rusher_position == "RB", rush_attempt == 1) %>%
+    group_by(player_id = rusher_player_id) %>%
+    summarise(
+      total_tackled_for_loss = sum(tackled_for_loss, na.rm = TRUE),
+      total_rb_carries = n(),
+      .groups = 'drop'
+    ) %>%
+    mutate(
+      pct_carries_tackled_for_loss = ifelse(total_rb_carries > 0, total_tackled_for_loss / total_rb_carries, 0)
+    )
+
+  # Join RB TFL stats with season_player_stats
+  season_player_stats <- left_join(season_player_stats, rb_tfl_stats, by = "player_id")
+
   all_downs_stats <- map(c(1, 3), ~get_down_stats(pbp_data, .x))
 
   # Get all unique player IDs and their names from the current year's pbp data
@@ -245,6 +301,8 @@ for (year in 2017:2024) {
 cat("STEP 6: Saving the final aggregated stats to CSV...\n")
 
 final_stats_output_file <- "all_downs_offensive_stats_1_3_2017_2024.csv"
+all_seasons_data_flat <- all_seasons_data_flat %>%
+  mutate(across(where(is.numeric), ~round(., 3)))
 write_csv(all_seasons_data_flat, final_stats_output_file)
 
 cat("\nScript finished successfully!\n")
