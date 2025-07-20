@@ -16,7 +16,8 @@
     "migrate": "prisma migrate dev",
     "studio": "prisma studio",
     "postinstall": "prisma generate --no-engine",
-    "seed:byDownData": "ts-node prisma/seedByDownData.ts"
+    "seed:byDownData": "ts-node prisma/seedByDownData.ts",
+    "seed:allData": "ts-node prisma/seedAllData.ts"
   },
   "dependencies": {
     "@ai-sdk/deepseek": "^0.2.14",
