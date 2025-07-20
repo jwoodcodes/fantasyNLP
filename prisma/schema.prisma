@@ -131,8 +131,8 @@ model ReceivingStat {
 }
 
 model PlayerSeason {
-  player_id                             String    @id
-  season                                Int       @id
+  player_id                             String
+  season                                Int
   player_name                           String?
   team                                  String?
   position                              String?
