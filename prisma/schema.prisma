@@ -268,7 +268,7 @@ model PlayerSeason {
   down_1_team_targets_all_games         Int?
   down_1_team_receptions_all_games      Int?
   down_1_team_rush_fd_all_games         Int?
-  down_1_team_rec_fd_all_games          Float?
+  down_1_team_rec_fd_all_games          Int?
   down_1_pct_team_carries_in_played_games Float?
   down_1_pct_team_targets_in_played_games Float?
   down_1_pct_team_receptions_in_played_games Float?
@@ -318,7 +318,7 @@ model PlayerSeason {
   down_3_team_targets_all_games         Int?
   down_3_team_receptions_all_games      Int?
   down_3_team_rush_fd_all_games         Int?
-  down_3_team_rec_fd_all_games          Float?
+  down_3_team_rec_fd_all_games          Int?
   down_3_pct_team_carries_in_played_games Float?
   down_3_pct_team_targets_in_played_games Float?
   down_3_pct_team_receptions_in_played_games Float?
