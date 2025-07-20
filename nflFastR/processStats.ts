@@ -23,6 +23,8 @@ interface PlayerSeasonStats {
   season: number;
   games_played: number;
   position?: string; // Added position field
+  [key: `${string}_total`]: number | undefined;
+  [key: string]: any;
   team?: string;
   completions_total?: number;
   attempts_total?: number;
@@ -297,7 +299,7 @@ async function getCompleteSeasonalStats(): Promise<{ [key: string]: PlayerSeason
               if (!seasonalStats[key][`${stat}_total`]) {
                 seasonalStats[key][`${stat}_total`] = 0;
               }
-              seasonalStats[key][`${stat}_total`] += game[stat];
+              seasonalStats[key][`${stat}_total`]! += game[stat];
             }
           }
         }
