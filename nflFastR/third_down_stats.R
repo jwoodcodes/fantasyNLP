@@ -13,7 +13,7 @@ install.packages("nflreadr", repos = c("https://nflverse.r-universe.dev", getOpt
 
 # Install other required packages if they are not already present
 other_packages <- c("dplyr", "tidyr", "purrr", "readr", "jsonlite")
-new_packages <- other_packages[!(other_packages %in% installed.packages()[,"Package"])]
+new_packages <- other_packages[!(other_packages %in% installed.packages()["Package"])]
 if(length(new_packages)) install.packages(new_packages)
 
 # Load libraries
@@ -27,25 +27,36 @@ library(jsonlite)
 
 cat("STEP 1: Loading and processing data for multiple seasons...\n")
 
-# --- 2. Data Processing Function ---
+# --- 2. Sanitization Function ---
+sanitize_player_name <- function(name) {
+  if (is.na(name) || is.null(name)) {
+    return("")
+  }
+  name <- tolower(name)
+  name <- gsub("[-.']", "", name, perl = TRUE) # Corrected regex
+  name <- gsub("\\b(iii|ii|jr)\\b", "", name, perl = TRUE)
+  name <- trimws(name)
+  return(name)
+}
+
+
+# --- 3. Data Processing Function ---
 
 get_down_stats <- function(pbp_data, down_num) {
   pbp_down <- pbp_data %>%
   filter(down == down_num)
 
   passing_totals <- pbp_down %>%
-  filter(pass_attempt == 1, !is.na(passer_player_id)) %>% group_by(player_id = passer_player_id, player_name = passer_player_name) %>% summarise(attempts = n(), completions = sum(complete_pass, na.rm = TRUE), passing_yards = sum(passing_yards, na.rm = TRUE), passing_tds = sum(pass_touchdown, na.rm = TRUE), interceptions = sum(interception, na.rm = TRUE), sacks_taken = sum(sack, na.rm = TRUE), passing_first_downs = sum(first_down_pass, na.rm = TRUE))
+  filter(pass_attempt == 1, !is.na(passer_player_id)) %>% group_by(player_id = passer_player_id) %>% summarise(attempts = n(), completions = sum(complete_pass, na.rm = TRUE), passing_yards = sum(passing_yards, na.rm = TRUE), passing_first_downs = sum(first_down_pass, na.rm = TRUE))
   rushing_totals <- pbp_down %>%
-  filter(rush_attempt == 1, !is.na(rusher_player_id)) %>% group_by(player_id = rusher_player_id, player_name = rusher_player_name) %>% summarise(carries = n(), rushing_yards = sum(rushing_yards, na.rm = TRUE), rushing_tds = sum(rush_touchdown, na.rm = TRUE), fumbles = sum(fumble_lost, na.rm = TRUE), rushing_first_downs = sum(first_down_rush, na.rm = TRUE))
+  filter(rush_attempt == 1, !is.na(rusher_player_id)) %>% group_by(player_id = rusher_player_id) %>% summarise(carries = n(), rushing_yards = sum(rushing_yards, na.rm = TRUE), rushing_first_downs = sum(first_down_rush, na.rm = TRUE))
   receiving_totals <- pbp_down %>%
-  filter(pass_attempt == 1, !is.na(receiver_player_id)) %>% group_by(player_id = receiver_player_id, player_name = receiver_player_name) %>% summarise(targets = n(), receptions = sum(complete_pass, na.rm = TRUE), receiving_yards = sum(receiving_yards, na.rm = TRUE), receiving_tds = sum(pass_touchdown, na.rm = TRUE), receiving_first_downs = sum(first_down_pass, na.rm = TRUE))
+  filter(pass_attempt == 1, !is.na(receiver_player_id)) %>% group_by(player_id = receiver_player_id) %>% summarise(targets = n(), receptions = sum(complete_pass, na.rm = TRUE), receiving_yards = sum(receiving_yards, na.rm = TRUE), receiving_first_downs = sum(first_down_pass, na.rm = TRUE))
 
-  final_stats <- full_join(passing_totals, rushing_totals, by = c("player_id", "player_name")) %>%
-  full_join(receiving_totals, by = c("player_id", "player_name"))
+  final_stats <- full_join(passing_totals, rushing_totals, by = c("player_id")) %>%
+  full_join(receiving_totals, by = c("player_id"))
   final_stats <- final_stats %>%
   mutate(across(where(is.numeric), ~ifelse(is.na(.), 0, .)))
-  final_stats <- final_stats %>%
-  mutate(total_first_downs = passing_first_downs + rushing_first_downs + receiving_first_downs)
 
   player_info <- bind_rows(pbp_down %>%
   filter(!is.na(passer_player_id)) %>% select(player_id = passer_player_id, position = passer_position, team = posteam),
@@ -54,22 +65,41 @@ get_down_stats <- function(pbp_data, down_num) {
   ) %>%
   filter(!is.na(player_id), !is.na(position), !is.na(team)) %>% group_by(player_id) %>% summarise(position = first(position), team = last(team))
   final_stats <- left_join(final_stats, player_info, by = "player_id") %>%
-  select(player_id, player_name, position, team, everything())
+  select(player_id, position, team, everything())
 
   player_games <- bind_rows(pbp_down %>%
   filter(!is.na(passer_player_id)) %>% select(player_id = passer_player_id, game_id, team = posteam),
   pbp_down %>% filter(!is.na(rusher_player_id)) %>% select(player_id = rusher_player_id, game_id, team = posteam),
   pbp_down %>% filter(!is.na(receiver_player_id)) %>% select(player_id = receiver_player_id, game_id, team = posteam)
   ) %>% filter(!is.na(player_id)) %>% distinct(player_id, game_id, team)
-  team_game_totals <- pbp_down %>% group_by(game_id, team = posteam) %>% summarise(team_carries_in_game = sum(rush_attempt == 1, na.rm = TRUE), team_targets_in_game = sum(pass_attempt == 1, na.rm = TRUE), team_receptions_in_game = sum(complete_pass, na.rm = TRUE), team_rush_fd_in_game = sum(first_down_rush, na.rm = TRUE), team_rec_fd_in_game = sum(first_down_pass, na.rm = TRUE), .groups = 'drop')
+  
+  team_game_totals <- pbp_down %>%
+    group_by(game_id, team = posteam) %>%
+    summarise(
+      team_carries_in_game = sum(rush_attempt == 1, na.rm = TRUE),
+      team_targets_in_game = sum(pass_attempt == 1, na.rm = TRUE),
+      team_receptions_in_game = sum(complete_pass, na.rm = TRUE),
+      team_rush_fd_in_game = sum(first_down_rush, na.rm = TRUE),
+      team_rec_fd_in_game = sum(first_down_pass, na.rm = TRUE),
+      .groups = 'drop'
+    )
+
   player_specific_team_totals <- left_join(player_games, team_game_totals, by = c("game_id", "team")) %>%
-  group_by(player_id) %>% summarise(team_carries_in_played_games = sum(team_carries_in_game, na.rm = TRUE), team_targets_in_played_games = sum(team_targets_in_game, na.rm = TRUE), team_receptions_in_played_games = sum(team_receptions_in_game, na.rm = TRUE), team_rush_fd_in_played_games = sum(team_rush_fd_in_game, na.rm = TRUE), team_rec_fd_in_played_games = sum(team_rec_fd_in_game, na.rm = TRUE), games_played = n_distinct(game_id), .groups = 'drop')
+  group_by(player_id) %>% summarise(
+    team_carries_in_played_games = sum(team_carries_in_game, na.rm = TRUE),
+    team_targets_in_played_games = sum(team_targets_in_game, na.rm = TRUE),
+    team_receptions_in_played_games = sum(team_receptions_in_game, na.rm = TRUE),
+    team_rush_fd_in_played_games = sum(team_rush_fd_in_game, na.rm = TRUE),
+    team_rec_fd_in_played_games = sum(team_rec_fd_in_game, na.rm = TRUE),
+    games_played = n_distinct(game_id),
+    .groups = 'drop'
+  )
   final_stats <- left_join(final_stats, player_specific_team_totals, by = "player_id")
 
-  team_totals_all_games <- pbp_down %>% group_by(team = posteam) %>% summarise(team_carries_all_games = sum(rush_attempt == 1, na.rm = TRUE), team_targets_all_games = sum(pass_attempt == 1, na.rm = TRUE), team_receptions_all_games = sum(complete_pass, na.rm = TRUE), team_rush_fd_all_games = sum(first_down_rush, na.rm = TRUE), team_rec_fd_all_games = sum(first_down_pass, na.rm = TRUE), .groups = 'drop')
+  team_totals_all_games <- pbp_down %>% group_by(team = posteam) %>% summarise(team_carries_all_games = sum(rush_attempt == 1, na.rm = TRUE), team_targets_all_games = sum(pass_attempt == 1, na.rm = TRUE), team_receptions_all_games = sum(complete_pass, na.rm = TRUE), .groups = 'drop')
   final_stats <- left_join(final_stats, team_totals_all_games, by = "team")
 
-  final_stats <- final_stats %>% mutate(pct_team_carries_in_played_games = ifelse(team_carries_in_played_games > 0, carries / team_carries_in_played_games, 0), pct_team_targets_in_played_games = ifelse(team_targets_in_played_games > 0, targets / team_targets_in_played_games, 0), pct_team_receptions_in_played_games = ifelse(team_receptions_in_played_games > 0, receptions / team_receptions_in_played_games, 0), pct_team_rush_fd_in_played_games = ifelse(team_rush_fd_in_played_games > 0, rushing_first_downs / team_rush_fd_in_played_games, 0), pct_team_rec_fd_in_played_games = ifelse(team_rec_fd_in_played_games > 0, receiving_first_downs / team_rec_fd_in_played_games, 0), yards_per_pass_attempt = ifelse(attempts > 0, passing_yards / attempts, 0), yards_per_completion = ifelse(completions > 0, passing_yards / completions, 0), yards_per_carry = ifelse(carries > 0, rushing_yards / carries, 0), yards_per_target = ifelse(targets > 0, receiving_yards / targets, 0), yards_per_reception = ifelse(receptions > 0, receiving_yards / receptions, 0), pass_attempts_per_game = attempts / games_played, completions_per_game = completions / games_played, passing_yards_per_game = passing_yards / games_played, passing_first_downs_per_game = passing_first_downs / games_played, carries_per_game = carries / games_played, rushing_yards_per_game = rushing_yards / carries, rushing_first_downs_per_game = rushing_first_downs / games_played, targets_per_game = targets / games_played, receptions_per_game = receptions / games_played, receiving_yards_per_game = receiving_yards / games_played, receiving_first_downs_per_game = receiving_first_downs / games_played)
+  final_stats <- final_stats %>% mutate(yards_per_pass_attempt = ifelse(attempts > 0, passing_yards / attempts, 0), yards_per_completion = ifelse(completions > 0, passing_yards / completions, 0), yards_per_carry = ifelse(carries > 0, rushing_yards / carries, 0), yards_per_target = ifelse(targets > 0, receiving_yards / targets, 0), yards_per_reception = ifelse(receptions > 0, receiving_yards / receptions, 0), pass_attempts_per_game = attempts / games_played, completions_per_game = completions / games_played, passing_yards_per_game = passing_yards / games_played, passing_first_downs_per_game = passing_first_downs / games_played, carries_per_game = carries / games_played, rushing_yards_per_game = rushing_yards / carries, rushing_first_downs_per_game = rushing_first_downs / games_played, targets_per_game = targets / games_played, receptions_per_game = receptions / games_played, receiving_yards_per_game = receiving_yards / games_played)
 
   return(final_stats)
 }
@@ -92,164 +122,112 @@ for (year in 2017:2024) {
     left_join(rosters_data %>% select(gsis_id, position), by = c("receiver_player_id" = "gsis_id")) %>%
     rename(receiver_position = position)
 
-  # --- Calculate Season-Level Stats (Green Zone Carries, HVTs) ---
-  # Get all unique player IDs and their names from the current year's pbp data
-  player_info_for_year <- bind_rows(
-    pbp_data %>% filter(!is.na(passer_player_id)) %>% select(player_id = passer_player_id, player_name = passer_player_name, team = posteam, position = passer_position),
-    pbp_data %>% filter(!is.na(rusher_player_id)) %>% select(player_id = rusher_player_id, player_name = rusher_player_name, team = posteam, position = rusher_position),
-    pbp_data %>% filter(!is.na(receiver_player_id)) %>% select(player_id = receiver_player_id, player_name = receiver_player_name, team = posteam, position = receiver_position)
-  ) %>%
-  filter(!is.na(player_id)) %>%
-  distinct(player_id, player_name, team, position)
-
-  season_player_stats_raw <- pbp_data %>%
-    filter(play_type %in% c('pass', 'run')) %>%
-    mutate(is_green_zone_carry = ifelse(rush_attempt == 1 & yardline_100 <= 10, 1, 0)) %>%
-    group_by(player_id = rusher_player_id, player_name = rusher_player_name, team = posteam) %>%
-    summarise(green_zone_carries = sum(is_green_zone_carry, na.rm = TRUE), .groups = 'drop')
-
-  # Add targets to season_player_stats_raw for HVT calculation
-  season_player_targets_raw <- pbp_data %>%
-    filter(pass_attempt == 1, !is.na(receiver_player_id)) %>% group_by(player_id = receiver_player_id, player_name = receiver_player_name, team = posteam) %>% summarise(targets = n(), .groups = 'drop')
-
-  season_player_stats <- full_join(season_player_stats_raw, season_player_targets_raw, by = c("player_id", "player_name", "team")) %>%
-    mutate(across(where(is.numeric), ~ifelse(is.na(.), 0, .)))
-
-  # Join with player_info_for_year to get position for HVT calculation
-  season_player_stats <- left_join(season_player_stats, player_info_for_year %>% select(player_id, position), by = "player_id")
-
-  # Calculate HVTs only for RBs
-  season_player_stats <- season_player_stats %>%
-    mutate(HVTs = ifelse(position == "RB", targets + green_zone_carries, NA_real_))
-
-  # Calculate team totals for Green Zone Carries (all games)
-  team_green_zone_carries_all_games_df <- pbp_data %>%
-    filter(play_type %in% c('pass', 'run')) %>%
-    mutate(is_green_zone_carry = ifelse(rush_attempt == 1 & yardline_100 <= 10, 1, 0)) %>%
-    group_by(team = posteam) %>%
-    summarise(
-      team_green_zone_carries_all_games = sum(is_green_zone_carry, na.rm = TRUE),
-      .groups = 'drop'
+  # --- Aggregate weekly stats to season totals ---
+  # Load weekly player stats directly from nflreadr
+  weekly_player_stats <- nflreadr::load_player_stats(year, "offense") %>%
+    filter(season_type == "REG") %>%
+    # Select and rename columns to match the structure expected by subsequent steps
+    select(
+      player_id, player_name, week, season, completions, attempts, passing_yards,
+      passing_tds, interceptions, sacks, sack_yards, passing_air_yards,
+      passing_yards_after_catch, passing_first_downs, passing_epa, pacr,
+      carries, rushing_yards, rushing_tds, rushing_fumbles, rushing_first_downs,
+      rushing_epa, receptions, targets, receiving_yards, receiving_tds,
+      receiving_air_yards, receiving_yards_after_catch, receiving_first_downs,
+      receiving_2pt_conversions, racr, target_share, air_yards_share, wopr,
+      fantasy_points, fantasy_points_ppr
     )
 
-  # Calculate total team RB HVTs (all games)
-  team_RB_HVTs_all_games_df <- pbp_data %>%
-    filter(play_type %in% c('pass', 'run')) %>%
-    mutate(is_rb_carry = ifelse(rush_attempt == 1 & rusher_position == "RB", 1, 0)) %>%
-    mutate(is_rb_target = ifelse(pass_attempt == 1 & receiver_position == "RB", 1, 0)) %>%
-    group_by(team = posteam) %>%
-    summarise(
-      total_team_RB_HVTs_all_games = sum(is_rb_carry, na.rm = TRUE) + sum(is_rb_target, na.rm = TRUE),
-      .groups = 'drop'
-    )
-
-  season_player_stats <- left_join(season_player_stats, team_green_zone_carries_all_games_df, by = "team")
-  season_player_stats <- left_join(season_player_stats, team_RB_HVTs_all_games_df, by = "team")
-
-  # Calculate team totals for Green Zone Carries and RB HVTs (in games played by player)
-  player_games_season <- bind_rows(
-    pbp_data %>% filter(!is.na(passer_player_id)) %>% select(player_id = passer_player_id, game_id, team = posteam),
-    pbp_data %>% filter(!is.na(rusher_player_id)) %>% select(player_id = rusher_player_id, game_id, team = posteam),
-    pbp_data %>% filter(!is.na(receiver_player_id)) %>% select(player_id = receiver_player_id, game_id, team = posteam)
-  ) %>% filter(!is.na(player_id)) %>% distinct(player_id, game_id, team)
-
-  team_game_totals_season <- pbp_data %>%
-    filter(play_type %in% c('pass', 'run')) %>%
-    mutate(is_green_zone_carry = ifelse(rush_attempt == 1 & yardline_100 <= 10, 1, 0)) %>%
-    mutate(is_rb_carry = ifelse(rush_attempt == 1 & rusher_position == "RB", 1, 0)) %>%
-    mutate(is_rb_target = ifelse(pass_attempt == 1 & receiver_position == "RB", 1, 0)) %>%
-    group_by(game_id, team = posteam) %>%
-    summarise(
-      team_green_zone_carries_in_game = sum(is_green_zone_carry, na.rm = TRUE),
-      total_team_RB_HVTs_in_game = sum(is_rb_carry, na.rm = TRUE) + sum(is_rb_target, na.rm = TRUE),
-      .groups = 'drop'
-    )
-
-  player_specific_team_totals_season <- left_join(player_games_season, team_game_totals_season, by = c("game_id", "team")) %>%
+  season_player_stats <- weekly_player_stats %>%
     group_by(player_id) %>%
     summarise(
-      team_green_zone_carries_in_played_games = sum(team_green_zone_carries_in_game, na.rm = TRUE),
-      total_team_RB_HVTs_in_played_games = sum(total_team_RB_HVTs_in_game, na.rm = TRUE),
-      games_played_season = n_distinct(game_id),
-      .groups = 'drop'
-    )
-
-  season_player_stats <- left_join(season_player_stats, player_specific_team_totals_season, by = "player_id") %>%
-    mutate(
-      HVTs_per_game = ifelse(games_played_season > 0, HVTs / games_played_season, 0),
-      pct_team_green_zone_carries_all_games = ifelse(team_green_zone_carries_all_games > 0, green_zone_carries / team_green_zone_carries_all_games, 0),
-      pct_team_green_zone_carries_in_played_games = ifelse(team_green_zone_carries_in_played_games > 0, green_zone_carries / team_green_zone_carries_in_played_games, 0),
-      pct_team_RB_HVTs_all_games = ifelse(total_team_RB_HVTs_all_games > 0, HVTs / total_team_RB_HVTs_all_games, 0),
-      pct_team_RB_HVTs_in_played_games = ifelse(total_team_RB_HVTs_in_played_games > 0, HVTs / total_team_RB_HVTs_in_played_games, 0)
-    )
-
-  # --- Calculate QB Stats (CPOE, Touchdown Rate) ---
-  qb_stats <- pbp_data %>%
-    filter(pass_attempt == 1, passer_position == "QB") %>%
-    group_by(player_id = passer_player_id) %>%
-    summarise(
-      total_pass_attempts = n(),
-      total_touchdown_passes = sum(pass_touchdown, na.rm = TRUE),
-      avg_cpoe = mean(cpoe, na.rm = TRUE),
+      completions_total = sum(completions, na.rm = TRUE),
+      attempts_total = sum(attempts, na.rm = TRUE),
+      passing_yards_total = sum(passing_yards, na.rm = TRUE),
+      passing_tds_total = sum(passing_tds, na.rm = TRUE),
+      interceptions_total = sum(interceptions, na.rm = TRUE),
+      sacks_total = sum(sacks, na.rm = TRUE),
+      sack_yards_total = sum(sack_yards, na.rm = TRUE),
+      passing_air_yards_total = sum(passing_air_yards, na.rm = TRUE),
+      passing_yards_after_catch_total = sum(passing_yards_after_catch, na.rm = TRUE),
+      passing_first_downs_total = sum(passing_first_downs, na.rm = TRUE),
+      passing_epa_total = sum(passing_epa, na.rm = TRUE),
+      pacr_total = sum(pacr, na.rm = TRUE),
+      carries_total = sum(carries, na.rm = TRUE),
+      rushing_yards_total = sum(rushing_yards, na.rm = TRUE),
+      rushing_tds_total = sum(rushing_tds, na.rm = TRUE),
+      rushing_fumbles_total = sum(rushing_fumbles, na.rm = TRUE),
+      rushing_first_downs_total = sum(rushing_first_downs, na.rm = TRUE),
+      rushing_epa_total = sum(rushing_epa, na.rm = TRUE),
+      receptions_total = sum(receptions, na.rm = TRUE),
+      targets_total = sum(targets, na.rm = TRUE),
+      receiving_yards_total = sum(receiving_yards, na.rm = TRUE),
+      receiving_tds_total = sum(receiving_tds, na.rm = TRUE),
+      receiving_air_yards_total = sum(receiving_air_yards, na.rm = TRUE),
+      receiving_yards_after_catch_total = sum(receiving_yards_after_catch, na.rm = TRUE),
+      receiving_first_downs_total = sum(receiving_first_downs, na.rm = TRUE),
+      receiving_2pt_conversions_total = sum(receiving_2pt_conversions, na.rm = TRUE),
+      racr_total = sum(racr, na.rm = TRUE),
+      target_share_total = sum(target_share, na.rm = TRUE),
+      air_yards_share_total = sum(air_yards_share, na.rm = TRUE),
+      wopr_total = sum(wopr, na.rm = TRUE),
+      fantasy_points_total = sum(fantasy_points, na.rm = TRUE),
+      fantasy_points_ppr_total = sum(fantasy_points_ppr, na.rm = TRUE),
+      games_played = n(),
       .groups = 'drop'
     ) %>%
     mutate(
-      touchdown_rate = ifelse(total_pass_attempts > 0, total_touchdown_passes / total_pass_attempts, 0)
+      completions_avg = completions_total / games_played,
+      attempts_avg = attempts_total / games_played,
+      passing_yards_avg = passing_yards_total / games_played,
+      passing_tds_avg = passing_tds_total / games_played,
+      interceptions_avg = interceptions_total / games_played,
+      sacks_avg = sacks_total / games_played,
+      sack_yards_avg = sack_yards_total / games_played,
+      passing_air_yards_avg = passing_air_yards_total / games_played,
+      passing_yards_after_catch_avg = passing_yards_after_catch_total / games_played,
+      passing_first_downs_avg = passing_first_downs_total / games_played,
+      passing_epa_avg = passing_epa_total / games_played, 
+      pacr_avg = pacr_total / games_played, 
+      carries_avg = carries_total / games_played,
+      rushing_yards_avg = rushing_yards_total / games_played,
+      rushing_tds_avg = rushing_tds_total / games_played,
+      rushing_fumbles_avg = rushing_fumbles_total / games_played,
+      rushing_first_downs_avg = rushing_first_downs_total / games_played,
+      rushing_epa_avg = rushing_epa_total / games_played, 
+      receptions_avg = receptions_total / games_played,
+      targets_avg = targets_total / games_played,
+      receiving_yards_avg = receiving_yards_total / games_played,
+      receiving_tds_avg = receiving_tds_total / games_played,
+      receiving_air_yards_avg = receiving_air_yards_total / games_played,
+      receiving_yards_after_catch_avg = receiving_yards_after_catch_total / games_played,
+      receiving_first_downs_avg = receiving_first_downs_total / games_played,
+      receiving_2pt_conversions_avg = receiving_2pt_conversions_total / games_played, 
+      racr_avg = racr_total / games_played, 
+      target_share_avg = target_share_total / games_played, 
+      air_yards_share_avg = air_yards_share_total / games_played, 
+      wopr_avg = wopr_total / games_played, 
+      fantasy_points_avg = fantasy_points_total / games_played,
+      fantasy_points_ppr_avg = fantasy_points_ppr_total / games_played
     )
 
-  # Join QB stats with season_player_stats
-  season_player_stats <- left_join(season_player_stats, qb_stats, by = "player_id")
+  # --- Add player names and position data ---
+  player_info <- rosters_data %>% select(gsis_id, full_name, position) %>% rename(player_id = gsis_id, player_name = full_name)
+  season_player_stats <- left_join(season_player_stats, player_info, by = "player_id")
 
-  # --- Calculate Weather-Dependent Fantasy Stats ---
-  # Calculate fantasy points per play
-  pbp_data_with_fp <- pbp_data %>%
-    mutate(
-      receiving_tds = ifelse(!is.na(receiver_player_id) & pass_touchdown == 1, 1, 0),
-      fantasy_points_ppr = (
-        (passing_yards * 0.04) +
-        (pass_touchdown * 4) +
-        (interception * -2) +
-        (rushing_yards * 0.1) +
-        (rush_touchdown * 6) +
-        (complete_pass * 1) +
-        (receiving_yards * 0.1) +
-        (receiving_tds * 6) -
-        (fumble_lost * 2)
-      )
-    )
-
-  # Aggregate fantasy points per player per game
-  player_game_fp <- pbp_data_with_fp %>%
-    # Combine player IDs from different roles into one column
-    tidyr::pivot_longer(
-      cols = c(passer_player_id, rusher_player_id, receiver_player_id),
-      names_to = "role",
-      values_to = "player_id"
-    ) %>% 
-    filter(!is.na(player_id)) %>%
-    group_by(player_id, game_id, temp, wind) %>%
-    summarise(total_fantasy_points = sum(fantasy_points_ppr, na.rm = TRUE), .groups = 'drop')
-
-  # Calculate weather-based stats
-  weather_summary_stats <- player_game_fp %>%
-    filter(!is.na(temp) & !is.na(wind)) %>%
-    group_by(player_id) %>%
+  # --- Calculate Season-Level Stats (Green Zone Carries, HVTs) ---
+  green_zone_carries <- pbp_data %>%
+    filter(play_type %in% c('pass', 'run') & rush_attempt == 1 & yardline_100 <= 10) %>%
+    group_by(player_id = rusher_player_id) %>%
     summarise(
-      games_over_30_degrees = n_distinct(game_id[temp > 30]),
-      games_below_30_degrees = n_distinct(game_id[temp < 30]),
-      avg_fp_over_30_degrees = mean(total_fantasy_points[temp > 30], na.rm = TRUE),
-      avg_fp_below_30_degrees = mean(total_fantasy_points[temp < 30], na.rm = TRUE),
-      avg_fp_wind_below_20_mph = mean(total_fantasy_points[wind < 20], na.rm = TRUE),
-      avg_fp_wind_above_20_mph = mean(total_fantasy_points[wind >= 20], na.rm = TRUE),
+      green_zone_carries = n(),
       .groups = 'drop'
-    ) %>% 
-    mutate(
-      diff_fp_temp_30_degrees = avg_fp_over_30_degrees - avg_fp_below_30_degrees,
-      diff_fp_wind_20_mph = avg_fp_wind_above_20_mph - avg_fp_wind_below_20_mph
     )
 
-  # Join weather stats with season_player_stats
-  season_player_stats <- left_join(season_player_stats, weather_summary_stats, by = "player_id")
+  season_player_stats <- left_join(season_player_stats, green_zone_carries, by = "player_id")
+
+  season_player_stats <- season_player_stats %>%
+    mutate(HVTs = ifelse(position == "RB", receptions_total + green_zone_carries, NA_real_))
 
   # --- Calculate QB EPA by Pass Location and Length ---
   qb_epa_stats <- pbp_data %>%
@@ -263,7 +241,6 @@ for (year in 2017:2024) {
       values_fill = 0
     )
 
-  # Join QB EPA stats with season_player_stats
   season_player_stats <- left_join(season_player_stats, qb_epa_stats, by = "player_id")
 
   # --- Calculate WR Target Share and EPA by Pass Location and Length ---
@@ -291,7 +268,6 @@ for (year in 2017:2024) {
       values_fill = 0
     )
 
-  # Join WR stats with season_player_stats
   season_player_stats <- left_join(season_player_stats, wr_stats, by = "player_id")
 
   # --- Calculate RB Tackled for Loss Stats (All Downs) ---
@@ -307,72 +283,50 @@ for (year in 2017:2024) {
       pct_carries_tackled_for_loss = ifelse(total_rb_carries > 0, total_tackled_for_loss / total_rb_carries, 0)
     )
 
-  # Join RB TFL stats with season_player_stats
   season_player_stats <- left_join(season_player_stats, rb_tfl_stats, by = "player_id")
 
-  all_downs_stats <- map(c(1, 3), ~get_down_stats(pbp_data, .x))
-
-  # Get all unique player IDs and their names from the current year's pbp data
-  # This ensures we have names for all players who appeared in the pbp data
-  player_info_for_year <- bind_rows(
-    pbp_data %>% filter(!is.na(passer_player_id)) %>% select(player_id = passer_player_id, player_name = passer_player_name, team = posteam, position = passer_position),
-    pbp_data %>% filter(!is.na(rusher_player_id)) %>% select(player_id = rusher_player_id, player_name = rusher_player_name, team = posteam, position = rusher_position),
-    pbp_data %>% filter(!is.na(receiver_player_id)) %>% select(player_id = receiver_player_id, player_name = receiver_player_name, team = posteam, position = receiver_position)
-  ) %>%
-  filter(!is.na(player_id)) %>%
-  distinct(player_id, player_name, team, position)
-
-  # Filter season_player_stats to only include players present in player_info_for_year
-  # This ensures we only process players who actually have a name and ID
-  season_player_stats <- season_player_stats %>%
-    semi_join(player_info_for_year, by = "player_id")
-
-  # Get the unique player IDs that have season stats
-  player_ids_with_season_stats <- unique(season_player_stats$player_id)
-
-  # Flatten the data into a single data frame for CSV export
-  flat_data_for_year <- data.frame()
-
-  for (id in player_ids_with_season_stats) {
-    player_row <- list()
-    player_row$season <- year
-
-    current_player_info <- player_info_for_year %>% filter(player_id == id) %>% distinct(player_name, team, position)
-    player_row$player_id <- id
-    player_row$player_name <- as.character(current_player_info$player_name[1])
-    player_row$team <- as.character(current_player_info$team[1])
-    player_row$position <- as.character(current_player_info$position[1]) # Add player position
-
-    season_stats_for_player <- season_player_stats %>% filter(player_id == id)
-    if (nrow(season_stats_for_player) > 0) {
-      for (col_name in names(season_stats_for_player)) {
-        if (!col_name %in% c("player_id", "player_name", "team", "position")) { # Exclude already added fields
-          player_row[[col_name]] <- season_stats_for_player[[col_name]][1]
-        }
-      }
-    }
-
-    for (i in c(1, 3)) {
-      down_stats <- all_downs_stats[[which(c(1,3) == i)]]
-      player_down_stats <- down_stats[down_stats$player_id == id, ]
-      if (nrow(player_down_stats) > 0) {
-        for (col_name in names(player_down_stats)) {
-          if (!col_name %in% c("player_id", "player_name", "position", "team")) {
-            player_row[[paste0("down_", i, "_", col_name)]] <- player_down_stats[[col_name]][1]
-          }
-        }
-      }
-    }
-    flat_data_for_year <- bind_rows(flat_data_for_year, as.data.frame(player_row))
+  # --- Process PFF Receiving Stats ---
+  pff_rec_path <- paste0("nflFastR/season_rec_stats_pff/rec", substr(year, 3, 4), ".csv")
+  if (file.exists(pff_rec_path)) {
+    pff_data <- read_csv(pff_rec_path)
+    pff_data$sanitized_player_name <- sapply(pff_data$player, sanitize_player_name)
+    season_player_stats$sanitized_player_name <- sapply(season_player_stats$player_name, sanitize_player_name)
+    
+    pff_data <- pff_data %>% select(sanitized_player_name, routes, yprr)
+    season_player_stats <- left_join(season_player_stats, pff_data, by = "sanitized_player_name")
   }
-  all_seasons_data_flat <- bind_rows(all_seasons_data_flat, flat_data_for_year)
 
-  # Aggregate team-level stats
+  # --- Calculate Down-Specific Stats ---
+  all_downs_stats <- map(c(1, 3), ~get_down_stats(pbp_data, .x))
+  down_1_stats <- all_downs_stats[[1]]
+  down_3_stats <- all_downs_stats[[2]]
+  
+  # Rename columns to be down-specific
+  colnames(down_1_stats) <- paste0("down_1_", colnames(down_1_stats))
+  colnames(down_3_stats) <- paste0("down_3_", colnames(down_3_stats))
+
+  # Merge down-specific stats
+  season_player_stats <- left_join(season_player_stats, down_1_stats, by = c("player_id" = "down_1_player_id"))
+  season_player_stats <- left_join(season_player_stats, down_3_stats, by = c("player_id" = "down_3_player_id"))
+
+  # --- Final Calculations for current season ---
+  season_player_stats <- season_player_stats %>%
+    mutate(
+      routes_per_game = ifelse(games_played > 0, routes / games_played, 0),
+      TPRR = ifelse(routes > 0, targets_total / routes, 0),
+      firstDPRR = ifelse(routes > 0, receiving_first_downs_total / routes, 0)
+    )
+
+  # Add season column explicitly
+  season_player_stats$season <- year
+
+  all_seasons_data_flat <- bind_rows(all_seasons_data_flat, season_player_stats)
+
+  # --- Aggregate Team Stats ---
   team_season_stats <- pbp_data %>%
-    group_by(team = posteam, season) %>%
+    group_by(team = posteam) %>%
     summarise(
       team_green_zone_carries_all_games = sum(ifelse(rush_attempt == 1 & yardline_100 <= 10, 1, 0), na.rm = TRUE),
-      total_team_RB_HVTs_all_games = sum(ifelse(rush_attempt == 1 & rusher_position == "RB", 1, 0), na.rm = TRUE) + sum(ifelse(pass_attempt == 1 & receiver_position == "RB", 1, 0), na.rm = TRUE),
       team_carries_all_games = sum(rush_attempt, na.rm = TRUE),
       team_targets_all_games = sum(pass_attempt, na.rm = TRUE),
       team_receptions_all_games = sum(complete_pass, na.rm = TRUE),
@@ -380,24 +334,36 @@ for (year in 2017:2024) {
       team_rec_fd_all_games = sum(first_down_pass, na.rm = TRUE),
       .groups = 'drop'
     )
-
+  team_season_stats$season <- year
   all_seasons_team_data_flat <- bind_rows(all_seasons_team_data_flat, team_season_stats)
 }
 
-# --- 6. Save Final Aggregated Stats ---
 
+# --- Save Final Aggregated Stats ---
 cat("STEP 6: Saving the final aggregated stats to CSV...\n")
 
-final_stats_output_file <- "all_downs_offensive_stats_1_3_2017_2024.csv"
+final_player_stats_output_file <- "final_player_seasons.csv"
 all_seasons_data_flat <- all_seasons_data_flat %>%
-  mutate(across(where(is.numeric), ~round(., 3)))
-write_csv(all_seasons_data_flat, final_stats_output_file)
+  mutate(across(where(is.numeric), ~round(., 3))) %>%
+  # Remove unwanted _total columns
+  select(-c(passing_epa_total, pacr_total, rushing_epa_total, receiving_2pt_conversions_total, racr_total, target_share_total, air_yards_share_total, wopr_total)) %>%
+  # Reorder columns to have player_id, player_name, season at the beginning
+  select(player_id, player_name, season, everything()) %>%
+  select(-starts_with("sanitized_player_name")) # Remove any temporary sanitized name columns
 
-team_stats_output_file <- "team_season_stats_2017_2024.csv"
+write_csv(all_seasons_data_flat, final_player_stats_output_file)
+
+final_team_stats_output_file <- "final_team_seasons.csv"
 all_seasons_team_data_flat <- all_seasons_team_data_flat %>%
   mutate(across(where(is.numeric), ~round(., 3)))
-write_csv(all_seasons_team_data_flat, team_stats_output_file)
+write_csv(all_seasons_team_data_flat, final_team_stats_output_file)
+
 
 cat("\nScript finished successfully!\n")
-cat(paste("Final aggregated stats saved to:", file.path(getwd(), final_stats_output_file), "\n"))
-cat(paste("Team season stats saved to:", file.path(getwd(), team_stats_output_file), "\n"))
+cat(paste("Final aggregated player stats saved to:", file.path(getwd(), final_player_stats_output_file), "\n"))
+cat(paste("Final aggregated team stats saved to:", file.path(getwd(), final_team_stats_output_file), "\n"))
+
+
+# --- Log last 10 entries ---
+cat("\nLast 10 entries of the final player data:\n")
+print(tail(all_seasons_data_flat, 10))

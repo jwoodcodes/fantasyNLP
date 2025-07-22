@@ -80,56 +80,6 @@ model PlayerStat {
   fantasyPointsPpr            Float?   @map("fantasy_points_ppr")
 }
 
-model ReceivingStat {
-  id                              String   @id @default(cuid())
-  player                          String?
-  playerId                        String?  @map("player_id")
-  position                        String?
-  teamName                        String?  @map("team_name")
-  playerGameCount                 Int?     @map("player_game_count")
-  avgDepthOfTarget                Float?   @map("avg_depth_of_target")
-  avoidedTackles                  Int?     @map("avoided_tackles")
-  caughtPercent                   Float?   @map("caught_percent")
-  contestedCatchRate              Float?   @map("contested_catch_rate")
-  contestedReceptions             Int?     @map("contested_receptions")
-  contestedTargets                Int?     @map("contested_targets")
-  declinedPenalties               Int?     @map("declined_penalties")
-  dropRate                        Float?   @map("drop_rate")
-  drops                           Int?
-  firstDowns                      Int?     @map("first_downs")
-  franchiseId                     Int?     @map("franchise_id")
-  fumbles                         Int?
-  gradesHandsDrop                 Float?   @map("grades_hands_drop")
-  gradesHandsFumble               Float?   @map("grades_hands_fumble")
-  gradesOffense                   Float?   @map("grades_offense")
-  gradesPassBlock                 Float?   @map("grades_pass_block")
-  gradesPassRoute                 Float?   @map("grades_pass_route")
-  inlineRate                      Float?   @map("inline_rate")
-  inlineSnaps                     Int?     @map("inline_snaps")
-  interceptions                   Int?
-  longest                         Int?
-  passBlockRate                   Float?   @map("pass_block_rate")
-  passBlocks                      Int?     @map("pass_blocks")
-  passPlays                       Int?
-  penalties                       Int?
-  receptions                      Int?
-  routeRate                       Float?   @map("route_rate")
-  routes                          Int?
-  slotRate                        Float?   @map("slot_rate")
-  slotSnaps                       Int?     @map("slot_snaps")
-  targetedQbRating                Float?   @map("targeted_qb_rating")
-  targets                         Int?
-  touchdowns                      Int?
-  wideRate                        Float?   @map("wide_rate")
-  wideSnaps                       Int?     @map("wide_snaps")
-  yards                           Int?
-  yardsAfterCatch                 Int?     @map("yards_after_catch")
-  yardsAfterCatchPerReception     Float?   @map("yards_after_catch_per_reception")
-  yardsPerReception               Float?   @map("yards_per_reception")
-  yprr                            Float?
-  season                          Int?
-}
-
 model PlayerSeason {
   player_id                             String
   season                                Int
@@ -193,15 +143,11 @@ model PlayerSeason {
   green_zone_carries                    Int?
   HVTs                                  Int?
   team_green_zone_carries_all_games     Int?
-  total_team_RB_HVTs_all_games          Int?
   team_green_zone_carries_in_played_games Int?
-  total_team_RB_HVTs_in_played_games    Int?
   games_played_season                   Int?
   HVTs_per_game                         Float?
   pct_team_green_zone_carries_all_games Float?
   pct_team_green_zone_carries_in_played_games Float?
-  pct_team_RB_HVTs_all_games            Float?
-  pct_team_RB_HVTs_in_played_games      Float?
   total_dropbacks                       Int?
   pass_attempts_on_dropbacks            Int?
   scrambles_on_dropbacks                Int?
@@ -210,15 +156,6 @@ model PlayerSeason {
   scramble_rate                         Float?
   sack_rate                             Float?
   touchdown_rate                        Float?
-  avg_cpoe                              Float?
-  games_over_30_degrees                 Int?
-  games_below_30_degrees                Int?
-  avg_fp_over_30_degrees                Float?
-  avg_fp_below_30_degrees               Float?
-  avg_fp_wind_below_20_mph              Float?
-  avg_fp_wind_above_20_mph              Float?
-  diff_fp_temp_30_degrees               Float?
-  diff_fp_wind_20_mph                   Float?
   avg_pass_epa_deep_left                Float?
   avg_pass_epa_deep_middle              Float?
   avg_pass_epa_deep_right               Float?
@@ -243,37 +180,20 @@ model PlayerSeason {
   down_1_attempts                       Int?
   down_1_completions                    Int?
   down_1_passing_yards                  Float?
-  down_1_passing_tds                    Int?
-  down_1_interceptions                  Int?
-  down_1_sacks_taken                    Int?
   down_1_passing_first_downs            Float?
   down_1_carries                        Int?
   down_1_rushing_yards                  Float?
-  down_1_rushing_tds                    Int?
-  down_1_fumbles                        Int?
   down_1_rushing_first_downs            Float?
   down_1_targets                        Int?
   down_1_receptions                     Int?
   down_1_receiving_yards                Float?
-  down_1_receiving_tds                  Int?
-  down_1_receiving_first_downs          Float?
-  down_1_total_first_downs              Int?
   down_1_team_carries_in_played_games   Int?
   down_1_team_targets_in_played_games   Int?
   down_1_team_receptions_in_played_games Int?
-  down_1_team_rush_fd_in_played_games   Int?
-  down_1_team_rec_fd_in_played_games    Float?
   down_1_games_played                   Int?
   down_1_team_carries_all_games         Int?
   down_1_team_targets_all_games         Int?
   down_1_team_receptions_all_games      Int?
-  down_1_team_rush_fd_all_games         Int?
-  down_1_team_rec_fd_all_games          Int?
-  down_1_pct_team_carries_in_played_games Float?
-  down_1_pct_team_targets_in_played_games Float?
-  down_1_pct_team_receptions_in_played_games Float?
-  down_1_pct_team_rush_fd_in_played_games Float?
-  down_1_pct_team_rec_fd_in_played_games Float?
   down_1_yards_per_pass_attempt         Float?
   down_1_yards_per_completion           Float?
   down_1_yards_per_carry                Float?
@@ -289,7 +209,6 @@ model PlayerSeason {
   down_1_targets_per_game               Float?
   down_1_receptions_per_game            Float?
   down_1_receiving_yards_per_game       Float?
-  down_1_receiving_first_downs_per_game Float?
   down_3_attempts                       Int?
   down_3_completions                    Int?
   down_3_passing_yards                  Float?
@@ -299,8 +218,6 @@ model PlayerSeason {
   down_3_passing_first_downs            Float?
   down_3_carries                        Int?
   down_3_rushing_yards                  Float?
-  down_3_rushing_tds                    Int?
-  down_3_fumbles                        Int?
   down_3_rushing_first_downs            Float?
   down_3_targets                        Int?
   down_3_receptions                     Int?
@@ -358,7 +275,6 @@ model TeamSeasonStats {
   team                                  String
   season                                Int
   team_green_zone_carries_all_games     Int?
-  total_team_RB_HVTs_all_games          Int?
   team_carries_all_games                Int?
   team_targets_all_games                Int?
   team_receptions_all_games             Int?
