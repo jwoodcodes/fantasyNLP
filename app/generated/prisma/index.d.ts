@@ -24,11 +24,6 @@ export type tradeAnalyzerData = $Result.DefaultSelection<Prisma.$tradeAnalyzerDa
  */
 export type PlayerStat = $Result.DefaultSelection<Prisma.$PlayerStatPayload>
 /**
- * Model ReceivingStat
- * 
- */
-export type ReceivingStat = $Result.DefaultSelection<Prisma.$ReceivingStatPayload>
-/**
  * Model PlayerSeason
  * 
  */
@@ -188,16 +183,6 @@ export class PrismaClient<
     * ```
     */
   get playerStat(): Prisma.PlayerStatDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.receivingStat`: Exposes CRUD operations for the **ReceivingStat** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more ReceivingStats
-    * const receivingStats = await prisma.receivingStat.findMany()
-    * ```
-    */
-  get receivingStat(): Prisma.ReceivingStatDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.playerSeason`: Exposes CRUD operations for the **PlayerSeason** model.
@@ -670,7 +655,6 @@ export namespace Prisma {
   export const ModelName: {
     tradeAnalyzerData: 'tradeAnalyzerData',
     PlayerStat: 'PlayerStat',
-    ReceivingStat: 'ReceivingStat',
     PlayerSeason: 'PlayerSeason',
     Feedback: 'Feedback',
     TeamSeasonStats: 'TeamSeasonStats'
@@ -692,7 +676,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "tradeAnalyzerData" | "playerStat" | "receivingStat" | "playerSeason" | "feedback" | "teamSeasonStats"
+      modelProps: "tradeAnalyzerData" | "playerStat" | "playerSeason" | "feedback" | "teamSeasonStats"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -841,80 +825,6 @@ export namespace Prisma {
           count: {
             args: Prisma.PlayerStatCountArgs<ExtArgs>
             result: $Utils.Optional<PlayerStatCountAggregateOutputType> | number
-          }
-        }
-      }
-      ReceivingStat: {
-        payload: Prisma.$ReceivingStatPayload<ExtArgs>
-        fields: Prisma.ReceivingStatFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.ReceivingStatFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceivingStatPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.ReceivingStatFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceivingStatPayload>
-          }
-          findFirst: {
-            args: Prisma.ReceivingStatFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceivingStatPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.ReceivingStatFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceivingStatPayload>
-          }
-          findMany: {
-            args: Prisma.ReceivingStatFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceivingStatPayload>[]
-          }
-          create: {
-            args: Prisma.ReceivingStatCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceivingStatPayload>
-          }
-          createMany: {
-            args: Prisma.ReceivingStatCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.ReceivingStatCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceivingStatPayload>[]
-          }
-          delete: {
-            args: Prisma.ReceivingStatDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceivingStatPayload>
-          }
-          update: {
-            args: Prisma.ReceivingStatUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceivingStatPayload>
-          }
-          deleteMany: {
-            args: Prisma.ReceivingStatDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.ReceivingStatUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.ReceivingStatUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceivingStatPayload>[]
-          }
-          upsert: {
-            args: Prisma.ReceivingStatUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ReceivingStatPayload>
-          }
-          aggregate: {
-            args: Prisma.ReceivingStatAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateReceivingStat>
-          }
-          groupBy: {
-            args: Prisma.ReceivingStatGroupByArgs<ExtArgs>
-            result: $Utils.Optional<ReceivingStatGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.ReceivingStatCountArgs<ExtArgs>
-            result: $Utils.Optional<ReceivingStatCountAggregateOutputType> | number
           }
         }
       }
@@ -1226,7 +1136,6 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     tradeAnalyzerData?: tradeAnalyzerDataOmit
     playerStat?: PlayerStatOmit
-    receivingStat?: ReceivingStatOmit
     playerSeason?: PlayerSeasonOmit
     feedback?: FeedbackOmit
     teamSeasonStats?: TeamSeasonStatsOmit
@@ -4188,1745 +4097,6 @@ export namespace Prisma {
 
 
   /**
-   * Model ReceivingStat
-   */
-
-  export type AggregateReceivingStat = {
-    _count: ReceivingStatCountAggregateOutputType | null
-    _avg: ReceivingStatAvgAggregateOutputType | null
-    _sum: ReceivingStatSumAggregateOutputType | null
-    _min: ReceivingStatMinAggregateOutputType | null
-    _max: ReceivingStatMaxAggregateOutputType | null
-  }
-
-  export type ReceivingStatAvgAggregateOutputType = {
-    playerGameCount: number | null
-    avgDepthOfTarget: number | null
-    avoidedTackles: number | null
-    caughtPercent: number | null
-    contestedCatchRate: number | null
-    contestedReceptions: number | null
-    contestedTargets: number | null
-    declinedPenalties: number | null
-    dropRate: number | null
-    drops: number | null
-    firstDowns: number | null
-    franchiseId: number | null
-    fumbles: number | null
-    gradesHandsDrop: number | null
-    gradesHandsFumble: number | null
-    gradesOffense: number | null
-    gradesPassBlock: number | null
-    gradesPassRoute: number | null
-    inlineRate: number | null
-    inlineSnaps: number | null
-    interceptions: number | null
-    longest: number | null
-    passBlockRate: number | null
-    passBlocks: number | null
-    passPlays: number | null
-    penalties: number | null
-    receptions: number | null
-    routeRate: number | null
-    routes: number | null
-    slotRate: number | null
-    slotSnaps: number | null
-    targetedQbRating: number | null
-    targets: number | null
-    touchdowns: number | null
-    wideRate: number | null
-    wideSnaps: number | null
-    yards: number | null
-    yardsAfterCatch: number | null
-    yardsAfterCatchPerReception: number | null
-    yardsPerReception: number | null
-    yprr: number | null
-    season: number | null
-  }
-
-  export type ReceivingStatSumAggregateOutputType = {
-    playerGameCount: number | null
-    avgDepthOfTarget: number | null
-    avoidedTackles: number | null
-    caughtPercent: number | null
-    contestedCatchRate: number | null
-    contestedReceptions: number | null
-    contestedTargets: number | null
-    declinedPenalties: number | null
-    dropRate: number | null
-    drops: number | null
-    firstDowns: number | null
-    franchiseId: number | null
-    fumbles: number | null
-    gradesHandsDrop: number | null
-    gradesHandsFumble: number | null
-    gradesOffense: number | null
-    gradesPassBlock: number | null
-    gradesPassRoute: number | null
-    inlineRate: number | null
-    inlineSnaps: number | null
-    interceptions: number | null
-    longest: number | null
-    passBlockRate: number | null
-    passBlocks: number | null
-    passPlays: number | null
-    penalties: number | null
-    receptions: number | null
-    routeRate: number | null
-    routes: number | null
-    slotRate: number | null
-    slotSnaps: number | null
-    targetedQbRating: number | null
-    targets: number | null
-    touchdowns: number | null
-    wideRate: number | null
-    wideSnaps: number | null
-    yards: number | null
-    yardsAfterCatch: number | null
-    yardsAfterCatchPerReception: number | null
-    yardsPerReception: number | null
-    yprr: number | null
-    season: number | null
-  }
-
-  export type ReceivingStatMinAggregateOutputType = {
-    id: string | null
-    player: string | null
-    playerId: string | null
-    position: string | null
-    teamName: string | null
-    playerGameCount: number | null
-    avgDepthOfTarget: number | null
-    avoidedTackles: number | null
-    caughtPercent: number | null
-    contestedCatchRate: number | null
-    contestedReceptions: number | null
-    contestedTargets: number | null
-    declinedPenalties: number | null
-    dropRate: number | null
-    drops: number | null
-    firstDowns: number | null
-    franchiseId: number | null
-    fumbles: number | null
-    gradesHandsDrop: number | null
-    gradesHandsFumble: number | null
-    gradesOffense: number | null
-    gradesPassBlock: number | null
-    gradesPassRoute: number | null
-    inlineRate: number | null
-    inlineSnaps: number | null
-    interceptions: number | null
-    longest: number | null
-    passBlockRate: number | null
-    passBlocks: number | null
-    passPlays: number | null
-    penalties: number | null
-    receptions: number | null
-    routeRate: number | null
-    routes: number | null
-    slotRate: number | null
-    slotSnaps: number | null
-    targetedQbRating: number | null
-    targets: number | null
-    touchdowns: number | null
-    wideRate: number | null
-    wideSnaps: number | null
-    yards: number | null
-    yardsAfterCatch: number | null
-    yardsAfterCatchPerReception: number | null
-    yardsPerReception: number | null
-    yprr: number | null
-    season: number | null
-  }
-
-  export type ReceivingStatMaxAggregateOutputType = {
-    id: string | null
-    player: string | null
-    playerId: string | null
-    position: string | null
-    teamName: string | null
-    playerGameCount: number | null
-    avgDepthOfTarget: number | null
-    avoidedTackles: number | null
-    caughtPercent: number | null
-    contestedCatchRate: number | null
-    contestedReceptions: number | null
-    contestedTargets: number | null
-    declinedPenalties: number | null
-    dropRate: number | null
-    drops: number | null
-    firstDowns: number | null
-    franchiseId: number | null
-    fumbles: number | null
-    gradesHandsDrop: number | null
-    gradesHandsFumble: number | null
-    gradesOffense: number | null
-    gradesPassBlock: number | null
-    gradesPassRoute: number | null
-    inlineRate: number | null
-    inlineSnaps: number | null
-    interceptions: number | null
-    longest: number | null
-    passBlockRate: number | null
-    passBlocks: number | null
-    passPlays: number | null
-    penalties: number | null
-    receptions: number | null
-    routeRate: number | null
-    routes: number | null
-    slotRate: number | null
-    slotSnaps: number | null
-    targetedQbRating: number | null
-    targets: number | null
-    touchdowns: number | null
-    wideRate: number | null
-    wideSnaps: number | null
-    yards: number | null
-    yardsAfterCatch: number | null
-    yardsAfterCatchPerReception: number | null
-    yardsPerReception: number | null
-    yprr: number | null
-    season: number | null
-  }
-
-  export type ReceivingStatCountAggregateOutputType = {
-    id: number
-    player: number
-    playerId: number
-    position: number
-    teamName: number
-    playerGameCount: number
-    avgDepthOfTarget: number
-    avoidedTackles: number
-    caughtPercent: number
-    contestedCatchRate: number
-    contestedReceptions: number
-    contestedTargets: number
-    declinedPenalties: number
-    dropRate: number
-    drops: number
-    firstDowns: number
-    franchiseId: number
-    fumbles: number
-    gradesHandsDrop: number
-    gradesHandsFumble: number
-    gradesOffense: number
-    gradesPassBlock: number
-    gradesPassRoute: number
-    inlineRate: number
-    inlineSnaps: number
-    interceptions: number
-    longest: number
-    passBlockRate: number
-    passBlocks: number
-    passPlays: number
-    penalties: number
-    receptions: number
-    routeRate: number
-    routes: number
-    slotRate: number
-    slotSnaps: number
-    targetedQbRating: number
-    targets: number
-    touchdowns: number
-    wideRate: number
-    wideSnaps: number
-    yards: number
-    yardsAfterCatch: number
-    yardsAfterCatchPerReception: number
-    yardsPerReception: number
-    yprr: number
-    season: number
-    _all: number
-  }
-
-
-  export type ReceivingStatAvgAggregateInputType = {
-    playerGameCount?: true
-    avgDepthOfTarget?: true
-    avoidedTackles?: true
-    caughtPercent?: true
-    contestedCatchRate?: true
-    contestedReceptions?: true
-    contestedTargets?: true
-    declinedPenalties?: true
-    dropRate?: true
-    drops?: true
-    firstDowns?: true
-    franchiseId?: true
-    fumbles?: true
-    gradesHandsDrop?: true
-    gradesHandsFumble?: true
-    gradesOffense?: true
-    gradesPassBlock?: true
-    gradesPassRoute?: true
-    inlineRate?: true
-    inlineSnaps?: true
-    interceptions?: true
-    longest?: true
-    passBlockRate?: true
-    passBlocks?: true
-    passPlays?: true
-    penalties?: true
-    receptions?: true
-    routeRate?: true
-    routes?: true
-    slotRate?: true
-    slotSnaps?: true
-    targetedQbRating?: true
-    targets?: true
-    touchdowns?: true
-    wideRate?: true
-    wideSnaps?: true
-    yards?: true
-    yardsAfterCatch?: true
-    yardsAfterCatchPerReception?: true
-    yardsPerReception?: true
-    yprr?: true
-    season?: true
-  }
-
-  export type ReceivingStatSumAggregateInputType = {
-    playerGameCount?: true
-    avgDepthOfTarget?: true
-    avoidedTackles?: true
-    caughtPercent?: true
-    contestedCatchRate?: true
-    contestedReceptions?: true
-    contestedTargets?: true
-    declinedPenalties?: true
-    dropRate?: true
-    drops?: true
-    firstDowns?: true
-    franchiseId?: true
-    fumbles?: true
-    gradesHandsDrop?: true
-    gradesHandsFumble?: true
-    gradesOffense?: true
-    gradesPassBlock?: true
-    gradesPassRoute?: true
-    inlineRate?: true
-    inlineSnaps?: true
-    interceptions?: true
-    longest?: true
-    passBlockRate?: true
-    passBlocks?: true
-    passPlays?: true
-    penalties?: true
-    receptions?: true
-    routeRate?: true
-    routes?: true
-    slotRate?: true
-    slotSnaps?: true
-    targetedQbRating?: true
-    targets?: true
-    touchdowns?: true
-    wideRate?: true
-    wideSnaps?: true
-    yards?: true
-    yardsAfterCatch?: true
-    yardsAfterCatchPerReception?: true
-    yardsPerReception?: true
-    yprr?: true
-    season?: true
-  }
-
-  export type ReceivingStatMinAggregateInputType = {
-    id?: true
-    player?: true
-    playerId?: true
-    position?: true
-    teamName?: true
-    playerGameCount?: true
-    avgDepthOfTarget?: true
-    avoidedTackles?: true
-    caughtPercent?: true
-    contestedCatchRate?: true
-    contestedReceptions?: true
-    contestedTargets?: true
-    declinedPenalties?: true
-    dropRate?: true
-    drops?: true
-    firstDowns?: true
-    franchiseId?: true
-    fumbles?: true
-    gradesHandsDrop?: true
-    gradesHandsFumble?: true
-    gradesOffense?: true
-    gradesPassBlock?: true
-    gradesPassRoute?: true
-    inlineRate?: true
-    inlineSnaps?: true
-    interceptions?: true
-    longest?: true
-    passBlockRate?: true
-    passBlocks?: true
-    passPlays?: true
-    penalties?: true
-    receptions?: true
-    routeRate?: true
-    routes?: true
-    slotRate?: true
-    slotSnaps?: true
-    targetedQbRating?: true
-    targets?: true
-    touchdowns?: true
-    wideRate?: true
-    wideSnaps?: true
-    yards?: true
-    yardsAfterCatch?: true
-    yardsAfterCatchPerReception?: true
-    yardsPerReception?: true
-    yprr?: true
-    season?: true
-  }
-
-  export type ReceivingStatMaxAggregateInputType = {
-    id?: true
-    player?: true
-    playerId?: true
-    position?: true
-    teamName?: true
-    playerGameCount?: true
-    avgDepthOfTarget?: true
-    avoidedTackles?: true
-    caughtPercent?: true
-    contestedCatchRate?: true
-    contestedReceptions?: true
-    contestedTargets?: true
-    declinedPenalties?: true
-    dropRate?: true
-    drops?: true
-    firstDowns?: true
-    franchiseId?: true
-    fumbles?: true
-    gradesHandsDrop?: true
-    gradesHandsFumble?: true
-    gradesOffense?: true
-    gradesPassBlock?: true
-    gradesPassRoute?: true
-    inlineRate?: true
-    inlineSnaps?: true
-    interceptions?: true
-    longest?: true
-    passBlockRate?: true
-    passBlocks?: true
-    passPlays?: true
-    penalties?: true
-    receptions?: true
-    routeRate?: true
-    routes?: true
-    slotRate?: true
-    slotSnaps?: true
-    targetedQbRating?: true
-    targets?: true
-    touchdowns?: true
-    wideRate?: true
-    wideSnaps?: true
-    yards?: true
-    yardsAfterCatch?: true
-    yardsAfterCatchPerReception?: true
-    yardsPerReception?: true
-    yprr?: true
-    season?: true
-  }
-
-  export type ReceivingStatCountAggregateInputType = {
-    id?: true
-    player?: true
-    playerId?: true
-    position?: true
-    teamName?: true
-    playerGameCount?: true
-    avgDepthOfTarget?: true
-    avoidedTackles?: true
-    caughtPercent?: true
-    contestedCatchRate?: true
-    contestedReceptions?: true
-    contestedTargets?: true
-    declinedPenalties?: true
-    dropRate?: true
-    drops?: true
-    firstDowns?: true
-    franchiseId?: true
-    fumbles?: true
-    gradesHandsDrop?: true
-    gradesHandsFumble?: true
-    gradesOffense?: true
-    gradesPassBlock?: true
-    gradesPassRoute?: true
-    inlineRate?: true
-    inlineSnaps?: true
-    interceptions?: true
-    longest?: true
-    passBlockRate?: true
-    passBlocks?: true
-    passPlays?: true
-    penalties?: true
-    receptions?: true
-    routeRate?: true
-    routes?: true
-    slotRate?: true
-    slotSnaps?: true
-    targetedQbRating?: true
-    targets?: true
-    touchdowns?: true
-    wideRate?: true
-    wideSnaps?: true
-    yards?: true
-    yardsAfterCatch?: true
-    yardsAfterCatchPerReception?: true
-    yardsPerReception?: true
-    yprr?: true
-    season?: true
-    _all?: true
-  }
-
-  export type ReceivingStatAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which ReceivingStat to aggregate.
-     */
-    where?: ReceivingStatWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ReceivingStats to fetch.
-     */
-    orderBy?: ReceivingStatOrderByWithRelationInput | ReceivingStatOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: ReceivingStatWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ReceivingStats from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ReceivingStats.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned ReceivingStats
-    **/
-    _count?: true | ReceivingStatCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: ReceivingStatAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: ReceivingStatSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: ReceivingStatMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: ReceivingStatMaxAggregateInputType
-  }
-
-  export type GetReceivingStatAggregateType<T extends ReceivingStatAggregateArgs> = {
-        [P in keyof T & keyof AggregateReceivingStat]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateReceivingStat[P]>
-      : GetScalarType<T[P], AggregateReceivingStat[P]>
-  }
-
-
-
-
-  export type ReceivingStatGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ReceivingStatWhereInput
-    orderBy?: ReceivingStatOrderByWithAggregationInput | ReceivingStatOrderByWithAggregationInput[]
-    by: ReceivingStatScalarFieldEnum[] | ReceivingStatScalarFieldEnum
-    having?: ReceivingStatScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: ReceivingStatCountAggregateInputType | true
-    _avg?: ReceivingStatAvgAggregateInputType
-    _sum?: ReceivingStatSumAggregateInputType
-    _min?: ReceivingStatMinAggregateInputType
-    _max?: ReceivingStatMaxAggregateInputType
-  }
-
-  export type ReceivingStatGroupByOutputType = {
-    id: string
-    player: string | null
-    playerId: string | null
-    position: string | null
-    teamName: string | null
-    playerGameCount: number | null
-    avgDepthOfTarget: number | null
-    avoidedTackles: number | null
-    caughtPercent: number | null
-    contestedCatchRate: number | null
-    contestedReceptions: number | null
-    contestedTargets: number | null
-    declinedPenalties: number | null
-    dropRate: number | null
-    drops: number | null
-    firstDowns: number | null
-    franchiseId: number | null
-    fumbles: number | null
-    gradesHandsDrop: number | null
-    gradesHandsFumble: number | null
-    gradesOffense: number | null
-    gradesPassBlock: number | null
-    gradesPassRoute: number | null
-    inlineRate: number | null
-    inlineSnaps: number | null
-    interceptions: number | null
-    longest: number | null
-    passBlockRate: number | null
-    passBlocks: number | null
-    passPlays: number | null
-    penalties: number | null
-    receptions: number | null
-    routeRate: number | null
-    routes: number | null
-    slotRate: number | null
-    slotSnaps: number | null
-    targetedQbRating: number | null
-    targets: number | null
-    touchdowns: number | null
-    wideRate: number | null
-    wideSnaps: number | null
-    yards: number | null
-    yardsAfterCatch: number | null
-    yardsAfterCatchPerReception: number | null
-    yardsPerReception: number | null
-    yprr: number | null
-    season: number | null
-    _count: ReceivingStatCountAggregateOutputType | null
-    _avg: ReceivingStatAvgAggregateOutputType | null
-    _sum: ReceivingStatSumAggregateOutputType | null
-    _min: ReceivingStatMinAggregateOutputType | null
-    _max: ReceivingStatMaxAggregateOutputType | null
-  }
-
-  type GetReceivingStatGroupByPayload<T extends ReceivingStatGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<ReceivingStatGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof ReceivingStatGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], ReceivingStatGroupByOutputType[P]>
-            : GetScalarType<T[P], ReceivingStatGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type ReceivingStatSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    player?: boolean
-    playerId?: boolean
-    position?: boolean
-    teamName?: boolean
-    playerGameCount?: boolean
-    avgDepthOfTarget?: boolean
-    avoidedTackles?: boolean
-    caughtPercent?: boolean
-    contestedCatchRate?: boolean
-    contestedReceptions?: boolean
-    contestedTargets?: boolean
-    declinedPenalties?: boolean
-    dropRate?: boolean
-    drops?: boolean
-    firstDowns?: boolean
-    franchiseId?: boolean
-    fumbles?: boolean
-    gradesHandsDrop?: boolean
-    gradesHandsFumble?: boolean
-    gradesOffense?: boolean
-    gradesPassBlock?: boolean
-    gradesPassRoute?: boolean
-    inlineRate?: boolean
-    inlineSnaps?: boolean
-    interceptions?: boolean
-    longest?: boolean
-    passBlockRate?: boolean
-    passBlocks?: boolean
-    passPlays?: boolean
-    penalties?: boolean
-    receptions?: boolean
-    routeRate?: boolean
-    routes?: boolean
-    slotRate?: boolean
-    slotSnaps?: boolean
-    targetedQbRating?: boolean
-    targets?: boolean
-    touchdowns?: boolean
-    wideRate?: boolean
-    wideSnaps?: boolean
-    yards?: boolean
-    yardsAfterCatch?: boolean
-    yardsAfterCatchPerReception?: boolean
-    yardsPerReception?: boolean
-    yprr?: boolean
-    season?: boolean
-  }, ExtArgs["result"]["receivingStat"]>
-
-  export type ReceivingStatSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    player?: boolean
-    playerId?: boolean
-    position?: boolean
-    teamName?: boolean
-    playerGameCount?: boolean
-    avgDepthOfTarget?: boolean
-    avoidedTackles?: boolean
-    caughtPercent?: boolean
-    contestedCatchRate?: boolean
-    contestedReceptions?: boolean
-    contestedTargets?: boolean
-    declinedPenalties?: boolean
-    dropRate?: boolean
-    drops?: boolean
-    firstDowns?: boolean
-    franchiseId?: boolean
-    fumbles?: boolean
-    gradesHandsDrop?: boolean
-    gradesHandsFumble?: boolean
-    gradesOffense?: boolean
-    gradesPassBlock?: boolean
-    gradesPassRoute?: boolean
-    inlineRate?: boolean
-    inlineSnaps?: boolean
-    interceptions?: boolean
-    longest?: boolean
-    passBlockRate?: boolean
-    passBlocks?: boolean
-    passPlays?: boolean
-    penalties?: boolean
-    receptions?: boolean
-    routeRate?: boolean
-    routes?: boolean
-    slotRate?: boolean
-    slotSnaps?: boolean
-    targetedQbRating?: boolean
-    targets?: boolean
-    touchdowns?: boolean
-    wideRate?: boolean
-    wideSnaps?: boolean
-    yards?: boolean
-    yardsAfterCatch?: boolean
-    yardsAfterCatchPerReception?: boolean
-    yardsPerReception?: boolean
-    yprr?: boolean
-    season?: boolean
-  }, ExtArgs["result"]["receivingStat"]>
-
-  export type ReceivingStatSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    player?: boolean
-    playerId?: boolean
-    position?: boolean
-    teamName?: boolean
-    playerGameCount?: boolean
-    avgDepthOfTarget?: boolean
-    avoidedTackles?: boolean
-    caughtPercent?: boolean
-    contestedCatchRate?: boolean
-    contestedReceptions?: boolean
-    contestedTargets?: boolean
-    declinedPenalties?: boolean
-    dropRate?: boolean
-    drops?: boolean
-    firstDowns?: boolean
-    franchiseId?: boolean
-    fumbles?: boolean
-    gradesHandsDrop?: boolean
-    gradesHandsFumble?: boolean
-    gradesOffense?: boolean
-    gradesPassBlock?: boolean
-    gradesPassRoute?: boolean
-    inlineRate?: boolean
-    inlineSnaps?: boolean
-    interceptions?: boolean
-    longest?: boolean
-    passBlockRate?: boolean
-    passBlocks?: boolean
-    passPlays?: boolean
-    penalties?: boolean
-    receptions?: boolean
-    routeRate?: boolean
-    routes?: boolean
-    slotRate?: boolean
-    slotSnaps?: boolean
-    targetedQbRating?: boolean
-    targets?: boolean
-    touchdowns?: boolean
-    wideRate?: boolean
-    wideSnaps?: boolean
-    yards?: boolean
-    yardsAfterCatch?: boolean
-    yardsAfterCatchPerReception?: boolean
-    yardsPerReception?: boolean
-    yprr?: boolean
-    season?: boolean
-  }, ExtArgs["result"]["receivingStat"]>
-
-  export type ReceivingStatSelectScalar = {
-    id?: boolean
-    player?: boolean
-    playerId?: boolean
-    position?: boolean
-    teamName?: boolean
-    playerGameCount?: boolean
-    avgDepthOfTarget?: boolean
-    avoidedTackles?: boolean
-    caughtPercent?: boolean
-    contestedCatchRate?: boolean
-    contestedReceptions?: boolean
-    contestedTargets?: boolean
-    declinedPenalties?: boolean
-    dropRate?: boolean
-    drops?: boolean
-    firstDowns?: boolean
-    franchiseId?: boolean
-    fumbles?: boolean
-    gradesHandsDrop?: boolean
-    gradesHandsFumble?: boolean
-    gradesOffense?: boolean
-    gradesPassBlock?: boolean
-    gradesPassRoute?: boolean
-    inlineRate?: boolean
-    inlineSnaps?: boolean
-    interceptions?: boolean
-    longest?: boolean
-    passBlockRate?: boolean
-    passBlocks?: boolean
-    passPlays?: boolean
-    penalties?: boolean
-    receptions?: boolean
-    routeRate?: boolean
-    routes?: boolean
-    slotRate?: boolean
-    slotSnaps?: boolean
-    targetedQbRating?: boolean
-    targets?: boolean
-    touchdowns?: boolean
-    wideRate?: boolean
-    wideSnaps?: boolean
-    yards?: boolean
-    yardsAfterCatch?: boolean
-    yardsAfterCatchPerReception?: boolean
-    yardsPerReception?: boolean
-    yprr?: boolean
-    season?: boolean
-  }
-
-  export type ReceivingStatOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "player" | "playerId" | "position" | "teamName" | "playerGameCount" | "avgDepthOfTarget" | "avoidedTackles" | "caughtPercent" | "contestedCatchRate" | "contestedReceptions" | "contestedTargets" | "declinedPenalties" | "dropRate" | "drops" | "firstDowns" | "franchiseId" | "fumbles" | "gradesHandsDrop" | "gradesHandsFumble" | "gradesOffense" | "gradesPassBlock" | "gradesPassRoute" | "inlineRate" | "inlineSnaps" | "interceptions" | "longest" | "passBlockRate" | "passBlocks" | "passPlays" | "penalties" | "receptions" | "routeRate" | "routes" | "slotRate" | "slotSnaps" | "targetedQbRating" | "targets" | "touchdowns" | "wideRate" | "wideSnaps" | "yards" | "yardsAfterCatch" | "yardsAfterCatchPerReception" | "yardsPerReception" | "yprr" | "season", ExtArgs["result"]["receivingStat"]>
-
-  export type $ReceivingStatPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "ReceivingStat"
-    objects: {}
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      player: string | null
-      playerId: string | null
-      position: string | null
-      teamName: string | null
-      playerGameCount: number | null
-      avgDepthOfTarget: number | null
-      avoidedTackles: number | null
-      caughtPercent: number | null
-      contestedCatchRate: number | null
-      contestedReceptions: number | null
-      contestedTargets: number | null
-      declinedPenalties: number | null
-      dropRate: number | null
-      drops: number | null
-      firstDowns: number | null
-      franchiseId: number | null
-      fumbles: number | null
-      gradesHandsDrop: number | null
-      gradesHandsFumble: number | null
-      gradesOffense: number | null
-      gradesPassBlock: number | null
-      gradesPassRoute: number | null
-      inlineRate: number | null
-      inlineSnaps: number | null
-      interceptions: number | null
-      longest: number | null
-      passBlockRate: number | null
-      passBlocks: number | null
-      passPlays: number | null
-      penalties: number | null
-      receptions: number | null
-      routeRate: number | null
-      routes: number | null
-      slotRate: number | null
-      slotSnaps: number | null
-      targetedQbRating: number | null
-      targets: number | null
-      touchdowns: number | null
-      wideRate: number | null
-      wideSnaps: number | null
-      yards: number | null
-      yardsAfterCatch: number | null
-      yardsAfterCatchPerReception: number | null
-      yardsPerReception: number | null
-      yprr: number | null
-      season: number | null
-    }, ExtArgs["result"]["receivingStat"]>
-    composites: {}
-  }
-
-  type ReceivingStatGetPayload<S extends boolean | null | undefined | ReceivingStatDefaultArgs> = $Result.GetResult<Prisma.$ReceivingStatPayload, S>
-
-  type ReceivingStatCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<ReceivingStatFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: ReceivingStatCountAggregateInputType | true
-    }
-
-  export interface ReceivingStatDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ReceivingStat'], meta: { name: 'ReceivingStat' } }
-    /**
-     * Find zero or one ReceivingStat that matches the filter.
-     * @param {ReceivingStatFindUniqueArgs} args - Arguments to find a ReceivingStat
-     * @example
-     * // Get one ReceivingStat
-     * const receivingStat = await prisma.receivingStat.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends ReceivingStatFindUniqueArgs>(args: SelectSubset<T, ReceivingStatFindUniqueArgs<ExtArgs>>): Prisma__ReceivingStatClient<$Result.GetResult<Prisma.$ReceivingStatPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one ReceivingStat that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {ReceivingStatFindUniqueOrThrowArgs} args - Arguments to find a ReceivingStat
-     * @example
-     * // Get one ReceivingStat
-     * const receivingStat = await prisma.receivingStat.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends ReceivingStatFindUniqueOrThrowArgs>(args: SelectSubset<T, ReceivingStatFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ReceivingStatClient<$Result.GetResult<Prisma.$ReceivingStatPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first ReceivingStat that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReceivingStatFindFirstArgs} args - Arguments to find a ReceivingStat
-     * @example
-     * // Get one ReceivingStat
-     * const receivingStat = await prisma.receivingStat.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends ReceivingStatFindFirstArgs>(args?: SelectSubset<T, ReceivingStatFindFirstArgs<ExtArgs>>): Prisma__ReceivingStatClient<$Result.GetResult<Prisma.$ReceivingStatPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first ReceivingStat that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReceivingStatFindFirstOrThrowArgs} args - Arguments to find a ReceivingStat
-     * @example
-     * // Get one ReceivingStat
-     * const receivingStat = await prisma.receivingStat.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends ReceivingStatFindFirstOrThrowArgs>(args?: SelectSubset<T, ReceivingStatFindFirstOrThrowArgs<ExtArgs>>): Prisma__ReceivingStatClient<$Result.GetResult<Prisma.$ReceivingStatPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more ReceivingStats that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReceivingStatFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all ReceivingStats
-     * const receivingStats = await prisma.receivingStat.findMany()
-     * 
-     * // Get first 10 ReceivingStats
-     * const receivingStats = await prisma.receivingStat.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const receivingStatWithIdOnly = await prisma.receivingStat.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends ReceivingStatFindManyArgs>(args?: SelectSubset<T, ReceivingStatFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReceivingStatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a ReceivingStat.
-     * @param {ReceivingStatCreateArgs} args - Arguments to create a ReceivingStat.
-     * @example
-     * // Create one ReceivingStat
-     * const ReceivingStat = await prisma.receivingStat.create({
-     *   data: {
-     *     // ... data to create a ReceivingStat
-     *   }
-     * })
-     * 
-     */
-    create<T extends ReceivingStatCreateArgs>(args: SelectSubset<T, ReceivingStatCreateArgs<ExtArgs>>): Prisma__ReceivingStatClient<$Result.GetResult<Prisma.$ReceivingStatPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many ReceivingStats.
-     * @param {ReceivingStatCreateManyArgs} args - Arguments to create many ReceivingStats.
-     * @example
-     * // Create many ReceivingStats
-     * const receivingStat = await prisma.receivingStat.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends ReceivingStatCreateManyArgs>(args?: SelectSubset<T, ReceivingStatCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many ReceivingStats and returns the data saved in the database.
-     * @param {ReceivingStatCreateManyAndReturnArgs} args - Arguments to create many ReceivingStats.
-     * @example
-     * // Create many ReceivingStats
-     * const receivingStat = await prisma.receivingStat.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many ReceivingStats and only return the `id`
-     * const receivingStatWithIdOnly = await prisma.receivingStat.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends ReceivingStatCreateManyAndReturnArgs>(args?: SelectSubset<T, ReceivingStatCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReceivingStatPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a ReceivingStat.
-     * @param {ReceivingStatDeleteArgs} args - Arguments to delete one ReceivingStat.
-     * @example
-     * // Delete one ReceivingStat
-     * const ReceivingStat = await prisma.receivingStat.delete({
-     *   where: {
-     *     // ... filter to delete one ReceivingStat
-     *   }
-     * })
-     * 
-     */
-    delete<T extends ReceivingStatDeleteArgs>(args: SelectSubset<T, ReceivingStatDeleteArgs<ExtArgs>>): Prisma__ReceivingStatClient<$Result.GetResult<Prisma.$ReceivingStatPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one ReceivingStat.
-     * @param {ReceivingStatUpdateArgs} args - Arguments to update one ReceivingStat.
-     * @example
-     * // Update one ReceivingStat
-     * const receivingStat = await prisma.receivingStat.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends ReceivingStatUpdateArgs>(args: SelectSubset<T, ReceivingStatUpdateArgs<ExtArgs>>): Prisma__ReceivingStatClient<$Result.GetResult<Prisma.$ReceivingStatPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more ReceivingStats.
-     * @param {ReceivingStatDeleteManyArgs} args - Arguments to filter ReceivingStats to delete.
-     * @example
-     * // Delete a few ReceivingStats
-     * const { count } = await prisma.receivingStat.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends ReceivingStatDeleteManyArgs>(args?: SelectSubset<T, ReceivingStatDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more ReceivingStats.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReceivingStatUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many ReceivingStats
-     * const receivingStat = await prisma.receivingStat.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends ReceivingStatUpdateManyArgs>(args: SelectSubset<T, ReceivingStatUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more ReceivingStats and returns the data updated in the database.
-     * @param {ReceivingStatUpdateManyAndReturnArgs} args - Arguments to update many ReceivingStats.
-     * @example
-     * // Update many ReceivingStats
-     * const receivingStat = await prisma.receivingStat.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more ReceivingStats and only return the `id`
-     * const receivingStatWithIdOnly = await prisma.receivingStat.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends ReceivingStatUpdateManyAndReturnArgs>(args: SelectSubset<T, ReceivingStatUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReceivingStatPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one ReceivingStat.
-     * @param {ReceivingStatUpsertArgs} args - Arguments to update or create a ReceivingStat.
-     * @example
-     * // Update or create a ReceivingStat
-     * const receivingStat = await prisma.receivingStat.upsert({
-     *   create: {
-     *     // ... data to create a ReceivingStat
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the ReceivingStat we want to update
-     *   }
-     * })
-     */
-    upsert<T extends ReceivingStatUpsertArgs>(args: SelectSubset<T, ReceivingStatUpsertArgs<ExtArgs>>): Prisma__ReceivingStatClient<$Result.GetResult<Prisma.$ReceivingStatPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of ReceivingStats.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReceivingStatCountArgs} args - Arguments to filter ReceivingStats to count.
-     * @example
-     * // Count the number of ReceivingStats
-     * const count = await prisma.receivingStat.count({
-     *   where: {
-     *     // ... the filter for the ReceivingStats we want to count
-     *   }
-     * })
-    **/
-    count<T extends ReceivingStatCountArgs>(
-      args?: Subset<T, ReceivingStatCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], ReceivingStatCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a ReceivingStat.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReceivingStatAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends ReceivingStatAggregateArgs>(args: Subset<T, ReceivingStatAggregateArgs>): Prisma.PrismaPromise<GetReceivingStatAggregateType<T>>
-
-    /**
-     * Group by ReceivingStat.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ReceivingStatGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends ReceivingStatGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ReceivingStatGroupByArgs['orderBy'] }
-        : { orderBy?: ReceivingStatGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, ReceivingStatGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetReceivingStatGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the ReceivingStat model
-   */
-  readonly fields: ReceivingStatFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for ReceivingStat.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__ReceivingStatClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the ReceivingStat model
-   */
-  interface ReceivingStatFieldRefs {
-    readonly id: FieldRef<"ReceivingStat", 'String'>
-    readonly player: FieldRef<"ReceivingStat", 'String'>
-    readonly playerId: FieldRef<"ReceivingStat", 'String'>
-    readonly position: FieldRef<"ReceivingStat", 'String'>
-    readonly teamName: FieldRef<"ReceivingStat", 'String'>
-    readonly playerGameCount: FieldRef<"ReceivingStat", 'Int'>
-    readonly avgDepthOfTarget: FieldRef<"ReceivingStat", 'Float'>
-    readonly avoidedTackles: FieldRef<"ReceivingStat", 'Int'>
-    readonly caughtPercent: FieldRef<"ReceivingStat", 'Float'>
-    readonly contestedCatchRate: FieldRef<"ReceivingStat", 'Float'>
-    readonly contestedReceptions: FieldRef<"ReceivingStat", 'Int'>
-    readonly contestedTargets: FieldRef<"ReceivingStat", 'Int'>
-    readonly declinedPenalties: FieldRef<"ReceivingStat", 'Int'>
-    readonly dropRate: FieldRef<"ReceivingStat", 'Float'>
-    readonly drops: FieldRef<"ReceivingStat", 'Int'>
-    readonly firstDowns: FieldRef<"ReceivingStat", 'Int'>
-    readonly franchiseId: FieldRef<"ReceivingStat", 'Int'>
-    readonly fumbles: FieldRef<"ReceivingStat", 'Int'>
-    readonly gradesHandsDrop: FieldRef<"ReceivingStat", 'Float'>
-    readonly gradesHandsFumble: FieldRef<"ReceivingStat", 'Float'>
-    readonly gradesOffense: FieldRef<"ReceivingStat", 'Float'>
-    readonly gradesPassBlock: FieldRef<"ReceivingStat", 'Float'>
-    readonly gradesPassRoute: FieldRef<"ReceivingStat", 'Float'>
-    readonly inlineRate: FieldRef<"ReceivingStat", 'Float'>
-    readonly inlineSnaps: FieldRef<"ReceivingStat", 'Int'>
-    readonly interceptions: FieldRef<"ReceivingStat", 'Int'>
-    readonly longest: FieldRef<"ReceivingStat", 'Int'>
-    readonly passBlockRate: FieldRef<"ReceivingStat", 'Float'>
-    readonly passBlocks: FieldRef<"ReceivingStat", 'Int'>
-    readonly passPlays: FieldRef<"ReceivingStat", 'Int'>
-    readonly penalties: FieldRef<"ReceivingStat", 'Int'>
-    readonly receptions: FieldRef<"ReceivingStat", 'Int'>
-    readonly routeRate: FieldRef<"ReceivingStat", 'Float'>
-    readonly routes: FieldRef<"ReceivingStat", 'Int'>
-    readonly slotRate: FieldRef<"ReceivingStat", 'Float'>
-    readonly slotSnaps: FieldRef<"ReceivingStat", 'Int'>
-    readonly targetedQbRating: FieldRef<"ReceivingStat", 'Float'>
-    readonly targets: FieldRef<"ReceivingStat", 'Int'>
-    readonly touchdowns: FieldRef<"ReceivingStat", 'Int'>
-    readonly wideRate: FieldRef<"ReceivingStat", 'Float'>
-    readonly wideSnaps: FieldRef<"ReceivingStat", 'Int'>
-    readonly yards: FieldRef<"ReceivingStat", 'Int'>
-    readonly yardsAfterCatch: FieldRef<"ReceivingStat", 'Int'>
-    readonly yardsAfterCatchPerReception: FieldRef<"ReceivingStat", 'Float'>
-    readonly yardsPerReception: FieldRef<"ReceivingStat", 'Float'>
-    readonly yprr: FieldRef<"ReceivingStat", 'Float'>
-    readonly season: FieldRef<"ReceivingStat", 'Int'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * ReceivingStat findUnique
-   */
-  export type ReceivingStatFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceivingStat
-     */
-    select?: ReceivingStatSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceivingStat
-     */
-    omit?: ReceivingStatOmit<ExtArgs> | null
-    /**
-     * Filter, which ReceivingStat to fetch.
-     */
-    where: ReceivingStatWhereUniqueInput
-  }
-
-  /**
-   * ReceivingStat findUniqueOrThrow
-   */
-  export type ReceivingStatFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceivingStat
-     */
-    select?: ReceivingStatSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceivingStat
-     */
-    omit?: ReceivingStatOmit<ExtArgs> | null
-    /**
-     * Filter, which ReceivingStat to fetch.
-     */
-    where: ReceivingStatWhereUniqueInput
-  }
-
-  /**
-   * ReceivingStat findFirst
-   */
-  export type ReceivingStatFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceivingStat
-     */
-    select?: ReceivingStatSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceivingStat
-     */
-    omit?: ReceivingStatOmit<ExtArgs> | null
-    /**
-     * Filter, which ReceivingStat to fetch.
-     */
-    where?: ReceivingStatWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ReceivingStats to fetch.
-     */
-    orderBy?: ReceivingStatOrderByWithRelationInput | ReceivingStatOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for ReceivingStats.
-     */
-    cursor?: ReceivingStatWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ReceivingStats from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ReceivingStats.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of ReceivingStats.
-     */
-    distinct?: ReceivingStatScalarFieldEnum | ReceivingStatScalarFieldEnum[]
-  }
-
-  /**
-   * ReceivingStat findFirstOrThrow
-   */
-  export type ReceivingStatFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceivingStat
-     */
-    select?: ReceivingStatSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceivingStat
-     */
-    omit?: ReceivingStatOmit<ExtArgs> | null
-    /**
-     * Filter, which ReceivingStat to fetch.
-     */
-    where?: ReceivingStatWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ReceivingStats to fetch.
-     */
-    orderBy?: ReceivingStatOrderByWithRelationInput | ReceivingStatOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for ReceivingStats.
-     */
-    cursor?: ReceivingStatWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ReceivingStats from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ReceivingStats.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of ReceivingStats.
-     */
-    distinct?: ReceivingStatScalarFieldEnum | ReceivingStatScalarFieldEnum[]
-  }
-
-  /**
-   * ReceivingStat findMany
-   */
-  export type ReceivingStatFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceivingStat
-     */
-    select?: ReceivingStatSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceivingStat
-     */
-    omit?: ReceivingStatOmit<ExtArgs> | null
-    /**
-     * Filter, which ReceivingStats to fetch.
-     */
-    where?: ReceivingStatWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ReceivingStats to fetch.
-     */
-    orderBy?: ReceivingStatOrderByWithRelationInput | ReceivingStatOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing ReceivingStats.
-     */
-    cursor?: ReceivingStatWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ReceivingStats from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ReceivingStats.
-     */
-    skip?: number
-    distinct?: ReceivingStatScalarFieldEnum | ReceivingStatScalarFieldEnum[]
-  }
-
-  /**
-   * ReceivingStat create
-   */
-  export type ReceivingStatCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceivingStat
-     */
-    select?: ReceivingStatSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceivingStat
-     */
-    omit?: ReceivingStatOmit<ExtArgs> | null
-    /**
-     * The data needed to create a ReceivingStat.
-     */
-    data?: XOR<ReceivingStatCreateInput, ReceivingStatUncheckedCreateInput>
-  }
-
-  /**
-   * ReceivingStat createMany
-   */
-  export type ReceivingStatCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many ReceivingStats.
-     */
-    data: ReceivingStatCreateManyInput | ReceivingStatCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * ReceivingStat createManyAndReturn
-   */
-  export type ReceivingStatCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceivingStat
-     */
-    select?: ReceivingStatSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceivingStat
-     */
-    omit?: ReceivingStatOmit<ExtArgs> | null
-    /**
-     * The data used to create many ReceivingStats.
-     */
-    data: ReceivingStatCreateManyInput | ReceivingStatCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * ReceivingStat update
-   */
-  export type ReceivingStatUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceivingStat
-     */
-    select?: ReceivingStatSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceivingStat
-     */
-    omit?: ReceivingStatOmit<ExtArgs> | null
-    /**
-     * The data needed to update a ReceivingStat.
-     */
-    data: XOR<ReceivingStatUpdateInput, ReceivingStatUncheckedUpdateInput>
-    /**
-     * Choose, which ReceivingStat to update.
-     */
-    where: ReceivingStatWhereUniqueInput
-  }
-
-  /**
-   * ReceivingStat updateMany
-   */
-  export type ReceivingStatUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update ReceivingStats.
-     */
-    data: XOR<ReceivingStatUpdateManyMutationInput, ReceivingStatUncheckedUpdateManyInput>
-    /**
-     * Filter which ReceivingStats to update
-     */
-    where?: ReceivingStatWhereInput
-    /**
-     * Limit how many ReceivingStats to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * ReceivingStat updateManyAndReturn
-   */
-  export type ReceivingStatUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceivingStat
-     */
-    select?: ReceivingStatSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceivingStat
-     */
-    omit?: ReceivingStatOmit<ExtArgs> | null
-    /**
-     * The data used to update ReceivingStats.
-     */
-    data: XOR<ReceivingStatUpdateManyMutationInput, ReceivingStatUncheckedUpdateManyInput>
-    /**
-     * Filter which ReceivingStats to update
-     */
-    where?: ReceivingStatWhereInput
-    /**
-     * Limit how many ReceivingStats to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * ReceivingStat upsert
-   */
-  export type ReceivingStatUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceivingStat
-     */
-    select?: ReceivingStatSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceivingStat
-     */
-    omit?: ReceivingStatOmit<ExtArgs> | null
-    /**
-     * The filter to search for the ReceivingStat to update in case it exists.
-     */
-    where: ReceivingStatWhereUniqueInput
-    /**
-     * In case the ReceivingStat found by the `where` argument doesn't exist, create a new ReceivingStat with this data.
-     */
-    create: XOR<ReceivingStatCreateInput, ReceivingStatUncheckedCreateInput>
-    /**
-     * In case the ReceivingStat was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<ReceivingStatUpdateInput, ReceivingStatUncheckedUpdateInput>
-  }
-
-  /**
-   * ReceivingStat delete
-   */
-  export type ReceivingStatDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceivingStat
-     */
-    select?: ReceivingStatSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceivingStat
-     */
-    omit?: ReceivingStatOmit<ExtArgs> | null
-    /**
-     * Filter which ReceivingStat to delete.
-     */
-    where: ReceivingStatWhereUniqueInput
-  }
-
-  /**
-   * ReceivingStat deleteMany
-   */
-  export type ReceivingStatDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which ReceivingStats to delete
-     */
-    where?: ReceivingStatWhereInput
-    /**
-     * Limit how many ReceivingStats to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * ReceivingStat without action
-   */
-  export type ReceivingStatDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ReceivingStat
-     */
-    select?: ReceivingStatSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ReceivingStat
-     */
-    omit?: ReceivingStatOmit<ExtArgs> | null
-  }
-
-
-  /**
    * Model PlayerSeason
    */
 
@@ -5997,15 +4167,11 @@ export namespace Prisma {
     green_zone_carries: number | null
     HVTs: number | null
     team_green_zone_carries_all_games: number | null
-    total_team_RB_HVTs_all_games: number | null
     team_green_zone_carries_in_played_games: number | null
-    total_team_RB_HVTs_in_played_games: number | null
     games_played_season: number | null
     HVTs_per_game: number | null
     pct_team_green_zone_carries_all_games: number | null
     pct_team_green_zone_carries_in_played_games: number | null
-    pct_team_RB_HVTs_all_games: number | null
-    pct_team_RB_HVTs_in_played_games: number | null
     total_dropbacks: number | null
     pass_attempts_on_dropbacks: number | null
     scrambles_on_dropbacks: number | null
@@ -6014,15 +4180,6 @@ export namespace Prisma {
     scramble_rate: number | null
     sack_rate: number | null
     touchdown_rate: number | null
-    avg_cpoe: number | null
-    games_over_30_degrees: number | null
-    games_below_30_degrees: number | null
-    avg_fp_over_30_degrees: number | null
-    avg_fp_below_30_degrees: number | null
-    avg_fp_wind_below_20_mph: number | null
-    avg_fp_wind_above_20_mph: number | null
-    diff_fp_temp_30_degrees: number | null
-    diff_fp_wind_20_mph: number | null
     avg_pass_epa_deep_left: number | null
     avg_pass_epa_deep_middle: number | null
     avg_pass_epa_deep_right: number | null
@@ -6047,37 +4204,20 @@ export namespace Prisma {
     down_1_attempts: number | null
     down_1_completions: number | null
     down_1_passing_yards: number | null
-    down_1_passing_tds: number | null
-    down_1_interceptions: number | null
-    down_1_sacks_taken: number | null
     down_1_passing_first_downs: number | null
     down_1_carries: number | null
     down_1_rushing_yards: number | null
-    down_1_rushing_tds: number | null
-    down_1_fumbles: number | null
     down_1_rushing_first_downs: number | null
     down_1_targets: number | null
     down_1_receptions: number | null
     down_1_receiving_yards: number | null
-    down_1_receiving_tds: number | null
-    down_1_receiving_first_downs: number | null
-    down_1_total_first_downs: number | null
     down_1_team_carries_in_played_games: number | null
     down_1_team_targets_in_played_games: number | null
     down_1_team_receptions_in_played_games: number | null
-    down_1_team_rush_fd_in_played_games: number | null
-    down_1_team_rec_fd_in_played_games: number | null
     down_1_games_played: number | null
     down_1_team_carries_all_games: number | null
     down_1_team_targets_all_games: number | null
     down_1_team_receptions_all_games: number | null
-    down_1_team_rush_fd_all_games: number | null
-    down_1_team_rec_fd_all_games: number | null
-    down_1_pct_team_carries_in_played_games: number | null
-    down_1_pct_team_targets_in_played_games: number | null
-    down_1_pct_team_receptions_in_played_games: number | null
-    down_1_pct_team_rush_fd_in_played_games: number | null
-    down_1_pct_team_rec_fd_in_played_games: number | null
     down_1_yards_per_pass_attempt: number | null
     down_1_yards_per_completion: number | null
     down_1_yards_per_carry: number | null
@@ -6093,7 +4233,6 @@ export namespace Prisma {
     down_1_targets_per_game: number | null
     down_1_receptions_per_game: number | null
     down_1_receiving_yards_per_game: number | null
-    down_1_receiving_first_downs_per_game: number | null
     down_3_attempts: number | null
     down_3_completions: number | null
     down_3_passing_yards: number | null
@@ -6103,8 +4242,6 @@ export namespace Prisma {
     down_3_passing_first_downs: number | null
     down_3_carries: number | null
     down_3_rushing_yards: number | null
-    down_3_rushing_tds: number | null
-    down_3_fumbles: number | null
     down_3_rushing_first_downs: number | null
     down_3_targets: number | null
     down_3_receptions: number | null
@@ -6205,15 +4342,11 @@ export namespace Prisma {
     green_zone_carries: number | null
     HVTs: number | null
     team_green_zone_carries_all_games: number | null
-    total_team_RB_HVTs_all_games: number | null
     team_green_zone_carries_in_played_games: number | null
-    total_team_RB_HVTs_in_played_games: number | null
     games_played_season: number | null
     HVTs_per_game: number | null
     pct_team_green_zone_carries_all_games: number | null
     pct_team_green_zone_carries_in_played_games: number | null
-    pct_team_RB_HVTs_all_games: number | null
-    pct_team_RB_HVTs_in_played_games: number | null
     total_dropbacks: number | null
     pass_attempts_on_dropbacks: number | null
     scrambles_on_dropbacks: number | null
@@ -6222,15 +4355,6 @@ export namespace Prisma {
     scramble_rate: number | null
     sack_rate: number | null
     touchdown_rate: number | null
-    avg_cpoe: number | null
-    games_over_30_degrees: number | null
-    games_below_30_degrees: number | null
-    avg_fp_over_30_degrees: number | null
-    avg_fp_below_30_degrees: number | null
-    avg_fp_wind_below_20_mph: number | null
-    avg_fp_wind_above_20_mph: number | null
-    diff_fp_temp_30_degrees: number | null
-    diff_fp_wind_20_mph: number | null
     avg_pass_epa_deep_left: number | null
     avg_pass_epa_deep_middle: number | null
     avg_pass_epa_deep_right: number | null
@@ -6255,37 +4379,20 @@ export namespace Prisma {
     down_1_attempts: number | null
     down_1_completions: number | null
     down_1_passing_yards: number | null
-    down_1_passing_tds: number | null
-    down_1_interceptions: number | null
-    down_1_sacks_taken: number | null
     down_1_passing_first_downs: number | null
     down_1_carries: number | null
     down_1_rushing_yards: number | null
-    down_1_rushing_tds: number | null
-    down_1_fumbles: number | null
     down_1_rushing_first_downs: number | null
     down_1_targets: number | null
     down_1_receptions: number | null
     down_1_receiving_yards: number | null
-    down_1_receiving_tds: number | null
-    down_1_receiving_first_downs: number | null
-    down_1_total_first_downs: number | null
     down_1_team_carries_in_played_games: number | null
     down_1_team_targets_in_played_games: number | null
     down_1_team_receptions_in_played_games: number | null
-    down_1_team_rush_fd_in_played_games: number | null
-    down_1_team_rec_fd_in_played_games: number | null
     down_1_games_played: number | null
     down_1_team_carries_all_games: number | null
     down_1_team_targets_all_games: number | null
     down_1_team_receptions_all_games: number | null
-    down_1_team_rush_fd_all_games: number | null
-    down_1_team_rec_fd_all_games: number | null
-    down_1_pct_team_carries_in_played_games: number | null
-    down_1_pct_team_targets_in_played_games: number | null
-    down_1_pct_team_receptions_in_played_games: number | null
-    down_1_pct_team_rush_fd_in_played_games: number | null
-    down_1_pct_team_rec_fd_in_played_games: number | null
     down_1_yards_per_pass_attempt: number | null
     down_1_yards_per_completion: number | null
     down_1_yards_per_carry: number | null
@@ -6301,7 +4408,6 @@ export namespace Prisma {
     down_1_targets_per_game: number | null
     down_1_receptions_per_game: number | null
     down_1_receiving_yards_per_game: number | null
-    down_1_receiving_first_downs_per_game: number | null
     down_3_attempts: number | null
     down_3_completions: number | null
     down_3_passing_yards: number | null
@@ -6311,8 +4417,6 @@ export namespace Prisma {
     down_3_passing_first_downs: number | null
     down_3_carries: number | null
     down_3_rushing_yards: number | null
-    down_3_rushing_tds: number | null
-    down_3_fumbles: number | null
     down_3_rushing_first_downs: number | null
     down_3_targets: number | null
     down_3_receptions: number | null
@@ -6417,15 +4521,11 @@ export namespace Prisma {
     green_zone_carries: number | null
     HVTs: number | null
     team_green_zone_carries_all_games: number | null
-    total_team_RB_HVTs_all_games: number | null
     team_green_zone_carries_in_played_games: number | null
-    total_team_RB_HVTs_in_played_games: number | null
     games_played_season: number | null
     HVTs_per_game: number | null
     pct_team_green_zone_carries_all_games: number | null
     pct_team_green_zone_carries_in_played_games: number | null
-    pct_team_RB_HVTs_all_games: number | null
-    pct_team_RB_HVTs_in_played_games: number | null
     total_dropbacks: number | null
     pass_attempts_on_dropbacks: number | null
     scrambles_on_dropbacks: number | null
@@ -6434,15 +4534,6 @@ export namespace Prisma {
     scramble_rate: number | null
     sack_rate: number | null
     touchdown_rate: number | null
-    avg_cpoe: number | null
-    games_over_30_degrees: number | null
-    games_below_30_degrees: number | null
-    avg_fp_over_30_degrees: number | null
-    avg_fp_below_30_degrees: number | null
-    avg_fp_wind_below_20_mph: number | null
-    avg_fp_wind_above_20_mph: number | null
-    diff_fp_temp_30_degrees: number | null
-    diff_fp_wind_20_mph: number | null
     avg_pass_epa_deep_left: number | null
     avg_pass_epa_deep_middle: number | null
     avg_pass_epa_deep_right: number | null
@@ -6467,37 +4558,20 @@ export namespace Prisma {
     down_1_attempts: number | null
     down_1_completions: number | null
     down_1_passing_yards: number | null
-    down_1_passing_tds: number | null
-    down_1_interceptions: number | null
-    down_1_sacks_taken: number | null
     down_1_passing_first_downs: number | null
     down_1_carries: number | null
     down_1_rushing_yards: number | null
-    down_1_rushing_tds: number | null
-    down_1_fumbles: number | null
     down_1_rushing_first_downs: number | null
     down_1_targets: number | null
     down_1_receptions: number | null
     down_1_receiving_yards: number | null
-    down_1_receiving_tds: number | null
-    down_1_receiving_first_downs: number | null
-    down_1_total_first_downs: number | null
     down_1_team_carries_in_played_games: number | null
     down_1_team_targets_in_played_games: number | null
     down_1_team_receptions_in_played_games: number | null
-    down_1_team_rush_fd_in_played_games: number | null
-    down_1_team_rec_fd_in_played_games: number | null
     down_1_games_played: number | null
     down_1_team_carries_all_games: number | null
     down_1_team_targets_all_games: number | null
     down_1_team_receptions_all_games: number | null
-    down_1_team_rush_fd_all_games: number | null
-    down_1_team_rec_fd_all_games: number | null
-    down_1_pct_team_carries_in_played_games: number | null
-    down_1_pct_team_targets_in_played_games: number | null
-    down_1_pct_team_receptions_in_played_games: number | null
-    down_1_pct_team_rush_fd_in_played_games: number | null
-    down_1_pct_team_rec_fd_in_played_games: number | null
     down_1_yards_per_pass_attempt: number | null
     down_1_yards_per_completion: number | null
     down_1_yards_per_carry: number | null
@@ -6513,7 +4587,6 @@ export namespace Prisma {
     down_1_targets_per_game: number | null
     down_1_receptions_per_game: number | null
     down_1_receiving_yards_per_game: number | null
-    down_1_receiving_first_downs_per_game: number | null
     down_3_attempts: number | null
     down_3_completions: number | null
     down_3_passing_yards: number | null
@@ -6523,8 +4596,6 @@ export namespace Prisma {
     down_3_passing_first_downs: number | null
     down_3_carries: number | null
     down_3_rushing_yards: number | null
-    down_3_rushing_tds: number | null
-    down_3_fumbles: number | null
     down_3_rushing_first_downs: number | null
     down_3_targets: number | null
     down_3_receptions: number | null
@@ -6629,15 +4700,11 @@ export namespace Prisma {
     green_zone_carries: number | null
     HVTs: number | null
     team_green_zone_carries_all_games: number | null
-    total_team_RB_HVTs_all_games: number | null
     team_green_zone_carries_in_played_games: number | null
-    total_team_RB_HVTs_in_played_games: number | null
     games_played_season: number | null
     HVTs_per_game: number | null
     pct_team_green_zone_carries_all_games: number | null
     pct_team_green_zone_carries_in_played_games: number | null
-    pct_team_RB_HVTs_all_games: number | null
-    pct_team_RB_HVTs_in_played_games: number | null
     total_dropbacks: number | null
     pass_attempts_on_dropbacks: number | null
     scrambles_on_dropbacks: number | null
@@ -6646,15 +4713,6 @@ export namespace Prisma {
     scramble_rate: number | null
     sack_rate: number | null
     touchdown_rate: number | null
-    avg_cpoe: number | null
-    games_over_30_degrees: number | null
-    games_below_30_degrees: number | null
-    avg_fp_over_30_degrees: number | null
-    avg_fp_below_30_degrees: number | null
-    avg_fp_wind_below_20_mph: number | null
-    avg_fp_wind_above_20_mph: number | null
-    diff_fp_temp_30_degrees: number | null
-    diff_fp_wind_20_mph: number | null
     avg_pass_epa_deep_left: number | null
     avg_pass_epa_deep_middle: number | null
     avg_pass_epa_deep_right: number | null
@@ -6679,37 +4737,20 @@ export namespace Prisma {
     down_1_attempts: number | null
     down_1_completions: number | null
     down_1_passing_yards: number | null
-    down_1_passing_tds: number | null
-    down_1_interceptions: number | null
-    down_1_sacks_taken: number | null
     down_1_passing_first_downs: number | null
     down_1_carries: number | null
     down_1_rushing_yards: number | null
-    down_1_rushing_tds: number | null
-    down_1_fumbles: number | null
     down_1_rushing_first_downs: number | null
     down_1_targets: number | null
     down_1_receptions: number | null
     down_1_receiving_yards: number | null
-    down_1_receiving_tds: number | null
-    down_1_receiving_first_downs: number | null
-    down_1_total_first_downs: number | null
     down_1_team_carries_in_played_games: number | null
     down_1_team_targets_in_played_games: number | null
     down_1_team_receptions_in_played_games: number | null
-    down_1_team_rush_fd_in_played_games: number | null
-    down_1_team_rec_fd_in_played_games: number | null
     down_1_games_played: number | null
     down_1_team_carries_all_games: number | null
     down_1_team_targets_all_games: number | null
     down_1_team_receptions_all_games: number | null
-    down_1_team_rush_fd_all_games: number | null
-    down_1_team_rec_fd_all_games: number | null
-    down_1_pct_team_carries_in_played_games: number | null
-    down_1_pct_team_targets_in_played_games: number | null
-    down_1_pct_team_receptions_in_played_games: number | null
-    down_1_pct_team_rush_fd_in_played_games: number | null
-    down_1_pct_team_rec_fd_in_played_games: number | null
     down_1_yards_per_pass_attempt: number | null
     down_1_yards_per_completion: number | null
     down_1_yards_per_carry: number | null
@@ -6725,7 +4766,6 @@ export namespace Prisma {
     down_1_targets_per_game: number | null
     down_1_receptions_per_game: number | null
     down_1_receiving_yards_per_game: number | null
-    down_1_receiving_first_downs_per_game: number | null
     down_3_attempts: number | null
     down_3_completions: number | null
     down_3_passing_yards: number | null
@@ -6735,8 +4775,6 @@ export namespace Prisma {
     down_3_passing_first_downs: number | null
     down_3_carries: number | null
     down_3_rushing_yards: number | null
-    down_3_rushing_tds: number | null
-    down_3_fumbles: number | null
     down_3_rushing_first_downs: number | null
     down_3_targets: number | null
     down_3_receptions: number | null
@@ -6841,15 +4879,11 @@ export namespace Prisma {
     green_zone_carries: number
     HVTs: number
     team_green_zone_carries_all_games: number
-    total_team_RB_HVTs_all_games: number
     team_green_zone_carries_in_played_games: number
-    total_team_RB_HVTs_in_played_games: number
     games_played_season: number
     HVTs_per_game: number
     pct_team_green_zone_carries_all_games: number
     pct_team_green_zone_carries_in_played_games: number
-    pct_team_RB_HVTs_all_games: number
-    pct_team_RB_HVTs_in_played_games: number
     total_dropbacks: number
     pass_attempts_on_dropbacks: number
     scrambles_on_dropbacks: number
@@ -6858,15 +4892,6 @@ export namespace Prisma {
     scramble_rate: number
     sack_rate: number
     touchdown_rate: number
-    avg_cpoe: number
-    games_over_30_degrees: number
-    games_below_30_degrees: number
-    avg_fp_over_30_degrees: number
-    avg_fp_below_30_degrees: number
-    avg_fp_wind_below_20_mph: number
-    avg_fp_wind_above_20_mph: number
-    diff_fp_temp_30_degrees: number
-    diff_fp_wind_20_mph: number
     avg_pass_epa_deep_left: number
     avg_pass_epa_deep_middle: number
     avg_pass_epa_deep_right: number
@@ -6891,37 +4916,20 @@ export namespace Prisma {
     down_1_attempts: number
     down_1_completions: number
     down_1_passing_yards: number
-    down_1_passing_tds: number
-    down_1_interceptions: number
-    down_1_sacks_taken: number
     down_1_passing_first_downs: number
     down_1_carries: number
     down_1_rushing_yards: number
-    down_1_rushing_tds: number
-    down_1_fumbles: number
     down_1_rushing_first_downs: number
     down_1_targets: number
     down_1_receptions: number
     down_1_receiving_yards: number
-    down_1_receiving_tds: number
-    down_1_receiving_first_downs: number
-    down_1_total_first_downs: number
     down_1_team_carries_in_played_games: number
     down_1_team_targets_in_played_games: number
     down_1_team_receptions_in_played_games: number
-    down_1_team_rush_fd_in_played_games: number
-    down_1_team_rec_fd_in_played_games: number
     down_1_games_played: number
     down_1_team_carries_all_games: number
     down_1_team_targets_all_games: number
     down_1_team_receptions_all_games: number
-    down_1_team_rush_fd_all_games: number
-    down_1_team_rec_fd_all_games: number
-    down_1_pct_team_carries_in_played_games: number
-    down_1_pct_team_targets_in_played_games: number
-    down_1_pct_team_receptions_in_played_games: number
-    down_1_pct_team_rush_fd_in_played_games: number
-    down_1_pct_team_rec_fd_in_played_games: number
     down_1_yards_per_pass_attempt: number
     down_1_yards_per_completion: number
     down_1_yards_per_carry: number
@@ -6937,7 +4945,6 @@ export namespace Prisma {
     down_1_targets_per_game: number
     down_1_receptions_per_game: number
     down_1_receiving_yards_per_game: number
-    down_1_receiving_first_downs_per_game: number
     down_3_attempts: number
     down_3_completions: number
     down_3_passing_yards: number
@@ -6947,8 +4954,6 @@ export namespace Prisma {
     down_3_passing_first_downs: number
     down_3_carries: number
     down_3_rushing_yards: number
-    down_3_rushing_tds: number
-    down_3_fumbles: number
     down_3_rushing_first_downs: number
     down_3_targets: number
     down_3_receptions: number
@@ -7051,15 +5056,11 @@ export namespace Prisma {
     green_zone_carries?: true
     HVTs?: true
     team_green_zone_carries_all_games?: true
-    total_team_RB_HVTs_all_games?: true
     team_green_zone_carries_in_played_games?: true
-    total_team_RB_HVTs_in_played_games?: true
     games_played_season?: true
     HVTs_per_game?: true
     pct_team_green_zone_carries_all_games?: true
     pct_team_green_zone_carries_in_played_games?: true
-    pct_team_RB_HVTs_all_games?: true
-    pct_team_RB_HVTs_in_played_games?: true
     total_dropbacks?: true
     pass_attempts_on_dropbacks?: true
     scrambles_on_dropbacks?: true
@@ -7068,15 +5069,6 @@ export namespace Prisma {
     scramble_rate?: true
     sack_rate?: true
     touchdown_rate?: true
-    avg_cpoe?: true
-    games_over_30_degrees?: true
-    games_below_30_degrees?: true
-    avg_fp_over_30_degrees?: true
-    avg_fp_below_30_degrees?: true
-    avg_fp_wind_below_20_mph?: true
-    avg_fp_wind_above_20_mph?: true
-    diff_fp_temp_30_degrees?: true
-    diff_fp_wind_20_mph?: true
     avg_pass_epa_deep_left?: true
     avg_pass_epa_deep_middle?: true
     avg_pass_epa_deep_right?: true
@@ -7101,37 +5093,20 @@ export namespace Prisma {
     down_1_attempts?: true
     down_1_completions?: true
     down_1_passing_yards?: true
-    down_1_passing_tds?: true
-    down_1_interceptions?: true
-    down_1_sacks_taken?: true
     down_1_passing_first_downs?: true
     down_1_carries?: true
     down_1_rushing_yards?: true
-    down_1_rushing_tds?: true
-    down_1_fumbles?: true
     down_1_rushing_first_downs?: true
     down_1_targets?: true
     down_1_receptions?: true
     down_1_receiving_yards?: true
-    down_1_receiving_tds?: true
-    down_1_receiving_first_downs?: true
-    down_1_total_first_downs?: true
     down_1_team_carries_in_played_games?: true
     down_1_team_targets_in_played_games?: true
     down_1_team_receptions_in_played_games?: true
-    down_1_team_rush_fd_in_played_games?: true
-    down_1_team_rec_fd_in_played_games?: true
     down_1_games_played?: true
     down_1_team_carries_all_games?: true
     down_1_team_targets_all_games?: true
     down_1_team_receptions_all_games?: true
-    down_1_team_rush_fd_all_games?: true
-    down_1_team_rec_fd_all_games?: true
-    down_1_pct_team_carries_in_played_games?: true
-    down_1_pct_team_targets_in_played_games?: true
-    down_1_pct_team_receptions_in_played_games?: true
-    down_1_pct_team_rush_fd_in_played_games?: true
-    down_1_pct_team_rec_fd_in_played_games?: true
     down_1_yards_per_pass_attempt?: true
     down_1_yards_per_completion?: true
     down_1_yards_per_carry?: true
@@ -7147,7 +5122,6 @@ export namespace Prisma {
     down_1_targets_per_game?: true
     down_1_receptions_per_game?: true
     down_1_receiving_yards_per_game?: true
-    down_1_receiving_first_downs_per_game?: true
     down_3_attempts?: true
     down_3_completions?: true
     down_3_passing_yards?: true
@@ -7157,8 +5131,6 @@ export namespace Prisma {
     down_3_passing_first_downs?: true
     down_3_carries?: true
     down_3_rushing_yards?: true
-    down_3_rushing_tds?: true
-    down_3_fumbles?: true
     down_3_rushing_first_downs?: true
     down_3_targets?: true
     down_3_receptions?: true
@@ -7259,15 +5231,11 @@ export namespace Prisma {
     green_zone_carries?: true
     HVTs?: true
     team_green_zone_carries_all_games?: true
-    total_team_RB_HVTs_all_games?: true
     team_green_zone_carries_in_played_games?: true
-    total_team_RB_HVTs_in_played_games?: true
     games_played_season?: true
     HVTs_per_game?: true
     pct_team_green_zone_carries_all_games?: true
     pct_team_green_zone_carries_in_played_games?: true
-    pct_team_RB_HVTs_all_games?: true
-    pct_team_RB_HVTs_in_played_games?: true
     total_dropbacks?: true
     pass_attempts_on_dropbacks?: true
     scrambles_on_dropbacks?: true
@@ -7276,15 +5244,6 @@ export namespace Prisma {
     scramble_rate?: true
     sack_rate?: true
     touchdown_rate?: true
-    avg_cpoe?: true
-    games_over_30_degrees?: true
-    games_below_30_degrees?: true
-    avg_fp_over_30_degrees?: true
-    avg_fp_below_30_degrees?: true
-    avg_fp_wind_below_20_mph?: true
-    avg_fp_wind_above_20_mph?: true
-    diff_fp_temp_30_degrees?: true
-    diff_fp_wind_20_mph?: true
     avg_pass_epa_deep_left?: true
     avg_pass_epa_deep_middle?: true
     avg_pass_epa_deep_right?: true
@@ -7309,37 +5268,20 @@ export namespace Prisma {
     down_1_attempts?: true
     down_1_completions?: true
     down_1_passing_yards?: true
-    down_1_passing_tds?: true
-    down_1_interceptions?: true
-    down_1_sacks_taken?: true
     down_1_passing_first_downs?: true
     down_1_carries?: true
     down_1_rushing_yards?: true
-    down_1_rushing_tds?: true
-    down_1_fumbles?: true
     down_1_rushing_first_downs?: true
     down_1_targets?: true
     down_1_receptions?: true
     down_1_receiving_yards?: true
-    down_1_receiving_tds?: true
-    down_1_receiving_first_downs?: true
-    down_1_total_first_downs?: true
     down_1_team_carries_in_played_games?: true
     down_1_team_targets_in_played_games?: true
     down_1_team_receptions_in_played_games?: true
-    down_1_team_rush_fd_in_played_games?: true
-    down_1_team_rec_fd_in_played_games?: true
     down_1_games_played?: true
     down_1_team_carries_all_games?: true
     down_1_team_targets_all_games?: true
     down_1_team_receptions_all_games?: true
-    down_1_team_rush_fd_all_games?: true
-    down_1_team_rec_fd_all_games?: true
-    down_1_pct_team_carries_in_played_games?: true
-    down_1_pct_team_targets_in_played_games?: true
-    down_1_pct_team_receptions_in_played_games?: true
-    down_1_pct_team_rush_fd_in_played_games?: true
-    down_1_pct_team_rec_fd_in_played_games?: true
     down_1_yards_per_pass_attempt?: true
     down_1_yards_per_completion?: true
     down_1_yards_per_carry?: true
@@ -7355,7 +5297,6 @@ export namespace Prisma {
     down_1_targets_per_game?: true
     down_1_receptions_per_game?: true
     down_1_receiving_yards_per_game?: true
-    down_1_receiving_first_downs_per_game?: true
     down_3_attempts?: true
     down_3_completions?: true
     down_3_passing_yards?: true
@@ -7365,8 +5306,6 @@ export namespace Prisma {
     down_3_passing_first_downs?: true
     down_3_carries?: true
     down_3_rushing_yards?: true
-    down_3_rushing_tds?: true
-    down_3_fumbles?: true
     down_3_rushing_first_downs?: true
     down_3_targets?: true
     down_3_receptions?: true
@@ -7471,15 +5410,11 @@ export namespace Prisma {
     green_zone_carries?: true
     HVTs?: true
     team_green_zone_carries_all_games?: true
-    total_team_RB_HVTs_all_games?: true
     team_green_zone_carries_in_played_games?: true
-    total_team_RB_HVTs_in_played_games?: true
     games_played_season?: true
     HVTs_per_game?: true
     pct_team_green_zone_carries_all_games?: true
     pct_team_green_zone_carries_in_played_games?: true
-    pct_team_RB_HVTs_all_games?: true
-    pct_team_RB_HVTs_in_played_games?: true
     total_dropbacks?: true
     pass_attempts_on_dropbacks?: true
     scrambles_on_dropbacks?: true
@@ -7488,15 +5423,6 @@ export namespace Prisma {
     scramble_rate?: true
     sack_rate?: true
     touchdown_rate?: true
-    avg_cpoe?: true
-    games_over_30_degrees?: true
-    games_below_30_degrees?: true
-    avg_fp_over_30_degrees?: true
-    avg_fp_below_30_degrees?: true
-    avg_fp_wind_below_20_mph?: true
-    avg_fp_wind_above_20_mph?: true
-    diff_fp_temp_30_degrees?: true
-    diff_fp_wind_20_mph?: true
     avg_pass_epa_deep_left?: true
     avg_pass_epa_deep_middle?: true
     avg_pass_epa_deep_right?: true
@@ -7521,37 +5447,20 @@ export namespace Prisma {
     down_1_attempts?: true
     down_1_completions?: true
     down_1_passing_yards?: true
-    down_1_passing_tds?: true
-    down_1_interceptions?: true
-    down_1_sacks_taken?: true
     down_1_passing_first_downs?: true
     down_1_carries?: true
     down_1_rushing_yards?: true
-    down_1_rushing_tds?: true
-    down_1_fumbles?: true
     down_1_rushing_first_downs?: true
     down_1_targets?: true
     down_1_receptions?: true
     down_1_receiving_yards?: true
-    down_1_receiving_tds?: true
-    down_1_receiving_first_downs?: true
-    down_1_total_first_downs?: true
     down_1_team_carries_in_played_games?: true
     down_1_team_targets_in_played_games?: true
     down_1_team_receptions_in_played_games?: true
-    down_1_team_rush_fd_in_played_games?: true
-    down_1_team_rec_fd_in_played_games?: true
     down_1_games_played?: true
     down_1_team_carries_all_games?: true
     down_1_team_targets_all_games?: true
     down_1_team_receptions_all_games?: true
-    down_1_team_rush_fd_all_games?: true
-    down_1_team_rec_fd_all_games?: true
-    down_1_pct_team_carries_in_played_games?: true
-    down_1_pct_team_targets_in_played_games?: true
-    down_1_pct_team_receptions_in_played_games?: true
-    down_1_pct_team_rush_fd_in_played_games?: true
-    down_1_pct_team_rec_fd_in_played_games?: true
     down_1_yards_per_pass_attempt?: true
     down_1_yards_per_completion?: true
     down_1_yards_per_carry?: true
@@ -7567,7 +5476,6 @@ export namespace Prisma {
     down_1_targets_per_game?: true
     down_1_receptions_per_game?: true
     down_1_receiving_yards_per_game?: true
-    down_1_receiving_first_downs_per_game?: true
     down_3_attempts?: true
     down_3_completions?: true
     down_3_passing_yards?: true
@@ -7577,8 +5485,6 @@ export namespace Prisma {
     down_3_passing_first_downs?: true
     down_3_carries?: true
     down_3_rushing_yards?: true
-    down_3_rushing_tds?: true
-    down_3_fumbles?: true
     down_3_rushing_first_downs?: true
     down_3_targets?: true
     down_3_receptions?: true
@@ -7683,15 +5589,11 @@ export namespace Prisma {
     green_zone_carries?: true
     HVTs?: true
     team_green_zone_carries_all_games?: true
-    total_team_RB_HVTs_all_games?: true
     team_green_zone_carries_in_played_games?: true
-    total_team_RB_HVTs_in_played_games?: true
     games_played_season?: true
     HVTs_per_game?: true
     pct_team_green_zone_carries_all_games?: true
     pct_team_green_zone_carries_in_played_games?: true
-    pct_team_RB_HVTs_all_games?: true
-    pct_team_RB_HVTs_in_played_games?: true
     total_dropbacks?: true
     pass_attempts_on_dropbacks?: true
     scrambles_on_dropbacks?: true
@@ -7700,15 +5602,6 @@ export namespace Prisma {
     scramble_rate?: true
     sack_rate?: true
     touchdown_rate?: true
-    avg_cpoe?: true
-    games_over_30_degrees?: true
-    games_below_30_degrees?: true
-    avg_fp_over_30_degrees?: true
-    avg_fp_below_30_degrees?: true
-    avg_fp_wind_below_20_mph?: true
-    avg_fp_wind_above_20_mph?: true
-    diff_fp_temp_30_degrees?: true
-    diff_fp_wind_20_mph?: true
     avg_pass_epa_deep_left?: true
     avg_pass_epa_deep_middle?: true
     avg_pass_epa_deep_right?: true
@@ -7733,37 +5626,20 @@ export namespace Prisma {
     down_1_attempts?: true
     down_1_completions?: true
     down_1_passing_yards?: true
-    down_1_passing_tds?: true
-    down_1_interceptions?: true
-    down_1_sacks_taken?: true
     down_1_passing_first_downs?: true
     down_1_carries?: true
     down_1_rushing_yards?: true
-    down_1_rushing_tds?: true
-    down_1_fumbles?: true
     down_1_rushing_first_downs?: true
     down_1_targets?: true
     down_1_receptions?: true
     down_1_receiving_yards?: true
-    down_1_receiving_tds?: true
-    down_1_receiving_first_downs?: true
-    down_1_total_first_downs?: true
     down_1_team_carries_in_played_games?: true
     down_1_team_targets_in_played_games?: true
     down_1_team_receptions_in_played_games?: true
-    down_1_team_rush_fd_in_played_games?: true
-    down_1_team_rec_fd_in_played_games?: true
     down_1_games_played?: true
     down_1_team_carries_all_games?: true
     down_1_team_targets_all_games?: true
     down_1_team_receptions_all_games?: true
-    down_1_team_rush_fd_all_games?: true
-    down_1_team_rec_fd_all_games?: true
-    down_1_pct_team_carries_in_played_games?: true
-    down_1_pct_team_targets_in_played_games?: true
-    down_1_pct_team_receptions_in_played_games?: true
-    down_1_pct_team_rush_fd_in_played_games?: true
-    down_1_pct_team_rec_fd_in_played_games?: true
     down_1_yards_per_pass_attempt?: true
     down_1_yards_per_completion?: true
     down_1_yards_per_carry?: true
@@ -7779,7 +5655,6 @@ export namespace Prisma {
     down_1_targets_per_game?: true
     down_1_receptions_per_game?: true
     down_1_receiving_yards_per_game?: true
-    down_1_receiving_first_downs_per_game?: true
     down_3_attempts?: true
     down_3_completions?: true
     down_3_passing_yards?: true
@@ -7789,8 +5664,6 @@ export namespace Prisma {
     down_3_passing_first_downs?: true
     down_3_carries?: true
     down_3_rushing_yards?: true
-    down_3_rushing_tds?: true
-    down_3_fumbles?: true
     down_3_rushing_first_downs?: true
     down_3_targets?: true
     down_3_receptions?: true
@@ -7895,15 +5768,11 @@ export namespace Prisma {
     green_zone_carries?: true
     HVTs?: true
     team_green_zone_carries_all_games?: true
-    total_team_RB_HVTs_all_games?: true
     team_green_zone_carries_in_played_games?: true
-    total_team_RB_HVTs_in_played_games?: true
     games_played_season?: true
     HVTs_per_game?: true
     pct_team_green_zone_carries_all_games?: true
     pct_team_green_zone_carries_in_played_games?: true
-    pct_team_RB_HVTs_all_games?: true
-    pct_team_RB_HVTs_in_played_games?: true
     total_dropbacks?: true
     pass_attempts_on_dropbacks?: true
     scrambles_on_dropbacks?: true
@@ -7912,15 +5781,6 @@ export namespace Prisma {
     scramble_rate?: true
     sack_rate?: true
     touchdown_rate?: true
-    avg_cpoe?: true
-    games_over_30_degrees?: true
-    games_below_30_degrees?: true
-    avg_fp_over_30_degrees?: true
-    avg_fp_below_30_degrees?: true
-    avg_fp_wind_below_20_mph?: true
-    avg_fp_wind_above_20_mph?: true
-    diff_fp_temp_30_degrees?: true
-    diff_fp_wind_20_mph?: true
     avg_pass_epa_deep_left?: true
     avg_pass_epa_deep_middle?: true
     avg_pass_epa_deep_right?: true
@@ -7945,37 +5805,20 @@ export namespace Prisma {
     down_1_attempts?: true
     down_1_completions?: true
     down_1_passing_yards?: true
-    down_1_passing_tds?: true
-    down_1_interceptions?: true
-    down_1_sacks_taken?: true
     down_1_passing_first_downs?: true
     down_1_carries?: true
     down_1_rushing_yards?: true
-    down_1_rushing_tds?: true
-    down_1_fumbles?: true
     down_1_rushing_first_downs?: true
     down_1_targets?: true
     down_1_receptions?: true
     down_1_receiving_yards?: true
-    down_1_receiving_tds?: true
-    down_1_receiving_first_downs?: true
-    down_1_total_first_downs?: true
     down_1_team_carries_in_played_games?: true
     down_1_team_targets_in_played_games?: true
     down_1_team_receptions_in_played_games?: true
-    down_1_team_rush_fd_in_played_games?: true
-    down_1_team_rec_fd_in_played_games?: true
     down_1_games_played?: true
     down_1_team_carries_all_games?: true
     down_1_team_targets_all_games?: true
     down_1_team_receptions_all_games?: true
-    down_1_team_rush_fd_all_games?: true
-    down_1_team_rec_fd_all_games?: true
-    down_1_pct_team_carries_in_played_games?: true
-    down_1_pct_team_targets_in_played_games?: true
-    down_1_pct_team_receptions_in_played_games?: true
-    down_1_pct_team_rush_fd_in_played_games?: true
-    down_1_pct_team_rec_fd_in_played_games?: true
     down_1_yards_per_pass_attempt?: true
     down_1_yards_per_completion?: true
     down_1_yards_per_carry?: true
@@ -7991,7 +5834,6 @@ export namespace Prisma {
     down_1_targets_per_game?: true
     down_1_receptions_per_game?: true
     down_1_receiving_yards_per_game?: true
-    down_1_receiving_first_downs_per_game?: true
     down_3_attempts?: true
     down_3_completions?: true
     down_3_passing_yards?: true
@@ -8001,8 +5843,6 @@ export namespace Prisma {
     down_3_passing_first_downs?: true
     down_3_carries?: true
     down_3_rushing_yards?: true
-    down_3_rushing_tds?: true
-    down_3_fumbles?: true
     down_3_rushing_first_downs?: true
     down_3_targets?: true
     down_3_receptions?: true
@@ -8194,15 +6034,11 @@ export namespace Prisma {
     green_zone_carries: number | null
     HVTs: number | null
     team_green_zone_carries_all_games: number | null
-    total_team_RB_HVTs_all_games: number | null
     team_green_zone_carries_in_played_games: number | null
-    total_team_RB_HVTs_in_played_games: number | null
     games_played_season: number | null
     HVTs_per_game: number | null
     pct_team_green_zone_carries_all_games: number | null
     pct_team_green_zone_carries_in_played_games: number | null
-    pct_team_RB_HVTs_all_games: number | null
-    pct_team_RB_HVTs_in_played_games: number | null
     total_dropbacks: number | null
     pass_attempts_on_dropbacks: number | null
     scrambles_on_dropbacks: number | null
@@ -8211,15 +6047,6 @@ export namespace Prisma {
     scramble_rate: number | null
     sack_rate: number | null
     touchdown_rate: number | null
-    avg_cpoe: number | null
-    games_over_30_degrees: number | null
-    games_below_30_degrees: number | null
-    avg_fp_over_30_degrees: number | null
-    avg_fp_below_30_degrees: number | null
-    avg_fp_wind_below_20_mph: number | null
-    avg_fp_wind_above_20_mph: number | null
-    diff_fp_temp_30_degrees: number | null
-    diff_fp_wind_20_mph: number | null
     avg_pass_epa_deep_left: number | null
     avg_pass_epa_deep_middle: number | null
     avg_pass_epa_deep_right: number | null
@@ -8244,37 +6071,20 @@ export namespace Prisma {
     down_1_attempts: number | null
     down_1_completions: number | null
     down_1_passing_yards: number | null
-    down_1_passing_tds: number | null
-    down_1_interceptions: number | null
-    down_1_sacks_taken: number | null
     down_1_passing_first_downs: number | null
     down_1_carries: number | null
     down_1_rushing_yards: number | null
-    down_1_rushing_tds: number | null
-    down_1_fumbles: number | null
     down_1_rushing_first_downs: number | null
     down_1_targets: number | null
     down_1_receptions: number | null
     down_1_receiving_yards: number | null
-    down_1_receiving_tds: number | null
-    down_1_receiving_first_downs: number | null
-    down_1_total_first_downs: number | null
     down_1_team_carries_in_played_games: number | null
     down_1_team_targets_in_played_games: number | null
     down_1_team_receptions_in_played_games: number | null
-    down_1_team_rush_fd_in_played_games: number | null
-    down_1_team_rec_fd_in_played_games: number | null
     down_1_games_played: number | null
     down_1_team_carries_all_games: number | null
     down_1_team_targets_all_games: number | null
     down_1_team_receptions_all_games: number | null
-    down_1_team_rush_fd_all_games: number | null
-    down_1_team_rec_fd_all_games: number | null
-    down_1_pct_team_carries_in_played_games: number | null
-    down_1_pct_team_targets_in_played_games: number | null
-    down_1_pct_team_receptions_in_played_games: number | null
-    down_1_pct_team_rush_fd_in_played_games: number | null
-    down_1_pct_team_rec_fd_in_played_games: number | null
     down_1_yards_per_pass_attempt: number | null
     down_1_yards_per_completion: number | null
     down_1_yards_per_carry: number | null
@@ -8290,7 +6100,6 @@ export namespace Prisma {
     down_1_targets_per_game: number | null
     down_1_receptions_per_game: number | null
     down_1_receiving_yards_per_game: number | null
-    down_1_receiving_first_downs_per_game: number | null
     down_3_attempts: number | null
     down_3_completions: number | null
     down_3_passing_yards: number | null
@@ -8300,8 +6109,6 @@ export namespace Prisma {
     down_3_passing_first_downs: number | null
     down_3_carries: number | null
     down_3_rushing_yards: number | null
-    down_3_rushing_tds: number | null
-    down_3_fumbles: number | null
     down_3_rushing_first_downs: number | null
     down_3_targets: number | null
     down_3_receptions: number | null
@@ -8425,15 +6232,11 @@ export namespace Prisma {
     green_zone_carries?: boolean
     HVTs?: boolean
     team_green_zone_carries_all_games?: boolean
-    total_team_RB_HVTs_all_games?: boolean
     team_green_zone_carries_in_played_games?: boolean
-    total_team_RB_HVTs_in_played_games?: boolean
     games_played_season?: boolean
     HVTs_per_game?: boolean
     pct_team_green_zone_carries_all_games?: boolean
     pct_team_green_zone_carries_in_played_games?: boolean
-    pct_team_RB_HVTs_all_games?: boolean
-    pct_team_RB_HVTs_in_played_games?: boolean
     total_dropbacks?: boolean
     pass_attempts_on_dropbacks?: boolean
     scrambles_on_dropbacks?: boolean
@@ -8442,15 +6245,6 @@ export namespace Prisma {
     scramble_rate?: boolean
     sack_rate?: boolean
     touchdown_rate?: boolean
-    avg_cpoe?: boolean
-    games_over_30_degrees?: boolean
-    games_below_30_degrees?: boolean
-    avg_fp_over_30_degrees?: boolean
-    avg_fp_below_30_degrees?: boolean
-    avg_fp_wind_below_20_mph?: boolean
-    avg_fp_wind_above_20_mph?: boolean
-    diff_fp_temp_30_degrees?: boolean
-    diff_fp_wind_20_mph?: boolean
     avg_pass_epa_deep_left?: boolean
     avg_pass_epa_deep_middle?: boolean
     avg_pass_epa_deep_right?: boolean
@@ -8475,37 +6269,20 @@ export namespace Prisma {
     down_1_attempts?: boolean
     down_1_completions?: boolean
     down_1_passing_yards?: boolean
-    down_1_passing_tds?: boolean
-    down_1_interceptions?: boolean
-    down_1_sacks_taken?: boolean
     down_1_passing_first_downs?: boolean
     down_1_carries?: boolean
     down_1_rushing_yards?: boolean
-    down_1_rushing_tds?: boolean
-    down_1_fumbles?: boolean
     down_1_rushing_first_downs?: boolean
     down_1_targets?: boolean
     down_1_receptions?: boolean
     down_1_receiving_yards?: boolean
-    down_1_receiving_tds?: boolean
-    down_1_receiving_first_downs?: boolean
-    down_1_total_first_downs?: boolean
     down_1_team_carries_in_played_games?: boolean
     down_1_team_targets_in_played_games?: boolean
     down_1_team_receptions_in_played_games?: boolean
-    down_1_team_rush_fd_in_played_games?: boolean
-    down_1_team_rec_fd_in_played_games?: boolean
     down_1_games_played?: boolean
     down_1_team_carries_all_games?: boolean
     down_1_team_targets_all_games?: boolean
     down_1_team_receptions_all_games?: boolean
-    down_1_team_rush_fd_all_games?: boolean
-    down_1_team_rec_fd_all_games?: boolean
-    down_1_pct_team_carries_in_played_games?: boolean
-    down_1_pct_team_targets_in_played_games?: boolean
-    down_1_pct_team_receptions_in_played_games?: boolean
-    down_1_pct_team_rush_fd_in_played_games?: boolean
-    down_1_pct_team_rec_fd_in_played_games?: boolean
     down_1_yards_per_pass_attempt?: boolean
     down_1_yards_per_completion?: boolean
     down_1_yards_per_carry?: boolean
@@ -8521,7 +6298,6 @@ export namespace Prisma {
     down_1_targets_per_game?: boolean
     down_1_receptions_per_game?: boolean
     down_1_receiving_yards_per_game?: boolean
-    down_1_receiving_first_downs_per_game?: boolean
     down_3_attempts?: boolean
     down_3_completions?: boolean
     down_3_passing_yards?: boolean
@@ -8531,8 +6307,6 @@ export namespace Prisma {
     down_3_passing_first_downs?: boolean
     down_3_carries?: boolean
     down_3_rushing_yards?: boolean
-    down_3_rushing_tds?: boolean
-    down_3_fumbles?: boolean
     down_3_rushing_first_downs?: boolean
     down_3_targets?: boolean
     down_3_receptions?: boolean
@@ -8637,15 +6411,11 @@ export namespace Prisma {
     green_zone_carries?: boolean
     HVTs?: boolean
     team_green_zone_carries_all_games?: boolean
-    total_team_RB_HVTs_all_games?: boolean
     team_green_zone_carries_in_played_games?: boolean
-    total_team_RB_HVTs_in_played_games?: boolean
     games_played_season?: boolean
     HVTs_per_game?: boolean
     pct_team_green_zone_carries_all_games?: boolean
     pct_team_green_zone_carries_in_played_games?: boolean
-    pct_team_RB_HVTs_all_games?: boolean
-    pct_team_RB_HVTs_in_played_games?: boolean
     total_dropbacks?: boolean
     pass_attempts_on_dropbacks?: boolean
     scrambles_on_dropbacks?: boolean
@@ -8654,15 +6424,6 @@ export namespace Prisma {
     scramble_rate?: boolean
     sack_rate?: boolean
     touchdown_rate?: boolean
-    avg_cpoe?: boolean
-    games_over_30_degrees?: boolean
-    games_below_30_degrees?: boolean
-    avg_fp_over_30_degrees?: boolean
-    avg_fp_below_30_degrees?: boolean
-    avg_fp_wind_below_20_mph?: boolean
-    avg_fp_wind_above_20_mph?: boolean
-    diff_fp_temp_30_degrees?: boolean
-    diff_fp_wind_20_mph?: boolean
     avg_pass_epa_deep_left?: boolean
     avg_pass_epa_deep_middle?: boolean
     avg_pass_epa_deep_right?: boolean
@@ -8687,37 +6448,20 @@ export namespace Prisma {
     down_1_attempts?: boolean
     down_1_completions?: boolean
     down_1_passing_yards?: boolean
-    down_1_passing_tds?: boolean
-    down_1_interceptions?: boolean
-    down_1_sacks_taken?: boolean
     down_1_passing_first_downs?: boolean
     down_1_carries?: boolean
     down_1_rushing_yards?: boolean
-    down_1_rushing_tds?: boolean
-    down_1_fumbles?: boolean
     down_1_rushing_first_downs?: boolean
     down_1_targets?: boolean
     down_1_receptions?: boolean
     down_1_receiving_yards?: boolean
-    down_1_receiving_tds?: boolean
-    down_1_receiving_first_downs?: boolean
-    down_1_total_first_downs?: boolean
     down_1_team_carries_in_played_games?: boolean
     down_1_team_targets_in_played_games?: boolean
     down_1_team_receptions_in_played_games?: boolean
-    down_1_team_rush_fd_in_played_games?: boolean
-    down_1_team_rec_fd_in_played_games?: boolean
     down_1_games_played?: boolean
     down_1_team_carries_all_games?: boolean
     down_1_team_targets_all_games?: boolean
     down_1_team_receptions_all_games?: boolean
-    down_1_team_rush_fd_all_games?: boolean
-    down_1_team_rec_fd_all_games?: boolean
-    down_1_pct_team_carries_in_played_games?: boolean
-    down_1_pct_team_targets_in_played_games?: boolean
-    down_1_pct_team_receptions_in_played_games?: boolean
-    down_1_pct_team_rush_fd_in_played_games?: boolean
-    down_1_pct_team_rec_fd_in_played_games?: boolean
     down_1_yards_per_pass_attempt?: boolean
     down_1_yards_per_completion?: boolean
     down_1_yards_per_carry?: boolean
@@ -8733,7 +6477,6 @@ export namespace Prisma {
     down_1_targets_per_game?: boolean
     down_1_receptions_per_game?: boolean
     down_1_receiving_yards_per_game?: boolean
-    down_1_receiving_first_downs_per_game?: boolean
     down_3_attempts?: boolean
     down_3_completions?: boolean
     down_3_passing_yards?: boolean
@@ -8743,8 +6486,6 @@ export namespace Prisma {
     down_3_passing_first_downs?: boolean
     down_3_carries?: boolean
     down_3_rushing_yards?: boolean
-    down_3_rushing_tds?: boolean
-    down_3_fumbles?: boolean
     down_3_rushing_first_downs?: boolean
     down_3_targets?: boolean
     down_3_receptions?: boolean
@@ -8849,15 +6590,11 @@ export namespace Prisma {
     green_zone_carries?: boolean
     HVTs?: boolean
     team_green_zone_carries_all_games?: boolean
-    total_team_RB_HVTs_all_games?: boolean
     team_green_zone_carries_in_played_games?: boolean
-    total_team_RB_HVTs_in_played_games?: boolean
     games_played_season?: boolean
     HVTs_per_game?: boolean
     pct_team_green_zone_carries_all_games?: boolean
     pct_team_green_zone_carries_in_played_games?: boolean
-    pct_team_RB_HVTs_all_games?: boolean
-    pct_team_RB_HVTs_in_played_games?: boolean
     total_dropbacks?: boolean
     pass_attempts_on_dropbacks?: boolean
     scrambles_on_dropbacks?: boolean
@@ -8866,15 +6603,6 @@ export namespace Prisma {
     scramble_rate?: boolean
     sack_rate?: boolean
     touchdown_rate?: boolean
-    avg_cpoe?: boolean
-    games_over_30_degrees?: boolean
-    games_below_30_degrees?: boolean
-    avg_fp_over_30_degrees?: boolean
-    avg_fp_below_30_degrees?: boolean
-    avg_fp_wind_below_20_mph?: boolean
-    avg_fp_wind_above_20_mph?: boolean
-    diff_fp_temp_30_degrees?: boolean
-    diff_fp_wind_20_mph?: boolean
     avg_pass_epa_deep_left?: boolean
     avg_pass_epa_deep_middle?: boolean
     avg_pass_epa_deep_right?: boolean
@@ -8899,37 +6627,20 @@ export namespace Prisma {
     down_1_attempts?: boolean
     down_1_completions?: boolean
     down_1_passing_yards?: boolean
-    down_1_passing_tds?: boolean
-    down_1_interceptions?: boolean
-    down_1_sacks_taken?: boolean
     down_1_passing_first_downs?: boolean
     down_1_carries?: boolean
     down_1_rushing_yards?: boolean
-    down_1_rushing_tds?: boolean
-    down_1_fumbles?: boolean
     down_1_rushing_first_downs?: boolean
     down_1_targets?: boolean
     down_1_receptions?: boolean
     down_1_receiving_yards?: boolean
-    down_1_receiving_tds?: boolean
-    down_1_receiving_first_downs?: boolean
-    down_1_total_first_downs?: boolean
     down_1_team_carries_in_played_games?: boolean
     down_1_team_targets_in_played_games?: boolean
     down_1_team_receptions_in_played_games?: boolean
-    down_1_team_rush_fd_in_played_games?: boolean
-    down_1_team_rec_fd_in_played_games?: boolean
     down_1_games_played?: boolean
     down_1_team_carries_all_games?: boolean
     down_1_team_targets_all_games?: boolean
     down_1_team_receptions_all_games?: boolean
-    down_1_team_rush_fd_all_games?: boolean
-    down_1_team_rec_fd_all_games?: boolean
-    down_1_pct_team_carries_in_played_games?: boolean
-    down_1_pct_team_targets_in_played_games?: boolean
-    down_1_pct_team_receptions_in_played_games?: boolean
-    down_1_pct_team_rush_fd_in_played_games?: boolean
-    down_1_pct_team_rec_fd_in_played_games?: boolean
     down_1_yards_per_pass_attempt?: boolean
     down_1_yards_per_completion?: boolean
     down_1_yards_per_carry?: boolean
@@ -8945,7 +6656,6 @@ export namespace Prisma {
     down_1_targets_per_game?: boolean
     down_1_receptions_per_game?: boolean
     down_1_receiving_yards_per_game?: boolean
-    down_1_receiving_first_downs_per_game?: boolean
     down_3_attempts?: boolean
     down_3_completions?: boolean
     down_3_passing_yards?: boolean
@@ -8955,8 +6665,6 @@ export namespace Prisma {
     down_3_passing_first_downs?: boolean
     down_3_carries?: boolean
     down_3_rushing_yards?: boolean
-    down_3_rushing_tds?: boolean
-    down_3_fumbles?: boolean
     down_3_rushing_first_downs?: boolean
     down_3_targets?: boolean
     down_3_receptions?: boolean
@@ -9061,15 +6769,11 @@ export namespace Prisma {
     green_zone_carries?: boolean
     HVTs?: boolean
     team_green_zone_carries_all_games?: boolean
-    total_team_RB_HVTs_all_games?: boolean
     team_green_zone_carries_in_played_games?: boolean
-    total_team_RB_HVTs_in_played_games?: boolean
     games_played_season?: boolean
     HVTs_per_game?: boolean
     pct_team_green_zone_carries_all_games?: boolean
     pct_team_green_zone_carries_in_played_games?: boolean
-    pct_team_RB_HVTs_all_games?: boolean
-    pct_team_RB_HVTs_in_played_games?: boolean
     total_dropbacks?: boolean
     pass_attempts_on_dropbacks?: boolean
     scrambles_on_dropbacks?: boolean
@@ -9078,15 +6782,6 @@ export namespace Prisma {
     scramble_rate?: boolean
     sack_rate?: boolean
     touchdown_rate?: boolean
-    avg_cpoe?: boolean
-    games_over_30_degrees?: boolean
-    games_below_30_degrees?: boolean
-    avg_fp_over_30_degrees?: boolean
-    avg_fp_below_30_degrees?: boolean
-    avg_fp_wind_below_20_mph?: boolean
-    avg_fp_wind_above_20_mph?: boolean
-    diff_fp_temp_30_degrees?: boolean
-    diff_fp_wind_20_mph?: boolean
     avg_pass_epa_deep_left?: boolean
     avg_pass_epa_deep_middle?: boolean
     avg_pass_epa_deep_right?: boolean
@@ -9111,37 +6806,20 @@ export namespace Prisma {
     down_1_attempts?: boolean
     down_1_completions?: boolean
     down_1_passing_yards?: boolean
-    down_1_passing_tds?: boolean
-    down_1_interceptions?: boolean
-    down_1_sacks_taken?: boolean
     down_1_passing_first_downs?: boolean
     down_1_carries?: boolean
     down_1_rushing_yards?: boolean
-    down_1_rushing_tds?: boolean
-    down_1_fumbles?: boolean
     down_1_rushing_first_downs?: boolean
     down_1_targets?: boolean
     down_1_receptions?: boolean
     down_1_receiving_yards?: boolean
-    down_1_receiving_tds?: boolean
-    down_1_receiving_first_downs?: boolean
-    down_1_total_first_downs?: boolean
     down_1_team_carries_in_played_games?: boolean
     down_1_team_targets_in_played_games?: boolean
     down_1_team_receptions_in_played_games?: boolean
-    down_1_team_rush_fd_in_played_games?: boolean
-    down_1_team_rec_fd_in_played_games?: boolean
     down_1_games_played?: boolean
     down_1_team_carries_all_games?: boolean
     down_1_team_targets_all_games?: boolean
     down_1_team_receptions_all_games?: boolean
-    down_1_team_rush_fd_all_games?: boolean
-    down_1_team_rec_fd_all_games?: boolean
-    down_1_pct_team_carries_in_played_games?: boolean
-    down_1_pct_team_targets_in_played_games?: boolean
-    down_1_pct_team_receptions_in_played_games?: boolean
-    down_1_pct_team_rush_fd_in_played_games?: boolean
-    down_1_pct_team_rec_fd_in_played_games?: boolean
     down_1_yards_per_pass_attempt?: boolean
     down_1_yards_per_completion?: boolean
     down_1_yards_per_carry?: boolean
@@ -9157,7 +6835,6 @@ export namespace Prisma {
     down_1_targets_per_game?: boolean
     down_1_receptions_per_game?: boolean
     down_1_receiving_yards_per_game?: boolean
-    down_1_receiving_first_downs_per_game?: boolean
     down_3_attempts?: boolean
     down_3_completions?: boolean
     down_3_passing_yards?: boolean
@@ -9167,8 +6844,6 @@ export namespace Prisma {
     down_3_passing_first_downs?: boolean
     down_3_carries?: boolean
     down_3_rushing_yards?: boolean
-    down_3_rushing_tds?: boolean
-    down_3_fumbles?: boolean
     down_3_rushing_first_downs?: boolean
     down_3_targets?: boolean
     down_3_receptions?: boolean
@@ -9210,7 +6885,7 @@ export namespace Prisma {
     down_3_receiving_first_downs_per_game?: boolean
   }
 
-  export type PlayerSeasonOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"player_id" | "season" | "player_name" | "team" | "position" | "games_played" | "completions_total" | "attempts_total" | "passing_yards_total" | "passing_tds_total" | "interceptions_total" | "passing_first_downs_total" | "carries_total" | "rushing_yards_total" | "rushing_tds_total" | "rushing_fumbles_total" | "rushing_fumbles_lost_total" | "rushing_first_downs_total" | "targets_total" | "receptions_total" | "receiving_yards_total" | "receiving_tds_total" | "receiving_air_yards_total" | "receiving_yards_after_catch_total" | "receiving_first_downs_total" | "fantasy_points_total" | "completions_avg" | "attempts_avg" | "passing_yards_avg" | "passing_tds_avg" | "interceptions_avg" | "passing_air_yards_avg" | "passing_yards_after_catch_avg" | "passing_first_downs_avg" | "carries_avg" | "rushing_yards_avg" | "rushing_tds_avg" | "rushing_fumbles_avg" | "rushing_fumbles_lost_avg" | "rushing_first_downs_avg" | "receptions_avg" | "targets_avg" | "receiving_yards_avg" | "receiving_tds_avg" | "receiving_air_yards_avg" | "receiving_yards_after_catch_avg" | "receiving_first_downs_avg" | "receiving_epa_avg" | "racr_avg" | "target_share_avg" | "air_yards_share_avg" | "wopr_avg" | "fantasy_points_avg" | "fantasy_points_ppr_avg" | "YPRR" | "routes" | "routes_per_game" | "TPRR" | "firstDPRR" | "green_zone_carries" | "HVTs" | "team_green_zone_carries_all_games" | "total_team_RB_HVTs_all_games" | "team_green_zone_carries_in_played_games" | "total_team_RB_HVTs_in_played_games" | "games_played_season" | "HVTs_per_game" | "pct_team_green_zone_carries_all_games" | "pct_team_green_zone_carries_in_played_games" | "pct_team_RB_HVTs_all_games" | "pct_team_RB_HVTs_in_played_games" | "total_dropbacks" | "pass_attempts_on_dropbacks" | "scrambles_on_dropbacks" | "sacks_on_dropbacks" | "pass_attempt_rate" | "scramble_rate" | "sack_rate" | "touchdown_rate" | "avg_cpoe" | "games_over_30_degrees" | "games_below_30_degrees" | "avg_fp_over_30_degrees" | "avg_fp_below_30_degrees" | "avg_fp_wind_below_20_mph" | "avg_fp_wind_above_20_mph" | "diff_fp_temp_30_degrees" | "diff_fp_wind_20_mph" | "avg_pass_epa_deep_left" | "avg_pass_epa_deep_middle" | "avg_pass_epa_deep_right" | "avg_pass_epa_short_left" | "avg_pass_epa_short_middle" | "avg_pass_epa_short_right" | "total_tackled_for_loss" | "total_rb_carries" | "pct_carries_tackled_for_loss" | "rec_avg_rec_epa_deep_left" | "rec_avg_rec_epa_deep_middle" | "rec_avg_rec_epa_deep_right" | "rec_avg_rec_epa_short_left" | "rec_avg_rec_epa_short_middle" | "rec_avg_rec_epa_short_right" | "rec_pct_targets_deep_left" | "rec_pct_targets_deep_middle" | "rec_pct_targets_deep_right" | "rec_pct_targets_short_left" | "rec_pct_targets_short_middle" | "rec_pct_targets_short_right" | "down_1_attempts" | "down_1_completions" | "down_1_passing_yards" | "down_1_passing_tds" | "down_1_interceptions" | "down_1_sacks_taken" | "down_1_passing_first_downs" | "down_1_carries" | "down_1_rushing_yards" | "down_1_rushing_tds" | "down_1_fumbles" | "down_1_rushing_first_downs" | "down_1_targets" | "down_1_receptions" | "down_1_receiving_yards" | "down_1_receiving_tds" | "down_1_receiving_first_downs" | "down_1_total_first_downs" | "down_1_team_carries_in_played_games" | "down_1_team_targets_in_played_games" | "down_1_team_receptions_in_played_games" | "down_1_team_rush_fd_in_played_games" | "down_1_team_rec_fd_in_played_games" | "down_1_games_played" | "down_1_team_carries_all_games" | "down_1_team_targets_all_games" | "down_1_team_receptions_all_games" | "down_1_team_rush_fd_all_games" | "down_1_team_rec_fd_all_games" | "down_1_pct_team_carries_in_played_games" | "down_1_pct_team_targets_in_played_games" | "down_1_pct_team_receptions_in_played_games" | "down_1_pct_team_rush_fd_in_played_games" | "down_1_pct_team_rec_fd_in_played_games" | "down_1_yards_per_pass_attempt" | "down_1_yards_per_completion" | "down_1_yards_per_carry" | "down_1_yards_per_target" | "down_1_yards_per_reception" | "down_1_pass_attempts_per_game" | "down_1_completions_per_game" | "down_1_passing_yards_per_game" | "down_1_passing_first_downs_per_game" | "down_1_carries_per_game" | "down_1_rushing_yards_per_game" | "down_1_rushing_first_downs_per_game" | "down_1_targets_per_game" | "down_1_receptions_per_game" | "down_1_receiving_yards_per_game" | "down_1_receiving_first_downs_per_game" | "down_3_attempts" | "down_3_completions" | "down_3_passing_yards" | "down_3_passing_tds" | "down_3_interceptions" | "down_3_sacks_taken" | "down_3_passing_first_downs" | "down_3_carries" | "down_3_rushing_yards" | "down_3_rushing_tds" | "down_3_fumbles" | "down_3_rushing_first_downs" | "down_3_targets" | "down_3_receptions" | "down_3_receiving_yards" | "down_3_receiving_tds" | "down_3_receiving_first_downs" | "down_3_total_first_downs" | "down_3_team_carries_in_played_games" | "down_3_team_targets_in_played_games" | "down_3_team_receptions_in_played_games" | "down_3_team_rush_fd_in_played_games" | "down_3_team_rec_fd_in_played_games" | "down_3_games_played" | "down_3_team_carries_all_games" | "down_3_team_targets_all_games" | "down_3_team_receptions_all_games" | "down_3_team_rush_fd_all_games" | "down_3_team_rec_fd_all_games" | "down_3_pct_team_carries_in_played_games" | "down_3_pct_team_targets_in_played_games" | "down_3_pct_team_receptions_in_played_games" | "down_3_pct_team_rush_fd_in_played_games" | "down_3_pct_team_rec_fd_in_played_games" | "down_3_yards_per_pass_attempt" | "down_3_yards_per_completion" | "down_3_yards_per_carry" | "down_3_yards_per_target" | "down_3_yards_per_reception" | "down_3_pass_attempts_per_game" | "down_3_completions_per_game" | "down_3_passing_yards_per_game" | "down_3_passing_first_downs_per_game" | "down_3_carries_per_game" | "down_3_rushing_yards_per_game" | "down_3_rushing_first_downs_per_game" | "down_3_targets_per_game" | "down_3_receptions_per_game" | "down_3_receiving_yards_per_game" | "down_3_receiving_first_downs_per_game", ExtArgs["result"]["playerSeason"]>
+  export type PlayerSeasonOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"player_id" | "season" | "player_name" | "team" | "position" | "games_played" | "completions_total" | "attempts_total" | "passing_yards_total" | "passing_tds_total" | "interceptions_total" | "passing_first_downs_total" | "carries_total" | "rushing_yards_total" | "rushing_tds_total" | "rushing_fumbles_total" | "rushing_fumbles_lost_total" | "rushing_first_downs_total" | "targets_total" | "receptions_total" | "receiving_yards_total" | "receiving_tds_total" | "receiving_air_yards_total" | "receiving_yards_after_catch_total" | "receiving_first_downs_total" | "fantasy_points_total" | "completions_avg" | "attempts_avg" | "passing_yards_avg" | "passing_tds_avg" | "interceptions_avg" | "passing_air_yards_avg" | "passing_yards_after_catch_avg" | "passing_first_downs_avg" | "carries_avg" | "rushing_yards_avg" | "rushing_tds_avg" | "rushing_fumbles_avg" | "rushing_fumbles_lost_avg" | "rushing_first_downs_avg" | "receptions_avg" | "targets_avg" | "receiving_yards_avg" | "receiving_tds_avg" | "receiving_air_yards_avg" | "receiving_yards_after_catch_avg" | "receiving_first_downs_avg" | "receiving_epa_avg" | "racr_avg" | "target_share_avg" | "air_yards_share_avg" | "wopr_avg" | "fantasy_points_avg" | "fantasy_points_ppr_avg" | "YPRR" | "routes" | "routes_per_game" | "TPRR" | "firstDPRR" | "green_zone_carries" | "HVTs" | "team_green_zone_carries_all_games" | "team_green_zone_carries_in_played_games" | "games_played_season" | "HVTs_per_game" | "pct_team_green_zone_carries_all_games" | "pct_team_green_zone_carries_in_played_games" | "total_dropbacks" | "pass_attempts_on_dropbacks" | "scrambles_on_dropbacks" | "sacks_on_dropbacks" | "pass_attempt_rate" | "scramble_rate" | "sack_rate" | "touchdown_rate" | "avg_pass_epa_deep_left" | "avg_pass_epa_deep_middle" | "avg_pass_epa_deep_right" | "avg_pass_epa_short_left" | "avg_pass_epa_short_middle" | "avg_pass_epa_short_right" | "total_tackled_for_loss" | "total_rb_carries" | "pct_carries_tackled_for_loss" | "rec_avg_rec_epa_deep_left" | "rec_avg_rec_epa_deep_middle" | "rec_avg_rec_epa_deep_right" | "rec_avg_rec_epa_short_left" | "rec_avg_rec_epa_short_middle" | "rec_avg_rec_epa_short_right" | "rec_pct_targets_deep_left" | "rec_pct_targets_deep_middle" | "rec_pct_targets_deep_right" | "rec_pct_targets_short_left" | "rec_pct_targets_short_middle" | "rec_pct_targets_short_right" | "down_1_attempts" | "down_1_completions" | "down_1_passing_yards" | "down_1_passing_first_downs" | "down_1_carries" | "down_1_rushing_yards" | "down_1_rushing_first_downs" | "down_1_targets" | "down_1_receptions" | "down_1_receiving_yards" | "down_1_team_carries_in_played_games" | "down_1_team_targets_in_played_games" | "down_1_team_receptions_in_played_games" | "down_1_games_played" | "down_1_team_carries_all_games" | "down_1_team_targets_all_games" | "down_1_team_receptions_all_games" | "down_1_yards_per_pass_attempt" | "down_1_yards_per_completion" | "down_1_yards_per_carry" | "down_1_yards_per_target" | "down_1_yards_per_reception" | "down_1_pass_attempts_per_game" | "down_1_completions_per_game" | "down_1_passing_yards_per_game" | "down_1_passing_first_downs_per_game" | "down_1_carries_per_game" | "down_1_rushing_yards_per_game" | "down_1_rushing_first_downs_per_game" | "down_1_targets_per_game" | "down_1_receptions_per_game" | "down_1_receiving_yards_per_game" | "down_3_attempts" | "down_3_completions" | "down_3_passing_yards" | "down_3_passing_tds" | "down_3_interceptions" | "down_3_sacks_taken" | "down_3_passing_first_downs" | "down_3_carries" | "down_3_rushing_yards" | "down_3_rushing_first_downs" | "down_3_targets" | "down_3_receptions" | "down_3_receiving_yards" | "down_3_receiving_tds" | "down_3_receiving_first_downs" | "down_3_total_first_downs" | "down_3_team_carries_in_played_games" | "down_3_team_targets_in_played_games" | "down_3_team_receptions_in_played_games" | "down_3_team_rush_fd_in_played_games" | "down_3_team_rec_fd_in_played_games" | "down_3_games_played" | "down_3_team_carries_all_games" | "down_3_team_targets_all_games" | "down_3_team_receptions_all_games" | "down_3_team_rush_fd_all_games" | "down_3_team_rec_fd_all_games" | "down_3_pct_team_carries_in_played_games" | "down_3_pct_team_targets_in_played_games" | "down_3_pct_team_receptions_in_played_games" | "down_3_pct_team_rush_fd_in_played_games" | "down_3_pct_team_rec_fd_in_played_games" | "down_3_yards_per_pass_attempt" | "down_3_yards_per_completion" | "down_3_yards_per_carry" | "down_3_yards_per_target" | "down_3_yards_per_reception" | "down_3_pass_attempts_per_game" | "down_3_completions_per_game" | "down_3_passing_yards_per_game" | "down_3_passing_first_downs_per_game" | "down_3_carries_per_game" | "down_3_rushing_yards_per_game" | "down_3_rushing_first_downs_per_game" | "down_3_targets_per_game" | "down_3_receptions_per_game" | "down_3_receiving_yards_per_game" | "down_3_receiving_first_downs_per_game", ExtArgs["result"]["playerSeason"]>
 
   export type $PlayerSeasonPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "PlayerSeason"
@@ -9278,15 +6953,11 @@ export namespace Prisma {
       green_zone_carries: number | null
       HVTs: number | null
       team_green_zone_carries_all_games: number | null
-      total_team_RB_HVTs_all_games: number | null
       team_green_zone_carries_in_played_games: number | null
-      total_team_RB_HVTs_in_played_games: number | null
       games_played_season: number | null
       HVTs_per_game: number | null
       pct_team_green_zone_carries_all_games: number | null
       pct_team_green_zone_carries_in_played_games: number | null
-      pct_team_RB_HVTs_all_games: number | null
-      pct_team_RB_HVTs_in_played_games: number | null
       total_dropbacks: number | null
       pass_attempts_on_dropbacks: number | null
       scrambles_on_dropbacks: number | null
@@ -9295,15 +6966,6 @@ export namespace Prisma {
       scramble_rate: number | null
       sack_rate: number | null
       touchdown_rate: number | null
-      avg_cpoe: number | null
-      games_over_30_degrees: number | null
-      games_below_30_degrees: number | null
-      avg_fp_over_30_degrees: number | null
-      avg_fp_below_30_degrees: number | null
-      avg_fp_wind_below_20_mph: number | null
-      avg_fp_wind_above_20_mph: number | null
-      diff_fp_temp_30_degrees: number | null
-      diff_fp_wind_20_mph: number | null
       avg_pass_epa_deep_left: number | null
       avg_pass_epa_deep_middle: number | null
       avg_pass_epa_deep_right: number | null
@@ -9328,37 +6990,20 @@ export namespace Prisma {
       down_1_attempts: number | null
       down_1_completions: number | null
       down_1_passing_yards: number | null
-      down_1_passing_tds: number | null
-      down_1_interceptions: number | null
-      down_1_sacks_taken: number | null
       down_1_passing_first_downs: number | null
       down_1_carries: number | null
       down_1_rushing_yards: number | null
-      down_1_rushing_tds: number | null
-      down_1_fumbles: number | null
       down_1_rushing_first_downs: number | null
       down_1_targets: number | null
       down_1_receptions: number | null
       down_1_receiving_yards: number | null
-      down_1_receiving_tds: number | null
-      down_1_receiving_first_downs: number | null
-      down_1_total_first_downs: number | null
       down_1_team_carries_in_played_games: number | null
       down_1_team_targets_in_played_games: number | null
       down_1_team_receptions_in_played_games: number | null
-      down_1_team_rush_fd_in_played_games: number | null
-      down_1_team_rec_fd_in_played_games: number | null
       down_1_games_played: number | null
       down_1_team_carries_all_games: number | null
       down_1_team_targets_all_games: number | null
       down_1_team_receptions_all_games: number | null
-      down_1_team_rush_fd_all_games: number | null
-      down_1_team_rec_fd_all_games: number | null
-      down_1_pct_team_carries_in_played_games: number | null
-      down_1_pct_team_targets_in_played_games: number | null
-      down_1_pct_team_receptions_in_played_games: number | null
-      down_1_pct_team_rush_fd_in_played_games: number | null
-      down_1_pct_team_rec_fd_in_played_games: number | null
       down_1_yards_per_pass_attempt: number | null
       down_1_yards_per_completion: number | null
       down_1_yards_per_carry: number | null
@@ -9374,7 +7019,6 @@ export namespace Prisma {
       down_1_targets_per_game: number | null
       down_1_receptions_per_game: number | null
       down_1_receiving_yards_per_game: number | null
-      down_1_receiving_first_downs_per_game: number | null
       down_3_attempts: number | null
       down_3_completions: number | null
       down_3_passing_yards: number | null
@@ -9384,8 +7028,6 @@ export namespace Prisma {
       down_3_passing_first_downs: number | null
       down_3_carries: number | null
       down_3_rushing_yards: number | null
-      down_3_rushing_tds: number | null
-      down_3_fumbles: number | null
       down_3_rushing_first_downs: number | null
       down_3_targets: number | null
       down_3_receptions: number | null
@@ -9910,15 +7552,11 @@ export namespace Prisma {
     readonly green_zone_carries: FieldRef<"PlayerSeason", 'Int'>
     readonly HVTs: FieldRef<"PlayerSeason", 'Int'>
     readonly team_green_zone_carries_all_games: FieldRef<"PlayerSeason", 'Int'>
-    readonly total_team_RB_HVTs_all_games: FieldRef<"PlayerSeason", 'Int'>
     readonly team_green_zone_carries_in_played_games: FieldRef<"PlayerSeason", 'Int'>
-    readonly total_team_RB_HVTs_in_played_games: FieldRef<"PlayerSeason", 'Int'>
     readonly games_played_season: FieldRef<"PlayerSeason", 'Int'>
     readonly HVTs_per_game: FieldRef<"PlayerSeason", 'Float'>
     readonly pct_team_green_zone_carries_all_games: FieldRef<"PlayerSeason", 'Float'>
     readonly pct_team_green_zone_carries_in_played_games: FieldRef<"PlayerSeason", 'Float'>
-    readonly pct_team_RB_HVTs_all_games: FieldRef<"PlayerSeason", 'Float'>
-    readonly pct_team_RB_HVTs_in_played_games: FieldRef<"PlayerSeason", 'Float'>
     readonly total_dropbacks: FieldRef<"PlayerSeason", 'Int'>
     readonly pass_attempts_on_dropbacks: FieldRef<"PlayerSeason", 'Int'>
     readonly scrambles_on_dropbacks: FieldRef<"PlayerSeason", 'Int'>
@@ -9927,15 +7565,6 @@ export namespace Prisma {
     readonly scramble_rate: FieldRef<"PlayerSeason", 'Float'>
     readonly sack_rate: FieldRef<"PlayerSeason", 'Float'>
     readonly touchdown_rate: FieldRef<"PlayerSeason", 'Float'>
-    readonly avg_cpoe: FieldRef<"PlayerSeason", 'Float'>
-    readonly games_over_30_degrees: FieldRef<"PlayerSeason", 'Int'>
-    readonly games_below_30_degrees: FieldRef<"PlayerSeason", 'Int'>
-    readonly avg_fp_over_30_degrees: FieldRef<"PlayerSeason", 'Float'>
-    readonly avg_fp_below_30_degrees: FieldRef<"PlayerSeason", 'Float'>
-    readonly avg_fp_wind_below_20_mph: FieldRef<"PlayerSeason", 'Float'>
-    readonly avg_fp_wind_above_20_mph: FieldRef<"PlayerSeason", 'Float'>
-    readonly diff_fp_temp_30_degrees: FieldRef<"PlayerSeason", 'Float'>
-    readonly diff_fp_wind_20_mph: FieldRef<"PlayerSeason", 'Float'>
     readonly avg_pass_epa_deep_left: FieldRef<"PlayerSeason", 'Float'>
     readonly avg_pass_epa_deep_middle: FieldRef<"PlayerSeason", 'Float'>
     readonly avg_pass_epa_deep_right: FieldRef<"PlayerSeason", 'Float'>
@@ -9960,37 +7589,20 @@ export namespace Prisma {
     readonly down_1_attempts: FieldRef<"PlayerSeason", 'Int'>
     readonly down_1_completions: FieldRef<"PlayerSeason", 'Int'>
     readonly down_1_passing_yards: FieldRef<"PlayerSeason", 'Float'>
-    readonly down_1_passing_tds: FieldRef<"PlayerSeason", 'Int'>
-    readonly down_1_interceptions: FieldRef<"PlayerSeason", 'Int'>
-    readonly down_1_sacks_taken: FieldRef<"PlayerSeason", 'Int'>
     readonly down_1_passing_first_downs: FieldRef<"PlayerSeason", 'Float'>
     readonly down_1_carries: FieldRef<"PlayerSeason", 'Int'>
     readonly down_1_rushing_yards: FieldRef<"PlayerSeason", 'Float'>
-    readonly down_1_rushing_tds: FieldRef<"PlayerSeason", 'Int'>
-    readonly down_1_fumbles: FieldRef<"PlayerSeason", 'Int'>
     readonly down_1_rushing_first_downs: FieldRef<"PlayerSeason", 'Float'>
     readonly down_1_targets: FieldRef<"PlayerSeason", 'Int'>
     readonly down_1_receptions: FieldRef<"PlayerSeason", 'Int'>
     readonly down_1_receiving_yards: FieldRef<"PlayerSeason", 'Float'>
-    readonly down_1_receiving_tds: FieldRef<"PlayerSeason", 'Int'>
-    readonly down_1_receiving_first_downs: FieldRef<"PlayerSeason", 'Float'>
-    readonly down_1_total_first_downs: FieldRef<"PlayerSeason", 'Int'>
     readonly down_1_team_carries_in_played_games: FieldRef<"PlayerSeason", 'Int'>
     readonly down_1_team_targets_in_played_games: FieldRef<"PlayerSeason", 'Int'>
     readonly down_1_team_receptions_in_played_games: FieldRef<"PlayerSeason", 'Int'>
-    readonly down_1_team_rush_fd_in_played_games: FieldRef<"PlayerSeason", 'Int'>
-    readonly down_1_team_rec_fd_in_played_games: FieldRef<"PlayerSeason", 'Float'>
     readonly down_1_games_played: FieldRef<"PlayerSeason", 'Int'>
     readonly down_1_team_carries_all_games: FieldRef<"PlayerSeason", 'Int'>
     readonly down_1_team_targets_all_games: FieldRef<"PlayerSeason", 'Int'>
     readonly down_1_team_receptions_all_games: FieldRef<"PlayerSeason", 'Int'>
-    readonly down_1_team_rush_fd_all_games: FieldRef<"PlayerSeason", 'Int'>
-    readonly down_1_team_rec_fd_all_games: FieldRef<"PlayerSeason", 'Int'>
-    readonly down_1_pct_team_carries_in_played_games: FieldRef<"PlayerSeason", 'Float'>
-    readonly down_1_pct_team_targets_in_played_games: FieldRef<"PlayerSeason", 'Float'>
-    readonly down_1_pct_team_receptions_in_played_games: FieldRef<"PlayerSeason", 'Float'>
-    readonly down_1_pct_team_rush_fd_in_played_games: FieldRef<"PlayerSeason", 'Float'>
-    readonly down_1_pct_team_rec_fd_in_played_games: FieldRef<"PlayerSeason", 'Float'>
     readonly down_1_yards_per_pass_attempt: FieldRef<"PlayerSeason", 'Float'>
     readonly down_1_yards_per_completion: FieldRef<"PlayerSeason", 'Float'>
     readonly down_1_yards_per_carry: FieldRef<"PlayerSeason", 'Float'>
@@ -10006,7 +7618,6 @@ export namespace Prisma {
     readonly down_1_targets_per_game: FieldRef<"PlayerSeason", 'Float'>
     readonly down_1_receptions_per_game: FieldRef<"PlayerSeason", 'Float'>
     readonly down_1_receiving_yards_per_game: FieldRef<"PlayerSeason", 'Float'>
-    readonly down_1_receiving_first_downs_per_game: FieldRef<"PlayerSeason", 'Float'>
     readonly down_3_attempts: FieldRef<"PlayerSeason", 'Int'>
     readonly down_3_completions: FieldRef<"PlayerSeason", 'Int'>
     readonly down_3_passing_yards: FieldRef<"PlayerSeason", 'Float'>
@@ -10016,8 +7627,6 @@ export namespace Prisma {
     readonly down_3_passing_first_downs: FieldRef<"PlayerSeason", 'Float'>
     readonly down_3_carries: FieldRef<"PlayerSeason", 'Int'>
     readonly down_3_rushing_yards: FieldRef<"PlayerSeason", 'Float'>
-    readonly down_3_rushing_tds: FieldRef<"PlayerSeason", 'Int'>
-    readonly down_3_fumbles: FieldRef<"PlayerSeason", 'Int'>
     readonly down_3_rushing_first_downs: FieldRef<"PlayerSeason", 'Float'>
     readonly down_3_targets: FieldRef<"PlayerSeason", 'Int'>
     readonly down_3_receptions: FieldRef<"PlayerSeason", 'Int'>
@@ -11446,7 +9055,6 @@ export namespace Prisma {
   export type TeamSeasonStatsAvgAggregateOutputType = {
     season: number | null
     team_green_zone_carries_all_games: number | null
-    total_team_RB_HVTs_all_games: number | null
     team_carries_all_games: number | null
     team_targets_all_games: number | null
     team_receptions_all_games: number | null
@@ -11457,7 +9065,6 @@ export namespace Prisma {
   export type TeamSeasonStatsSumAggregateOutputType = {
     season: number | null
     team_green_zone_carries_all_games: number | null
-    total_team_RB_HVTs_all_games: number | null
     team_carries_all_games: number | null
     team_targets_all_games: number | null
     team_receptions_all_games: number | null
@@ -11469,7 +9076,6 @@ export namespace Prisma {
     team: string | null
     season: number | null
     team_green_zone_carries_all_games: number | null
-    total_team_RB_HVTs_all_games: number | null
     team_carries_all_games: number | null
     team_targets_all_games: number | null
     team_receptions_all_games: number | null
@@ -11481,7 +9087,6 @@ export namespace Prisma {
     team: string | null
     season: number | null
     team_green_zone_carries_all_games: number | null
-    total_team_RB_HVTs_all_games: number | null
     team_carries_all_games: number | null
     team_targets_all_games: number | null
     team_receptions_all_games: number | null
@@ -11493,7 +9098,6 @@ export namespace Prisma {
     team: number
     season: number
     team_green_zone_carries_all_games: number
-    total_team_RB_HVTs_all_games: number
     team_carries_all_games: number
     team_targets_all_games: number
     team_receptions_all_games: number
@@ -11506,7 +9110,6 @@ export namespace Prisma {
   export type TeamSeasonStatsAvgAggregateInputType = {
     season?: true
     team_green_zone_carries_all_games?: true
-    total_team_RB_HVTs_all_games?: true
     team_carries_all_games?: true
     team_targets_all_games?: true
     team_receptions_all_games?: true
@@ -11517,7 +9120,6 @@ export namespace Prisma {
   export type TeamSeasonStatsSumAggregateInputType = {
     season?: true
     team_green_zone_carries_all_games?: true
-    total_team_RB_HVTs_all_games?: true
     team_carries_all_games?: true
     team_targets_all_games?: true
     team_receptions_all_games?: true
@@ -11529,7 +9131,6 @@ export namespace Prisma {
     team?: true
     season?: true
     team_green_zone_carries_all_games?: true
-    total_team_RB_HVTs_all_games?: true
     team_carries_all_games?: true
     team_targets_all_games?: true
     team_receptions_all_games?: true
@@ -11541,7 +9142,6 @@ export namespace Prisma {
     team?: true
     season?: true
     team_green_zone_carries_all_games?: true
-    total_team_RB_HVTs_all_games?: true
     team_carries_all_games?: true
     team_targets_all_games?: true
     team_receptions_all_games?: true
@@ -11553,7 +9153,6 @@ export namespace Prisma {
     team?: true
     season?: true
     team_green_zone_carries_all_games?: true
-    total_team_RB_HVTs_all_games?: true
     team_carries_all_games?: true
     team_targets_all_games?: true
     team_receptions_all_games?: true
@@ -11652,7 +9251,6 @@ export namespace Prisma {
     team: string
     season: number
     team_green_zone_carries_all_games: number | null
-    total_team_RB_HVTs_all_games: number | null
     team_carries_all_games: number | null
     team_targets_all_games: number | null
     team_receptions_all_games: number | null
@@ -11683,7 +9281,6 @@ export namespace Prisma {
     team?: boolean
     season?: boolean
     team_green_zone_carries_all_games?: boolean
-    total_team_RB_HVTs_all_games?: boolean
     team_carries_all_games?: boolean
     team_targets_all_games?: boolean
     team_receptions_all_games?: boolean
@@ -11695,7 +9292,6 @@ export namespace Prisma {
     team?: boolean
     season?: boolean
     team_green_zone_carries_all_games?: boolean
-    total_team_RB_HVTs_all_games?: boolean
     team_carries_all_games?: boolean
     team_targets_all_games?: boolean
     team_receptions_all_games?: boolean
@@ -11707,7 +9303,6 @@ export namespace Prisma {
     team?: boolean
     season?: boolean
     team_green_zone_carries_all_games?: boolean
-    total_team_RB_HVTs_all_games?: boolean
     team_carries_all_games?: boolean
     team_targets_all_games?: boolean
     team_receptions_all_games?: boolean
@@ -11719,7 +9314,6 @@ export namespace Prisma {
     team?: boolean
     season?: boolean
     team_green_zone_carries_all_games?: boolean
-    total_team_RB_HVTs_all_games?: boolean
     team_carries_all_games?: boolean
     team_targets_all_games?: boolean
     team_receptions_all_games?: boolean
@@ -11727,7 +9321,7 @@ export namespace Prisma {
     team_rec_fd_all_games?: boolean
   }
 
-  export type TeamSeasonStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"team" | "season" | "team_green_zone_carries_all_games" | "total_team_RB_HVTs_all_games" | "team_carries_all_games" | "team_targets_all_games" | "team_receptions_all_games" | "team_rush_fd_all_games" | "team_rec_fd_all_games", ExtArgs["result"]["teamSeasonStats"]>
+  export type TeamSeasonStatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"team" | "season" | "team_green_zone_carries_all_games" | "team_carries_all_games" | "team_targets_all_games" | "team_receptions_all_games" | "team_rush_fd_all_games" | "team_rec_fd_all_games", ExtArgs["result"]["teamSeasonStats"]>
 
   export type $TeamSeasonStatsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "TeamSeasonStats"
@@ -11736,7 +9330,6 @@ export namespace Prisma {
       team: string
       season: number
       team_green_zone_carries_all_games: number | null
-      total_team_RB_HVTs_all_games: number | null
       team_carries_all_games: number | null
       team_targets_all_games: number | null
       team_receptions_all_games: number | null
@@ -12168,7 +9761,6 @@ export namespace Prisma {
     readonly team: FieldRef<"TeamSeasonStats", 'String'>
     readonly season: FieldRef<"TeamSeasonStats", 'Int'>
     readonly team_green_zone_carries_all_games: FieldRef<"TeamSeasonStats", 'Int'>
-    readonly total_team_RB_HVTs_all_games: FieldRef<"TeamSeasonStats", 'Int'>
     readonly team_carries_all_games: FieldRef<"TeamSeasonStats", 'Int'>
     readonly team_targets_all_games: FieldRef<"TeamSeasonStats", 'Int'>
     readonly team_receptions_all_games: FieldRef<"TeamSeasonStats", 'Int'>
@@ -12625,59 +10217,6 @@ export namespace Prisma {
   export type PlayerStatScalarFieldEnum = (typeof PlayerStatScalarFieldEnum)[keyof typeof PlayerStatScalarFieldEnum]
 
 
-  export const ReceivingStatScalarFieldEnum: {
-    id: 'id',
-    player: 'player',
-    playerId: 'playerId',
-    position: 'position',
-    teamName: 'teamName',
-    playerGameCount: 'playerGameCount',
-    avgDepthOfTarget: 'avgDepthOfTarget',
-    avoidedTackles: 'avoidedTackles',
-    caughtPercent: 'caughtPercent',
-    contestedCatchRate: 'contestedCatchRate',
-    contestedReceptions: 'contestedReceptions',
-    contestedTargets: 'contestedTargets',
-    declinedPenalties: 'declinedPenalties',
-    dropRate: 'dropRate',
-    drops: 'drops',
-    firstDowns: 'firstDowns',
-    franchiseId: 'franchiseId',
-    fumbles: 'fumbles',
-    gradesHandsDrop: 'gradesHandsDrop',
-    gradesHandsFumble: 'gradesHandsFumble',
-    gradesOffense: 'gradesOffense',
-    gradesPassBlock: 'gradesPassBlock',
-    gradesPassRoute: 'gradesPassRoute',
-    inlineRate: 'inlineRate',
-    inlineSnaps: 'inlineSnaps',
-    interceptions: 'interceptions',
-    longest: 'longest',
-    passBlockRate: 'passBlockRate',
-    passBlocks: 'passBlocks',
-    passPlays: 'passPlays',
-    penalties: 'penalties',
-    receptions: 'receptions',
-    routeRate: 'routeRate',
-    routes: 'routes',
-    slotRate: 'slotRate',
-    slotSnaps: 'slotSnaps',
-    targetedQbRating: 'targetedQbRating',
-    targets: 'targets',
-    touchdowns: 'touchdowns',
-    wideRate: 'wideRate',
-    wideSnaps: 'wideSnaps',
-    yards: 'yards',
-    yardsAfterCatch: 'yardsAfterCatch',
-    yardsAfterCatchPerReception: 'yardsAfterCatchPerReception',
-    yardsPerReception: 'yardsPerReception',
-    yprr: 'yprr',
-    season: 'season'
-  };
-
-  export type ReceivingStatScalarFieldEnum = (typeof ReceivingStatScalarFieldEnum)[keyof typeof ReceivingStatScalarFieldEnum]
-
-
   export const PlayerSeasonScalarFieldEnum: {
     player_id: 'player_id',
     season: 'season',
@@ -12741,15 +10280,11 @@ export namespace Prisma {
     green_zone_carries: 'green_zone_carries',
     HVTs: 'HVTs',
     team_green_zone_carries_all_games: 'team_green_zone_carries_all_games',
-    total_team_RB_HVTs_all_games: 'total_team_RB_HVTs_all_games',
     team_green_zone_carries_in_played_games: 'team_green_zone_carries_in_played_games',
-    total_team_RB_HVTs_in_played_games: 'total_team_RB_HVTs_in_played_games',
     games_played_season: 'games_played_season',
     HVTs_per_game: 'HVTs_per_game',
     pct_team_green_zone_carries_all_games: 'pct_team_green_zone_carries_all_games',
     pct_team_green_zone_carries_in_played_games: 'pct_team_green_zone_carries_in_played_games',
-    pct_team_RB_HVTs_all_games: 'pct_team_RB_HVTs_all_games',
-    pct_team_RB_HVTs_in_played_games: 'pct_team_RB_HVTs_in_played_games',
     total_dropbacks: 'total_dropbacks',
     pass_attempts_on_dropbacks: 'pass_attempts_on_dropbacks',
     scrambles_on_dropbacks: 'scrambles_on_dropbacks',
@@ -12758,15 +10293,6 @@ export namespace Prisma {
     scramble_rate: 'scramble_rate',
     sack_rate: 'sack_rate',
     touchdown_rate: 'touchdown_rate',
-    avg_cpoe: 'avg_cpoe',
-    games_over_30_degrees: 'games_over_30_degrees',
-    games_below_30_degrees: 'games_below_30_degrees',
-    avg_fp_over_30_degrees: 'avg_fp_over_30_degrees',
-    avg_fp_below_30_degrees: 'avg_fp_below_30_degrees',
-    avg_fp_wind_below_20_mph: 'avg_fp_wind_below_20_mph',
-    avg_fp_wind_above_20_mph: 'avg_fp_wind_above_20_mph',
-    diff_fp_temp_30_degrees: 'diff_fp_temp_30_degrees',
-    diff_fp_wind_20_mph: 'diff_fp_wind_20_mph',
     avg_pass_epa_deep_left: 'avg_pass_epa_deep_left',
     avg_pass_epa_deep_middle: 'avg_pass_epa_deep_middle',
     avg_pass_epa_deep_right: 'avg_pass_epa_deep_right',
@@ -12791,37 +10317,20 @@ export namespace Prisma {
     down_1_attempts: 'down_1_attempts',
     down_1_completions: 'down_1_completions',
     down_1_passing_yards: 'down_1_passing_yards',
-    down_1_passing_tds: 'down_1_passing_tds',
-    down_1_interceptions: 'down_1_interceptions',
-    down_1_sacks_taken: 'down_1_sacks_taken',
     down_1_passing_first_downs: 'down_1_passing_first_downs',
     down_1_carries: 'down_1_carries',
     down_1_rushing_yards: 'down_1_rushing_yards',
-    down_1_rushing_tds: 'down_1_rushing_tds',
-    down_1_fumbles: 'down_1_fumbles',
     down_1_rushing_first_downs: 'down_1_rushing_first_downs',
     down_1_targets: 'down_1_targets',
     down_1_receptions: 'down_1_receptions',
     down_1_receiving_yards: 'down_1_receiving_yards',
-    down_1_receiving_tds: 'down_1_receiving_tds',
-    down_1_receiving_first_downs: 'down_1_receiving_first_downs',
-    down_1_total_first_downs: 'down_1_total_first_downs',
     down_1_team_carries_in_played_games: 'down_1_team_carries_in_played_games',
     down_1_team_targets_in_played_games: 'down_1_team_targets_in_played_games',
     down_1_team_receptions_in_played_games: 'down_1_team_receptions_in_played_games',
-    down_1_team_rush_fd_in_played_games: 'down_1_team_rush_fd_in_played_games',
-    down_1_team_rec_fd_in_played_games: 'down_1_team_rec_fd_in_played_games',
     down_1_games_played: 'down_1_games_played',
     down_1_team_carries_all_games: 'down_1_team_carries_all_games',
     down_1_team_targets_all_games: 'down_1_team_targets_all_games',
     down_1_team_receptions_all_games: 'down_1_team_receptions_all_games',
-    down_1_team_rush_fd_all_games: 'down_1_team_rush_fd_all_games',
-    down_1_team_rec_fd_all_games: 'down_1_team_rec_fd_all_games',
-    down_1_pct_team_carries_in_played_games: 'down_1_pct_team_carries_in_played_games',
-    down_1_pct_team_targets_in_played_games: 'down_1_pct_team_targets_in_played_games',
-    down_1_pct_team_receptions_in_played_games: 'down_1_pct_team_receptions_in_played_games',
-    down_1_pct_team_rush_fd_in_played_games: 'down_1_pct_team_rush_fd_in_played_games',
-    down_1_pct_team_rec_fd_in_played_games: 'down_1_pct_team_rec_fd_in_played_games',
     down_1_yards_per_pass_attempt: 'down_1_yards_per_pass_attempt',
     down_1_yards_per_completion: 'down_1_yards_per_completion',
     down_1_yards_per_carry: 'down_1_yards_per_carry',
@@ -12837,7 +10346,6 @@ export namespace Prisma {
     down_1_targets_per_game: 'down_1_targets_per_game',
     down_1_receptions_per_game: 'down_1_receptions_per_game',
     down_1_receiving_yards_per_game: 'down_1_receiving_yards_per_game',
-    down_1_receiving_first_downs_per_game: 'down_1_receiving_first_downs_per_game',
     down_3_attempts: 'down_3_attempts',
     down_3_completions: 'down_3_completions',
     down_3_passing_yards: 'down_3_passing_yards',
@@ -12847,8 +10355,6 @@ export namespace Prisma {
     down_3_passing_first_downs: 'down_3_passing_first_downs',
     down_3_carries: 'down_3_carries',
     down_3_rushing_yards: 'down_3_rushing_yards',
-    down_3_rushing_tds: 'down_3_rushing_tds',
-    down_3_fumbles: 'down_3_fumbles',
     down_3_rushing_first_downs: 'down_3_rushing_first_downs',
     down_3_targets: 'down_3_targets',
     down_3_receptions: 'down_3_receptions',
@@ -12909,7 +10415,6 @@ export namespace Prisma {
     team: 'team',
     season: 'season',
     team_green_zone_carries_all_games: 'team_green_zone_carries_all_games',
-    total_team_RB_HVTs_all_games: 'total_team_RB_HVTs_all_games',
     team_carries_all_games: 'team_carries_all_games',
     team_targets_all_games: 'team_targets_all_games',
     team_receptions_all_games: 'team_receptions_all_games',
@@ -13399,270 +10904,6 @@ export namespace Prisma {
     fantasyPointsPpr?: FloatNullableWithAggregatesFilter<"PlayerStat"> | number | null
   }
 
-  export type ReceivingStatWhereInput = {
-    AND?: ReceivingStatWhereInput | ReceivingStatWhereInput[]
-    OR?: ReceivingStatWhereInput[]
-    NOT?: ReceivingStatWhereInput | ReceivingStatWhereInput[]
-    id?: StringFilter<"ReceivingStat"> | string
-    player?: StringNullableFilter<"ReceivingStat"> | string | null
-    playerId?: StringNullableFilter<"ReceivingStat"> | string | null
-    position?: StringNullableFilter<"ReceivingStat"> | string | null
-    teamName?: StringNullableFilter<"ReceivingStat"> | string | null
-    playerGameCount?: IntNullableFilter<"ReceivingStat"> | number | null
-    avgDepthOfTarget?: FloatNullableFilter<"ReceivingStat"> | number | null
-    avoidedTackles?: IntNullableFilter<"ReceivingStat"> | number | null
-    caughtPercent?: FloatNullableFilter<"ReceivingStat"> | number | null
-    contestedCatchRate?: FloatNullableFilter<"ReceivingStat"> | number | null
-    contestedReceptions?: IntNullableFilter<"ReceivingStat"> | number | null
-    contestedTargets?: IntNullableFilter<"ReceivingStat"> | number | null
-    declinedPenalties?: IntNullableFilter<"ReceivingStat"> | number | null
-    dropRate?: FloatNullableFilter<"ReceivingStat"> | number | null
-    drops?: IntNullableFilter<"ReceivingStat"> | number | null
-    firstDowns?: IntNullableFilter<"ReceivingStat"> | number | null
-    franchiseId?: IntNullableFilter<"ReceivingStat"> | number | null
-    fumbles?: IntNullableFilter<"ReceivingStat"> | number | null
-    gradesHandsDrop?: FloatNullableFilter<"ReceivingStat"> | number | null
-    gradesHandsFumble?: FloatNullableFilter<"ReceivingStat"> | number | null
-    gradesOffense?: FloatNullableFilter<"ReceivingStat"> | number | null
-    gradesPassBlock?: FloatNullableFilter<"ReceivingStat"> | number | null
-    gradesPassRoute?: FloatNullableFilter<"ReceivingStat"> | number | null
-    inlineRate?: FloatNullableFilter<"ReceivingStat"> | number | null
-    inlineSnaps?: IntNullableFilter<"ReceivingStat"> | number | null
-    interceptions?: IntNullableFilter<"ReceivingStat"> | number | null
-    longest?: IntNullableFilter<"ReceivingStat"> | number | null
-    passBlockRate?: FloatNullableFilter<"ReceivingStat"> | number | null
-    passBlocks?: IntNullableFilter<"ReceivingStat"> | number | null
-    passPlays?: IntNullableFilter<"ReceivingStat"> | number | null
-    penalties?: IntNullableFilter<"ReceivingStat"> | number | null
-    receptions?: IntNullableFilter<"ReceivingStat"> | number | null
-    routeRate?: FloatNullableFilter<"ReceivingStat"> | number | null
-    routes?: IntNullableFilter<"ReceivingStat"> | number | null
-    slotRate?: FloatNullableFilter<"ReceivingStat"> | number | null
-    slotSnaps?: IntNullableFilter<"ReceivingStat"> | number | null
-    targetedQbRating?: FloatNullableFilter<"ReceivingStat"> | number | null
-    targets?: IntNullableFilter<"ReceivingStat"> | number | null
-    touchdowns?: IntNullableFilter<"ReceivingStat"> | number | null
-    wideRate?: FloatNullableFilter<"ReceivingStat"> | number | null
-    wideSnaps?: IntNullableFilter<"ReceivingStat"> | number | null
-    yards?: IntNullableFilter<"ReceivingStat"> | number | null
-    yardsAfterCatch?: IntNullableFilter<"ReceivingStat"> | number | null
-    yardsAfterCatchPerReception?: FloatNullableFilter<"ReceivingStat"> | number | null
-    yardsPerReception?: FloatNullableFilter<"ReceivingStat"> | number | null
-    yprr?: FloatNullableFilter<"ReceivingStat"> | number | null
-    season?: IntNullableFilter<"ReceivingStat"> | number | null
-  }
-
-  export type ReceivingStatOrderByWithRelationInput = {
-    id?: SortOrder
-    player?: SortOrderInput | SortOrder
-    playerId?: SortOrderInput | SortOrder
-    position?: SortOrderInput | SortOrder
-    teamName?: SortOrderInput | SortOrder
-    playerGameCount?: SortOrderInput | SortOrder
-    avgDepthOfTarget?: SortOrderInput | SortOrder
-    avoidedTackles?: SortOrderInput | SortOrder
-    caughtPercent?: SortOrderInput | SortOrder
-    contestedCatchRate?: SortOrderInput | SortOrder
-    contestedReceptions?: SortOrderInput | SortOrder
-    contestedTargets?: SortOrderInput | SortOrder
-    declinedPenalties?: SortOrderInput | SortOrder
-    dropRate?: SortOrderInput | SortOrder
-    drops?: SortOrderInput | SortOrder
-    firstDowns?: SortOrderInput | SortOrder
-    franchiseId?: SortOrderInput | SortOrder
-    fumbles?: SortOrderInput | SortOrder
-    gradesHandsDrop?: SortOrderInput | SortOrder
-    gradesHandsFumble?: SortOrderInput | SortOrder
-    gradesOffense?: SortOrderInput | SortOrder
-    gradesPassBlock?: SortOrderInput | SortOrder
-    gradesPassRoute?: SortOrderInput | SortOrder
-    inlineRate?: SortOrderInput | SortOrder
-    inlineSnaps?: SortOrderInput | SortOrder
-    interceptions?: SortOrderInput | SortOrder
-    longest?: SortOrderInput | SortOrder
-    passBlockRate?: SortOrderInput | SortOrder
-    passBlocks?: SortOrderInput | SortOrder
-    passPlays?: SortOrderInput | SortOrder
-    penalties?: SortOrderInput | SortOrder
-    receptions?: SortOrderInput | SortOrder
-    routeRate?: SortOrderInput | SortOrder
-    routes?: SortOrderInput | SortOrder
-    slotRate?: SortOrderInput | SortOrder
-    slotSnaps?: SortOrderInput | SortOrder
-    targetedQbRating?: SortOrderInput | SortOrder
-    targets?: SortOrderInput | SortOrder
-    touchdowns?: SortOrderInput | SortOrder
-    wideRate?: SortOrderInput | SortOrder
-    wideSnaps?: SortOrderInput | SortOrder
-    yards?: SortOrderInput | SortOrder
-    yardsAfterCatch?: SortOrderInput | SortOrder
-    yardsAfterCatchPerReception?: SortOrderInput | SortOrder
-    yardsPerReception?: SortOrderInput | SortOrder
-    yprr?: SortOrderInput | SortOrder
-    season?: SortOrderInput | SortOrder
-  }
-
-  export type ReceivingStatWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: ReceivingStatWhereInput | ReceivingStatWhereInput[]
-    OR?: ReceivingStatWhereInput[]
-    NOT?: ReceivingStatWhereInput | ReceivingStatWhereInput[]
-    player?: StringNullableFilter<"ReceivingStat"> | string | null
-    playerId?: StringNullableFilter<"ReceivingStat"> | string | null
-    position?: StringNullableFilter<"ReceivingStat"> | string | null
-    teamName?: StringNullableFilter<"ReceivingStat"> | string | null
-    playerGameCount?: IntNullableFilter<"ReceivingStat"> | number | null
-    avgDepthOfTarget?: FloatNullableFilter<"ReceivingStat"> | number | null
-    avoidedTackles?: IntNullableFilter<"ReceivingStat"> | number | null
-    caughtPercent?: FloatNullableFilter<"ReceivingStat"> | number | null
-    contestedCatchRate?: FloatNullableFilter<"ReceivingStat"> | number | null
-    contestedReceptions?: IntNullableFilter<"ReceivingStat"> | number | null
-    contestedTargets?: IntNullableFilter<"ReceivingStat"> | number | null
-    declinedPenalties?: IntNullableFilter<"ReceivingStat"> | number | null
-    dropRate?: FloatNullableFilter<"ReceivingStat"> | number | null
-    drops?: IntNullableFilter<"ReceivingStat"> | number | null
-    firstDowns?: IntNullableFilter<"ReceivingStat"> | number | null
-    franchiseId?: IntNullableFilter<"ReceivingStat"> | number | null
-    fumbles?: IntNullableFilter<"ReceivingStat"> | number | null
-    gradesHandsDrop?: FloatNullableFilter<"ReceivingStat"> | number | null
-    gradesHandsFumble?: FloatNullableFilter<"ReceivingStat"> | number | null
-    gradesOffense?: FloatNullableFilter<"ReceivingStat"> | number | null
-    gradesPassBlock?: FloatNullableFilter<"ReceivingStat"> | number | null
-    gradesPassRoute?: FloatNullableFilter<"ReceivingStat"> | number | null
-    inlineRate?: FloatNullableFilter<"ReceivingStat"> | number | null
-    inlineSnaps?: IntNullableFilter<"ReceivingStat"> | number | null
-    interceptions?: IntNullableFilter<"ReceivingStat"> | number | null
-    longest?: IntNullableFilter<"ReceivingStat"> | number | null
-    passBlockRate?: FloatNullableFilter<"ReceivingStat"> | number | null
-    passBlocks?: IntNullableFilter<"ReceivingStat"> | number | null
-    passPlays?: IntNullableFilter<"ReceivingStat"> | number | null
-    penalties?: IntNullableFilter<"ReceivingStat"> | number | null
-    receptions?: IntNullableFilter<"ReceivingStat"> | number | null
-    routeRate?: FloatNullableFilter<"ReceivingStat"> | number | null
-    routes?: IntNullableFilter<"ReceivingStat"> | number | null
-    slotRate?: FloatNullableFilter<"ReceivingStat"> | number | null
-    slotSnaps?: IntNullableFilter<"ReceivingStat"> | number | null
-    targetedQbRating?: FloatNullableFilter<"ReceivingStat"> | number | null
-    targets?: IntNullableFilter<"ReceivingStat"> | number | null
-    touchdowns?: IntNullableFilter<"ReceivingStat"> | number | null
-    wideRate?: FloatNullableFilter<"ReceivingStat"> | number | null
-    wideSnaps?: IntNullableFilter<"ReceivingStat"> | number | null
-    yards?: IntNullableFilter<"ReceivingStat"> | number | null
-    yardsAfterCatch?: IntNullableFilter<"ReceivingStat"> | number | null
-    yardsAfterCatchPerReception?: FloatNullableFilter<"ReceivingStat"> | number | null
-    yardsPerReception?: FloatNullableFilter<"ReceivingStat"> | number | null
-    yprr?: FloatNullableFilter<"ReceivingStat"> | number | null
-    season?: IntNullableFilter<"ReceivingStat"> | number | null
-  }, "id">
-
-  export type ReceivingStatOrderByWithAggregationInput = {
-    id?: SortOrder
-    player?: SortOrderInput | SortOrder
-    playerId?: SortOrderInput | SortOrder
-    position?: SortOrderInput | SortOrder
-    teamName?: SortOrderInput | SortOrder
-    playerGameCount?: SortOrderInput | SortOrder
-    avgDepthOfTarget?: SortOrderInput | SortOrder
-    avoidedTackles?: SortOrderInput | SortOrder
-    caughtPercent?: SortOrderInput | SortOrder
-    contestedCatchRate?: SortOrderInput | SortOrder
-    contestedReceptions?: SortOrderInput | SortOrder
-    contestedTargets?: SortOrderInput | SortOrder
-    declinedPenalties?: SortOrderInput | SortOrder
-    dropRate?: SortOrderInput | SortOrder
-    drops?: SortOrderInput | SortOrder
-    firstDowns?: SortOrderInput | SortOrder
-    franchiseId?: SortOrderInput | SortOrder
-    fumbles?: SortOrderInput | SortOrder
-    gradesHandsDrop?: SortOrderInput | SortOrder
-    gradesHandsFumble?: SortOrderInput | SortOrder
-    gradesOffense?: SortOrderInput | SortOrder
-    gradesPassBlock?: SortOrderInput | SortOrder
-    gradesPassRoute?: SortOrderInput | SortOrder
-    inlineRate?: SortOrderInput | SortOrder
-    inlineSnaps?: SortOrderInput | SortOrder
-    interceptions?: SortOrderInput | SortOrder
-    longest?: SortOrderInput | SortOrder
-    passBlockRate?: SortOrderInput | SortOrder
-    passBlocks?: SortOrderInput | SortOrder
-    passPlays?: SortOrderInput | SortOrder
-    penalties?: SortOrderInput | SortOrder
-    receptions?: SortOrderInput | SortOrder
-    routeRate?: SortOrderInput | SortOrder
-    routes?: SortOrderInput | SortOrder
-    slotRate?: SortOrderInput | SortOrder
-    slotSnaps?: SortOrderInput | SortOrder
-    targetedQbRating?: SortOrderInput | SortOrder
-    targets?: SortOrderInput | SortOrder
-    touchdowns?: SortOrderInput | SortOrder
-    wideRate?: SortOrderInput | SortOrder
-    wideSnaps?: SortOrderInput | SortOrder
-    yards?: SortOrderInput | SortOrder
-    yardsAfterCatch?: SortOrderInput | SortOrder
-    yardsAfterCatchPerReception?: SortOrderInput | SortOrder
-    yardsPerReception?: SortOrderInput | SortOrder
-    yprr?: SortOrderInput | SortOrder
-    season?: SortOrderInput | SortOrder
-    _count?: ReceivingStatCountOrderByAggregateInput
-    _avg?: ReceivingStatAvgOrderByAggregateInput
-    _max?: ReceivingStatMaxOrderByAggregateInput
-    _min?: ReceivingStatMinOrderByAggregateInput
-    _sum?: ReceivingStatSumOrderByAggregateInput
-  }
-
-  export type ReceivingStatScalarWhereWithAggregatesInput = {
-    AND?: ReceivingStatScalarWhereWithAggregatesInput | ReceivingStatScalarWhereWithAggregatesInput[]
-    OR?: ReceivingStatScalarWhereWithAggregatesInput[]
-    NOT?: ReceivingStatScalarWhereWithAggregatesInput | ReceivingStatScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"ReceivingStat"> | string
-    player?: StringNullableWithAggregatesFilter<"ReceivingStat"> | string | null
-    playerId?: StringNullableWithAggregatesFilter<"ReceivingStat"> | string | null
-    position?: StringNullableWithAggregatesFilter<"ReceivingStat"> | string | null
-    teamName?: StringNullableWithAggregatesFilter<"ReceivingStat"> | string | null
-    playerGameCount?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    avgDepthOfTarget?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    avoidedTackles?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    caughtPercent?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    contestedCatchRate?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    contestedReceptions?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    contestedTargets?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    declinedPenalties?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    dropRate?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    drops?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    firstDowns?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    franchiseId?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    fumbles?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    gradesHandsDrop?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    gradesHandsFumble?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    gradesOffense?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    gradesPassBlock?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    gradesPassRoute?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    inlineRate?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    inlineSnaps?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    interceptions?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    longest?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    passBlockRate?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    passBlocks?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    passPlays?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    penalties?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    receptions?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    routeRate?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    routes?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    slotRate?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    slotSnaps?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    targetedQbRating?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    targets?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    touchdowns?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    wideRate?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    wideSnaps?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    yards?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    yardsAfterCatch?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    yardsAfterCatchPerReception?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    yardsPerReception?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    yprr?: FloatNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-    season?: IntNullableWithAggregatesFilter<"ReceivingStat"> | number | null
-  }
-
   export type PlayerSeasonWhereInput = {
     AND?: PlayerSeasonWhereInput | PlayerSeasonWhereInput[]
     OR?: PlayerSeasonWhereInput[]
@@ -13729,15 +10970,11 @@ export namespace Prisma {
     green_zone_carries?: IntNullableFilter<"PlayerSeason"> | number | null
     HVTs?: IntNullableFilter<"PlayerSeason"> | number | null
     team_green_zone_carries_all_games?: IntNullableFilter<"PlayerSeason"> | number | null
-    total_team_RB_HVTs_all_games?: IntNullableFilter<"PlayerSeason"> | number | null
     team_green_zone_carries_in_played_games?: IntNullableFilter<"PlayerSeason"> | number | null
-    total_team_RB_HVTs_in_played_games?: IntNullableFilter<"PlayerSeason"> | number | null
     games_played_season?: IntNullableFilter<"PlayerSeason"> | number | null
     HVTs_per_game?: FloatNullableFilter<"PlayerSeason"> | number | null
     pct_team_green_zone_carries_all_games?: FloatNullableFilter<"PlayerSeason"> | number | null
     pct_team_green_zone_carries_in_played_games?: FloatNullableFilter<"PlayerSeason"> | number | null
-    pct_team_RB_HVTs_all_games?: FloatNullableFilter<"PlayerSeason"> | number | null
-    pct_team_RB_HVTs_in_played_games?: FloatNullableFilter<"PlayerSeason"> | number | null
     total_dropbacks?: IntNullableFilter<"PlayerSeason"> | number | null
     pass_attempts_on_dropbacks?: IntNullableFilter<"PlayerSeason"> | number | null
     scrambles_on_dropbacks?: IntNullableFilter<"PlayerSeason"> | number | null
@@ -13746,15 +10983,6 @@ export namespace Prisma {
     scramble_rate?: FloatNullableFilter<"PlayerSeason"> | number | null
     sack_rate?: FloatNullableFilter<"PlayerSeason"> | number | null
     touchdown_rate?: FloatNullableFilter<"PlayerSeason"> | number | null
-    avg_cpoe?: FloatNullableFilter<"PlayerSeason"> | number | null
-    games_over_30_degrees?: IntNullableFilter<"PlayerSeason"> | number | null
-    games_below_30_degrees?: IntNullableFilter<"PlayerSeason"> | number | null
-    avg_fp_over_30_degrees?: FloatNullableFilter<"PlayerSeason"> | number | null
-    avg_fp_below_30_degrees?: FloatNullableFilter<"PlayerSeason"> | number | null
-    avg_fp_wind_below_20_mph?: FloatNullableFilter<"PlayerSeason"> | number | null
-    avg_fp_wind_above_20_mph?: FloatNullableFilter<"PlayerSeason"> | number | null
-    diff_fp_temp_30_degrees?: FloatNullableFilter<"PlayerSeason"> | number | null
-    diff_fp_wind_20_mph?: FloatNullableFilter<"PlayerSeason"> | number | null
     avg_pass_epa_deep_left?: FloatNullableFilter<"PlayerSeason"> | number | null
     avg_pass_epa_deep_middle?: FloatNullableFilter<"PlayerSeason"> | number | null
     avg_pass_epa_deep_right?: FloatNullableFilter<"PlayerSeason"> | number | null
@@ -13779,37 +11007,20 @@ export namespace Prisma {
     down_1_attempts?: IntNullableFilter<"PlayerSeason"> | number | null
     down_1_completions?: IntNullableFilter<"PlayerSeason"> | number | null
     down_1_passing_yards?: FloatNullableFilter<"PlayerSeason"> | number | null
-    down_1_passing_tds?: IntNullableFilter<"PlayerSeason"> | number | null
-    down_1_interceptions?: IntNullableFilter<"PlayerSeason"> | number | null
-    down_1_sacks_taken?: IntNullableFilter<"PlayerSeason"> | number | null
     down_1_passing_first_downs?: FloatNullableFilter<"PlayerSeason"> | number | null
     down_1_carries?: IntNullableFilter<"PlayerSeason"> | number | null
     down_1_rushing_yards?: FloatNullableFilter<"PlayerSeason"> | number | null
-    down_1_rushing_tds?: IntNullableFilter<"PlayerSeason"> | number | null
-    down_1_fumbles?: IntNullableFilter<"PlayerSeason"> | number | null
     down_1_rushing_first_downs?: FloatNullableFilter<"PlayerSeason"> | number | null
     down_1_targets?: IntNullableFilter<"PlayerSeason"> | number | null
     down_1_receptions?: IntNullableFilter<"PlayerSeason"> | number | null
     down_1_receiving_yards?: FloatNullableFilter<"PlayerSeason"> | number | null
-    down_1_receiving_tds?: IntNullableFilter<"PlayerSeason"> | number | null
-    down_1_receiving_first_downs?: FloatNullableFilter<"PlayerSeason"> | number | null
-    down_1_total_first_downs?: IntNullableFilter<"PlayerSeason"> | number | null
     down_1_team_carries_in_played_games?: IntNullableFilter<"PlayerSeason"> | number | null
     down_1_team_targets_in_played_games?: IntNullableFilter<"PlayerSeason"> | number | null
     down_1_team_receptions_in_played_games?: IntNullableFilter<"PlayerSeason"> | number | null
-    down_1_team_rush_fd_in_played_games?: IntNullableFilter<"PlayerSeason"> | number | null
-    down_1_team_rec_fd_in_played_games?: FloatNullableFilter<"PlayerSeason"> | number | null
     down_1_games_played?: IntNullableFilter<"PlayerSeason"> | number | null
     down_1_team_carries_all_games?: IntNullableFilter<"PlayerSeason"> | number | null
     down_1_team_targets_all_games?: IntNullableFilter<"PlayerSeason"> | number | null
     down_1_team_receptions_all_games?: IntNullableFilter<"PlayerSeason"> | number | null
-    down_1_team_rush_fd_all_games?: IntNullableFilter<"PlayerSeason"> | number | null
-    down_1_team_rec_fd_all_games?: IntNullableFilter<"PlayerSeason"> | number | null
-    down_1_pct_team_carries_in_played_games?: FloatNullableFilter<"PlayerSeason"> | number | null
-    down_1_pct_team_targets_in_played_games?: FloatNullableFilter<"PlayerSeason"> | number | null
-    down_1_pct_team_receptions_in_played_games?: FloatNullableFilter<"PlayerSeason"> | number | null
-    down_1_pct_team_rush_fd_in_played_games?: FloatNullableFilter<"PlayerSeason"> | number | null
-    down_1_pct_team_rec_fd_in_played_games?: FloatNullableFilter<"PlayerSeason"> | number | null
     down_1_yards_per_pass_attempt?: FloatNullableFilter<"PlayerSeason"> | number | null
     down_1_yards_per_completion?: FloatNullableFilter<"PlayerSeason"> | number | null
     down_1_yards_per_carry?: FloatNullableFilter<"PlayerSeason"> | number | null
@@ -13825,7 +11036,6 @@ export namespace Prisma {
     down_1_targets_per_game?: FloatNullableFilter<"PlayerSeason"> | number | null
     down_1_receptions_per_game?: FloatNullableFilter<"PlayerSeason"> | number | null
     down_1_receiving_yards_per_game?: FloatNullableFilter<"PlayerSeason"> | number | null
-    down_1_receiving_first_downs_per_game?: FloatNullableFilter<"PlayerSeason"> | number | null
     down_3_attempts?: IntNullableFilter<"PlayerSeason"> | number | null
     down_3_completions?: IntNullableFilter<"PlayerSeason"> | number | null
     down_3_passing_yards?: FloatNullableFilter<"PlayerSeason"> | number | null
@@ -13835,8 +11045,6 @@ export namespace Prisma {
     down_3_passing_first_downs?: FloatNullableFilter<"PlayerSeason"> | number | null
     down_3_carries?: IntNullableFilter<"PlayerSeason"> | number | null
     down_3_rushing_yards?: FloatNullableFilter<"PlayerSeason"> | number | null
-    down_3_rushing_tds?: IntNullableFilter<"PlayerSeason"> | number | null
-    down_3_fumbles?: IntNullableFilter<"PlayerSeason"> | number | null
     down_3_rushing_first_downs?: FloatNullableFilter<"PlayerSeason"> | number | null
     down_3_targets?: IntNullableFilter<"PlayerSeason"> | number | null
     down_3_receptions?: IntNullableFilter<"PlayerSeason"> | number | null
@@ -13941,15 +11149,11 @@ export namespace Prisma {
     green_zone_carries?: SortOrderInput | SortOrder
     HVTs?: SortOrderInput | SortOrder
     team_green_zone_carries_all_games?: SortOrderInput | SortOrder
-    total_team_RB_HVTs_all_games?: SortOrderInput | SortOrder
     team_green_zone_carries_in_played_games?: SortOrderInput | SortOrder
-    total_team_RB_HVTs_in_played_games?: SortOrderInput | SortOrder
     games_played_season?: SortOrderInput | SortOrder
     HVTs_per_game?: SortOrderInput | SortOrder
     pct_team_green_zone_carries_all_games?: SortOrderInput | SortOrder
     pct_team_green_zone_carries_in_played_games?: SortOrderInput | SortOrder
-    pct_team_RB_HVTs_all_games?: SortOrderInput | SortOrder
-    pct_team_RB_HVTs_in_played_games?: SortOrderInput | SortOrder
     total_dropbacks?: SortOrderInput | SortOrder
     pass_attempts_on_dropbacks?: SortOrderInput | SortOrder
     scrambles_on_dropbacks?: SortOrderInput | SortOrder
@@ -13958,15 +11162,6 @@ export namespace Prisma {
     scramble_rate?: SortOrderInput | SortOrder
     sack_rate?: SortOrderInput | SortOrder
     touchdown_rate?: SortOrderInput | SortOrder
-    avg_cpoe?: SortOrderInput | SortOrder
-    games_over_30_degrees?: SortOrderInput | SortOrder
-    games_below_30_degrees?: SortOrderInput | SortOrder
-    avg_fp_over_30_degrees?: SortOrderInput | SortOrder
-    avg_fp_below_30_degrees?: SortOrderInput | SortOrder
-    avg_fp_wind_below_20_mph?: SortOrderInput | SortOrder
-    avg_fp_wind_above_20_mph?: SortOrderInput | SortOrder
-    diff_fp_temp_30_degrees?: SortOrderInput | SortOrder
-    diff_fp_wind_20_mph?: SortOrderInput | SortOrder
     avg_pass_epa_deep_left?: SortOrderInput | SortOrder
     avg_pass_epa_deep_middle?: SortOrderInput | SortOrder
     avg_pass_epa_deep_right?: SortOrderInput | SortOrder
@@ -13991,37 +11186,20 @@ export namespace Prisma {
     down_1_attempts?: SortOrderInput | SortOrder
     down_1_completions?: SortOrderInput | SortOrder
     down_1_passing_yards?: SortOrderInput | SortOrder
-    down_1_passing_tds?: SortOrderInput | SortOrder
-    down_1_interceptions?: SortOrderInput | SortOrder
-    down_1_sacks_taken?: SortOrderInput | SortOrder
     down_1_passing_first_downs?: SortOrderInput | SortOrder
     down_1_carries?: SortOrderInput | SortOrder
     down_1_rushing_yards?: SortOrderInput | SortOrder
-    down_1_rushing_tds?: SortOrderInput | SortOrder
-    down_1_fumbles?: SortOrderInput | SortOrder
     down_1_rushing_first_downs?: SortOrderInput | SortOrder
     down_1_targets?: SortOrderInput | SortOrder
     down_1_receptions?: SortOrderInput | SortOrder
     down_1_receiving_yards?: SortOrderInput | SortOrder
-    down_1_receiving_tds?: SortOrderInput | SortOrder
-    down_1_receiving_first_downs?: SortOrderInput | SortOrder
-    down_1_total_first_downs?: SortOrderInput | SortOrder
     down_1_team_carries_in_played_games?: SortOrderInput | SortOrder
     down_1_team_targets_in_played_games?: SortOrderInput | SortOrder
     down_1_team_receptions_in_played_games?: SortOrderInput | SortOrder
-    down_1_team_rush_fd_in_played_games?: SortOrderInput | SortOrder
-    down_1_team_rec_fd_in_played_games?: SortOrderInput | SortOrder
     down_1_games_played?: SortOrderInput | SortOrder
     down_1_team_carries_all_games?: SortOrderInput | SortOrder
     down_1_team_targets_all_games?: SortOrderInput | SortOrder
     down_1_team_receptions_all_games?: SortOrderInput | SortOrder
-    down_1_team_rush_fd_all_games?: SortOrderInput | SortOrder
-    down_1_team_rec_fd_all_games?: SortOrderInput | SortOrder
-    down_1_pct_team_carries_in_played_games?: SortOrderInput | SortOrder
-    down_1_pct_team_targets_in_played_games?: SortOrderInput | SortOrder
-    down_1_pct_team_receptions_in_played_games?: SortOrderInput | SortOrder
-    down_1_pct_team_rush_fd_in_played_games?: SortOrderInput | SortOrder
-    down_1_pct_team_rec_fd_in_played_games?: SortOrderInput | SortOrder
     down_1_yards_per_pass_attempt?: SortOrderInput | SortOrder
     down_1_yards_per_completion?: SortOrderInput | SortOrder
     down_1_yards_per_carry?: SortOrderInput | SortOrder
@@ -14037,7 +11215,6 @@ export namespace Prisma {
     down_1_targets_per_game?: SortOrderInput | SortOrder
     down_1_receptions_per_game?: SortOrderInput | SortOrder
     down_1_receiving_yards_per_game?: SortOrderInput | SortOrder
-    down_1_receiving_first_downs_per_game?: SortOrderInput | SortOrder
     down_3_attempts?: SortOrderInput | SortOrder
     down_3_completions?: SortOrderInput | SortOrder
     down_3_passing_yards?: SortOrderInput | SortOrder
@@ -14047,8 +11224,6 @@ export namespace Prisma {
     down_3_passing_first_downs?: SortOrderInput | SortOrder
     down_3_carries?: SortOrderInput | SortOrder
     down_3_rushing_yards?: SortOrderInput | SortOrder
-    down_3_rushing_tds?: SortOrderInput | SortOrder
-    down_3_fumbles?: SortOrderInput | SortOrder
     down_3_rushing_first_downs?: SortOrderInput | SortOrder
     down_3_targets?: SortOrderInput | SortOrder
     down_3_receptions?: SortOrderInput | SortOrder
@@ -14157,15 +11332,11 @@ export namespace Prisma {
     green_zone_carries?: IntNullableFilter<"PlayerSeason"> | number | null
     HVTs?: IntNullableFilter<"PlayerSeason"> | number | null
     team_green_zone_carries_all_games?: IntNullableFilter<"PlayerSeason"> | number | null
-    total_team_RB_HVTs_all_games?: IntNullableFilter<"PlayerSeason"> | number | null
     team_green_zone_carries_in_played_games?: IntNullableFilter<"PlayerSeason"> | number | null
-    total_team_RB_HVTs_in_played_games?: IntNullableFilter<"PlayerSeason"> | number | null
     games_played_season?: IntNullableFilter<"PlayerSeason"> | number | null
     HVTs_per_game?: FloatNullableFilter<"PlayerSeason"> | number | null
     pct_team_green_zone_carries_all_games?: FloatNullableFilter<"PlayerSeason"> | number | null
     pct_team_green_zone_carries_in_played_games?: FloatNullableFilter<"PlayerSeason"> | number | null
-    pct_team_RB_HVTs_all_games?: FloatNullableFilter<"PlayerSeason"> | number | null
-    pct_team_RB_HVTs_in_played_games?: FloatNullableFilter<"PlayerSeason"> | number | null
     total_dropbacks?: IntNullableFilter<"PlayerSeason"> | number | null
     pass_attempts_on_dropbacks?: IntNullableFilter<"PlayerSeason"> | number | null
     scrambles_on_dropbacks?: IntNullableFilter<"PlayerSeason"> | number | null
@@ -14174,15 +11345,6 @@ export namespace Prisma {
     scramble_rate?: FloatNullableFilter<"PlayerSeason"> | number | null
     sack_rate?: FloatNullableFilter<"PlayerSeason"> | number | null
     touchdown_rate?: FloatNullableFilter<"PlayerSeason"> | number | null
-    avg_cpoe?: FloatNullableFilter<"PlayerSeason"> | number | null
-    games_over_30_degrees?: IntNullableFilter<"PlayerSeason"> | number | null
-    games_below_30_degrees?: IntNullableFilter<"PlayerSeason"> | number | null
-    avg_fp_over_30_degrees?: FloatNullableFilter<"PlayerSeason"> | number | null
-    avg_fp_below_30_degrees?: FloatNullableFilter<"PlayerSeason"> | number | null
-    avg_fp_wind_below_20_mph?: FloatNullableFilter<"PlayerSeason"> | number | null
-    avg_fp_wind_above_20_mph?: FloatNullableFilter<"PlayerSeason"> | number | null
-    diff_fp_temp_30_degrees?: FloatNullableFilter<"PlayerSeason"> | number | null
-    diff_fp_wind_20_mph?: FloatNullableFilter<"PlayerSeason"> | number | null
     avg_pass_epa_deep_left?: FloatNullableFilter<"PlayerSeason"> | number | null
     avg_pass_epa_deep_middle?: FloatNullableFilter<"PlayerSeason"> | number | null
     avg_pass_epa_deep_right?: FloatNullableFilter<"PlayerSeason"> | number | null
@@ -14207,37 +11369,20 @@ export namespace Prisma {
     down_1_attempts?: IntNullableFilter<"PlayerSeason"> | number | null
     down_1_completions?: IntNullableFilter<"PlayerSeason"> | number | null
     down_1_passing_yards?: FloatNullableFilter<"PlayerSeason"> | number | null
-    down_1_passing_tds?: IntNullableFilter<"PlayerSeason"> | number | null
-    down_1_interceptions?: IntNullableFilter<"PlayerSeason"> | number | null
-    down_1_sacks_taken?: IntNullableFilter<"PlayerSeason"> | number | null
     down_1_passing_first_downs?: FloatNullableFilter<"PlayerSeason"> | number | null
     down_1_carries?: IntNullableFilter<"PlayerSeason"> | number | null
     down_1_rushing_yards?: FloatNullableFilter<"PlayerSeason"> | number | null
-    down_1_rushing_tds?: IntNullableFilter<"PlayerSeason"> | number | null
-    down_1_fumbles?: IntNullableFilter<"PlayerSeason"> | number | null
     down_1_rushing_first_downs?: FloatNullableFilter<"PlayerSeason"> | number | null
     down_1_targets?: IntNullableFilter<"PlayerSeason"> | number | null
     down_1_receptions?: IntNullableFilter<"PlayerSeason"> | number | null
     down_1_receiving_yards?: FloatNullableFilter<"PlayerSeason"> | number | null
-    down_1_receiving_tds?: IntNullableFilter<"PlayerSeason"> | number | null
-    down_1_receiving_first_downs?: FloatNullableFilter<"PlayerSeason"> | number | null
-    down_1_total_first_downs?: IntNullableFilter<"PlayerSeason"> | number | null
     down_1_team_carries_in_played_games?: IntNullableFilter<"PlayerSeason"> | number | null
     down_1_team_targets_in_played_games?: IntNullableFilter<"PlayerSeason"> | number | null
     down_1_team_receptions_in_played_games?: IntNullableFilter<"PlayerSeason"> | number | null
-    down_1_team_rush_fd_in_played_games?: IntNullableFilter<"PlayerSeason"> | number | null
-    down_1_team_rec_fd_in_played_games?: FloatNullableFilter<"PlayerSeason"> | number | null
     down_1_games_played?: IntNullableFilter<"PlayerSeason"> | number | null
     down_1_team_carries_all_games?: IntNullableFilter<"PlayerSeason"> | number | null
     down_1_team_targets_all_games?: IntNullableFilter<"PlayerSeason"> | number | null
     down_1_team_receptions_all_games?: IntNullableFilter<"PlayerSeason"> | number | null
-    down_1_team_rush_fd_all_games?: IntNullableFilter<"PlayerSeason"> | number | null
-    down_1_team_rec_fd_all_games?: IntNullableFilter<"PlayerSeason"> | number | null
-    down_1_pct_team_carries_in_played_games?: FloatNullableFilter<"PlayerSeason"> | number | null
-    down_1_pct_team_targets_in_played_games?: FloatNullableFilter<"PlayerSeason"> | number | null
-    down_1_pct_team_receptions_in_played_games?: FloatNullableFilter<"PlayerSeason"> | number | null
-    down_1_pct_team_rush_fd_in_played_games?: FloatNullableFilter<"PlayerSeason"> | number | null
-    down_1_pct_team_rec_fd_in_played_games?: FloatNullableFilter<"PlayerSeason"> | number | null
     down_1_yards_per_pass_attempt?: FloatNullableFilter<"PlayerSeason"> | number | null
     down_1_yards_per_completion?: FloatNullableFilter<"PlayerSeason"> | number | null
     down_1_yards_per_carry?: FloatNullableFilter<"PlayerSeason"> | number | null
@@ -14253,7 +11398,6 @@ export namespace Prisma {
     down_1_targets_per_game?: FloatNullableFilter<"PlayerSeason"> | number | null
     down_1_receptions_per_game?: FloatNullableFilter<"PlayerSeason"> | number | null
     down_1_receiving_yards_per_game?: FloatNullableFilter<"PlayerSeason"> | number | null
-    down_1_receiving_first_downs_per_game?: FloatNullableFilter<"PlayerSeason"> | number | null
     down_3_attempts?: IntNullableFilter<"PlayerSeason"> | number | null
     down_3_completions?: IntNullableFilter<"PlayerSeason"> | number | null
     down_3_passing_yards?: FloatNullableFilter<"PlayerSeason"> | number | null
@@ -14263,8 +11407,6 @@ export namespace Prisma {
     down_3_passing_first_downs?: FloatNullableFilter<"PlayerSeason"> | number | null
     down_3_carries?: IntNullableFilter<"PlayerSeason"> | number | null
     down_3_rushing_yards?: FloatNullableFilter<"PlayerSeason"> | number | null
-    down_3_rushing_tds?: IntNullableFilter<"PlayerSeason"> | number | null
-    down_3_fumbles?: IntNullableFilter<"PlayerSeason"> | number | null
     down_3_rushing_first_downs?: FloatNullableFilter<"PlayerSeason"> | number | null
     down_3_targets?: IntNullableFilter<"PlayerSeason"> | number | null
     down_3_receptions?: IntNullableFilter<"PlayerSeason"> | number | null
@@ -14369,15 +11511,11 @@ export namespace Prisma {
     green_zone_carries?: SortOrderInput | SortOrder
     HVTs?: SortOrderInput | SortOrder
     team_green_zone_carries_all_games?: SortOrderInput | SortOrder
-    total_team_RB_HVTs_all_games?: SortOrderInput | SortOrder
     team_green_zone_carries_in_played_games?: SortOrderInput | SortOrder
-    total_team_RB_HVTs_in_played_games?: SortOrderInput | SortOrder
     games_played_season?: SortOrderInput | SortOrder
     HVTs_per_game?: SortOrderInput | SortOrder
     pct_team_green_zone_carries_all_games?: SortOrderInput | SortOrder
     pct_team_green_zone_carries_in_played_games?: SortOrderInput | SortOrder
-    pct_team_RB_HVTs_all_games?: SortOrderInput | SortOrder
-    pct_team_RB_HVTs_in_played_games?: SortOrderInput | SortOrder
     total_dropbacks?: SortOrderInput | SortOrder
     pass_attempts_on_dropbacks?: SortOrderInput | SortOrder
     scrambles_on_dropbacks?: SortOrderInput | SortOrder
@@ -14386,15 +11524,6 @@ export namespace Prisma {
     scramble_rate?: SortOrderInput | SortOrder
     sack_rate?: SortOrderInput | SortOrder
     touchdown_rate?: SortOrderInput | SortOrder
-    avg_cpoe?: SortOrderInput | SortOrder
-    games_over_30_degrees?: SortOrderInput | SortOrder
-    games_below_30_degrees?: SortOrderInput | SortOrder
-    avg_fp_over_30_degrees?: SortOrderInput | SortOrder
-    avg_fp_below_30_degrees?: SortOrderInput | SortOrder
-    avg_fp_wind_below_20_mph?: SortOrderInput | SortOrder
-    avg_fp_wind_above_20_mph?: SortOrderInput | SortOrder
-    diff_fp_temp_30_degrees?: SortOrderInput | SortOrder
-    diff_fp_wind_20_mph?: SortOrderInput | SortOrder
     avg_pass_epa_deep_left?: SortOrderInput | SortOrder
     avg_pass_epa_deep_middle?: SortOrderInput | SortOrder
     avg_pass_epa_deep_right?: SortOrderInput | SortOrder
@@ -14419,37 +11548,20 @@ export namespace Prisma {
     down_1_attempts?: SortOrderInput | SortOrder
     down_1_completions?: SortOrderInput | SortOrder
     down_1_passing_yards?: SortOrderInput | SortOrder
-    down_1_passing_tds?: SortOrderInput | SortOrder
-    down_1_interceptions?: SortOrderInput | SortOrder
-    down_1_sacks_taken?: SortOrderInput | SortOrder
     down_1_passing_first_downs?: SortOrderInput | SortOrder
     down_1_carries?: SortOrderInput | SortOrder
     down_1_rushing_yards?: SortOrderInput | SortOrder
-    down_1_rushing_tds?: SortOrderInput | SortOrder
-    down_1_fumbles?: SortOrderInput | SortOrder
     down_1_rushing_first_downs?: SortOrderInput | SortOrder
     down_1_targets?: SortOrderInput | SortOrder
     down_1_receptions?: SortOrderInput | SortOrder
     down_1_receiving_yards?: SortOrderInput | SortOrder
-    down_1_receiving_tds?: SortOrderInput | SortOrder
-    down_1_receiving_first_downs?: SortOrderInput | SortOrder
-    down_1_total_first_downs?: SortOrderInput | SortOrder
     down_1_team_carries_in_played_games?: SortOrderInput | SortOrder
     down_1_team_targets_in_played_games?: SortOrderInput | SortOrder
     down_1_team_receptions_in_played_games?: SortOrderInput | SortOrder
-    down_1_team_rush_fd_in_played_games?: SortOrderInput | SortOrder
-    down_1_team_rec_fd_in_played_games?: SortOrderInput | SortOrder
     down_1_games_played?: SortOrderInput | SortOrder
     down_1_team_carries_all_games?: SortOrderInput | SortOrder
     down_1_team_targets_all_games?: SortOrderInput | SortOrder
     down_1_team_receptions_all_games?: SortOrderInput | SortOrder
-    down_1_team_rush_fd_all_games?: SortOrderInput | SortOrder
-    down_1_team_rec_fd_all_games?: SortOrderInput | SortOrder
-    down_1_pct_team_carries_in_played_games?: SortOrderInput | SortOrder
-    down_1_pct_team_targets_in_played_games?: SortOrderInput | SortOrder
-    down_1_pct_team_receptions_in_played_games?: SortOrderInput | SortOrder
-    down_1_pct_team_rush_fd_in_played_games?: SortOrderInput | SortOrder
-    down_1_pct_team_rec_fd_in_played_games?: SortOrderInput | SortOrder
     down_1_yards_per_pass_attempt?: SortOrderInput | SortOrder
     down_1_yards_per_completion?: SortOrderInput | SortOrder
     down_1_yards_per_carry?: SortOrderInput | SortOrder
@@ -14465,7 +11577,6 @@ export namespace Prisma {
     down_1_targets_per_game?: SortOrderInput | SortOrder
     down_1_receptions_per_game?: SortOrderInput | SortOrder
     down_1_receiving_yards_per_game?: SortOrderInput | SortOrder
-    down_1_receiving_first_downs_per_game?: SortOrderInput | SortOrder
     down_3_attempts?: SortOrderInput | SortOrder
     down_3_completions?: SortOrderInput | SortOrder
     down_3_passing_yards?: SortOrderInput | SortOrder
@@ -14475,8 +11586,6 @@ export namespace Prisma {
     down_3_passing_first_downs?: SortOrderInput | SortOrder
     down_3_carries?: SortOrderInput | SortOrder
     down_3_rushing_yards?: SortOrderInput | SortOrder
-    down_3_rushing_tds?: SortOrderInput | SortOrder
-    down_3_fumbles?: SortOrderInput | SortOrder
     down_3_rushing_first_downs?: SortOrderInput | SortOrder
     down_3_targets?: SortOrderInput | SortOrder
     down_3_receptions?: SortOrderInput | SortOrder
@@ -14589,15 +11698,11 @@ export namespace Prisma {
     green_zone_carries?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     HVTs?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     team_green_zone_carries_all_games?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    total_team_RB_HVTs_all_games?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     team_green_zone_carries_in_played_games?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    total_team_RB_HVTs_in_played_games?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     games_played_season?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     HVTs_per_game?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     pct_team_green_zone_carries_all_games?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     pct_team_green_zone_carries_in_played_games?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    pct_team_RB_HVTs_all_games?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    pct_team_RB_HVTs_in_played_games?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     total_dropbacks?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     pass_attempts_on_dropbacks?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     scrambles_on_dropbacks?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
@@ -14606,15 +11711,6 @@ export namespace Prisma {
     scramble_rate?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     sack_rate?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     touchdown_rate?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    avg_cpoe?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    games_over_30_degrees?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    games_below_30_degrees?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    avg_fp_over_30_degrees?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    avg_fp_below_30_degrees?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    avg_fp_wind_below_20_mph?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    avg_fp_wind_above_20_mph?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    diff_fp_temp_30_degrees?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    diff_fp_wind_20_mph?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     avg_pass_epa_deep_left?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     avg_pass_epa_deep_middle?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     avg_pass_epa_deep_right?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
@@ -14639,37 +11735,20 @@ export namespace Prisma {
     down_1_attempts?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_1_completions?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_1_passing_yards?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    down_1_passing_tds?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    down_1_interceptions?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    down_1_sacks_taken?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_1_passing_first_downs?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_1_carries?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_1_rushing_yards?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    down_1_rushing_tds?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    down_1_fumbles?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_1_rushing_first_downs?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_1_targets?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_1_receptions?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_1_receiving_yards?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    down_1_receiving_tds?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    down_1_receiving_first_downs?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    down_1_total_first_downs?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_1_team_carries_in_played_games?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_1_team_targets_in_played_games?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_1_team_receptions_in_played_games?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    down_1_team_rush_fd_in_played_games?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    down_1_team_rec_fd_in_played_games?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_1_games_played?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_1_team_carries_all_games?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_1_team_targets_all_games?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_1_team_receptions_all_games?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    down_1_team_rush_fd_all_games?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    down_1_team_rec_fd_all_games?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    down_1_pct_team_carries_in_played_games?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    down_1_pct_team_targets_in_played_games?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    down_1_pct_team_receptions_in_played_games?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    down_1_pct_team_rush_fd_in_played_games?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    down_1_pct_team_rec_fd_in_played_games?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_1_yards_per_pass_attempt?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_1_yards_per_completion?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_1_yards_per_carry?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
@@ -14685,7 +11764,6 @@ export namespace Prisma {
     down_1_targets_per_game?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_1_receptions_per_game?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_1_receiving_yards_per_game?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    down_1_receiving_first_downs_per_game?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_3_attempts?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_3_completions?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_3_passing_yards?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
@@ -14695,8 +11773,6 @@ export namespace Prisma {
     down_3_passing_first_downs?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_3_carries?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_3_rushing_yards?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    down_3_rushing_tds?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
-    down_3_fumbles?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_3_rushing_first_downs?: FloatNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_3_targets?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
     down_3_receptions?: IntNullableWithAggregatesFilter<"PlayerSeason"> | number | null
@@ -14802,7 +11878,6 @@ export namespace Prisma {
     team?: StringFilter<"TeamSeasonStats"> | string
     season?: IntFilter<"TeamSeasonStats"> | number
     team_green_zone_carries_all_games?: IntNullableFilter<"TeamSeasonStats"> | number | null
-    total_team_RB_HVTs_all_games?: IntNullableFilter<"TeamSeasonStats"> | number | null
     team_carries_all_games?: IntNullableFilter<"TeamSeasonStats"> | number | null
     team_targets_all_games?: IntNullableFilter<"TeamSeasonStats"> | number | null
     team_receptions_all_games?: IntNullableFilter<"TeamSeasonStats"> | number | null
@@ -14814,7 +11889,6 @@ export namespace Prisma {
     team?: SortOrder
     season?: SortOrder
     team_green_zone_carries_all_games?: SortOrderInput | SortOrder
-    total_team_RB_HVTs_all_games?: SortOrderInput | SortOrder
     team_carries_all_games?: SortOrderInput | SortOrder
     team_targets_all_games?: SortOrderInput | SortOrder
     team_receptions_all_games?: SortOrderInput | SortOrder
@@ -14830,7 +11904,6 @@ export namespace Prisma {
     team?: StringFilter<"TeamSeasonStats"> | string
     season?: IntFilter<"TeamSeasonStats"> | number
     team_green_zone_carries_all_games?: IntNullableFilter<"TeamSeasonStats"> | number | null
-    total_team_RB_HVTs_all_games?: IntNullableFilter<"TeamSeasonStats"> | number | null
     team_carries_all_games?: IntNullableFilter<"TeamSeasonStats"> | number | null
     team_targets_all_games?: IntNullableFilter<"TeamSeasonStats"> | number | null
     team_receptions_all_games?: IntNullableFilter<"TeamSeasonStats"> | number | null
@@ -14842,7 +11915,6 @@ export namespace Prisma {
     team?: SortOrder
     season?: SortOrder
     team_green_zone_carries_all_games?: SortOrderInput | SortOrder
-    total_team_RB_HVTs_all_games?: SortOrderInput | SortOrder
     team_carries_all_games?: SortOrderInput | SortOrder
     team_targets_all_games?: SortOrderInput | SortOrder
     team_receptions_all_games?: SortOrderInput | SortOrder
@@ -14862,7 +11934,6 @@ export namespace Prisma {
     team?: StringWithAggregatesFilter<"TeamSeasonStats"> | string
     season?: IntWithAggregatesFilter<"TeamSeasonStats"> | number
     team_green_zone_carries_all_games?: IntNullableWithAggregatesFilter<"TeamSeasonStats"> | number | null
-    total_team_RB_HVTs_all_games?: IntNullableWithAggregatesFilter<"TeamSeasonStats"> | number | null
     team_carries_all_games?: IntNullableWithAggregatesFilter<"TeamSeasonStats"> | number | null
     team_targets_all_games?: IntNullableWithAggregatesFilter<"TeamSeasonStats"> | number | null
     team_receptions_all_games?: IntNullableWithAggregatesFilter<"TeamSeasonStats"> | number | null
@@ -15325,356 +12396,6 @@ export namespace Prisma {
     fantasyPointsPpr?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
-  export type ReceivingStatCreateInput = {
-    id?: string
-    player?: string | null
-    playerId?: string | null
-    position?: string | null
-    teamName?: string | null
-    playerGameCount?: number | null
-    avgDepthOfTarget?: number | null
-    avoidedTackles?: number | null
-    caughtPercent?: number | null
-    contestedCatchRate?: number | null
-    contestedReceptions?: number | null
-    contestedTargets?: number | null
-    declinedPenalties?: number | null
-    dropRate?: number | null
-    drops?: number | null
-    firstDowns?: number | null
-    franchiseId?: number | null
-    fumbles?: number | null
-    gradesHandsDrop?: number | null
-    gradesHandsFumble?: number | null
-    gradesOffense?: number | null
-    gradesPassBlock?: number | null
-    gradesPassRoute?: number | null
-    inlineRate?: number | null
-    inlineSnaps?: number | null
-    interceptions?: number | null
-    longest?: number | null
-    passBlockRate?: number | null
-    passBlocks?: number | null
-    passPlays?: number | null
-    penalties?: number | null
-    receptions?: number | null
-    routeRate?: number | null
-    routes?: number | null
-    slotRate?: number | null
-    slotSnaps?: number | null
-    targetedQbRating?: number | null
-    targets?: number | null
-    touchdowns?: number | null
-    wideRate?: number | null
-    wideSnaps?: number | null
-    yards?: number | null
-    yardsAfterCatch?: number | null
-    yardsAfterCatchPerReception?: number | null
-    yardsPerReception?: number | null
-    yprr?: number | null
-    season?: number | null
-  }
-
-  export type ReceivingStatUncheckedCreateInput = {
-    id?: string
-    player?: string | null
-    playerId?: string | null
-    position?: string | null
-    teamName?: string | null
-    playerGameCount?: number | null
-    avgDepthOfTarget?: number | null
-    avoidedTackles?: number | null
-    caughtPercent?: number | null
-    contestedCatchRate?: number | null
-    contestedReceptions?: number | null
-    contestedTargets?: number | null
-    declinedPenalties?: number | null
-    dropRate?: number | null
-    drops?: number | null
-    firstDowns?: number | null
-    franchiseId?: number | null
-    fumbles?: number | null
-    gradesHandsDrop?: number | null
-    gradesHandsFumble?: number | null
-    gradesOffense?: number | null
-    gradesPassBlock?: number | null
-    gradesPassRoute?: number | null
-    inlineRate?: number | null
-    inlineSnaps?: number | null
-    interceptions?: number | null
-    longest?: number | null
-    passBlockRate?: number | null
-    passBlocks?: number | null
-    passPlays?: number | null
-    penalties?: number | null
-    receptions?: number | null
-    routeRate?: number | null
-    routes?: number | null
-    slotRate?: number | null
-    slotSnaps?: number | null
-    targetedQbRating?: number | null
-    targets?: number | null
-    touchdowns?: number | null
-    wideRate?: number | null
-    wideSnaps?: number | null
-    yards?: number | null
-    yardsAfterCatch?: number | null
-    yardsAfterCatchPerReception?: number | null
-    yardsPerReception?: number | null
-    yprr?: number | null
-    season?: number | null
-  }
-
-  export type ReceivingStatUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    player?: NullableStringFieldUpdateOperationsInput | string | null
-    playerId?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
-    teamName?: NullableStringFieldUpdateOperationsInput | string | null
-    playerGameCount?: NullableIntFieldUpdateOperationsInput | number | null
-    avgDepthOfTarget?: NullableFloatFieldUpdateOperationsInput | number | null
-    avoidedTackles?: NullableIntFieldUpdateOperationsInput | number | null
-    caughtPercent?: NullableFloatFieldUpdateOperationsInput | number | null
-    contestedCatchRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    contestedReceptions?: NullableIntFieldUpdateOperationsInput | number | null
-    contestedTargets?: NullableIntFieldUpdateOperationsInput | number | null
-    declinedPenalties?: NullableIntFieldUpdateOperationsInput | number | null
-    dropRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    drops?: NullableIntFieldUpdateOperationsInput | number | null
-    firstDowns?: NullableIntFieldUpdateOperationsInput | number | null
-    franchiseId?: NullableIntFieldUpdateOperationsInput | number | null
-    fumbles?: NullableIntFieldUpdateOperationsInput | number | null
-    gradesHandsDrop?: NullableFloatFieldUpdateOperationsInput | number | null
-    gradesHandsFumble?: NullableFloatFieldUpdateOperationsInput | number | null
-    gradesOffense?: NullableFloatFieldUpdateOperationsInput | number | null
-    gradesPassBlock?: NullableFloatFieldUpdateOperationsInput | number | null
-    gradesPassRoute?: NullableFloatFieldUpdateOperationsInput | number | null
-    inlineRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    inlineSnaps?: NullableIntFieldUpdateOperationsInput | number | null
-    interceptions?: NullableIntFieldUpdateOperationsInput | number | null
-    longest?: NullableIntFieldUpdateOperationsInput | number | null
-    passBlockRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    passBlocks?: NullableIntFieldUpdateOperationsInput | number | null
-    passPlays?: NullableIntFieldUpdateOperationsInput | number | null
-    penalties?: NullableIntFieldUpdateOperationsInput | number | null
-    receptions?: NullableIntFieldUpdateOperationsInput | number | null
-    routeRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    routes?: NullableIntFieldUpdateOperationsInput | number | null
-    slotRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    slotSnaps?: NullableIntFieldUpdateOperationsInput | number | null
-    targetedQbRating?: NullableFloatFieldUpdateOperationsInput | number | null
-    targets?: NullableIntFieldUpdateOperationsInput | number | null
-    touchdowns?: NullableIntFieldUpdateOperationsInput | number | null
-    wideRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    wideSnaps?: NullableIntFieldUpdateOperationsInput | number | null
-    yards?: NullableIntFieldUpdateOperationsInput | number | null
-    yardsAfterCatch?: NullableIntFieldUpdateOperationsInput | number | null
-    yardsAfterCatchPerReception?: NullableFloatFieldUpdateOperationsInput | number | null
-    yardsPerReception?: NullableFloatFieldUpdateOperationsInput | number | null
-    yprr?: NullableFloatFieldUpdateOperationsInput | number | null
-    season?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
-  export type ReceivingStatUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    player?: NullableStringFieldUpdateOperationsInput | string | null
-    playerId?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
-    teamName?: NullableStringFieldUpdateOperationsInput | string | null
-    playerGameCount?: NullableIntFieldUpdateOperationsInput | number | null
-    avgDepthOfTarget?: NullableFloatFieldUpdateOperationsInput | number | null
-    avoidedTackles?: NullableIntFieldUpdateOperationsInput | number | null
-    caughtPercent?: NullableFloatFieldUpdateOperationsInput | number | null
-    contestedCatchRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    contestedReceptions?: NullableIntFieldUpdateOperationsInput | number | null
-    contestedTargets?: NullableIntFieldUpdateOperationsInput | number | null
-    declinedPenalties?: NullableIntFieldUpdateOperationsInput | number | null
-    dropRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    drops?: NullableIntFieldUpdateOperationsInput | number | null
-    firstDowns?: NullableIntFieldUpdateOperationsInput | number | null
-    franchiseId?: NullableIntFieldUpdateOperationsInput | number | null
-    fumbles?: NullableIntFieldUpdateOperationsInput | number | null
-    gradesHandsDrop?: NullableFloatFieldUpdateOperationsInput | number | null
-    gradesHandsFumble?: NullableFloatFieldUpdateOperationsInput | number | null
-    gradesOffense?: NullableFloatFieldUpdateOperationsInput | number | null
-    gradesPassBlock?: NullableFloatFieldUpdateOperationsInput | number | null
-    gradesPassRoute?: NullableFloatFieldUpdateOperationsInput | number | null
-    inlineRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    inlineSnaps?: NullableIntFieldUpdateOperationsInput | number | null
-    interceptions?: NullableIntFieldUpdateOperationsInput | number | null
-    longest?: NullableIntFieldUpdateOperationsInput | number | null
-    passBlockRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    passBlocks?: NullableIntFieldUpdateOperationsInput | number | null
-    passPlays?: NullableIntFieldUpdateOperationsInput | number | null
-    penalties?: NullableIntFieldUpdateOperationsInput | number | null
-    receptions?: NullableIntFieldUpdateOperationsInput | number | null
-    routeRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    routes?: NullableIntFieldUpdateOperationsInput | number | null
-    slotRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    slotSnaps?: NullableIntFieldUpdateOperationsInput | number | null
-    targetedQbRating?: NullableFloatFieldUpdateOperationsInput | number | null
-    targets?: NullableIntFieldUpdateOperationsInput | number | null
-    touchdowns?: NullableIntFieldUpdateOperationsInput | number | null
-    wideRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    wideSnaps?: NullableIntFieldUpdateOperationsInput | number | null
-    yards?: NullableIntFieldUpdateOperationsInput | number | null
-    yardsAfterCatch?: NullableIntFieldUpdateOperationsInput | number | null
-    yardsAfterCatchPerReception?: NullableFloatFieldUpdateOperationsInput | number | null
-    yardsPerReception?: NullableFloatFieldUpdateOperationsInput | number | null
-    yprr?: NullableFloatFieldUpdateOperationsInput | number | null
-    season?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
-  export type ReceivingStatCreateManyInput = {
-    id?: string
-    player?: string | null
-    playerId?: string | null
-    position?: string | null
-    teamName?: string | null
-    playerGameCount?: number | null
-    avgDepthOfTarget?: number | null
-    avoidedTackles?: number | null
-    caughtPercent?: number | null
-    contestedCatchRate?: number | null
-    contestedReceptions?: number | null
-    contestedTargets?: number | null
-    declinedPenalties?: number | null
-    dropRate?: number | null
-    drops?: number | null
-    firstDowns?: number | null
-    franchiseId?: number | null
-    fumbles?: number | null
-    gradesHandsDrop?: number | null
-    gradesHandsFumble?: number | null
-    gradesOffense?: number | null
-    gradesPassBlock?: number | null
-    gradesPassRoute?: number | null
-    inlineRate?: number | null
-    inlineSnaps?: number | null
-    interceptions?: number | null
-    longest?: number | null
-    passBlockRate?: number | null
-    passBlocks?: number | null
-    passPlays?: number | null
-    penalties?: number | null
-    receptions?: number | null
-    routeRate?: number | null
-    routes?: number | null
-    slotRate?: number | null
-    slotSnaps?: number | null
-    targetedQbRating?: number | null
-    targets?: number | null
-    touchdowns?: number | null
-    wideRate?: number | null
-    wideSnaps?: number | null
-    yards?: number | null
-    yardsAfterCatch?: number | null
-    yardsAfterCatchPerReception?: number | null
-    yardsPerReception?: number | null
-    yprr?: number | null
-    season?: number | null
-  }
-
-  export type ReceivingStatUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    player?: NullableStringFieldUpdateOperationsInput | string | null
-    playerId?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
-    teamName?: NullableStringFieldUpdateOperationsInput | string | null
-    playerGameCount?: NullableIntFieldUpdateOperationsInput | number | null
-    avgDepthOfTarget?: NullableFloatFieldUpdateOperationsInput | number | null
-    avoidedTackles?: NullableIntFieldUpdateOperationsInput | number | null
-    caughtPercent?: NullableFloatFieldUpdateOperationsInput | number | null
-    contestedCatchRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    contestedReceptions?: NullableIntFieldUpdateOperationsInput | number | null
-    contestedTargets?: NullableIntFieldUpdateOperationsInput | number | null
-    declinedPenalties?: NullableIntFieldUpdateOperationsInput | number | null
-    dropRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    drops?: NullableIntFieldUpdateOperationsInput | number | null
-    firstDowns?: NullableIntFieldUpdateOperationsInput | number | null
-    franchiseId?: NullableIntFieldUpdateOperationsInput | number | null
-    fumbles?: NullableIntFieldUpdateOperationsInput | number | null
-    gradesHandsDrop?: NullableFloatFieldUpdateOperationsInput | number | null
-    gradesHandsFumble?: NullableFloatFieldUpdateOperationsInput | number | null
-    gradesOffense?: NullableFloatFieldUpdateOperationsInput | number | null
-    gradesPassBlock?: NullableFloatFieldUpdateOperationsInput | number | null
-    gradesPassRoute?: NullableFloatFieldUpdateOperationsInput | number | null
-    inlineRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    inlineSnaps?: NullableIntFieldUpdateOperationsInput | number | null
-    interceptions?: NullableIntFieldUpdateOperationsInput | number | null
-    longest?: NullableIntFieldUpdateOperationsInput | number | null
-    passBlockRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    passBlocks?: NullableIntFieldUpdateOperationsInput | number | null
-    passPlays?: NullableIntFieldUpdateOperationsInput | number | null
-    penalties?: NullableIntFieldUpdateOperationsInput | number | null
-    receptions?: NullableIntFieldUpdateOperationsInput | number | null
-    routeRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    routes?: NullableIntFieldUpdateOperationsInput | number | null
-    slotRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    slotSnaps?: NullableIntFieldUpdateOperationsInput | number | null
-    targetedQbRating?: NullableFloatFieldUpdateOperationsInput | number | null
-    targets?: NullableIntFieldUpdateOperationsInput | number | null
-    touchdowns?: NullableIntFieldUpdateOperationsInput | number | null
-    wideRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    wideSnaps?: NullableIntFieldUpdateOperationsInput | number | null
-    yards?: NullableIntFieldUpdateOperationsInput | number | null
-    yardsAfterCatch?: NullableIntFieldUpdateOperationsInput | number | null
-    yardsAfterCatchPerReception?: NullableFloatFieldUpdateOperationsInput | number | null
-    yardsPerReception?: NullableFloatFieldUpdateOperationsInput | number | null
-    yprr?: NullableFloatFieldUpdateOperationsInput | number | null
-    season?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
-  export type ReceivingStatUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    player?: NullableStringFieldUpdateOperationsInput | string | null
-    playerId?: NullableStringFieldUpdateOperationsInput | string | null
-    position?: NullableStringFieldUpdateOperationsInput | string | null
-    teamName?: NullableStringFieldUpdateOperationsInput | string | null
-    playerGameCount?: NullableIntFieldUpdateOperationsInput | number | null
-    avgDepthOfTarget?: NullableFloatFieldUpdateOperationsInput | number | null
-    avoidedTackles?: NullableIntFieldUpdateOperationsInput | number | null
-    caughtPercent?: NullableFloatFieldUpdateOperationsInput | number | null
-    contestedCatchRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    contestedReceptions?: NullableIntFieldUpdateOperationsInput | number | null
-    contestedTargets?: NullableIntFieldUpdateOperationsInput | number | null
-    declinedPenalties?: NullableIntFieldUpdateOperationsInput | number | null
-    dropRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    drops?: NullableIntFieldUpdateOperationsInput | number | null
-    firstDowns?: NullableIntFieldUpdateOperationsInput | number | null
-    franchiseId?: NullableIntFieldUpdateOperationsInput | number | null
-    fumbles?: NullableIntFieldUpdateOperationsInput | number | null
-    gradesHandsDrop?: NullableFloatFieldUpdateOperationsInput | number | null
-    gradesHandsFumble?: NullableFloatFieldUpdateOperationsInput | number | null
-    gradesOffense?: NullableFloatFieldUpdateOperationsInput | number | null
-    gradesPassBlock?: NullableFloatFieldUpdateOperationsInput | number | null
-    gradesPassRoute?: NullableFloatFieldUpdateOperationsInput | number | null
-    inlineRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    inlineSnaps?: NullableIntFieldUpdateOperationsInput | number | null
-    interceptions?: NullableIntFieldUpdateOperationsInput | number | null
-    longest?: NullableIntFieldUpdateOperationsInput | number | null
-    passBlockRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    passBlocks?: NullableIntFieldUpdateOperationsInput | number | null
-    passPlays?: NullableIntFieldUpdateOperationsInput | number | null
-    penalties?: NullableIntFieldUpdateOperationsInput | number | null
-    receptions?: NullableIntFieldUpdateOperationsInput | number | null
-    routeRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    routes?: NullableIntFieldUpdateOperationsInput | number | null
-    slotRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    slotSnaps?: NullableIntFieldUpdateOperationsInput | number | null
-    targetedQbRating?: NullableFloatFieldUpdateOperationsInput | number | null
-    targets?: NullableIntFieldUpdateOperationsInput | number | null
-    touchdowns?: NullableIntFieldUpdateOperationsInput | number | null
-    wideRate?: NullableFloatFieldUpdateOperationsInput | number | null
-    wideSnaps?: NullableIntFieldUpdateOperationsInput | number | null
-    yards?: NullableIntFieldUpdateOperationsInput | number | null
-    yardsAfterCatch?: NullableIntFieldUpdateOperationsInput | number | null
-    yardsAfterCatchPerReception?: NullableFloatFieldUpdateOperationsInput | number | null
-    yardsPerReception?: NullableFloatFieldUpdateOperationsInput | number | null
-    yprr?: NullableFloatFieldUpdateOperationsInput | number | null
-    season?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
   export type PlayerSeasonCreateInput = {
     player_id: string
     season: number
@@ -15738,15 +12459,11 @@ export namespace Prisma {
     green_zone_carries?: number | null
     HVTs?: number | null
     team_green_zone_carries_all_games?: number | null
-    total_team_RB_HVTs_all_games?: number | null
     team_green_zone_carries_in_played_games?: number | null
-    total_team_RB_HVTs_in_played_games?: number | null
     games_played_season?: number | null
     HVTs_per_game?: number | null
     pct_team_green_zone_carries_all_games?: number | null
     pct_team_green_zone_carries_in_played_games?: number | null
-    pct_team_RB_HVTs_all_games?: number | null
-    pct_team_RB_HVTs_in_played_games?: number | null
     total_dropbacks?: number | null
     pass_attempts_on_dropbacks?: number | null
     scrambles_on_dropbacks?: number | null
@@ -15755,15 +12472,6 @@ export namespace Prisma {
     scramble_rate?: number | null
     sack_rate?: number | null
     touchdown_rate?: number | null
-    avg_cpoe?: number | null
-    games_over_30_degrees?: number | null
-    games_below_30_degrees?: number | null
-    avg_fp_over_30_degrees?: number | null
-    avg_fp_below_30_degrees?: number | null
-    avg_fp_wind_below_20_mph?: number | null
-    avg_fp_wind_above_20_mph?: number | null
-    diff_fp_temp_30_degrees?: number | null
-    diff_fp_wind_20_mph?: number | null
     avg_pass_epa_deep_left?: number | null
     avg_pass_epa_deep_middle?: number | null
     avg_pass_epa_deep_right?: number | null
@@ -15788,37 +12496,20 @@ export namespace Prisma {
     down_1_attempts?: number | null
     down_1_completions?: number | null
     down_1_passing_yards?: number | null
-    down_1_passing_tds?: number | null
-    down_1_interceptions?: number | null
-    down_1_sacks_taken?: number | null
     down_1_passing_first_downs?: number | null
     down_1_carries?: number | null
     down_1_rushing_yards?: number | null
-    down_1_rushing_tds?: number | null
-    down_1_fumbles?: number | null
     down_1_rushing_first_downs?: number | null
     down_1_targets?: number | null
     down_1_receptions?: number | null
     down_1_receiving_yards?: number | null
-    down_1_receiving_tds?: number | null
-    down_1_receiving_first_downs?: number | null
-    down_1_total_first_downs?: number | null
     down_1_team_carries_in_played_games?: number | null
     down_1_team_targets_in_played_games?: number | null
     down_1_team_receptions_in_played_games?: number | null
-    down_1_team_rush_fd_in_played_games?: number | null
-    down_1_team_rec_fd_in_played_games?: number | null
     down_1_games_played?: number | null
     down_1_team_carries_all_games?: number | null
     down_1_team_targets_all_games?: number | null
     down_1_team_receptions_all_games?: number | null
-    down_1_team_rush_fd_all_games?: number | null
-    down_1_team_rec_fd_all_games?: number | null
-    down_1_pct_team_carries_in_played_games?: number | null
-    down_1_pct_team_targets_in_played_games?: number | null
-    down_1_pct_team_receptions_in_played_games?: number | null
-    down_1_pct_team_rush_fd_in_played_games?: number | null
-    down_1_pct_team_rec_fd_in_played_games?: number | null
     down_1_yards_per_pass_attempt?: number | null
     down_1_yards_per_completion?: number | null
     down_1_yards_per_carry?: number | null
@@ -15834,7 +12525,6 @@ export namespace Prisma {
     down_1_targets_per_game?: number | null
     down_1_receptions_per_game?: number | null
     down_1_receiving_yards_per_game?: number | null
-    down_1_receiving_first_downs_per_game?: number | null
     down_3_attempts?: number | null
     down_3_completions?: number | null
     down_3_passing_yards?: number | null
@@ -15844,8 +12534,6 @@ export namespace Prisma {
     down_3_passing_first_downs?: number | null
     down_3_carries?: number | null
     down_3_rushing_yards?: number | null
-    down_3_rushing_tds?: number | null
-    down_3_fumbles?: number | null
     down_3_rushing_first_downs?: number | null
     down_3_targets?: number | null
     down_3_receptions?: number | null
@@ -15950,15 +12638,11 @@ export namespace Prisma {
     green_zone_carries?: number | null
     HVTs?: number | null
     team_green_zone_carries_all_games?: number | null
-    total_team_RB_HVTs_all_games?: number | null
     team_green_zone_carries_in_played_games?: number | null
-    total_team_RB_HVTs_in_played_games?: number | null
     games_played_season?: number | null
     HVTs_per_game?: number | null
     pct_team_green_zone_carries_all_games?: number | null
     pct_team_green_zone_carries_in_played_games?: number | null
-    pct_team_RB_HVTs_all_games?: number | null
-    pct_team_RB_HVTs_in_played_games?: number | null
     total_dropbacks?: number | null
     pass_attempts_on_dropbacks?: number | null
     scrambles_on_dropbacks?: number | null
@@ -15967,15 +12651,6 @@ export namespace Prisma {
     scramble_rate?: number | null
     sack_rate?: number | null
     touchdown_rate?: number | null
-    avg_cpoe?: number | null
-    games_over_30_degrees?: number | null
-    games_below_30_degrees?: number | null
-    avg_fp_over_30_degrees?: number | null
-    avg_fp_below_30_degrees?: number | null
-    avg_fp_wind_below_20_mph?: number | null
-    avg_fp_wind_above_20_mph?: number | null
-    diff_fp_temp_30_degrees?: number | null
-    diff_fp_wind_20_mph?: number | null
     avg_pass_epa_deep_left?: number | null
     avg_pass_epa_deep_middle?: number | null
     avg_pass_epa_deep_right?: number | null
@@ -16000,37 +12675,20 @@ export namespace Prisma {
     down_1_attempts?: number | null
     down_1_completions?: number | null
     down_1_passing_yards?: number | null
-    down_1_passing_tds?: number | null
-    down_1_interceptions?: number | null
-    down_1_sacks_taken?: number | null
     down_1_passing_first_downs?: number | null
     down_1_carries?: number | null
     down_1_rushing_yards?: number | null
-    down_1_rushing_tds?: number | null
-    down_1_fumbles?: number | null
     down_1_rushing_first_downs?: number | null
     down_1_targets?: number | null
     down_1_receptions?: number | null
     down_1_receiving_yards?: number | null
-    down_1_receiving_tds?: number | null
-    down_1_receiving_first_downs?: number | null
-    down_1_total_first_downs?: number | null
     down_1_team_carries_in_played_games?: number | null
     down_1_team_targets_in_played_games?: number | null
     down_1_team_receptions_in_played_games?: number | null
-    down_1_team_rush_fd_in_played_games?: number | null
-    down_1_team_rec_fd_in_played_games?: number | null
     down_1_games_played?: number | null
     down_1_team_carries_all_games?: number | null
     down_1_team_targets_all_games?: number | null
     down_1_team_receptions_all_games?: number | null
-    down_1_team_rush_fd_all_games?: number | null
-    down_1_team_rec_fd_all_games?: number | null
-    down_1_pct_team_carries_in_played_games?: number | null
-    down_1_pct_team_targets_in_played_games?: number | null
-    down_1_pct_team_receptions_in_played_games?: number | null
-    down_1_pct_team_rush_fd_in_played_games?: number | null
-    down_1_pct_team_rec_fd_in_played_games?: number | null
     down_1_yards_per_pass_attempt?: number | null
     down_1_yards_per_completion?: number | null
     down_1_yards_per_carry?: number | null
@@ -16046,7 +12704,6 @@ export namespace Prisma {
     down_1_targets_per_game?: number | null
     down_1_receptions_per_game?: number | null
     down_1_receiving_yards_per_game?: number | null
-    down_1_receiving_first_downs_per_game?: number | null
     down_3_attempts?: number | null
     down_3_completions?: number | null
     down_3_passing_yards?: number | null
@@ -16056,8 +12713,6 @@ export namespace Prisma {
     down_3_passing_first_downs?: number | null
     down_3_carries?: number | null
     down_3_rushing_yards?: number | null
-    down_3_rushing_tds?: number | null
-    down_3_fumbles?: number | null
     down_3_rushing_first_downs?: number | null
     down_3_targets?: number | null
     down_3_receptions?: number | null
@@ -16162,15 +12817,11 @@ export namespace Prisma {
     green_zone_carries?: NullableIntFieldUpdateOperationsInput | number | null
     HVTs?: NullableIntFieldUpdateOperationsInput | number | null
     team_green_zone_carries_all_games?: NullableIntFieldUpdateOperationsInput | number | null
-    total_team_RB_HVTs_all_games?: NullableIntFieldUpdateOperationsInput | number | null
     team_green_zone_carries_in_played_games?: NullableIntFieldUpdateOperationsInput | number | null
-    total_team_RB_HVTs_in_played_games?: NullableIntFieldUpdateOperationsInput | number | null
     games_played_season?: NullableIntFieldUpdateOperationsInput | number | null
     HVTs_per_game?: NullableFloatFieldUpdateOperationsInput | number | null
     pct_team_green_zone_carries_all_games?: NullableFloatFieldUpdateOperationsInput | number | null
     pct_team_green_zone_carries_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
-    pct_team_RB_HVTs_all_games?: NullableFloatFieldUpdateOperationsInput | number | null
-    pct_team_RB_HVTs_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
     total_dropbacks?: NullableIntFieldUpdateOperationsInput | number | null
     pass_attempts_on_dropbacks?: NullableIntFieldUpdateOperationsInput | number | null
     scrambles_on_dropbacks?: NullableIntFieldUpdateOperationsInput | number | null
@@ -16179,15 +12830,6 @@ export namespace Prisma {
     scramble_rate?: NullableFloatFieldUpdateOperationsInput | number | null
     sack_rate?: NullableFloatFieldUpdateOperationsInput | number | null
     touchdown_rate?: NullableFloatFieldUpdateOperationsInput | number | null
-    avg_cpoe?: NullableFloatFieldUpdateOperationsInput | number | null
-    games_over_30_degrees?: NullableIntFieldUpdateOperationsInput | number | null
-    games_below_30_degrees?: NullableIntFieldUpdateOperationsInput | number | null
-    avg_fp_over_30_degrees?: NullableFloatFieldUpdateOperationsInput | number | null
-    avg_fp_below_30_degrees?: NullableFloatFieldUpdateOperationsInput | number | null
-    avg_fp_wind_below_20_mph?: NullableFloatFieldUpdateOperationsInput | number | null
-    avg_fp_wind_above_20_mph?: NullableFloatFieldUpdateOperationsInput | number | null
-    diff_fp_temp_30_degrees?: NullableFloatFieldUpdateOperationsInput | number | null
-    diff_fp_wind_20_mph?: NullableFloatFieldUpdateOperationsInput | number | null
     avg_pass_epa_deep_left?: NullableFloatFieldUpdateOperationsInput | number | null
     avg_pass_epa_deep_middle?: NullableFloatFieldUpdateOperationsInput | number | null
     avg_pass_epa_deep_right?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -16212,37 +12854,20 @@ export namespace Prisma {
     down_1_attempts?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_completions?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_passing_yards?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_passing_tds?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_interceptions?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_sacks_taken?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_passing_first_downs?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_carries?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_rushing_yards?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_rushing_tds?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_fumbles?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_rushing_first_downs?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_targets?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_receptions?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_receiving_yards?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_receiving_tds?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_receiving_first_downs?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_total_first_downs?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_team_carries_in_played_games?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_team_targets_in_played_games?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_team_receptions_in_played_games?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_team_rush_fd_in_played_games?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_team_rec_fd_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_games_played?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_team_carries_all_games?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_team_targets_all_games?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_team_receptions_all_games?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_team_rush_fd_all_games?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_team_rec_fd_all_games?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_pct_team_carries_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_pct_team_targets_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_pct_team_receptions_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_pct_team_rush_fd_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_pct_team_rec_fd_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_yards_per_pass_attempt?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_yards_per_completion?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_yards_per_carry?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -16258,7 +12883,6 @@ export namespace Prisma {
     down_1_targets_per_game?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_receptions_per_game?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_receiving_yards_per_game?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_receiving_first_downs_per_game?: NullableFloatFieldUpdateOperationsInput | number | null
     down_3_attempts?: NullableIntFieldUpdateOperationsInput | number | null
     down_3_completions?: NullableIntFieldUpdateOperationsInput | number | null
     down_3_passing_yards?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -16268,8 +12892,6 @@ export namespace Prisma {
     down_3_passing_first_downs?: NullableFloatFieldUpdateOperationsInput | number | null
     down_3_carries?: NullableIntFieldUpdateOperationsInput | number | null
     down_3_rushing_yards?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_3_rushing_tds?: NullableIntFieldUpdateOperationsInput | number | null
-    down_3_fumbles?: NullableIntFieldUpdateOperationsInput | number | null
     down_3_rushing_first_downs?: NullableFloatFieldUpdateOperationsInput | number | null
     down_3_targets?: NullableIntFieldUpdateOperationsInput | number | null
     down_3_receptions?: NullableIntFieldUpdateOperationsInput | number | null
@@ -16374,15 +12996,11 @@ export namespace Prisma {
     green_zone_carries?: NullableIntFieldUpdateOperationsInput | number | null
     HVTs?: NullableIntFieldUpdateOperationsInput | number | null
     team_green_zone_carries_all_games?: NullableIntFieldUpdateOperationsInput | number | null
-    total_team_RB_HVTs_all_games?: NullableIntFieldUpdateOperationsInput | number | null
     team_green_zone_carries_in_played_games?: NullableIntFieldUpdateOperationsInput | number | null
-    total_team_RB_HVTs_in_played_games?: NullableIntFieldUpdateOperationsInput | number | null
     games_played_season?: NullableIntFieldUpdateOperationsInput | number | null
     HVTs_per_game?: NullableFloatFieldUpdateOperationsInput | number | null
     pct_team_green_zone_carries_all_games?: NullableFloatFieldUpdateOperationsInput | number | null
     pct_team_green_zone_carries_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
-    pct_team_RB_HVTs_all_games?: NullableFloatFieldUpdateOperationsInput | number | null
-    pct_team_RB_HVTs_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
     total_dropbacks?: NullableIntFieldUpdateOperationsInput | number | null
     pass_attempts_on_dropbacks?: NullableIntFieldUpdateOperationsInput | number | null
     scrambles_on_dropbacks?: NullableIntFieldUpdateOperationsInput | number | null
@@ -16391,15 +13009,6 @@ export namespace Prisma {
     scramble_rate?: NullableFloatFieldUpdateOperationsInput | number | null
     sack_rate?: NullableFloatFieldUpdateOperationsInput | number | null
     touchdown_rate?: NullableFloatFieldUpdateOperationsInput | number | null
-    avg_cpoe?: NullableFloatFieldUpdateOperationsInput | number | null
-    games_over_30_degrees?: NullableIntFieldUpdateOperationsInput | number | null
-    games_below_30_degrees?: NullableIntFieldUpdateOperationsInput | number | null
-    avg_fp_over_30_degrees?: NullableFloatFieldUpdateOperationsInput | number | null
-    avg_fp_below_30_degrees?: NullableFloatFieldUpdateOperationsInput | number | null
-    avg_fp_wind_below_20_mph?: NullableFloatFieldUpdateOperationsInput | number | null
-    avg_fp_wind_above_20_mph?: NullableFloatFieldUpdateOperationsInput | number | null
-    diff_fp_temp_30_degrees?: NullableFloatFieldUpdateOperationsInput | number | null
-    diff_fp_wind_20_mph?: NullableFloatFieldUpdateOperationsInput | number | null
     avg_pass_epa_deep_left?: NullableFloatFieldUpdateOperationsInput | number | null
     avg_pass_epa_deep_middle?: NullableFloatFieldUpdateOperationsInput | number | null
     avg_pass_epa_deep_right?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -16424,37 +13033,20 @@ export namespace Prisma {
     down_1_attempts?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_completions?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_passing_yards?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_passing_tds?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_interceptions?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_sacks_taken?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_passing_first_downs?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_carries?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_rushing_yards?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_rushing_tds?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_fumbles?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_rushing_first_downs?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_targets?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_receptions?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_receiving_yards?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_receiving_tds?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_receiving_first_downs?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_total_first_downs?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_team_carries_in_played_games?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_team_targets_in_played_games?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_team_receptions_in_played_games?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_team_rush_fd_in_played_games?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_team_rec_fd_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_games_played?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_team_carries_all_games?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_team_targets_all_games?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_team_receptions_all_games?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_team_rush_fd_all_games?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_team_rec_fd_all_games?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_pct_team_carries_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_pct_team_targets_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_pct_team_receptions_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_pct_team_rush_fd_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_pct_team_rec_fd_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_yards_per_pass_attempt?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_yards_per_completion?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_yards_per_carry?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -16470,7 +13062,6 @@ export namespace Prisma {
     down_1_targets_per_game?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_receptions_per_game?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_receiving_yards_per_game?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_receiving_first_downs_per_game?: NullableFloatFieldUpdateOperationsInput | number | null
     down_3_attempts?: NullableIntFieldUpdateOperationsInput | number | null
     down_3_completions?: NullableIntFieldUpdateOperationsInput | number | null
     down_3_passing_yards?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -16480,8 +13071,6 @@ export namespace Prisma {
     down_3_passing_first_downs?: NullableFloatFieldUpdateOperationsInput | number | null
     down_3_carries?: NullableIntFieldUpdateOperationsInput | number | null
     down_3_rushing_yards?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_3_rushing_tds?: NullableIntFieldUpdateOperationsInput | number | null
-    down_3_fumbles?: NullableIntFieldUpdateOperationsInput | number | null
     down_3_rushing_first_downs?: NullableFloatFieldUpdateOperationsInput | number | null
     down_3_targets?: NullableIntFieldUpdateOperationsInput | number | null
     down_3_receptions?: NullableIntFieldUpdateOperationsInput | number | null
@@ -16586,15 +13175,11 @@ export namespace Prisma {
     green_zone_carries?: number | null
     HVTs?: number | null
     team_green_zone_carries_all_games?: number | null
-    total_team_RB_HVTs_all_games?: number | null
     team_green_zone_carries_in_played_games?: number | null
-    total_team_RB_HVTs_in_played_games?: number | null
     games_played_season?: number | null
     HVTs_per_game?: number | null
     pct_team_green_zone_carries_all_games?: number | null
     pct_team_green_zone_carries_in_played_games?: number | null
-    pct_team_RB_HVTs_all_games?: number | null
-    pct_team_RB_HVTs_in_played_games?: number | null
     total_dropbacks?: number | null
     pass_attempts_on_dropbacks?: number | null
     scrambles_on_dropbacks?: number | null
@@ -16603,15 +13188,6 @@ export namespace Prisma {
     scramble_rate?: number | null
     sack_rate?: number | null
     touchdown_rate?: number | null
-    avg_cpoe?: number | null
-    games_over_30_degrees?: number | null
-    games_below_30_degrees?: number | null
-    avg_fp_over_30_degrees?: number | null
-    avg_fp_below_30_degrees?: number | null
-    avg_fp_wind_below_20_mph?: number | null
-    avg_fp_wind_above_20_mph?: number | null
-    diff_fp_temp_30_degrees?: number | null
-    diff_fp_wind_20_mph?: number | null
     avg_pass_epa_deep_left?: number | null
     avg_pass_epa_deep_middle?: number | null
     avg_pass_epa_deep_right?: number | null
@@ -16636,37 +13212,20 @@ export namespace Prisma {
     down_1_attempts?: number | null
     down_1_completions?: number | null
     down_1_passing_yards?: number | null
-    down_1_passing_tds?: number | null
-    down_1_interceptions?: number | null
-    down_1_sacks_taken?: number | null
     down_1_passing_first_downs?: number | null
     down_1_carries?: number | null
     down_1_rushing_yards?: number | null
-    down_1_rushing_tds?: number | null
-    down_1_fumbles?: number | null
     down_1_rushing_first_downs?: number | null
     down_1_targets?: number | null
     down_1_receptions?: number | null
     down_1_receiving_yards?: number | null
-    down_1_receiving_tds?: number | null
-    down_1_receiving_first_downs?: number | null
-    down_1_total_first_downs?: number | null
     down_1_team_carries_in_played_games?: number | null
     down_1_team_targets_in_played_games?: number | null
     down_1_team_receptions_in_played_games?: number | null
-    down_1_team_rush_fd_in_played_games?: number | null
-    down_1_team_rec_fd_in_played_games?: number | null
     down_1_games_played?: number | null
     down_1_team_carries_all_games?: number | null
     down_1_team_targets_all_games?: number | null
     down_1_team_receptions_all_games?: number | null
-    down_1_team_rush_fd_all_games?: number | null
-    down_1_team_rec_fd_all_games?: number | null
-    down_1_pct_team_carries_in_played_games?: number | null
-    down_1_pct_team_targets_in_played_games?: number | null
-    down_1_pct_team_receptions_in_played_games?: number | null
-    down_1_pct_team_rush_fd_in_played_games?: number | null
-    down_1_pct_team_rec_fd_in_played_games?: number | null
     down_1_yards_per_pass_attempt?: number | null
     down_1_yards_per_completion?: number | null
     down_1_yards_per_carry?: number | null
@@ -16682,7 +13241,6 @@ export namespace Prisma {
     down_1_targets_per_game?: number | null
     down_1_receptions_per_game?: number | null
     down_1_receiving_yards_per_game?: number | null
-    down_1_receiving_first_downs_per_game?: number | null
     down_3_attempts?: number | null
     down_3_completions?: number | null
     down_3_passing_yards?: number | null
@@ -16692,8 +13250,6 @@ export namespace Prisma {
     down_3_passing_first_downs?: number | null
     down_3_carries?: number | null
     down_3_rushing_yards?: number | null
-    down_3_rushing_tds?: number | null
-    down_3_fumbles?: number | null
     down_3_rushing_first_downs?: number | null
     down_3_targets?: number | null
     down_3_receptions?: number | null
@@ -16798,15 +13354,11 @@ export namespace Prisma {
     green_zone_carries?: NullableIntFieldUpdateOperationsInput | number | null
     HVTs?: NullableIntFieldUpdateOperationsInput | number | null
     team_green_zone_carries_all_games?: NullableIntFieldUpdateOperationsInput | number | null
-    total_team_RB_HVTs_all_games?: NullableIntFieldUpdateOperationsInput | number | null
     team_green_zone_carries_in_played_games?: NullableIntFieldUpdateOperationsInput | number | null
-    total_team_RB_HVTs_in_played_games?: NullableIntFieldUpdateOperationsInput | number | null
     games_played_season?: NullableIntFieldUpdateOperationsInput | number | null
     HVTs_per_game?: NullableFloatFieldUpdateOperationsInput | number | null
     pct_team_green_zone_carries_all_games?: NullableFloatFieldUpdateOperationsInput | number | null
     pct_team_green_zone_carries_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
-    pct_team_RB_HVTs_all_games?: NullableFloatFieldUpdateOperationsInput | number | null
-    pct_team_RB_HVTs_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
     total_dropbacks?: NullableIntFieldUpdateOperationsInput | number | null
     pass_attempts_on_dropbacks?: NullableIntFieldUpdateOperationsInput | number | null
     scrambles_on_dropbacks?: NullableIntFieldUpdateOperationsInput | number | null
@@ -16815,15 +13367,6 @@ export namespace Prisma {
     scramble_rate?: NullableFloatFieldUpdateOperationsInput | number | null
     sack_rate?: NullableFloatFieldUpdateOperationsInput | number | null
     touchdown_rate?: NullableFloatFieldUpdateOperationsInput | number | null
-    avg_cpoe?: NullableFloatFieldUpdateOperationsInput | number | null
-    games_over_30_degrees?: NullableIntFieldUpdateOperationsInput | number | null
-    games_below_30_degrees?: NullableIntFieldUpdateOperationsInput | number | null
-    avg_fp_over_30_degrees?: NullableFloatFieldUpdateOperationsInput | number | null
-    avg_fp_below_30_degrees?: NullableFloatFieldUpdateOperationsInput | number | null
-    avg_fp_wind_below_20_mph?: NullableFloatFieldUpdateOperationsInput | number | null
-    avg_fp_wind_above_20_mph?: NullableFloatFieldUpdateOperationsInput | number | null
-    diff_fp_temp_30_degrees?: NullableFloatFieldUpdateOperationsInput | number | null
-    diff_fp_wind_20_mph?: NullableFloatFieldUpdateOperationsInput | number | null
     avg_pass_epa_deep_left?: NullableFloatFieldUpdateOperationsInput | number | null
     avg_pass_epa_deep_middle?: NullableFloatFieldUpdateOperationsInput | number | null
     avg_pass_epa_deep_right?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -16848,37 +13391,20 @@ export namespace Prisma {
     down_1_attempts?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_completions?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_passing_yards?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_passing_tds?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_interceptions?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_sacks_taken?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_passing_first_downs?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_carries?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_rushing_yards?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_rushing_tds?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_fumbles?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_rushing_first_downs?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_targets?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_receptions?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_receiving_yards?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_receiving_tds?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_receiving_first_downs?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_total_first_downs?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_team_carries_in_played_games?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_team_targets_in_played_games?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_team_receptions_in_played_games?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_team_rush_fd_in_played_games?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_team_rec_fd_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_games_played?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_team_carries_all_games?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_team_targets_all_games?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_team_receptions_all_games?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_team_rush_fd_all_games?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_team_rec_fd_all_games?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_pct_team_carries_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_pct_team_targets_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_pct_team_receptions_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_pct_team_rush_fd_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_pct_team_rec_fd_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_yards_per_pass_attempt?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_yards_per_completion?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_yards_per_carry?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -16894,7 +13420,6 @@ export namespace Prisma {
     down_1_targets_per_game?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_receptions_per_game?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_receiving_yards_per_game?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_receiving_first_downs_per_game?: NullableFloatFieldUpdateOperationsInput | number | null
     down_3_attempts?: NullableIntFieldUpdateOperationsInput | number | null
     down_3_completions?: NullableIntFieldUpdateOperationsInput | number | null
     down_3_passing_yards?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -16904,8 +13429,6 @@ export namespace Prisma {
     down_3_passing_first_downs?: NullableFloatFieldUpdateOperationsInput | number | null
     down_3_carries?: NullableIntFieldUpdateOperationsInput | number | null
     down_3_rushing_yards?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_3_rushing_tds?: NullableIntFieldUpdateOperationsInput | number | null
-    down_3_fumbles?: NullableIntFieldUpdateOperationsInput | number | null
     down_3_rushing_first_downs?: NullableFloatFieldUpdateOperationsInput | number | null
     down_3_targets?: NullableIntFieldUpdateOperationsInput | number | null
     down_3_receptions?: NullableIntFieldUpdateOperationsInput | number | null
@@ -17010,15 +13533,11 @@ export namespace Prisma {
     green_zone_carries?: NullableIntFieldUpdateOperationsInput | number | null
     HVTs?: NullableIntFieldUpdateOperationsInput | number | null
     team_green_zone_carries_all_games?: NullableIntFieldUpdateOperationsInput | number | null
-    total_team_RB_HVTs_all_games?: NullableIntFieldUpdateOperationsInput | number | null
     team_green_zone_carries_in_played_games?: NullableIntFieldUpdateOperationsInput | number | null
-    total_team_RB_HVTs_in_played_games?: NullableIntFieldUpdateOperationsInput | number | null
     games_played_season?: NullableIntFieldUpdateOperationsInput | number | null
     HVTs_per_game?: NullableFloatFieldUpdateOperationsInput | number | null
     pct_team_green_zone_carries_all_games?: NullableFloatFieldUpdateOperationsInput | number | null
     pct_team_green_zone_carries_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
-    pct_team_RB_HVTs_all_games?: NullableFloatFieldUpdateOperationsInput | number | null
-    pct_team_RB_HVTs_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
     total_dropbacks?: NullableIntFieldUpdateOperationsInput | number | null
     pass_attempts_on_dropbacks?: NullableIntFieldUpdateOperationsInput | number | null
     scrambles_on_dropbacks?: NullableIntFieldUpdateOperationsInput | number | null
@@ -17027,15 +13546,6 @@ export namespace Prisma {
     scramble_rate?: NullableFloatFieldUpdateOperationsInput | number | null
     sack_rate?: NullableFloatFieldUpdateOperationsInput | number | null
     touchdown_rate?: NullableFloatFieldUpdateOperationsInput | number | null
-    avg_cpoe?: NullableFloatFieldUpdateOperationsInput | number | null
-    games_over_30_degrees?: NullableIntFieldUpdateOperationsInput | number | null
-    games_below_30_degrees?: NullableIntFieldUpdateOperationsInput | number | null
-    avg_fp_over_30_degrees?: NullableFloatFieldUpdateOperationsInput | number | null
-    avg_fp_below_30_degrees?: NullableFloatFieldUpdateOperationsInput | number | null
-    avg_fp_wind_below_20_mph?: NullableFloatFieldUpdateOperationsInput | number | null
-    avg_fp_wind_above_20_mph?: NullableFloatFieldUpdateOperationsInput | number | null
-    diff_fp_temp_30_degrees?: NullableFloatFieldUpdateOperationsInput | number | null
-    diff_fp_wind_20_mph?: NullableFloatFieldUpdateOperationsInput | number | null
     avg_pass_epa_deep_left?: NullableFloatFieldUpdateOperationsInput | number | null
     avg_pass_epa_deep_middle?: NullableFloatFieldUpdateOperationsInput | number | null
     avg_pass_epa_deep_right?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -17060,37 +13570,20 @@ export namespace Prisma {
     down_1_attempts?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_completions?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_passing_yards?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_passing_tds?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_interceptions?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_sacks_taken?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_passing_first_downs?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_carries?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_rushing_yards?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_rushing_tds?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_fumbles?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_rushing_first_downs?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_targets?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_receptions?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_receiving_yards?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_receiving_tds?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_receiving_first_downs?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_total_first_downs?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_team_carries_in_played_games?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_team_targets_in_played_games?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_team_receptions_in_played_games?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_team_rush_fd_in_played_games?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_team_rec_fd_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_games_played?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_team_carries_all_games?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_team_targets_all_games?: NullableIntFieldUpdateOperationsInput | number | null
     down_1_team_receptions_all_games?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_team_rush_fd_all_games?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_team_rec_fd_all_games?: NullableIntFieldUpdateOperationsInput | number | null
-    down_1_pct_team_carries_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_pct_team_targets_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_pct_team_receptions_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_pct_team_rush_fd_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_pct_team_rec_fd_in_played_games?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_yards_per_pass_attempt?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_yards_per_completion?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_yards_per_carry?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -17106,7 +13599,6 @@ export namespace Prisma {
     down_1_targets_per_game?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_receptions_per_game?: NullableFloatFieldUpdateOperationsInput | number | null
     down_1_receiving_yards_per_game?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_1_receiving_first_downs_per_game?: NullableFloatFieldUpdateOperationsInput | number | null
     down_3_attempts?: NullableIntFieldUpdateOperationsInput | number | null
     down_3_completions?: NullableIntFieldUpdateOperationsInput | number | null
     down_3_passing_yards?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -17116,8 +13608,6 @@ export namespace Prisma {
     down_3_passing_first_downs?: NullableFloatFieldUpdateOperationsInput | number | null
     down_3_carries?: NullableIntFieldUpdateOperationsInput | number | null
     down_3_rushing_yards?: NullableFloatFieldUpdateOperationsInput | number | null
-    down_3_rushing_tds?: NullableIntFieldUpdateOperationsInput | number | null
-    down_3_fumbles?: NullableIntFieldUpdateOperationsInput | number | null
     down_3_rushing_first_downs?: NullableFloatFieldUpdateOperationsInput | number | null
     down_3_targets?: NullableIntFieldUpdateOperationsInput | number | null
     down_3_receptions?: NullableIntFieldUpdateOperationsInput | number | null
@@ -17226,7 +13716,6 @@ export namespace Prisma {
     team: string
     season: number
     team_green_zone_carries_all_games?: number | null
-    total_team_RB_HVTs_all_games?: number | null
     team_carries_all_games?: number | null
     team_targets_all_games?: number | null
     team_receptions_all_games?: number | null
@@ -17238,7 +13727,6 @@ export namespace Prisma {
     team: string
     season: number
     team_green_zone_carries_all_games?: number | null
-    total_team_RB_HVTs_all_games?: number | null
     team_carries_all_games?: number | null
     team_targets_all_games?: number | null
     team_receptions_all_games?: number | null
@@ -17250,7 +13738,6 @@ export namespace Prisma {
     team?: StringFieldUpdateOperationsInput | string
     season?: IntFieldUpdateOperationsInput | number
     team_green_zone_carries_all_games?: NullableIntFieldUpdateOperationsInput | number | null
-    total_team_RB_HVTs_all_games?: NullableIntFieldUpdateOperationsInput | number | null
     team_carries_all_games?: NullableIntFieldUpdateOperationsInput | number | null
     team_targets_all_games?: NullableIntFieldUpdateOperationsInput | number | null
     team_receptions_all_games?: NullableIntFieldUpdateOperationsInput | number | null
@@ -17262,7 +13749,6 @@ export namespace Prisma {
     team?: StringFieldUpdateOperationsInput | string
     season?: IntFieldUpdateOperationsInput | number
     team_green_zone_carries_all_games?: NullableIntFieldUpdateOperationsInput | number | null
-    total_team_RB_HVTs_all_games?: NullableIntFieldUpdateOperationsInput | number | null
     team_carries_all_games?: NullableIntFieldUpdateOperationsInput | number | null
     team_targets_all_games?: NullableIntFieldUpdateOperationsInput | number | null
     team_receptions_all_games?: NullableIntFieldUpdateOperationsInput | number | null
@@ -17274,7 +13760,6 @@ export namespace Prisma {
     team: string
     season: number
     team_green_zone_carries_all_games?: number | null
-    total_team_RB_HVTs_all_games?: number | null
     team_carries_all_games?: number | null
     team_targets_all_games?: number | null
     team_receptions_all_games?: number | null
@@ -17286,7 +13771,6 @@ export namespace Prisma {
     team?: StringFieldUpdateOperationsInput | string
     season?: IntFieldUpdateOperationsInput | number
     team_green_zone_carries_all_games?: NullableIntFieldUpdateOperationsInput | number | null
-    total_team_RB_HVTs_all_games?: NullableIntFieldUpdateOperationsInput | number | null
     team_carries_all_games?: NullableIntFieldUpdateOperationsInput | number | null
     team_targets_all_games?: NullableIntFieldUpdateOperationsInput | number | null
     team_receptions_all_games?: NullableIntFieldUpdateOperationsInput | number | null
@@ -17298,7 +13782,6 @@ export namespace Prisma {
     team?: StringFieldUpdateOperationsInput | string
     season?: IntFieldUpdateOperationsInput | number
     team_green_zone_carries_all_games?: NullableIntFieldUpdateOperationsInput | number | null
-    total_team_RB_HVTs_all_games?: NullableIntFieldUpdateOperationsInput | number | null
     team_carries_all_games?: NullableIntFieldUpdateOperationsInput | number | null
     team_targets_all_games?: NullableIntFieldUpdateOperationsInput | number | null
     team_receptions_all_games?: NullableIntFieldUpdateOperationsInput | number | null
@@ -17775,246 +14258,6 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
-  export type ReceivingStatCountOrderByAggregateInput = {
-    id?: SortOrder
-    player?: SortOrder
-    playerId?: SortOrder
-    position?: SortOrder
-    teamName?: SortOrder
-    playerGameCount?: SortOrder
-    avgDepthOfTarget?: SortOrder
-    avoidedTackles?: SortOrder
-    caughtPercent?: SortOrder
-    contestedCatchRate?: SortOrder
-    contestedReceptions?: SortOrder
-    contestedTargets?: SortOrder
-    declinedPenalties?: SortOrder
-    dropRate?: SortOrder
-    drops?: SortOrder
-    firstDowns?: SortOrder
-    franchiseId?: SortOrder
-    fumbles?: SortOrder
-    gradesHandsDrop?: SortOrder
-    gradesHandsFumble?: SortOrder
-    gradesOffense?: SortOrder
-    gradesPassBlock?: SortOrder
-    gradesPassRoute?: SortOrder
-    inlineRate?: SortOrder
-    inlineSnaps?: SortOrder
-    interceptions?: SortOrder
-    longest?: SortOrder
-    passBlockRate?: SortOrder
-    passBlocks?: SortOrder
-    passPlays?: SortOrder
-    penalties?: SortOrder
-    receptions?: SortOrder
-    routeRate?: SortOrder
-    routes?: SortOrder
-    slotRate?: SortOrder
-    slotSnaps?: SortOrder
-    targetedQbRating?: SortOrder
-    targets?: SortOrder
-    touchdowns?: SortOrder
-    wideRate?: SortOrder
-    wideSnaps?: SortOrder
-    yards?: SortOrder
-    yardsAfterCatch?: SortOrder
-    yardsAfterCatchPerReception?: SortOrder
-    yardsPerReception?: SortOrder
-    yprr?: SortOrder
-    season?: SortOrder
-  }
-
-  export type ReceivingStatAvgOrderByAggregateInput = {
-    playerGameCount?: SortOrder
-    avgDepthOfTarget?: SortOrder
-    avoidedTackles?: SortOrder
-    caughtPercent?: SortOrder
-    contestedCatchRate?: SortOrder
-    contestedReceptions?: SortOrder
-    contestedTargets?: SortOrder
-    declinedPenalties?: SortOrder
-    dropRate?: SortOrder
-    drops?: SortOrder
-    firstDowns?: SortOrder
-    franchiseId?: SortOrder
-    fumbles?: SortOrder
-    gradesHandsDrop?: SortOrder
-    gradesHandsFumble?: SortOrder
-    gradesOffense?: SortOrder
-    gradesPassBlock?: SortOrder
-    gradesPassRoute?: SortOrder
-    inlineRate?: SortOrder
-    inlineSnaps?: SortOrder
-    interceptions?: SortOrder
-    longest?: SortOrder
-    passBlockRate?: SortOrder
-    passBlocks?: SortOrder
-    passPlays?: SortOrder
-    penalties?: SortOrder
-    receptions?: SortOrder
-    routeRate?: SortOrder
-    routes?: SortOrder
-    slotRate?: SortOrder
-    slotSnaps?: SortOrder
-    targetedQbRating?: SortOrder
-    targets?: SortOrder
-    touchdowns?: SortOrder
-    wideRate?: SortOrder
-    wideSnaps?: SortOrder
-    yards?: SortOrder
-    yardsAfterCatch?: SortOrder
-    yardsAfterCatchPerReception?: SortOrder
-    yardsPerReception?: SortOrder
-    yprr?: SortOrder
-    season?: SortOrder
-  }
-
-  export type ReceivingStatMaxOrderByAggregateInput = {
-    id?: SortOrder
-    player?: SortOrder
-    playerId?: SortOrder
-    position?: SortOrder
-    teamName?: SortOrder
-    playerGameCount?: SortOrder
-    avgDepthOfTarget?: SortOrder
-    avoidedTackles?: SortOrder
-    caughtPercent?: SortOrder
-    contestedCatchRate?: SortOrder
-    contestedReceptions?: SortOrder
-    contestedTargets?: SortOrder
-    declinedPenalties?: SortOrder
-    dropRate?: SortOrder
-    drops?: SortOrder
-    firstDowns?: SortOrder
-    franchiseId?: SortOrder
-    fumbles?: SortOrder
-    gradesHandsDrop?: SortOrder
-    gradesHandsFumble?: SortOrder
-    gradesOffense?: SortOrder
-    gradesPassBlock?: SortOrder
-    gradesPassRoute?: SortOrder
-    inlineRate?: SortOrder
-    inlineSnaps?: SortOrder
-    interceptions?: SortOrder
-    longest?: SortOrder
-    passBlockRate?: SortOrder
-    passBlocks?: SortOrder
-    passPlays?: SortOrder
-    penalties?: SortOrder
-    receptions?: SortOrder
-    routeRate?: SortOrder
-    routes?: SortOrder
-    slotRate?: SortOrder
-    slotSnaps?: SortOrder
-    targetedQbRating?: SortOrder
-    targets?: SortOrder
-    touchdowns?: SortOrder
-    wideRate?: SortOrder
-    wideSnaps?: SortOrder
-    yards?: SortOrder
-    yardsAfterCatch?: SortOrder
-    yardsAfterCatchPerReception?: SortOrder
-    yardsPerReception?: SortOrder
-    yprr?: SortOrder
-    season?: SortOrder
-  }
-
-  export type ReceivingStatMinOrderByAggregateInput = {
-    id?: SortOrder
-    player?: SortOrder
-    playerId?: SortOrder
-    position?: SortOrder
-    teamName?: SortOrder
-    playerGameCount?: SortOrder
-    avgDepthOfTarget?: SortOrder
-    avoidedTackles?: SortOrder
-    caughtPercent?: SortOrder
-    contestedCatchRate?: SortOrder
-    contestedReceptions?: SortOrder
-    contestedTargets?: SortOrder
-    declinedPenalties?: SortOrder
-    dropRate?: SortOrder
-    drops?: SortOrder
-    firstDowns?: SortOrder
-    franchiseId?: SortOrder
-    fumbles?: SortOrder
-    gradesHandsDrop?: SortOrder
-    gradesHandsFumble?: SortOrder
-    gradesOffense?: SortOrder
-    gradesPassBlock?: SortOrder
-    gradesPassRoute?: SortOrder
-    inlineRate?: SortOrder
-    inlineSnaps?: SortOrder
-    interceptions?: SortOrder
-    longest?: SortOrder
-    passBlockRate?: SortOrder
-    passBlocks?: SortOrder
-    passPlays?: SortOrder
-    penalties?: SortOrder
-    receptions?: SortOrder
-    routeRate?: SortOrder
-    routes?: SortOrder
-    slotRate?: SortOrder
-    slotSnaps?: SortOrder
-    targetedQbRating?: SortOrder
-    targets?: SortOrder
-    touchdowns?: SortOrder
-    wideRate?: SortOrder
-    wideSnaps?: SortOrder
-    yards?: SortOrder
-    yardsAfterCatch?: SortOrder
-    yardsAfterCatchPerReception?: SortOrder
-    yardsPerReception?: SortOrder
-    yprr?: SortOrder
-    season?: SortOrder
-  }
-
-  export type ReceivingStatSumOrderByAggregateInput = {
-    playerGameCount?: SortOrder
-    avgDepthOfTarget?: SortOrder
-    avoidedTackles?: SortOrder
-    caughtPercent?: SortOrder
-    contestedCatchRate?: SortOrder
-    contestedReceptions?: SortOrder
-    contestedTargets?: SortOrder
-    declinedPenalties?: SortOrder
-    dropRate?: SortOrder
-    drops?: SortOrder
-    firstDowns?: SortOrder
-    franchiseId?: SortOrder
-    fumbles?: SortOrder
-    gradesHandsDrop?: SortOrder
-    gradesHandsFumble?: SortOrder
-    gradesOffense?: SortOrder
-    gradesPassBlock?: SortOrder
-    gradesPassRoute?: SortOrder
-    inlineRate?: SortOrder
-    inlineSnaps?: SortOrder
-    interceptions?: SortOrder
-    longest?: SortOrder
-    passBlockRate?: SortOrder
-    passBlocks?: SortOrder
-    passPlays?: SortOrder
-    penalties?: SortOrder
-    receptions?: SortOrder
-    routeRate?: SortOrder
-    routes?: SortOrder
-    slotRate?: SortOrder
-    slotSnaps?: SortOrder
-    targetedQbRating?: SortOrder
-    targets?: SortOrder
-    touchdowns?: SortOrder
-    wideRate?: SortOrder
-    wideSnaps?: SortOrder
-    yards?: SortOrder
-    yardsAfterCatch?: SortOrder
-    yardsAfterCatchPerReception?: SortOrder
-    yardsPerReception?: SortOrder
-    yprr?: SortOrder
-    season?: SortOrder
-  }
-
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -18094,15 +14337,11 @@ export namespace Prisma {
     green_zone_carries?: SortOrder
     HVTs?: SortOrder
     team_green_zone_carries_all_games?: SortOrder
-    total_team_RB_HVTs_all_games?: SortOrder
     team_green_zone_carries_in_played_games?: SortOrder
-    total_team_RB_HVTs_in_played_games?: SortOrder
     games_played_season?: SortOrder
     HVTs_per_game?: SortOrder
     pct_team_green_zone_carries_all_games?: SortOrder
     pct_team_green_zone_carries_in_played_games?: SortOrder
-    pct_team_RB_HVTs_all_games?: SortOrder
-    pct_team_RB_HVTs_in_played_games?: SortOrder
     total_dropbacks?: SortOrder
     pass_attempts_on_dropbacks?: SortOrder
     scrambles_on_dropbacks?: SortOrder
@@ -18111,15 +14350,6 @@ export namespace Prisma {
     scramble_rate?: SortOrder
     sack_rate?: SortOrder
     touchdown_rate?: SortOrder
-    avg_cpoe?: SortOrder
-    games_over_30_degrees?: SortOrder
-    games_below_30_degrees?: SortOrder
-    avg_fp_over_30_degrees?: SortOrder
-    avg_fp_below_30_degrees?: SortOrder
-    avg_fp_wind_below_20_mph?: SortOrder
-    avg_fp_wind_above_20_mph?: SortOrder
-    diff_fp_temp_30_degrees?: SortOrder
-    diff_fp_wind_20_mph?: SortOrder
     avg_pass_epa_deep_left?: SortOrder
     avg_pass_epa_deep_middle?: SortOrder
     avg_pass_epa_deep_right?: SortOrder
@@ -18144,37 +14374,20 @@ export namespace Prisma {
     down_1_attempts?: SortOrder
     down_1_completions?: SortOrder
     down_1_passing_yards?: SortOrder
-    down_1_passing_tds?: SortOrder
-    down_1_interceptions?: SortOrder
-    down_1_sacks_taken?: SortOrder
     down_1_passing_first_downs?: SortOrder
     down_1_carries?: SortOrder
     down_1_rushing_yards?: SortOrder
-    down_1_rushing_tds?: SortOrder
-    down_1_fumbles?: SortOrder
     down_1_rushing_first_downs?: SortOrder
     down_1_targets?: SortOrder
     down_1_receptions?: SortOrder
     down_1_receiving_yards?: SortOrder
-    down_1_receiving_tds?: SortOrder
-    down_1_receiving_first_downs?: SortOrder
-    down_1_total_first_downs?: SortOrder
     down_1_team_carries_in_played_games?: SortOrder
     down_1_team_targets_in_played_games?: SortOrder
     down_1_team_receptions_in_played_games?: SortOrder
-    down_1_team_rush_fd_in_played_games?: SortOrder
-    down_1_team_rec_fd_in_played_games?: SortOrder
     down_1_games_played?: SortOrder
     down_1_team_carries_all_games?: SortOrder
     down_1_team_targets_all_games?: SortOrder
     down_1_team_receptions_all_games?: SortOrder
-    down_1_team_rush_fd_all_games?: SortOrder
-    down_1_team_rec_fd_all_games?: SortOrder
-    down_1_pct_team_carries_in_played_games?: SortOrder
-    down_1_pct_team_targets_in_played_games?: SortOrder
-    down_1_pct_team_receptions_in_played_games?: SortOrder
-    down_1_pct_team_rush_fd_in_played_games?: SortOrder
-    down_1_pct_team_rec_fd_in_played_games?: SortOrder
     down_1_yards_per_pass_attempt?: SortOrder
     down_1_yards_per_completion?: SortOrder
     down_1_yards_per_carry?: SortOrder
@@ -18190,7 +14403,6 @@ export namespace Prisma {
     down_1_targets_per_game?: SortOrder
     down_1_receptions_per_game?: SortOrder
     down_1_receiving_yards_per_game?: SortOrder
-    down_1_receiving_first_downs_per_game?: SortOrder
     down_3_attempts?: SortOrder
     down_3_completions?: SortOrder
     down_3_passing_yards?: SortOrder
@@ -18200,8 +14412,6 @@ export namespace Prisma {
     down_3_passing_first_downs?: SortOrder
     down_3_carries?: SortOrder
     down_3_rushing_yards?: SortOrder
-    down_3_rushing_tds?: SortOrder
-    down_3_fumbles?: SortOrder
     down_3_rushing_first_downs?: SortOrder
     down_3_targets?: SortOrder
     down_3_receptions?: SortOrder
@@ -18302,15 +14512,11 @@ export namespace Prisma {
     green_zone_carries?: SortOrder
     HVTs?: SortOrder
     team_green_zone_carries_all_games?: SortOrder
-    total_team_RB_HVTs_all_games?: SortOrder
     team_green_zone_carries_in_played_games?: SortOrder
-    total_team_RB_HVTs_in_played_games?: SortOrder
     games_played_season?: SortOrder
     HVTs_per_game?: SortOrder
     pct_team_green_zone_carries_all_games?: SortOrder
     pct_team_green_zone_carries_in_played_games?: SortOrder
-    pct_team_RB_HVTs_all_games?: SortOrder
-    pct_team_RB_HVTs_in_played_games?: SortOrder
     total_dropbacks?: SortOrder
     pass_attempts_on_dropbacks?: SortOrder
     scrambles_on_dropbacks?: SortOrder
@@ -18319,15 +14525,6 @@ export namespace Prisma {
     scramble_rate?: SortOrder
     sack_rate?: SortOrder
     touchdown_rate?: SortOrder
-    avg_cpoe?: SortOrder
-    games_over_30_degrees?: SortOrder
-    games_below_30_degrees?: SortOrder
-    avg_fp_over_30_degrees?: SortOrder
-    avg_fp_below_30_degrees?: SortOrder
-    avg_fp_wind_below_20_mph?: SortOrder
-    avg_fp_wind_above_20_mph?: SortOrder
-    diff_fp_temp_30_degrees?: SortOrder
-    diff_fp_wind_20_mph?: SortOrder
     avg_pass_epa_deep_left?: SortOrder
     avg_pass_epa_deep_middle?: SortOrder
     avg_pass_epa_deep_right?: SortOrder
@@ -18352,37 +14549,20 @@ export namespace Prisma {
     down_1_attempts?: SortOrder
     down_1_completions?: SortOrder
     down_1_passing_yards?: SortOrder
-    down_1_passing_tds?: SortOrder
-    down_1_interceptions?: SortOrder
-    down_1_sacks_taken?: SortOrder
     down_1_passing_first_downs?: SortOrder
     down_1_carries?: SortOrder
     down_1_rushing_yards?: SortOrder
-    down_1_rushing_tds?: SortOrder
-    down_1_fumbles?: SortOrder
     down_1_rushing_first_downs?: SortOrder
     down_1_targets?: SortOrder
     down_1_receptions?: SortOrder
     down_1_receiving_yards?: SortOrder
-    down_1_receiving_tds?: SortOrder
-    down_1_receiving_first_downs?: SortOrder
-    down_1_total_first_downs?: SortOrder
     down_1_team_carries_in_played_games?: SortOrder
     down_1_team_targets_in_played_games?: SortOrder
     down_1_team_receptions_in_played_games?: SortOrder
-    down_1_team_rush_fd_in_played_games?: SortOrder
-    down_1_team_rec_fd_in_played_games?: SortOrder
     down_1_games_played?: SortOrder
     down_1_team_carries_all_games?: SortOrder
     down_1_team_targets_all_games?: SortOrder
     down_1_team_receptions_all_games?: SortOrder
-    down_1_team_rush_fd_all_games?: SortOrder
-    down_1_team_rec_fd_all_games?: SortOrder
-    down_1_pct_team_carries_in_played_games?: SortOrder
-    down_1_pct_team_targets_in_played_games?: SortOrder
-    down_1_pct_team_receptions_in_played_games?: SortOrder
-    down_1_pct_team_rush_fd_in_played_games?: SortOrder
-    down_1_pct_team_rec_fd_in_played_games?: SortOrder
     down_1_yards_per_pass_attempt?: SortOrder
     down_1_yards_per_completion?: SortOrder
     down_1_yards_per_carry?: SortOrder
@@ -18398,7 +14578,6 @@ export namespace Prisma {
     down_1_targets_per_game?: SortOrder
     down_1_receptions_per_game?: SortOrder
     down_1_receiving_yards_per_game?: SortOrder
-    down_1_receiving_first_downs_per_game?: SortOrder
     down_3_attempts?: SortOrder
     down_3_completions?: SortOrder
     down_3_passing_yards?: SortOrder
@@ -18408,8 +14587,6 @@ export namespace Prisma {
     down_3_passing_first_downs?: SortOrder
     down_3_carries?: SortOrder
     down_3_rushing_yards?: SortOrder
-    down_3_rushing_tds?: SortOrder
-    down_3_fumbles?: SortOrder
     down_3_rushing_first_downs?: SortOrder
     down_3_targets?: SortOrder
     down_3_receptions?: SortOrder
@@ -18514,15 +14691,11 @@ export namespace Prisma {
     green_zone_carries?: SortOrder
     HVTs?: SortOrder
     team_green_zone_carries_all_games?: SortOrder
-    total_team_RB_HVTs_all_games?: SortOrder
     team_green_zone_carries_in_played_games?: SortOrder
-    total_team_RB_HVTs_in_played_games?: SortOrder
     games_played_season?: SortOrder
     HVTs_per_game?: SortOrder
     pct_team_green_zone_carries_all_games?: SortOrder
     pct_team_green_zone_carries_in_played_games?: SortOrder
-    pct_team_RB_HVTs_all_games?: SortOrder
-    pct_team_RB_HVTs_in_played_games?: SortOrder
     total_dropbacks?: SortOrder
     pass_attempts_on_dropbacks?: SortOrder
     scrambles_on_dropbacks?: SortOrder
@@ -18531,15 +14704,6 @@ export namespace Prisma {
     scramble_rate?: SortOrder
     sack_rate?: SortOrder
     touchdown_rate?: SortOrder
-    avg_cpoe?: SortOrder
-    games_over_30_degrees?: SortOrder
-    games_below_30_degrees?: SortOrder
-    avg_fp_over_30_degrees?: SortOrder
-    avg_fp_below_30_degrees?: SortOrder
-    avg_fp_wind_below_20_mph?: SortOrder
-    avg_fp_wind_above_20_mph?: SortOrder
-    diff_fp_temp_30_degrees?: SortOrder
-    diff_fp_wind_20_mph?: SortOrder
     avg_pass_epa_deep_left?: SortOrder
     avg_pass_epa_deep_middle?: SortOrder
     avg_pass_epa_deep_right?: SortOrder
@@ -18564,37 +14728,20 @@ export namespace Prisma {
     down_1_attempts?: SortOrder
     down_1_completions?: SortOrder
     down_1_passing_yards?: SortOrder
-    down_1_passing_tds?: SortOrder
-    down_1_interceptions?: SortOrder
-    down_1_sacks_taken?: SortOrder
     down_1_passing_first_downs?: SortOrder
     down_1_carries?: SortOrder
     down_1_rushing_yards?: SortOrder
-    down_1_rushing_tds?: SortOrder
-    down_1_fumbles?: SortOrder
     down_1_rushing_first_downs?: SortOrder
     down_1_targets?: SortOrder
     down_1_receptions?: SortOrder
     down_1_receiving_yards?: SortOrder
-    down_1_receiving_tds?: SortOrder
-    down_1_receiving_first_downs?: SortOrder
-    down_1_total_first_downs?: SortOrder
     down_1_team_carries_in_played_games?: SortOrder
     down_1_team_targets_in_played_games?: SortOrder
     down_1_team_receptions_in_played_games?: SortOrder
-    down_1_team_rush_fd_in_played_games?: SortOrder
-    down_1_team_rec_fd_in_played_games?: SortOrder
     down_1_games_played?: SortOrder
     down_1_team_carries_all_games?: SortOrder
     down_1_team_targets_all_games?: SortOrder
     down_1_team_receptions_all_games?: SortOrder
-    down_1_team_rush_fd_all_games?: SortOrder
-    down_1_team_rec_fd_all_games?: SortOrder
-    down_1_pct_team_carries_in_played_games?: SortOrder
-    down_1_pct_team_targets_in_played_games?: SortOrder
-    down_1_pct_team_receptions_in_played_games?: SortOrder
-    down_1_pct_team_rush_fd_in_played_games?: SortOrder
-    down_1_pct_team_rec_fd_in_played_games?: SortOrder
     down_1_yards_per_pass_attempt?: SortOrder
     down_1_yards_per_completion?: SortOrder
     down_1_yards_per_carry?: SortOrder
@@ -18610,7 +14757,6 @@ export namespace Prisma {
     down_1_targets_per_game?: SortOrder
     down_1_receptions_per_game?: SortOrder
     down_1_receiving_yards_per_game?: SortOrder
-    down_1_receiving_first_downs_per_game?: SortOrder
     down_3_attempts?: SortOrder
     down_3_completions?: SortOrder
     down_3_passing_yards?: SortOrder
@@ -18620,8 +14766,6 @@ export namespace Prisma {
     down_3_passing_first_downs?: SortOrder
     down_3_carries?: SortOrder
     down_3_rushing_yards?: SortOrder
-    down_3_rushing_tds?: SortOrder
-    down_3_fumbles?: SortOrder
     down_3_rushing_first_downs?: SortOrder
     down_3_targets?: SortOrder
     down_3_receptions?: SortOrder
@@ -18726,15 +14870,11 @@ export namespace Prisma {
     green_zone_carries?: SortOrder
     HVTs?: SortOrder
     team_green_zone_carries_all_games?: SortOrder
-    total_team_RB_HVTs_all_games?: SortOrder
     team_green_zone_carries_in_played_games?: SortOrder
-    total_team_RB_HVTs_in_played_games?: SortOrder
     games_played_season?: SortOrder
     HVTs_per_game?: SortOrder
     pct_team_green_zone_carries_all_games?: SortOrder
     pct_team_green_zone_carries_in_played_games?: SortOrder
-    pct_team_RB_HVTs_all_games?: SortOrder
-    pct_team_RB_HVTs_in_played_games?: SortOrder
     total_dropbacks?: SortOrder
     pass_attempts_on_dropbacks?: SortOrder
     scrambles_on_dropbacks?: SortOrder
@@ -18743,15 +14883,6 @@ export namespace Prisma {
     scramble_rate?: SortOrder
     sack_rate?: SortOrder
     touchdown_rate?: SortOrder
-    avg_cpoe?: SortOrder
-    games_over_30_degrees?: SortOrder
-    games_below_30_degrees?: SortOrder
-    avg_fp_over_30_degrees?: SortOrder
-    avg_fp_below_30_degrees?: SortOrder
-    avg_fp_wind_below_20_mph?: SortOrder
-    avg_fp_wind_above_20_mph?: SortOrder
-    diff_fp_temp_30_degrees?: SortOrder
-    diff_fp_wind_20_mph?: SortOrder
     avg_pass_epa_deep_left?: SortOrder
     avg_pass_epa_deep_middle?: SortOrder
     avg_pass_epa_deep_right?: SortOrder
@@ -18776,37 +14907,20 @@ export namespace Prisma {
     down_1_attempts?: SortOrder
     down_1_completions?: SortOrder
     down_1_passing_yards?: SortOrder
-    down_1_passing_tds?: SortOrder
-    down_1_interceptions?: SortOrder
-    down_1_sacks_taken?: SortOrder
     down_1_passing_first_downs?: SortOrder
     down_1_carries?: SortOrder
     down_1_rushing_yards?: SortOrder
-    down_1_rushing_tds?: SortOrder
-    down_1_fumbles?: SortOrder
     down_1_rushing_first_downs?: SortOrder
     down_1_targets?: SortOrder
     down_1_receptions?: SortOrder
     down_1_receiving_yards?: SortOrder
-    down_1_receiving_tds?: SortOrder
-    down_1_receiving_first_downs?: SortOrder
-    down_1_total_first_downs?: SortOrder
     down_1_team_carries_in_played_games?: SortOrder
     down_1_team_targets_in_played_games?: SortOrder
     down_1_team_receptions_in_played_games?: SortOrder
-    down_1_team_rush_fd_in_played_games?: SortOrder
-    down_1_team_rec_fd_in_played_games?: SortOrder
     down_1_games_played?: SortOrder
     down_1_team_carries_all_games?: SortOrder
     down_1_team_targets_all_games?: SortOrder
     down_1_team_receptions_all_games?: SortOrder
-    down_1_team_rush_fd_all_games?: SortOrder
-    down_1_team_rec_fd_all_games?: SortOrder
-    down_1_pct_team_carries_in_played_games?: SortOrder
-    down_1_pct_team_targets_in_played_games?: SortOrder
-    down_1_pct_team_receptions_in_played_games?: SortOrder
-    down_1_pct_team_rush_fd_in_played_games?: SortOrder
-    down_1_pct_team_rec_fd_in_played_games?: SortOrder
     down_1_yards_per_pass_attempt?: SortOrder
     down_1_yards_per_completion?: SortOrder
     down_1_yards_per_carry?: SortOrder
@@ -18822,7 +14936,6 @@ export namespace Prisma {
     down_1_targets_per_game?: SortOrder
     down_1_receptions_per_game?: SortOrder
     down_1_receiving_yards_per_game?: SortOrder
-    down_1_receiving_first_downs_per_game?: SortOrder
     down_3_attempts?: SortOrder
     down_3_completions?: SortOrder
     down_3_passing_yards?: SortOrder
@@ -18832,8 +14945,6 @@ export namespace Prisma {
     down_3_passing_first_downs?: SortOrder
     down_3_carries?: SortOrder
     down_3_rushing_yards?: SortOrder
-    down_3_rushing_tds?: SortOrder
-    down_3_fumbles?: SortOrder
     down_3_rushing_first_downs?: SortOrder
     down_3_targets?: SortOrder
     down_3_receptions?: SortOrder
@@ -18934,15 +15045,11 @@ export namespace Prisma {
     green_zone_carries?: SortOrder
     HVTs?: SortOrder
     team_green_zone_carries_all_games?: SortOrder
-    total_team_RB_HVTs_all_games?: SortOrder
     team_green_zone_carries_in_played_games?: SortOrder
-    total_team_RB_HVTs_in_played_games?: SortOrder
     games_played_season?: SortOrder
     HVTs_per_game?: SortOrder
     pct_team_green_zone_carries_all_games?: SortOrder
     pct_team_green_zone_carries_in_played_games?: SortOrder
-    pct_team_RB_HVTs_all_games?: SortOrder
-    pct_team_RB_HVTs_in_played_games?: SortOrder
     total_dropbacks?: SortOrder
     pass_attempts_on_dropbacks?: SortOrder
     scrambles_on_dropbacks?: SortOrder
@@ -18951,15 +15058,6 @@ export namespace Prisma {
     scramble_rate?: SortOrder
     sack_rate?: SortOrder
     touchdown_rate?: SortOrder
-    avg_cpoe?: SortOrder
-    games_over_30_degrees?: SortOrder
-    games_below_30_degrees?: SortOrder
-    avg_fp_over_30_degrees?: SortOrder
-    avg_fp_below_30_degrees?: SortOrder
-    avg_fp_wind_below_20_mph?: SortOrder
-    avg_fp_wind_above_20_mph?: SortOrder
-    diff_fp_temp_30_degrees?: SortOrder
-    diff_fp_wind_20_mph?: SortOrder
     avg_pass_epa_deep_left?: SortOrder
     avg_pass_epa_deep_middle?: SortOrder
     avg_pass_epa_deep_right?: SortOrder
@@ -18984,37 +15082,20 @@ export namespace Prisma {
     down_1_attempts?: SortOrder
     down_1_completions?: SortOrder
     down_1_passing_yards?: SortOrder
-    down_1_passing_tds?: SortOrder
-    down_1_interceptions?: SortOrder
-    down_1_sacks_taken?: SortOrder
     down_1_passing_first_downs?: SortOrder
     down_1_carries?: SortOrder
     down_1_rushing_yards?: SortOrder
-    down_1_rushing_tds?: SortOrder
-    down_1_fumbles?: SortOrder
     down_1_rushing_first_downs?: SortOrder
     down_1_targets?: SortOrder
     down_1_receptions?: SortOrder
     down_1_receiving_yards?: SortOrder
-    down_1_receiving_tds?: SortOrder
-    down_1_receiving_first_downs?: SortOrder
-    down_1_total_first_downs?: SortOrder
     down_1_team_carries_in_played_games?: SortOrder
     down_1_team_targets_in_played_games?: SortOrder
     down_1_team_receptions_in_played_games?: SortOrder
-    down_1_team_rush_fd_in_played_games?: SortOrder
-    down_1_team_rec_fd_in_played_games?: SortOrder
     down_1_games_played?: SortOrder
     down_1_team_carries_all_games?: SortOrder
     down_1_team_targets_all_games?: SortOrder
     down_1_team_receptions_all_games?: SortOrder
-    down_1_team_rush_fd_all_games?: SortOrder
-    down_1_team_rec_fd_all_games?: SortOrder
-    down_1_pct_team_carries_in_played_games?: SortOrder
-    down_1_pct_team_targets_in_played_games?: SortOrder
-    down_1_pct_team_receptions_in_played_games?: SortOrder
-    down_1_pct_team_rush_fd_in_played_games?: SortOrder
-    down_1_pct_team_rec_fd_in_played_games?: SortOrder
     down_1_yards_per_pass_attempt?: SortOrder
     down_1_yards_per_completion?: SortOrder
     down_1_yards_per_carry?: SortOrder
@@ -19030,7 +15111,6 @@ export namespace Prisma {
     down_1_targets_per_game?: SortOrder
     down_1_receptions_per_game?: SortOrder
     down_1_receiving_yards_per_game?: SortOrder
-    down_1_receiving_first_downs_per_game?: SortOrder
     down_3_attempts?: SortOrder
     down_3_completions?: SortOrder
     down_3_passing_yards?: SortOrder
@@ -19040,8 +15120,6 @@ export namespace Prisma {
     down_3_passing_first_downs?: SortOrder
     down_3_carries?: SortOrder
     down_3_rushing_yards?: SortOrder
-    down_3_rushing_tds?: SortOrder
-    down_3_fumbles?: SortOrder
     down_3_rushing_first_downs?: SortOrder
     down_3_targets?: SortOrder
     down_3_receptions?: SortOrder
@@ -19173,7 +15251,6 @@ export namespace Prisma {
     team?: SortOrder
     season?: SortOrder
     team_green_zone_carries_all_games?: SortOrder
-    total_team_RB_HVTs_all_games?: SortOrder
     team_carries_all_games?: SortOrder
     team_targets_all_games?: SortOrder
     team_receptions_all_games?: SortOrder
@@ -19184,7 +15261,6 @@ export namespace Prisma {
   export type TeamSeasonStatsAvgOrderByAggregateInput = {
     season?: SortOrder
     team_green_zone_carries_all_games?: SortOrder
-    total_team_RB_HVTs_all_games?: SortOrder
     team_carries_all_games?: SortOrder
     team_targets_all_games?: SortOrder
     team_receptions_all_games?: SortOrder
@@ -19196,7 +15272,6 @@ export namespace Prisma {
     team?: SortOrder
     season?: SortOrder
     team_green_zone_carries_all_games?: SortOrder
-    total_team_RB_HVTs_all_games?: SortOrder
     team_carries_all_games?: SortOrder
     team_targets_all_games?: SortOrder
     team_receptions_all_games?: SortOrder
@@ -19208,7 +15283,6 @@ export namespace Prisma {
     team?: SortOrder
     season?: SortOrder
     team_green_zone_carries_all_games?: SortOrder
-    total_team_RB_HVTs_all_games?: SortOrder
     team_carries_all_games?: SortOrder
     team_targets_all_games?: SortOrder
     team_receptions_all_games?: SortOrder
@@ -19219,7 +15293,6 @@ export namespace Prisma {
   export type TeamSeasonStatsSumOrderByAggregateInput = {
     season?: SortOrder
     team_green_zone_carries_all_games?: SortOrder
-    total_team_RB_HVTs_all_games?: SortOrder
     team_carries_all_games?: SortOrder
     team_targets_all_games?: SortOrder
     team_receptions_all_games?: SortOrder
