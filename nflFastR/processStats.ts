@@ -169,7 +169,7 @@ async function getCompleteWeeklyStats(): Promise<PlayerStat[]> {
         });
         resolve(weeklyStats);
       },
-      error: (err) => {
+      error: (err: Error) => {
         reject(err);
       }
     });
