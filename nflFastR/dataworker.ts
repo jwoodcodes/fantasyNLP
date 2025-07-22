@@ -11,33 +11,18 @@ const dataWorker = async () => {
     },
   });
 
-  // Fetch all receiving stats from the database
-  const receivingStats = await prisma.receivingStat.findMany({});
-
-  // Create a map for quick lookup of receiving stats by player display name
-  const receivingStatsMap = new Map();
-  receivingStats.forEach(stat => {
-    if (stat.player) {
-      receivingStatsMap.set(stat.player, stat);
-    }
-  });
-
   const combinedData = playerStats.map(player => {
-    const matchingRoute = receivingStatsMap.get(player.playerDisplayName);
-
-    // Combine data, similar to your original logic
+    // Since ReceivingStat model is removed, these fields will be null
     const holder = {
       ...player,
-      routes: matchingRoute?.routes || null,
-      yprr: matchingRoute?.yprr || null,
-      tprr: (matchingRoute?.targets && matchingRoute?.routes) ?
-        (Number(matchingRoute.targets) / Number(matchingRoute.routes)) : null,
-      firstDRR: (player.receivingFirstDowns && matchingRoute?.routes) ?
-        (Number(player.receivingFirstDowns) / Number(matchingRoute.routes)) : null,
-      adot: matchingRoute?.avgDepthOfTarget || null,
-      routePercent: matchingRoute?.routeRate || null,
-      yac: matchingRoute?.yardsPerReception || null,
-      yacPerRec: matchingRoute?.yardsAfterCatchPerReception || null,
+      routes: null,
+      yprr: null,
+      tprr: null,
+      firstDRR: null,
+      adot: null,
+      routePercent: null,
+      yac: null,
+      yacPerRec: null,
     };
 
     return holder;
