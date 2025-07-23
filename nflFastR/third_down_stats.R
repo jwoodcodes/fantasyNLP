@@ -49,9 +49,9 @@ get_down_stats <- function(pbp_data, down_num) {
   passing_totals <- pbp_down %>%
   filter(pass_attempt == 1, !is.na(passer_player_id)) %>% group_by(player_id = passer_player_id) %>% summarise(attempts = n(), completions = sum(complete_pass, na.rm = TRUE), passing_yards = sum(passing_yards, na.rm = TRUE), passing_first_downs = sum(first_down_pass, na.rm = TRUE))
   rushing_totals <- pbp_down %>%
-  filter(rush_attempt == 1, !is.na(rusher_player_id)) %>% group_by(player_id = rusher_player_id) %>% summarise(carries = n(), rushing_yards = sum(rushing_yards, na.rm = TRUE), rushing_first_downs = sum(first_down_rush, na.rm = TRUE))
+  filter(rush_attempt == 1, !is.na(rusher_player_id)) %>% group_by(player_id = rusher_player_id) %>% summarise(carries = n(), rushing_yards = sum(rushing_yards, na.rm = TRUE))
   receiving_totals <- pbp_down %>%
-  filter(pass_attempt == 1, !is.na(receiver_player_id)) %>% group_by(player_id = receiver_player_id) %>% summarise(targets = n(), receptions = sum(complete_pass, na.rm = TRUE), receiving_yards = sum(receiving_yards, na.rm = TRUE), receiving_first_downs = sum(first_down_pass, na.rm = TRUE))
+  filter(pass_attempt == 1, !is.na(receiver_player_id)) %>% group_by(player_id = receiver_player_id) %>% summarise(targets = n(), receptions = sum(complete_pass, na.rm = TRUE), receiving_yards = sum(receiving_yards, na.rm = TRUE))
 
   final_stats <- full_join(passing_totals, rushing_totals, by = c("player_id")) %>%
   full_join(receiving_totals, by = c("player_id"))
@@ -65,7 +65,7 @@ get_down_stats <- function(pbp_data, down_num) {
   ) %>%
   filter(!is.na(player_id), !is.na(position), !is.na(team)) %>% group_by(player_id) %>% summarise(position = first(position), team = last(team))
   final_stats <- left_join(final_stats, player_info, by = "player_id") %>%
-  select(player_id, position, team, everything())
+  select(player_id, everything())
 
   player_games <- bind_rows(pbp_down %>%
   filter(!is.na(passer_player_id)) %>% select(player_id = passer_player_id, game_id, team = posteam),
@@ -99,7 +99,7 @@ get_down_stats <- function(pbp_data, down_num) {
   team_totals_all_games <- pbp_down %>% group_by(team = posteam) %>% summarise(team_carries_all_games = sum(rush_attempt == 1, na.rm = TRUE), team_targets_all_games = sum(pass_attempt == 1, na.rm = TRUE), team_receptions_all_games = sum(complete_pass, na.rm = TRUE), .groups = 'drop')
   final_stats <- left_join(final_stats, team_totals_all_games, by = "team")
 
-  final_stats <- final_stats %>% mutate(yards_per_pass_attempt = ifelse(attempts > 0, passing_yards / attempts, 0), yards_per_completion = ifelse(completions > 0, passing_yards / completions, 0), yards_per_carry = ifelse(carries > 0, rushing_yards / carries, 0), yards_per_target = ifelse(targets > 0, receiving_yards / targets, 0), yards_per_reception = ifelse(receptions > 0, receiving_yards / receptions, 0), pass_attempts_per_game = attempts / games_played, completions_per_game = completions / games_played, passing_yards_per_game = passing_yards / games_played, passing_first_downs_per_game = passing_first_downs / games_played, carries_per_game = carries / games_played, rushing_yards_per_game = rushing_yards / carries, rushing_first_downs_per_game = rushing_first_downs / games_played, targets_per_game = targets / games_played, receptions_per_game = receptions / games_played, receiving_yards_per_game = receiving_yards / games_played)
+  final_stats <- final_stats %>% mutate(yards_per_target = ifelse(targets > 0, receiving_yards / targets, 0), yards_per_reception = ifelse(receptions > 0, receiving_yards / receptions, 0), pass_attempts_per_game = attempts / games_played, completions_per_game = completions / games_played, rushing_yards_per_game = rushing_yards / games_played, targets_per_game = targets / games_played, receptions_per_game = receptions / games_played, receiving_yards_per_game = receiving_yards / games_played)
 
   return(final_stats)
 }
@@ -134,7 +134,7 @@ for (year in 2017:2024) {
       carries, rushing_yards, rushing_tds, rushing_fumbles, rushing_first_downs,
       rushing_epa, receptions, targets, receiving_yards, receiving_tds,
       receiving_air_yards, receiving_yards_after_catch, receiving_first_downs,
-      receiving_2pt_conversions, racr, target_share, air_yards_share, wopr,
+      racr, target_share, air_yards_share, wopr,
       fantasy_points, fantasy_points_ppr
     )
 
@@ -147,10 +147,8 @@ for (year in 2017:2024) {
       passing_tds_total = sum(passing_tds, na.rm = TRUE),
       interceptions_total = sum(interceptions, na.rm = TRUE),
       sacks_total = sum(sacks, na.rm = TRUE),
-      sack_yards_total = sum(sack_yards, na.rm = TRUE),
       passing_air_yards_total = sum(passing_air_yards, na.rm = TRUE),
       passing_yards_after_catch_total = sum(passing_yards_after_catch, na.rm = TRUE),
-      passing_first_downs_total = sum(passing_first_downs, na.rm = TRUE),
       passing_epa_total = sum(passing_epa, na.rm = TRUE),
       pacr_total = sum(pacr, na.rm = TRUE),
       carries_total = sum(carries, na.rm = TRUE),
@@ -166,7 +164,6 @@ for (year in 2017:2024) {
       receiving_air_yards_total = sum(receiving_air_yards, na.rm = TRUE),
       receiving_yards_after_catch_total = sum(receiving_yards_after_catch, na.rm = TRUE),
       receiving_first_downs_total = sum(receiving_first_downs, na.rm = TRUE),
-      receiving_2pt_conversions_total = sum(receiving_2pt_conversions, na.rm = TRUE),
       racr_total = sum(racr, na.rm = TRUE),
       target_share_total = sum(target_share, na.rm = TRUE),
       air_yards_share_total = sum(air_yards_share, na.rm = TRUE),
@@ -183,10 +180,8 @@ for (year in 2017:2024) {
       passing_tds_avg = passing_tds_total / games_played,
       interceptions_avg = interceptions_total / games_played,
       sacks_avg = sacks_total / games_played,
-      sack_yards_avg = sack_yards_total / games_played,
       passing_air_yards_avg = passing_air_yards_total / games_played,
       passing_yards_after_catch_avg = passing_yards_after_catch_total / games_played,
-      passing_first_downs_avg = passing_first_downs_total / games_played,
       passing_epa_avg = passing_epa_total / games_played, 
       pacr_avg = pacr_total / games_played, 
       carries_avg = carries_total / games_played,
@@ -201,8 +196,7 @@ for (year in 2017:2024) {
       receiving_tds_avg = receiving_tds_total / games_played,
       receiving_air_yards_avg = receiving_air_yards_total / games_played,
       receiving_yards_after_catch_avg = receiving_yards_after_catch_total / games_played,
-      receiving_first_downs_avg = receiving_first_downs_total / games_played,
-      receiving_2pt_conversions_avg = receiving_2pt_conversions_total / games_played, 
+      receiving_first_downs_avg = receiving_first_downs_total / games_played, 
       racr_avg = racr_total / games_played, 
       target_share_avg = target_share_total / games_played, 
       air_yards_share_avg = air_yards_share_total / games_played, 
@@ -276,11 +270,10 @@ for (year in 2017:2024) {
     group_by(player_id = rusher_player_id) %>%
     summarise(
       total_tackled_for_loss = sum(tackled_for_loss, na.rm = TRUE),
-      total_rb_carries = n(),
       .groups = 'drop'
     ) %>%
     mutate(
-      pct_carries_tackled_for_loss = ifelse(total_rb_carries > 0, total_tackled_for_loss / total_rb_carries, 0)
+      pct_carries_tackled_for_loss = ifelse(total_tackled_for_loss > 0, total_tackled_for_loss / total_tackled_for_loss, 0)
     )
 
   season_player_stats <- left_join(season_player_stats, rb_tfl_stats, by = "player_id")
@@ -300,6 +293,7 @@ for (year in 2017:2024) {
   all_downs_stats <- map(c(1, 3), ~get_down_stats(pbp_data, .x))
   down_1_stats <- all_downs_stats[[1]]
   down_3_stats <- all_downs_stats[[2]]
+  down_3_stats <- down_3_stats %>% select(-position, -team)
   
   # Rename columns to be down-specific
   colnames(down_1_stats) <- paste0("down_1_", colnames(down_1_stats))
@@ -346,7 +340,7 @@ final_player_stats_output_file <- "final_player_seasons.csv"
 all_seasons_data_flat <- all_seasons_data_flat %>%
   mutate(across(where(is.numeric), ~round(., 3))) %>%
   # Remove unwanted _total columns
-  select(-c(passing_epa_total, pacr_total, rushing_epa_total, receiving_2pt_conversions_total, racr_total, target_share_total, air_yards_share_total, wopr_total)) %>%
+  select(-c(passing_epa_total, pacr_total, rushing_epa_total, racr_total, target_share_total, air_yards_share_total, wopr_total)) %>%
   # Reorder columns to have player_id, player_name, season at the beginning
   select(player_id, player_name, season, everything()) %>%
   select(-starts_with("sanitized_player_name")) # Remove any temporary sanitized name columns

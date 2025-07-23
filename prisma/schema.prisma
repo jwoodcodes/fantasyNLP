@@ -52,10 +52,8 @@ model PlayerStat {
   passingTds                  Int?     @map("passing_tds")
   interceptions               Int?
   sacks                       Int?
-  sackYards                   Float?   @map("sack_yards")
   passingAirYards             Float?   @map("passing_air_yards")
   passingYardsAfterCatch      Float?   @map("passing_yards_after_catch")
-  passingFirstDowns           Int?     @map("passing_first_downs")
   passingEpa                  Float?   @map("passing_epa")
   pacr                        Float?
   carries                     Int?
@@ -71,7 +69,6 @@ model PlayerStat {
   receivingAirYards           Float?   @map("receiving_air_yards")
   receivingYardsAfterCatch    Float?   @map("receiving_yards_after_catch")
   receivingFirstDowns         Int?     @map("receiving_first_downs")
-  receiving2ptConversions     Int?     @map("receiving_2pt_conversions")
   racr                        Float?
   targetShare                 Float?   @map("target_share")
   airYardsShare               Float?   @map("air_yards_share")
@@ -92,7 +89,6 @@ model PlayerSeason {
   passing_yards_total                   Float?
   passing_tds_total                     Float?
   interceptions_total                   Float?
-  passing_first_downs_total             Float?
   carries_total                         Float?
   rushing_yards_total                   Float?
   rushing_tds_total                     Float?
@@ -114,7 +110,6 @@ model PlayerSeason {
   interceptions_avg                     Float?
   passing_air_yards_avg                 Float?
   passing_yards_after_catch_avg         Float?
-  passing_first_downs_avg               Float?
   carries_avg                           Float?
   rushing_yards_avg                     Float?
   rushing_tds_avg                       Float?
@@ -163,7 +158,6 @@ model PlayerSeason {
   avg_pass_epa_short_middle             Float?
   avg_pass_epa_short_right              Float?
   total_tackled_for_loss                Int?
-  total_rb_carries                      Int?
   pct_carries_tackled_for_loss          Float?
   rec_avg_rec_epa_deep_left             Float?
   rec_avg_rec_epa_deep_middle           Float?
@@ -180,32 +174,23 @@ model PlayerSeason {
   down_1_attempts                       Int?
   down_1_completions                    Int?
   down_1_passing_yards                  Float?
-  down_1_passing_first_downs            Float?
   down_1_carries                        Int?
   down_1_rushing_yards                  Float?
-  down_1_rushing_first_downs            Float?
   down_1_targets                        Int?
   down_1_receptions                     Int?
   down_1_receiving_yards                Float?
   down_1_team_carries_in_played_games   Int?
   down_1_team_targets_in_played_games   Int?
   down_1_team_receptions_in_played_games Int?
-  down_1_games_played                   Int?
   down_1_team_carries_all_games         Int?
   down_1_team_targets_all_games         Int?
   down_1_team_receptions_all_games      Int?
-  down_1_yards_per_pass_attempt         Float?
-  down_1_yards_per_completion           Float?
-  down_1_yards_per_carry                Float?
   down_1_yards_per_target               Float?
   down_1_yards_per_reception            Float?
   down_1_pass_attempts_per_game         Float?
   down_1_completions_per_game           Float?
-  down_1_passing_yards_per_game         Float?
-  down_1_passing_first_downs_per_game   Float?
   down_1_carries_per_game               Float?
   down_1_rushing_yards_per_game         Float?
-  down_1_rushing_first_downs_per_game   Float?
   down_1_targets_per_game               Float?
   down_1_receptions_per_game            Float?
   down_1_receiving_yards_per_game       Float?
@@ -230,7 +215,6 @@ model PlayerSeason {
   down_3_team_receptions_in_played_games Int?
   down_3_team_rush_fd_in_played_games   Int?
   down_3_team_rec_fd_in_played_games    Float?
-  down_3_games_played                   Int?
   down_3_team_carries_all_games         Int?
   down_3_team_targets_all_games         Int?
   down_3_team_receptions_all_games      Int?
@@ -243,7 +227,6 @@ model PlayerSeason {
   down_3_pct_team_rec_fd_in_played_games Float?
   down_3_yards_per_pass_attempt         Float?
   down_3_yards_per_completion           Float?
-  down_3_yards_per_carry                Float?
   down_3_yards_per_target               Float?
   down_3_yards_per_reception            Float?
   down_3_pass_attempts_per_game         Float?
@@ -283,5 +266,3 @@ model TeamSeasonStats {
 
   @@id([team, season])
 }
-
-
